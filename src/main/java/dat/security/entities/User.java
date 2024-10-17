@@ -1,6 +1,7 @@
 package dat.security.entities;
 
 import dat.entities.Store;
+import dat.entities.Product;
 import jakarta.persistence.*;
 import lombok.*;
 import org.mindrot.jbcrypt.BCrypt;
@@ -50,6 +51,20 @@ public class User implements Serializable {
     @JoinColumn(name = "store_id")
     private Store employeeInStore;
 
+    // Many-to-Many: Users can save multiple stores
+    @ManyToMany
+    @JoinTable(name = "user_saved_stores",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "store_id"))
+    private Set<Store> savedStores = new HashSet<>();
+
+    // Many-to-Many: Users can save multiple products
+    @ManyToMany
+    @JoinTable(name = "user_saved_products",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private Set<Product> savedProducts = new HashSet<>();
+
     // Constructor to create a new user with a hashed password and role
     public User(String name, String email, String password, Role role) {
         this.name = name;
@@ -90,5 +105,25 @@ public class User implements Serializable {
             this.employeeInStore.getEmployees().remove(this);  // Remove from store's employee list
             this.employeeInStore = null;
         }
+    }
+
+    // Method to add a saved store to the user's saved stores
+    public void addSavedStore(Store store) {
+        this.savedStores.add(store);
+    }
+
+    // Method to remove a saved store from the user's saved stores
+    public void removeSavedStore(Store store) {
+        this.savedStores.remove(store);
+    }
+
+    // Method to add a product to the list of saved products
+    public void addSavedProduct(Product product) {
+        this.savedProducts.add(product);
+    }
+
+    // Method to remove a product from the list of saved products
+    public void removeSavedProduct(Product product) {
+        this.savedProducts.remove(product);
     }
 }

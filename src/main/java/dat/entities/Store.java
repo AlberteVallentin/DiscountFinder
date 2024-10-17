@@ -45,6 +45,10 @@ public class Store {
     @Column(name = "salling_id")
     private String sallingId;
 
+    // Many-to-Many: Stores can be saved by multiple users
+    @ManyToMany(mappedBy = "savedStores", fetch = FetchType.LAZY)
+    private Set<User> savedByUsers = new HashSet<>();
+
     // Add an employee to the store
     public void addEmployee(User employee) {
         this.employees.add(employee);
