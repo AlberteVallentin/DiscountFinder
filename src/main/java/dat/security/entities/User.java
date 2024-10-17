@@ -1,7 +1,6 @@
 package dat.security.entities;
 
 import dat.entities.Store;
-import dat.security.enums.RoleType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.mindrot.jbcrypt.BCrypt;
@@ -43,7 +42,7 @@ public class User implements Serializable {
     private Role role;
 
     // One-to-Many: A store manager can manage multiple stores
-    @OneToMany(mappedBy = "storeManager", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "storeManager", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     private Set<Store> stores = new HashSet<>();
 
     // Many-to-One: An employee can only work in one store
@@ -78,6 +77,9 @@ public class User implements Serializable {
 
     // Method to set the employee's store
     public void setEmployeeInStore(Store store) {
+        if (this.employeeInStore != null) {
+            removeEmployeeFromStore();  // Remove from the previous store before adding to the new one
+        }
         this.employeeInStore = store;
         store.getEmployees().add(this);  // Synchronize on the store side
     }
@@ -90,4 +92,3 @@ public class User implements Serializable {
         }
     }
 }
-
