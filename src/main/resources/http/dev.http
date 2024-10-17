@@ -1,0 +1,100 @@
+### A simple get request to the test endpoint. No need for login
+GET {{url}}/auth/test/
+
+### Populate the database with some data
+GET {{url}}/hotels/populate/
+
+### Create a new user - this one will only get a USER roleType by default
+POST {{url}}/auth/register/
+
+{
+    "username": "user",
+    "password": "test123"
+}
+
+###
+POST {{url}}/auth/login/
+
+{
+    "username": "user",
+    "password": "test123"
+}
+
+> {%
+    client.global.set("jwt_token", response.body.token);
+    console.log("JWT Token:", client.global.get("jwt_token"));
+%}
+
+###
+GET {{url}}/protected/user_demo/
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+###
+GET {{url}}/protected/admin_demo/
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+### Add admin roleType to user
+POST {{url}}/auth/user/addrole/
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+    "roleType": "ADMIN"
+}
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+###
+GET {{url}}/hotels
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+###
+GET {{url}}/hotels/2
+
+###
+POST {{url}}/hotels
+Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+  "hotelName": "Holiday Inn",
+  "hotelAddress": "Stuttgart",
+  "hotelType": "STANDARD"
+}
+
+###
+PUT {{url}}/hotels/3
+Content-Type: application/json
+
+{
+  "hotelName": "Ritz Carlton",
+  "hotelAddress": "London City",
+  "hotelType": "LUXURY"
+}
+
+###
+DELETE {{url}}/hotels/5
+Authorization: Bearer {{jwt_token}}
+
+// Room API
+###
+GET {{url}}/rooms
+Authorization: Bearer {{jwt_token}}
+
+###
+GET {{url}}/rooms/1
+Authorization: Bearer {{jwt_token}}
+
+###
+POST {{url}}/rooms/hotel/1
+Content-Type: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+  "roomNumber": 11,
+  "roomPrice": 1150,
+  "roomType": "SINGLE"
+}

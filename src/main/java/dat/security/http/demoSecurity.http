@@ -1,0 +1,133 @@
+
+
+### A simple GET request to the test endpoint. No need for login
+GET {{url}}/auth/test/
+
+### Create a new user with USER role
+POST {{url}}/auth/register/
+
+{
+    "email": "user@user.com",
+    "name": "user",
+    "password": "test123",
+    "roleType": "USER"
+}
+
+
+### Login as the user
+POST {{url}}/auth/login/
+
+{
+    "email": "user@user.com",
+    "password": "test123"
+}
+> {%
+    client.global.set("jwt_token", response.body.token);
+    console.log("JWT Token:", client.global.get("jwt_token"));
+%}
+
+
+### Create a new user with the STORE_MANAGER role
+POST http://localhost:7070/api/auth/register/
+Content-Type: application/json
+
+{
+    "email": "user@storemanager.com",
+    "name": "storemanager",
+    "password": "test123",
+    "roleType": "STORE_MANAGER"
+}
+
+### Login as the store manager
+POST {{url}}/auth/login/
+
+{
+    "email": "user@storemanager.com",
+    "password": "test123"
+}
+> {%
+    client.global.set("jwt_token", response.body.token);
+    console.log("JWT Token:", client.global.get("jwt_token"));
+%}
+
+
+### Create a new user with the STORE_EMPLOYEE role
+POST http://localhost:7070/api/auth/register/
+Content-Type: application/json
+
+{
+    "email": "user@storeemployee.com",
+    "name": "storeemployee",
+    "password": "test123",
+    "roleType": "STORE_EMPLOYEE"
+}
+
+### Login as the store employee
+POST {{url}}/auth/login/
+
+{
+    "email": "user@storeemployee.com",
+    "password": "test123"
+}
+> {%
+
+    client.global.set("jwt_token", response.body.token);
+    console.log("JWT Token:", client.global.get("jwt_token"));
+%}
+
+
+### Create (try) a new user with the ADMIN role
+POST http://localhost:7070/api/auth/register/
+Content-Type: application/json
+
+{
+  "email": "user@admin.com",
+  "name": "admin",
+  "password": "test123",
+  "roleType": "ADMIN"
+}
+
+
+
+### User can access this endpoint
+GET {{url}}/protected/user_demo/
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+
+### Store Employee can access this endpoint
+GET {{url}}/protected/store_employee_demo/
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+
+### Admin can access this endpoint
+GET {{url}}/protected/admin_demo/
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+
+### Store Manager can access this endpoint
+GET {{url}}/protected/store_manager_demo/
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+
+### Add ADMIN role to a user
+POST {{url}}/auth/user/addrole/
+Accept: application/json
+Authorization: Bearer {{jwt_token}}
+
+{
+    "role": "ADMIN"
+}
+
+
+
+### Reset token
+GET {{url}}/auth/test/
+
+> {%
+    client.global.set("jwt_token", null);
+    console.log("JWT Token:", client.global.get("jwt_token"));
+%}
