@@ -7,6 +7,6 @@ public enum CategoryName {
     FROZEN,
     BEVERAGES,
     BAKERY,
-    OTHER // Generic category for future flexibility
+    OTHER
 }
 

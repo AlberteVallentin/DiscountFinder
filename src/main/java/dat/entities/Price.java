@@ -1,16 +1,15 @@
 package dat.entities;
 
-import java.math.BigDecimal;
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.LocalDateTime;
-
+import java.math.BigDecimal;
 
 @Entity
+@Table(name = "prices")
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "prices")
+@AllArgsConstructor
 public class Price {
 
     @Id
@@ -30,5 +29,9 @@ public class Price {
     @Column(name = "percent_discount", nullable = false)
     private BigDecimal percentDiscount;
 
-    // Getters and Setters
+    // One-to-One relation with Product (Product owns the relation)
+    @OneToOne(mappedBy = "price", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Product product;
 }
+
+

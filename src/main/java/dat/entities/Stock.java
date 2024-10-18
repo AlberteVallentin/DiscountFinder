@@ -20,8 +20,11 @@ public class Stock {
     @Column(name = "unit", nullable = false)
     private String unit;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "stock_unit_id")
     private StockUnit stockUnit;
+
+    @OneToOne(mappedBy = "stock", fetch = FetchType.EAGER)
+    private Product product;
 
 }

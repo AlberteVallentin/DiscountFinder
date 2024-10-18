@@ -1,10 +1,8 @@
 package dat.entities;
 
+import dat.security.entities.User;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "address")
@@ -21,14 +19,24 @@ public class Address {
     @Column(name = "city", nullable = false)
     private String city;
 
-    @Column(name = "streetname_and_number", nullable = false)
-    private String streetnameAndNumber;
+    @Column(name = "street_name_and_number", nullable = false)
+    private String streetNameAndNumber;
 
     @Column(name = "postal_code", nullable = false)
     private String postalCode;
 
-    // Store relationship - one address can belong to one store
-    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Store> stores = new HashSet<>();
+    // One-to-One: Each address is tied to one store
+    @OneToOne(mappedBy = "address", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, optional = false)
+    private Store store;
+
+    // One-to-One: An address can belong to a single user
+    @OneToOne(mappedBy = "address", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    private User user;
+
+    public Address(String city, String streetNameAndNumber, String postalCode) {
+        this.city = city;
+        this.streetNameAndNumber = streetNameAndNumber;
+        this.postalCode = postalCode;
+    }
 }
 

@@ -26,14 +26,19 @@ public class Store {
     @JoinColumn(name = "brand_id")
     private StoreBrand brand;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "address_id")
+    // One-to-One: A store has one address
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "address_id", nullable = false)
     private Address address;
 
     // Many-to-One: Each store has one manager, but a manager can manage multiple stores
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_manager_id")
     private User storeManager;
+
+    // One-to-Many: A store can have many products
+    @OneToMany(mappedBy = "store", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<Product> products = new HashSet<>();
 
     // One-to-Many: A store can have many employees, but an employee can only work in one store
     @OneToMany(mappedBy = "employeeInStore", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
@@ -70,5 +75,16 @@ public class Store {
         if (manager != null) {
             manager.getStores().add(this);  // Add this store to the new manager's list
         }
+    }
+
+
+    public void addProduct(Product product) {
+        this.products.add(product);
+        product.setStore(this);
+    }
+
+    public void removeProduct(Product product) {
+        this.products.remove(product);
+        product.setStore(null);
     }
 }

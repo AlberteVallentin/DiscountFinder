@@ -3,6 +3,8 @@ package dat.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
+import java.util.Set;
+import java.util.HashSet;
 
 
 @Entity
@@ -23,25 +25,66 @@ public class Product {
     @Column(name = "image_link")
     private String imageLink;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "store_id")
+    // Many-to-One: Each product belongs to one store
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "store_id", nullable = false)  // Store is mandatory for Product
     private Store store;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "price_id")
+    // One-to-One relation with Price
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "price_id", nullable = false)
     private Price price;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "stock_id")
+    // One-to-One: A product has one stock
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "stock_id", referencedColumnName = "stock_id")
     private Stock stock;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id") // Foreign key to Category entity
-    private Category category;
 
     @Column(name = "start_time")
     private LocalDateTime startTime;
 
     @Column(name = "end_time")
     private LocalDateTime endTime;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "product_category",
+        joinColumns = @JoinColumn(name = "product_id"),
+        inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private Set<Category> categories = new HashSet<>();
+
+    public void addCategory(Category category) {
+        if (category != null) {
+            this.categories.add(category);
+            category.getProducts().add(this);
+        }
+    }
+
+    public void removeCategory(Category category) {
+        if (category != null) {
+            this.categories.remove(category);
+            category.getProducts().remove(this);
+        }
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
+        if (store != null) {
+            store.getProducts().add(this);
+        }
+    }
+
+    public void addStock(Stock stock) {
+        this.stock = stock;
+        stock.setProduct(this);  // Synkroniser forholdet
+    }
+
+    public void removeStock() {
+        if (this.stock != null) {
+            this.stock.setProduct(null);  // Fjern produktreferencen fra stock
+            this.stock = null;  // Fjern stocken fra produktet
+        }
+    }
 }
+

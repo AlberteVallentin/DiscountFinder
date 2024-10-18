@@ -1,5 +1,6 @@
 package dat.security.entities;
 
+import dat.entities.Address;
 import dat.entities.Store;
 import dat.entities.Product;
 import jakarta.persistence.*;
@@ -41,6 +42,11 @@ public class User implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
+
+    // One-to-One: A user has one address
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER, optional = true)
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     // One-to-Many: A store manager can manage multiple stores
     @OneToMany(mappedBy = "storeManager", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
@@ -126,4 +132,13 @@ public class User implements Serializable {
     public void removeSavedProduct(Product product) {
         this.savedProducts.remove(product);
     }
+
+    // Method to set or update the user's address
+    public void setAddress(Address address) {
+        this.address = address;
+        if (address != null) {
+            address.setUser(this);
+        }
+    }
 }
+
