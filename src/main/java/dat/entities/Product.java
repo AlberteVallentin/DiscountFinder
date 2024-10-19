@@ -90,5 +90,13 @@ public class Product {
             this.stock = null;  // Fjern stocken fra produktet
         }
     }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime.withNano(0);
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime.withNano(0);
+    }
 }
 

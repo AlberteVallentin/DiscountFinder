@@ -122,3 +122,34 @@ Caused by: java.net.ConnectException: Connection refused
 2024-10-19 19:14:29 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1c3b9394
 2024-10-19 19:14:29 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
 2024-10-19 19:14:29 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2024-10-19 19:22:37 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
+2024-10-19 19:22:37 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2024-10-19 19:22:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-10-19 19:22:38 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7fd4acee
+2024-10-19 19:22:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-10-19 19:22:38 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2024-10-19 19:22:38 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-10-19 19:22:38 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - constraint "uk_rs2iqes6ryntdb52d2vqpjirh" of relation "product" does not exist, skipping
+2024-10-19 19:22:38 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-10-19 19:22:38 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - constraint "uk_kh7nm24fdy4i3dh876bt2ywlu" of relation "product" does not exist, skipping
+2024-10-19 19:22:38 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-10-19 19:22:38 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - constraint "uk_lrfcwj1khod8ht4kt90bdd70q" of relation "stores" does not exist, skipping
+2024-10-19 19:22:38 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-10-19 19:22:38 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - constraint "uk_6dotkott2kjsp8vw4d0m25fb7" of relation "users" does not exist, skipping
+2024-10-19 19:22:38 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-10-19 19:22:38 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - constraint "uk_hbvhqvjgmhd5omxyo67ynvbyp" of relation "users" does not exist, skipping
+2024-10-19 19:22:38 [main] INFO  io.javalin.Javalin - Starting Javalin ...
+2024-10-19 19:22:38 [main] INFO  org.eclipse.jetty.server.Server - jetty-11.0.23; built: 2024-08-14T01:40:17.906Z; git: 6fcf5ccaebd7ca13a0cb96c96adca699a24080a0; jvm 17.0.10+7-LTS
+2024-10-19 19:22:38 [main] INFO  o.e.j.s.s.DefaultSessionIdManager - Session workerName=node0
+2024-10-19 19:22:38 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@5908e6d6{/api,null,AVAILABLE}
+2024-10-19 19:22:38 [main] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@a323a5b{HTTP/1.1, (http/1.1)}{0.0.0.0:7070}
+2024-10-19 19:22:38 [main] INFO  org.eclipse.jetty.server.Server - Started Server@afee63{STARTING}[11.0.23,sto=0] @1244ms
+2024-10-19 19:22:38 [main] INFO  io.javalin.Javalin - Javalin started in 51ms \o/
+2024-10-19 19:22:38 [main] INFO  io.javalin.Javalin - Listening on http://localhost:7070/api
+2024-10-19 19:22:38 [main] INFO  io.javalin.Javalin - You are running Javalin 6.3.0 (released August 22, 2024).
+2024-10-19 19:23:05 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
+2024-10-19 19:23:05 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2024-10-19 19:23:05 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-10-19 19:23:06 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1c3b9394
+2024-10-19 19:23:06 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-10-19 19:23:06 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy

@@ -8,8 +8,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.SQLException;
-
-import javax.sql.DataSource;
 import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
 import org.hibernate.engine.spi.SessionFactoryImplementor;
 
@@ -44,7 +42,6 @@ public class Populate {
                     StringBuilder sqlStatement = new StringBuilder();
 
                     while ((line = reader.readLine()) != null) {
-                        // Ignore comments in the SQL file
                         if (line.startsWith("--") || line.trim().isEmpty()) {
                             continue;
                         }
