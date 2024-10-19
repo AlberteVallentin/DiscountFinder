@@ -21,7 +21,7 @@ public class Stock {
     private String unit;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "stock_unit_id")
+    @JoinColumn(name = "stock_unit_id", nullable = false)
     private StockUnit stockUnit;
 
     @OneToOne(mappedBy = "stock", fetch = FetchType.EAGER)

@@ -1,0 +1,124 @@
+2024-10-19 18:44:10 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
+2024-10-19 18:44:10 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2024-10-19 18:44:10 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-10-19 18:44:11 [main] ERROR com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Exception during pool initialization.
+org.postgresql.util.PSQLException: Connection to localhost:5432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:352)
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54)
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:273)
+	at org.postgresql.Driver.makeConnection(Driver.java:446)
+	at org.postgresql.Driver.connect(Driver.java:298)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:138)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:359)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:201)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:470)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:561)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:100)
+	at com.zaxxer.hikari.HikariDataSource.<init>(HikariDataSource.java:81)
+	at org.hibernate.hikaricp.internal.HikariCPConnectionProvider.configure(HikariCPConnectionProvider.java:58)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.configureService(StandardServiceRegistryImpl.java:125)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:248)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:216)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.buildJdbcConnectionAccess(JdbcEnvironmentInitiator.java:283)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:150)
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:34)
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:119)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:264)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:239)
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:216)
+	at org.hibernate.boot.model.relational.Database.<init>(Database.java:45)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.getDatabase(InFlightMetadataCollectorImpl.java:230)
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:198)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:166)
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.build(MetadataBuildingProcess.java:125)
+	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:451)
+	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:102)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:863)
+	at dat.config.HibernateConfig.createEMF(HibernateConfig.java:71)
+	at dat.config.HibernateConfig.getEntityManagerFactory(HibernateConfig.java:31)
+	at dat.config.Populate.main(Populate.java:15)
+Caused by: java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:672)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:547)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:602)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:633)
+	at org.postgresql.core.PGStream.createSocket(PGStream.java:260)
+	at org.postgresql.core.PGStream.<init>(PGStream.java:121)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:140)
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:268)
+	... 33 common frames omitted
+2024-10-19 19:02:38 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
+2024-10-19 19:02:38 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2024-10-19 19:02:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-10-19 19:02:38 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1c3b9394
+2024-10-19 19:02:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-10-19 19:02:38 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2024-10-19 19:02:39 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-10-19 19:02:39 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - constraint "uk_rs2iqes6ryntdb52d2vqpjirh" of relation "product" does not exist, skipping
+2024-10-19 19:02:39 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-10-19 19:02:39 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - constraint "uk_kh7nm24fdy4i3dh876bt2ywlu" of relation "product" does not exist, skipping
+2024-10-19 19:02:39 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-10-19 19:02:39 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - constraint "uk_lrfcwj1khod8ht4kt90bdd70q" of relation "stores" does not exist, skipping
+2024-10-19 19:02:39 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-10-19 19:02:39 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - constraint "uk_6dotkott2kjsp8vw4d0m25fb7" of relation "users" does not exist, skipping
+2024-10-19 19:02:39 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-10-19 19:02:39 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - constraint "uk_hbvhqvjgmhd5omxyo67ynvbyp" of relation "users" does not exist, skipping
+2024-10-19 19:03:42 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
+2024-10-19 19:03:42 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2024-10-19 19:03:42 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-10-19 19:03:42 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@655ef322
+2024-10-19 19:03:42 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-10-19 19:03:42 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2024-10-19 19:04:24 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
+2024-10-19 19:04:24 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2024-10-19 19:04:24 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-10-19 19:04:24 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1c3b9394
+2024-10-19 19:04:24 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-10-19 19:04:25 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2024-10-19 19:05:20 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
+2024-10-19 19:05:20 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2024-10-19 19:05:20 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-10-19 19:05:20 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2e5c7f0b
+2024-10-19 19:05:20 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-10-19 19:05:20 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2024-10-19 19:05:21 [main] INFO  io.javalin.Javalin - Starting Javalin ...
+2024-10-19 19:05:21 [main] INFO  org.eclipse.jetty.server.Server - jetty-11.0.23; built: 2024-08-14T01:40:17.906Z; git: 6fcf5ccaebd7ca13a0cb96c96adca699a24080a0; jvm 17.0.10+7-LTS
+2024-10-19 19:05:21 [main] INFO  o.e.j.s.s.DefaultSessionIdManager - Session workerName=node0
+2024-10-19 19:05:21 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@18dd7767{/api,null,AVAILABLE}
+2024-10-19 19:05:21 [main] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@17b6ad97{HTTP/1.1, (http/1.1)}{0.0.0.0:7070}
+2024-10-19 19:05:21 [main] INFO  org.eclipse.jetty.server.Server - Started Server@40016ce1{STARTING}[11.0.23,sto=0] @1321ms
+2024-10-19 19:05:21 [main] INFO  io.javalin.Javalin - Javalin started in 83ms \o/
+2024-10-19 19:05:21 [main] INFO  io.javalin.Javalin - Listening on http://localhost:7070/api
+2024-10-19 19:05:21 [main] INFO  io.javalin.Javalin - You are running Javalin 6.3.0 (released August 22, 2024).
+2024-10-19 19:05:43 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
+2024-10-19 19:05:43 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2024-10-19 19:05:43 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-10-19 19:05:43 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1c3b9394
+2024-10-19 19:05:43 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-10-19 19:05:44 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2024-10-19 19:08:30 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
+2024-10-19 19:08:30 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2024-10-19 19:08:30 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-10-19 19:08:30 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@710b18a6
+2024-10-19 19:08:30 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-10-19 19:08:31 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2024-10-19 19:09:48 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
+2024-10-19 19:09:48 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2024-10-19 19:09:48 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-10-19 19:09:48 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7c1e2a2d
+2024-10-19 19:09:48 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-10-19 19:09:48 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2024-10-19 19:13:44 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
+2024-10-19 19:13:44 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2024-10-19 19:13:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-10-19 19:13:44 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@655ef322
+2024-10-19 19:13:44 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-10-19 19:13:44 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2024-10-19 19:14:29 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
+2024-10-19 19:14:29 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2024-10-19 19:14:29 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-10-19 19:14:29 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1c3b9394
+2024-10-19 19:14:29 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-10-19 19:14:29 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy

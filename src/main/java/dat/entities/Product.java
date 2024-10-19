@@ -22,9 +22,6 @@ public class Product {
     @Column(name = "product_name", nullable = false)
     private String productName;
 
-    @Column(name = "image_link")
-    private String imageLink;
-
     // Many-to-One: Each product belongs to one store
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "store_id", nullable = false)  // Store is mandatory for Product
@@ -53,6 +50,13 @@ public class Product {
         inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     private Set<Category> categories = new HashSet<>();
+
+    // Many-to-Many: Users can save multiple products
+    @ManyToMany
+    @JoinTable(name = "user_saved_products",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private Set<Product> savedProducts = new HashSet<>();
 
     public void addCategory(Category category) {
         if (category != null) {

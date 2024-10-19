@@ -4,6 +4,9 @@ import dat.enums.BrandName;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -19,8 +22,16 @@ public class StoreBrand {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "brand_name", nullable = false)
-    private BrandName brandName;  // Use the enum here
+    private BrandName brandName;
 
+    // One-to-Many: A store brand can have multiple stores
+    @OneToMany(mappedBy = "brand", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    private Set<Store> stores = new HashSet<>();
 
+    // Constructor for easier instantiation
+    public StoreBrand(BrandName brandName) {
+        this.brandName = brandName;
+    }
 }
+
 

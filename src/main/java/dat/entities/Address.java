@@ -16,14 +16,14 @@ public class Address {
     @Column(name = "address_id", nullable = false)
     private Long id;
 
-    @Column(name = "city", nullable = false)
-    private String city;
 
     @Column(name = "street_name_and_number", nullable = false)
     private String streetNameAndNumber;
 
-    @Column(name = "postal_code", nullable = false)
-    private String postalCode;
+    // Many-to-One: Each address is tied to one postal code
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "postal_code", nullable = false)
+    private PostalCode postalCode;
 
     // One-to-One: Each address is tied to one store
     @OneToOne(mappedBy = "address", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, optional = false)
@@ -33,10 +33,11 @@ public class Address {
     @OneToOne(mappedBy = "address", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private User user;
 
-    public Address(String city, String streetNameAndNumber, String postalCode) {
-        this.city = city;
+    // Constructor
+    public Address(String streetNameAndNumber, PostalCode postalCode) {
         this.streetNameAndNumber = streetNameAndNumber;
         this.postalCode = postalCode;
     }
+
 }
 

@@ -38,13 +38,14 @@ public class User implements Serializable {
     @Column(name = "password", nullable = false)
     private String password;
 
-    // Role association
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    // Many-to-One: A user has one role
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
+
     // One-to-One: A user has one address
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER, optional = true)
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "address_id")
     private Address address;
 
