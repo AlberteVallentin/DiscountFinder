@@ -1,8 +1,10 @@
 package dat.dtos;
 
+import dat.entities.Store;
 import lombok.*;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -19,5 +21,6 @@ public class StoreDTO {
     private boolean hasProductsInDb;
     private String sallingId;
     private Set<ProductDTO> products;
+
 }
 
