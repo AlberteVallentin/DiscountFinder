@@ -8,4 +8,3 @@ public enum UnitType {
     GRAM,
     MILLILITER
 }
-
