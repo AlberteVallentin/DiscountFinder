@@ -1,55 +1,97 @@
 package dat.config;
 
 
+import dat.security.entities.Role;
+import dat.security.enums.RoleType;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import org.jetbrains.annotations.NotNull;
-
-import java.math.BigDecimal;
-import java.util.Set;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.sql.Connection;
+import java.sql.SQLException;
+import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
+import org.hibernate.engine.spi.SessionFactoryImplementor;
 
 public class Populate {
     public static void main(String[] args) {
-
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
-
-        Set<Room> calRooms = getCalRooms();
-        Set<Room> hilRooms = getHilRooms();
-
-        try (var em = emf.createEntityManager()) {
-            em.getTransaction().begin();
-            Hotel california = new Hotel("Hotel California", "California", Hotel.HotelType.LUXURY);
-            Hotel hilton = new Hotel("Hilton", "Copenhagen", Hotel.HotelType.STANDARD);
-            california.setRooms(calRooms);
-            hilton.setRooms(hilRooms);
-            em.persist(california);
-            em.persist(hilton);
-            em.getTransaction().commit();
+        // Populate using SQL file
+        try {
+            loadSQLData(emf);
+            populateRoles(emf);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    @NotNull
-    private static Set<Room> getCalRooms() {
-        Room r100 = new Room(100, new BigDecimal(2520), Room.RoomType.SINGLE);
-        Room r101 = new Room(101, new BigDecimal(2520), Room.RoomType.SINGLE);
-        Room r102 = new Room(102, new BigDecimal(2520), Room.RoomType.SINGLE);
-        Room r103 = new Room(103, new BigDecimal(2520), Room.RoomType.SINGLE);
-        Room r104 = new Room(104, new BigDecimal(3200), Room.RoomType.DOUBLE);
-        Room r105 = new Room(105, new BigDecimal(4500), Room.RoomType.SUITE);
+    private static void loadSQLData(EntityManagerFactory emf) {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
 
-        Room[] roomArray = {r100, r101, r102, r103, r104, r105};
-        return Set.of(roomArray);
+            // Get the DataSource from the EntityManagerFactory
+            SessionFactoryImplementor sfi = emf.unwrap(SessionFactoryImplementor.class);
+            ConnectionProvider cp = sfi.getServiceRegistry().getService(ConnectionProvider.class);
+            try (Connection connection = cp.getConnection()) {
+
+                // Read the SQL file from resources/data/data.sql
+                InputStream inputStream = Populate.class.getClassLoader().getResourceAsStream("data/postal_code_and_city.sql");
+                if (inputStream == null) {
+                    throw new IllegalArgumentException("data.sql not found in resources/data directory");
+                }
+
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                    String line;
+                    StringBuilder sqlStatement = new StringBuilder();
+
+                    while ((line = reader.readLine()) != null) {
+                        if (line.startsWith("--") || line.trim().isEmpty()) {
+                            continue;
+                        }
+
+                        sqlStatement.append(line);
+                        // If we find a semicolon, it indicates the end of a statement
+                        if (line.endsWith(";")) {
+                            try (var statement = connection.createStatement()) {
+                                statement.execute(sqlStatement.toString());
+                            } catch (SQLException e) {
+                                e.printStackTrace();
+                            }
+                            // Clear for the next statement
+                            sqlStatement.setLength(0);
+                        }
+                    }
+                }
+
+                em.getTransaction().commit();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    @NotNull
-    private static Set<Room> getHilRooms() {
-        Room r111 = new Room(111, new BigDecimal(2520), Room.RoomType.SINGLE);
-        Room r112 = new Room(112, new BigDecimal(2520), Room.RoomType.SINGLE);
-        Room r113 = new Room(113, new BigDecimal(2520), Room.RoomType.SINGLE);
-        Room r114 = new Room(114, new BigDecimal(2520), Room.RoomType.DOUBLE);
-        Room r115 = new Room(115, new BigDecimal(3200), Room.RoomType.DOUBLE);
-        Room r116 = new Room(116, new BigDecimal(4500), Room.RoomType.SUITE);
+    private static void populateRoles(EntityManagerFactory emf) {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
 
-        Room[] roomArray = {r111, r112, r113, r114, r115, r116};
-        return Set.of(roomArray);
+            // Check if roles already exist
+            Long roleCount = em.createQuery("SELECT COUNT(r) FROM Role r", Long.class).getSingleResult();
+            if (roleCount == 0) {
+                // Create and persist roles
+                Role userRole = new Role(RoleType.USER);
+                Role adminRole = new Role(RoleType.ADMIN);
+                Role storeManagerRole = new Role(RoleType.STORE_MANAGER);
+                Role storeEmployeeRole = new Role(RoleType.STORE_EMPLOYEE);
+
+                em.persist(userRole);
+                em.persist(adminRole);
+                em.persist(storeManagerRole);
+                em.persist(storeEmployeeRole);
+            }
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
