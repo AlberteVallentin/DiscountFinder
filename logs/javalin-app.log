@@ -338,3 +338,24 @@ Caused by: java.net.ConnectException: Connection refused
 2024-10-21 12:15:01 [main] INFO  io.javalin.Javalin - Javalin started in 63ms \o/
 2024-10-21 12:15:01 [main] INFO  io.javalin.Javalin - Listening on http://localhost:7070/api
 2024-10-21 12:15:01 [main] INFO  io.javalin.Javalin - You are running Javalin 6.3.0 (released August 22, 2024).
+2024-10-21 14:18:13 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
+2024-10-21 14:18:13 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2024-10-21 14:18:13 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-10-21 14:18:13 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4e76dac
+2024-10-21 14:18:13 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-10-21 14:18:14 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2024-10-21 14:18:14 [main] INFO  io.javalin.Javalin - Starting Javalin ...
+2024-10-21 14:18:14 [main] INFO  org.eclipse.jetty.server.Server - jetty-11.0.23; built: 2024-08-14T01:40:17.906Z; git: 6fcf5ccaebd7ca13a0cb96c96adca699a24080a0; jvm 17.0.10+7-LTS
+2024-10-21 14:18:14 [main] INFO  o.e.j.s.s.DefaultSessionIdManager - Session workerName=node0
+2024-10-21 14:18:14 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@6aad919c{/api,null,AVAILABLE}
+2024-10-21 14:18:14 [main] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@71b26880{HTTP/1.1, (http/1.1)}{0.0.0.0:7070}
+2024-10-21 14:18:14 [main] INFO  org.eclipse.jetty.server.Server - Started Server@2120bed{STARTING}[11.0.23,sto=0] @1342ms
+2024-10-21 14:18:14 [main] INFO  io.javalin.Javalin - Javalin started in 56ms \o/
+2024-10-21 14:18:14 [main] INFO  io.javalin.Javalin - Listening on http://localhost:7070/api
+2024-10-21 14:18:14 [main] INFO  io.javalin.Javalin - You are running Javalin 6.3.0 (released August 22, 2024).
+2024-10-21 14:18:35 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
+2024-10-21 14:18:35 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2024-10-21 14:18:35 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-10-21 14:18:35 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1c3b9394
+2024-10-21 14:18:35 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-10-21 14:18:35 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy

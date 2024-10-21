@@ -11,9 +11,13 @@ import java.util.Set;
 @ToString
 @Builder
 public class StoreDTO {
-    private Long id;             // Store ID
-    private String storeName;     // Name of the store
-    private Long storeManagerId;  // ID of the Store Manager
-    private Set<Long> employeeIds;  // Set of Employee IDs working in this store
+    private Long id;
+    private String storeName;
+    private String brand;
+    private AddressDTO address;
+    private Long storeManagerId;
+    private boolean hasProductsInDb;
+    private String sallingId;
+    private Set<ProductDTO> products;
 }
 
