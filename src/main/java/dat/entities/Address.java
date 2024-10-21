@@ -17,8 +17,8 @@ public class Address {
     private Long id;
 
 
-    @Column(name = "street_name_and_number", nullable = false)
-    private String streetNameAndNumber;
+    @Column(name = "address_line", nullable = false)
+    private String addressLine;
 
     // Many-to-One: Each address is tied to one postal code
     @ManyToOne(fetch = FetchType.EAGER)
@@ -34,8 +34,8 @@ public class Address {
     private User user;
 
     // Constructor
-    public Address(String streetNameAndNumber, PostalCode postalCode) {
-        this.streetNameAndNumber = streetNameAndNumber;
+    public Address(String addressLine, PostalCode postalCode) {
+        this.addressLine = addressLine;
         this.postalCode = postalCode;
     }
 

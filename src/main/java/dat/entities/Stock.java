@@ -2,6 +2,8 @@ package dat.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 
@@ -17,8 +19,8 @@ public class Stock {
     @Column(name = "stock_id", nullable = false)
     private Long id;
 
-    @Column(name = "unit", nullable = false)
-    private String unit;
+    @Column(name = "quantity", nullable = false)
+    private BigDecimal quantity;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "stock_unit_id", nullable = false)

@@ -1,6 +1,8 @@
 package dat.config;
 
 
+import dat.security.entities.Role;
+import dat.security.enums.RoleType;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import java.io.BufferedReader;
@@ -17,6 +19,7 @@ public class Populate {
         // Populate using SQL file
         try {
             loadSQLData(emf);
+            populateRoles(emf);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,6 +65,31 @@ public class Populate {
 
                 em.getTransaction().commit();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void populateRoles(EntityManagerFactory emf) {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+
+            // Check if roles already exist
+            Long roleCount = em.createQuery("SELECT COUNT(r) FROM Role r", Long.class).getSingleResult();
+            if (roleCount == 0) {
+                // Create and persist roles
+                Role userRole = new Role(RoleType.USER);
+                Role adminRole = new Role(RoleType.ADMIN);
+                Role storeManagerRole = new Role(RoleType.STORE_MANAGER);
+                Role storeEmployeeRole = new Role(RoleType.STORE_EMPLOYEE);
+
+                em.persist(userRole);
+                em.persist(adminRole);
+                em.persist(storeManagerRole);
+                em.persist(storeEmployeeRole);
+            }
+
+            em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }

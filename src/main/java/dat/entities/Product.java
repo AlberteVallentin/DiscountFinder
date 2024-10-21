@@ -43,6 +43,10 @@ public class Product {
     @Column(name = "end_time")
     private LocalDateTime endTime;
 
+    @Column(name = "last_updated")
+    private LocalDateTime lastUpdated;
+
+
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(
         name = "product_category",
@@ -81,22 +85,14 @@ public class Product {
 
     public void addStock(Stock stock) {
         this.stock = stock;
-        stock.setProduct(this);  // Synkroniser forholdet
+        stock.setProduct(this);
     }
 
     public void removeStock() {
         if (this.stock != null) {
-            this.stock.setProduct(null);  // Fjern produktreferencen fra stock
-            this.stock = null;  // Fjern stocken fra produktet
+            this.stock.setProduct(null);
+            this.stock = null;
         }
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime.withNano(0);
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime.withNano(0);
     }
 }
 

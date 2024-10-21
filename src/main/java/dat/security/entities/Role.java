@@ -13,7 +13,6 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @Table(name = "roles")
 public class Role implements Serializable {
@@ -27,11 +26,14 @@ public class Role implements Serializable {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role_type", nullable = false)
+    @Column(name = "role_type", nullable = false, unique = true)
     private RoleType roleType;
 
     @OneToMany(mappedBy = "role", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private Set<User> users = new HashSet<>();
 
+    public Role(RoleType roleType) {
+        this.roleType = roleType;
+    }
 
 }
