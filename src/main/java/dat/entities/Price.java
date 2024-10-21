@@ -1,5 +1,6 @@
 package dat.entities;
 
+import dat.dtos.PriceDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
@@ -32,6 +33,15 @@ public class Price {
     // One-to-One relation with Product (Product owns the relation)
     @OneToOne(mappedBy = "price", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Product product;
+
+    public Price(PriceDTO priceDTO) {
+        this.id = priceDTO.getId();
+        this.originalPrice = priceDTO.getOriginalPrice();
+        this.newPrice = priceDTO.getNewPrice();
+        this.discount = priceDTO.getDiscount();
+        this.percentDiscount = priceDTO.getPercentDiscount();
+    }
+
 }
 
 

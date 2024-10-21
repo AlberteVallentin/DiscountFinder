@@ -1,5 +1,6 @@
 package dat.entities;
 
+import dat.dtos.PostalCodeDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,5 +19,11 @@ public class PostalCode {
 
     @Column(name = "city", nullable = false)
     private String city;
+
+    public PostalCode(PostalCodeDTO postalCodeDTO) {
+        this.postalCode = postalCodeDTO.getPostalCode();
+        this.city = postalCodeDTO.getCity();
+    }
+
 
 }

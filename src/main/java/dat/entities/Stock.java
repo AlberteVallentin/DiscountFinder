@@ -1,5 +1,6 @@
 package dat.entities;
 
+import dat.dtos.StockDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,5 +29,11 @@ public class Stock {
 
     @OneToOne(mappedBy = "stock", fetch = FetchType.EAGER)
     private Product product;
+
+    public Stock(StockDTO stockDTO) {
+        this.id = stockDTO.getId();
+        this.quantity = stockDTO.getQuantity();
+        this.stockUnit = new StockUnit(stockDTO.getStockUnit());
+    }
 
 }

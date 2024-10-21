@@ -1,5 +1,6 @@
 package dat.entities;
 
+import dat.dtos.StoreDTO;
 import dat.security.entities.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -86,4 +87,20 @@ public class Store {
         this.products.remove(product);
         product.setStore(null);
     }
+
+    public Store(StoreDTO storeDTO) {
+        this.id = storeDTO.getId();
+        this.storeName = storeDTO.getStoreName();
+        this.address = new Address(storeDTO.getAddress());
+        if (storeDTO.getBrand() != null) {
+            this.brand = new StoreBrand(storeDTO.getBrand());
+        }
+        if (storeDTO.getStoreManager() != null) {
+            this.storeManager = new User(storeDTO.getStoreManager());
+        }
+        this.hasProductsInDb = storeDTO.isHasProductsInDb();
+        this.sallingId = storeDTO.getSallingId();
+    }
+
+
 }

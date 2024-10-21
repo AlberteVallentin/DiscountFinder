@@ -1,5 +1,6 @@
 package dat.entities;
 
+import dat.dtos.StoreBrandDTO;
 import dat.enums.BrandName;
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,10 +29,17 @@ public class StoreBrand {
     @OneToMany(mappedBy = "brand", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private Set<Store> stores = new HashSet<>();
 
-    // Constructor for easier instantiation
+
     public StoreBrand(BrandName brandName) {
         this.brandName = brandName;
     }
+
+    public StoreBrand(StoreBrandDTO storeBrandDTO) {
+        this.id = storeBrandDTO.getId();
+        this.brandName = storeBrandDTO.getBrandName();
+    }
+
+
 }
 
 

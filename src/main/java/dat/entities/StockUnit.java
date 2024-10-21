@@ -1,5 +1,6 @@
 package dat.entities;
 
+import dat.dtos.StockUnitDTO;
 import dat.enums.UnitType;
 import jakarta.persistence.*;
 import lombok.*;
@@ -31,5 +32,10 @@ public class StockUnit {
     // Constructor
     public StockUnit(UnitType unitType) {
         this.unitType = unitType;
+    }
+
+    public StockUnit(StockUnitDTO stockUnitDTO) {
+        this.id = stockUnitDTO.getId();
+        this.unitType = stockUnitDTO.getUnitType();
     }
 }

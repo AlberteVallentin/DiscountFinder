@@ -1,5 +1,6 @@
 package dat.entities;
 
+import dat.dtos.CategoryDTO;
 import dat.enums.CategoryName;
 import jakarta.persistence.*;
 import lombok.*;
@@ -44,6 +45,12 @@ public class Category {
             product.getCategories().remove(this);
         }
     }
+
+    public Category(CategoryDTO categoryDTO) {
+        this.id = categoryDTO.getId();
+        this.categoryName = categoryDTO.getCategoryName();
+    }
+
 }
 
 

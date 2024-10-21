@@ -13,7 +13,7 @@ import java.util.Set;
 public class StoreDTO {
     private Long id;
     private String storeName;
-    private String brand;
+    private StoreBrandDTO brand;
     private AddressDTO address;
     private Long storeManagerId;
     private boolean hasProductsInDb;

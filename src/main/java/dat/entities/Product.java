@@ -1,5 +1,7 @@
 package dat.entities;
 
+import dat.dtos.CategoryDTO;
+import dat.dtos.ProductDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
@@ -94,5 +96,20 @@ public class Product {
             this.stock = null;
         }
     }
+
+    public Product(ProductDTO productDTO) {
+        this.id = productDTO.getId();
+        this.productName = productDTO.getProductName();
+        this.store = new Store(productDTO.getStore());
+        this.price = new Price(productDTO.getPrice());
+        this.stock = new Stock(productDTO.getStock());
+        this.startTime = productDTO.getStartTime();
+        this.endTime = productDTO.getEndTime();
+        this.lastUpdated = productDTO.getLastUpdated();
+        for (CategoryDTO categoryDTO : productDTO.getCategories()) {
+            this.categories.add(new Category(categoryDTO));
+        }
+    }
+
 }
 
