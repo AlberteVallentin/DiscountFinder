@@ -32,8 +32,6 @@ public class SecurityRoutes {
             path("/protected", ()->{
                 get("/user_demo", (ctx)->ctx.json(jsonMapper.createObjectNode().put("msg", "Hello from USER Protected")), RoleType.USER);
                 get("/admin_demo", (ctx)->ctx.json(jsonMapper.createObjectNode().put("msg", "Hello from ADMIN Protected")), RoleType.ADMIN);
-                get("/store_manager_demo", (ctx)->ctx.json(jsonMapper.createObjectNode().put("msg", "Hello from STORE_MANAGER Protected")), RoleType.STORE_MANAGER);
-                get("/store_employee_demo", (ctx)->ctx.json(jsonMapper.createObjectNode().put("msg", "Hello from STORE_EMPLOYEE Protected")), RoleType.STORE_EMPLOYEE);
             });
         };
     }

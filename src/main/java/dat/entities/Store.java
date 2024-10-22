@@ -45,7 +45,7 @@ public class Store {
         this.sallingStoreId = dto.getSallingStoreId();
         this.name = dto.getName();
         this.brand = dto.getBrand();
-        this.address = dto.getAddress();
+        this.address = new Address(dto.getAddress());
         this.hasProductsInDb = dto.hasProductsInDb();  // Fixed this line
     }
 
@@ -53,10 +53,10 @@ public class Store {
     public void updateFromSallingApi(StoreDTO dto) {
         this.name = dto.getName();
         if (this.address == null) {
-            this.address = dto.getAddress();
+            this.address = new Address(dto.getAddress());
         } else {
             this.address.setAddressLine(dto.getAddress().getAddressLine());
-            this.address.setPostalCode(dto.getAddress().getPostalCode());
+            this.address.setPostalCode(new PostalCode(dto.getAddress().getPostalCode()));
             this.address.setLongitude(dto.getAddress().getLongitude());
             this.address.setLatitude(dto.getAddress().getLatitude());
         }

@@ -80,13 +80,9 @@ public class Populate {
                 // Create and persist roles
                 Role userRole = new Role(RoleType.USER);
                 Role adminRole = new Role(RoleType.ADMIN);
-                Role storeManagerRole = new Role(RoleType.STORE_MANAGER);
-                Role storeEmployeeRole = new Role(RoleType.STORE_EMPLOYEE);
 
                 em.persist(userRole);
                 em.persist(adminRole);
-                em.persist(storeManagerRole);
-                em.persist(storeEmployeeRole);
             }
 
             em.getTransaction().commit();

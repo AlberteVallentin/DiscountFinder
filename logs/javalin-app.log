@@ -359,3 +359,49 @@ Caused by: java.net.ConnectException: Connection refused
 2024-10-21 14:18:35 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1c3b9394
 2024-10-21 14:18:35 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
 2024-10-21 14:18:35 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2024-10-22 17:34:59 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
+2024-10-22 17:34:59 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2024-10-22 17:34:59 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-10-22 17:35:00 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@61d9efe0
+2024-10-22 17:35:00 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-10-22 17:36:12 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
+2024-10-22 17:36:12 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2024-10-22 17:36:13 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-10-22 17:36:13 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@fd0e5b6
+2024-10-22 17:36:13 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-10-22 17:37:04 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
+2024-10-22 17:37:04 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2024-10-22 17:37:05 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-10-22 17:37:05 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@fd0e5b6
+2024-10-22 17:37:05 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-10-22 17:40:56 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
+2024-10-22 17:40:56 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2024-10-22 17:40:56 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-10-22 17:40:56 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2187fff7
+2024-10-22 17:40:56 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-10-22 17:40:56 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2024-10-22 17:40:57 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-10-22 17:40:57 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - constraint "uk_bo4t9moxwowswgg5jncfwtbbr" of relation "products" does not exist, skipping
+2024-10-22 17:40:57 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-10-22 17:40:57 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - constraint "uk_rnqss1iapc0xe7g2iyd2rgf7q" of relation "products" does not exist, skipping
+2024-10-22 17:40:57 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-10-22 17:40:57 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - constraint "uk_gj15e215lcpf95jdcja47psr7" of relation "products" does not exist, skipping
+2024-10-22 17:40:57 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-10-22 17:40:57 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - constraint "uk_6kpjgt1lwdofsckw70uo9eo0" of relation "roles" does not exist, skipping
+2024-10-22 17:40:57 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-10-22 17:40:57 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - constraint "uk_huq17a7p1srb95e5krcjyjx49" of relation "stores" does not exist, skipping
+2024-10-22 17:40:57 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-10-22 17:40:57 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - constraint "uk_lrfcwj1khod8ht4kt90bdd70q" of relation "stores" does not exist, skipping
+2024-10-22 17:40:57 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-10-22 17:40:57 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - constraint "uk_6dotkott2kjsp8vw4d0m25fb7" of relation "users" does not exist, skipping
+2024-10-22 17:40:57 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-10-22 17:40:57 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - constraint "uk_hbvhqvjgmhd5omxyo67ynvbyp" of relation "users" does not exist, skipping
+2024-10-22 17:40:57 [main] INFO  io.javalin.Javalin - Starting Javalin ...
+2024-10-22 17:40:57 [main] INFO  org.eclipse.jetty.server.Server - jetty-11.0.23; built: 2024-08-14T01:40:17.906Z; git: 6fcf5ccaebd7ca13a0cb96c96adca699a24080a0; jvm 17.0.10+7-LTS
+2024-10-22 17:40:57 [main] INFO  o.e.j.s.s.DefaultSessionIdManager - Session workerName=node0
+2024-10-22 17:40:57 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@734a149a{/api,null,AVAILABLE}
+2024-10-22 17:40:57 [main] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@37b1149b{HTTP/1.1, (http/1.1)}{0.0.0.0:7070}
+2024-10-22 17:40:57 [main] INFO  org.eclipse.jetty.server.Server - Started Server@4e94669c{STARTING}[11.0.23,sto=0] @1165ms
+2024-10-22 17:40:57 [main] INFO  io.javalin.Javalin - Javalin started in 59ms \o/
+2024-10-22 17:40:57 [main] INFO  io.javalin.Javalin - Listening on http://localhost:7070/api
+2024-10-22 17:40:57 [main] INFO  io.javalin.Javalin - You are running Javalin 6.3.0 (released August 22, 2024).

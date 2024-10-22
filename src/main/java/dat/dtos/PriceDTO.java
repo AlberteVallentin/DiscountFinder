@@ -1,5 +1,6 @@
 package dat.dtos;
 
+import dat.entities.Price;
 import lombok.*;
 import java.math.BigDecimal;
 
@@ -16,4 +17,12 @@ public class PriceDTO {
     private BigDecimal newPrice;
     private BigDecimal discount;
     private BigDecimal percentDiscount;
+
+    public PriceDTO(Price price) {
+        this.id = price.getId();
+        this.originalPrice = price.getOriginalPrice();
+        this.newPrice = price.getNewPrice();
+        this.discount = price.getDiscount();
+        this.percentDiscount = price.getPercentDiscount();
+    }
 }

@@ -25,12 +25,10 @@ public class Address {
     @Column(name = "latitude")
     private Double latitude;
 
-    // Many-to-One: Each address is tied to one postal code
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "postal_code", nullable = false)
     private PostalCode postalCode;
 
-    // One-to-One: Each address is tied to one store
     @OneToOne(mappedBy = "address", fetch = FetchType.EAGER)
     private Store store;
 
@@ -54,6 +52,24 @@ public class Address {
         this.addressLine = dto.getAddressLine();
         this.longitude = dto.getLongitude();
         this.latitude = dto.getLatitude();
-        this.postalCode = new PostalCode(dto.getPostalCode());
+        if (dto.getPostalCode() != null) {
+            this.postalCode = new PostalCode(dto.getPostalCode());
+        }
+    }
+
+    // Update method from DTO
+    public void updateFromDTO(AddressDTO dto) {
+        this.addressLine = dto.getAddressLine();
+        this.longitude = dto.getLongitude();
+        this.latitude = dto.getLatitude();
+        if (dto.getPostalCode() != null) {
+            if (this.postalCode == null) {
+                this.postalCode = new PostalCode(dto.getPostalCode());
+            } else {
+                // Update existing postal code
+                this.postalCode.setPostalCode(dto.getPostalCode().getPostalCode());
+                this.postalCode.setCity(dto.getPostalCode().getCity());
+            }
+        }
     }
 }
