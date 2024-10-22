@@ -3,13 +3,20 @@ package dat.daos.impl;
 import dat.daos.IDAO;
 import dat.dtos.StoreDTO;
 import dat.entities.Store;
+import dat.entities.Address;
+import dat.entities.PostalCode;
+import dat.exceptions.ApiException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class StoreDAO implements IDAO<StoreDTO, Long> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(StoreDAO.class);
     private static StoreDAO instance;
     private static EntityManagerFactory emf;
 
@@ -43,27 +50,71 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
     }
 
     @Override
-    public StoreDTO create(StoreDTO storeDTO) {
+    public StoreDTO create(StoreDTO storeDTO) throws ApiException {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
+
+            // Først check om PostalCode eksisterer
+            PostalCode postalCode = findOrCreatePostalCode(em, storeDTO.getAddress().getPostalCode().getPostalCode(),
+                storeDTO.getAddress().getPostalCode().getCity());
+
+            // Opret ny Address
+            Address address = new Address(storeDTO.getAddress());
+            address.setPostalCode(postalCode);
+
+            // Opret ny Store
             Store store = new Store(storeDTO);
+            store.setAddress(address);
+
+            em.persist(postalCode);
+            em.persist(address);
             em.persist(store);
+
             em.getTransaction().commit();
+
             return new StoreDTO(store);
+        } catch (Exception e) {
+            LOGGER.error("Error creating store", e);
+            throw new ApiException(500, "Could not create store: " + e.getMessage());
         }
     }
 
     @Override
-    public StoreDTO update(Long id, StoreDTO storeDTO) {
+    public StoreDTO update(Long id, StoreDTO storeDTO) throws ApiException {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
-            Store store = em.find(Store.class, id);
-            if (store != null) {
-                store.updateFromSallingApi(storeDTO);
-                em.merge(store);
+
+            Store existingStore = em.find(Store.class, id);
+            if (existingStore == null) {
+                throw new ApiException(404, "Store not found with id: " + id);
             }
+
+            // Opdater PostalCode
+            PostalCode postalCode = findOrCreatePostalCode(em, storeDTO.getAddress().getPostalCode().getPostalCode(),
+                storeDTO.getAddress().getPostalCode().getCity());
+
+            // Opdater eller opret Address
+            Address address = existingStore.getAddress();
+            if (address == null) {
+                address = new Address(storeDTO.getAddress());
+            } else {
+                address.updateFromDTO(storeDTO.getAddress());
+            }
+            address.setPostalCode(postalCode);
+
+            // Opdater Store
+            existingStore.updateFromSallingApi(storeDTO);
+            existingStore.setAddress(address);
+
+            em.merge(existingStore);
             em.getTransaction().commit();
-            return store != null ? new StoreDTO(store) : null;
+
+            return new StoreDTO(existingStore);
+        } catch (ApiException e) {
+            throw e;
+        } catch (Exception e) {
+            LOGGER.error("Error updating store", e);
+            throw new ApiException(500, "Could not update store: " + e.getMessage());
         }
     }
 
@@ -86,7 +137,21 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
         }
     }
 
-    // Additional helper methods
+    // Hjælpemetoder
+    private PostalCode findOrCreatePostalCode(EntityManager em, int postalCodeNumber, String city) {
+        PostalCode postalCode = em.find(PostalCode.class, postalCodeNumber);
+        if (postalCode == null) {
+            postalCode = new PostalCode();
+            postalCode.setPostalCode(postalCodeNumber);
+            postalCode.setCity(city);
+            em.persist(postalCode);
+        } else if (!postalCode.getCity().equals(city)) {
+            postalCode.setCity(city);
+        }
+        return postalCode;
+    }
+
+    // Find en butik baseret på Salling Store ID
     public Store findBySallingId(String sallingStoreId) {
         try (EntityManager em = emf.createEntityManager()) {
             TypedQuery<Store> query = em.createQuery(
@@ -97,26 +162,47 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
         }
     }
 
-    public List<StoreDTO> findByPostalCode(int postalCode) {
+    // Gem eller opdater en liste af butikker fra Salling API
+    public void saveOrUpdateStores(List<StoreDTO> stores) throws ApiException {
         try (EntityManager em = emf.createEntityManager()) {
-            TypedQuery<Store> query = em.createQuery(
-                "SELECT s FROM Store s WHERE s.address.postalCode.postalCode = :postalCode",
-                Store.class);
-            query.setParameter("postalCode", postalCode);
-            return query.getResultList().stream()
-                .map(StoreDTO::new)
-                .collect(Collectors.toList());
-        }
-    }
+            em.getTransaction().begin();
 
-    public List<StoreDTO> findStoresWithProducts() {
-        try (EntityManager em = emf.createEntityManager()) {
-            TypedQuery<Store> query = em.createQuery(
-                "SELECT s FROM Store s WHERE s.hasProductsInDb = true",
-                Store.class);
-            return query.getResultList().stream()
-                .map(StoreDTO::new)
-                .collect(Collectors.toList());
+            for (StoreDTO storeDTO : stores) {
+                try {
+                    Store existingStore = findBySallingId(storeDTO.getSallingStoreId());
+                    if (existingStore == null) {
+                        // Opret ny butik
+                        PostalCode postalCode = findOrCreatePostalCode(em,
+                            storeDTO.getAddress().getPostalCode().getPostalCode(),
+                            storeDTO.getAddress().getPostalCode().getCity());
+
+                        Address address = new Address(storeDTO.getAddress());
+                        address.setPostalCode(postalCode);
+
+                        Store store = new Store(storeDTO);
+                        store.setAddress(address);
+
+                        em.persist(store);
+                        LOGGER.info("Created new store: {}", store.getName());
+                    } else {
+                        // Opdater eksisterende butik
+                        existingStore.updateFromSallingApi(storeDTO);
+                        Address address = existingStore.getAddress();
+                        address.updateFromDTO(storeDTO.getAddress());
+
+                        em.merge(existingStore);
+                        LOGGER.info("Updated existing store: {}", existingStore.getName());
+                    }
+                } catch (Exception e) {
+                    LOGGER.error("Error processing store: {}", storeDTO.getName(), e);
+                }
+            }
+
+            em.getTransaction().commit();
+            LOGGER.info("Successfully processed {} stores", stores.size());
+        } catch (Exception e) {
+            LOGGER.error("Error saving/updating stores", e);
+            throw new ApiException(500, "Could not save/update stores: " + e.getMessage());
         }
     }
 }

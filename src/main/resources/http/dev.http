@@ -1,100 +1,76 @@
-### A simple get request to the test endpoint. No need for login
-GET {{url}}/auth/test/
 
-### Populate the database with some data
-GET {{url}}/hotels/populate/
+### Environment variables - Make sure you have http-client.env.json file with these variables
+GET {{url}}/auth/test
 
-### Create a new user - this one will only get a USER roleType by default
-POST {{url}}/auth/register/
-
-{
-    "username": "user",
-    "password": "test123"
-}
-
-###
-POST {{url}}/auth/login/
-
-{
-    "username": "user",
-    "password": "test123"
-}
-
-> {%
-    client.global.set("jwt_token", response.body.token);
-    console.log("JWT Token:", client.global.get("jwt_token"));
-%}
-
-###
-GET {{url}}/protected/user_demo/
-Accept: application/json
-Authorization: Bearer {{jwt_token}}
-
-###
-GET {{url}}/protected/admin_demo/
-Accept: application/json
-Authorization: Bearer {{jwt_token}}
-
-### Add admin roleType to user
-POST {{url}}/auth/user/addrole/
-Accept: application/json
-Authorization: Bearer {{jwt_token}}
-
-{
-    "roleType": "ADMIN"
-}
-Accept: application/json
-Authorization: Bearer {{jwt_token}}
-
-###
-GET {{url}}/hotels
-Accept: application/json
-Authorization: Bearer {{jwt_token}}
-
-###
-GET {{url}}/hotels/2
-
-###
-POST {{url}}/hotels
-Content-Type: application/json
-Authorization: Bearer {{jwt_token}}
-
-{
-  "hotelName": "Holiday Inn",
-  "hotelAddress": "Stuttgart",
-  "hotelType": "STANDARD"
-}
-
-###
-PUT {{url}}/hotels/3
+### Register new user
+POST {{url}}/auth/register
 Content-Type: application/json
 
 {
-  "hotelName": "Ritz Carlton",
-  "hotelAddress": "London City",
-  "hotelType": "LUXURY"
+  "email": "test@test.dk",
+  "name": "Test User",
+  "password": "test123"
+
 }
 
-###
-DELETE {{url}}/hotels/5
-Authorization: Bearer {{jwt_token}}
+> {% client.global.set("auth_token", response.body.token); %}
 
-// Room API
-###
-GET {{url}}/rooms
-Authorization: Bearer {{jwt_token}}
-
-###
-GET {{url}}/rooms/1
-Authorization: Bearer {{jwt_token}}
-
-###
-POST {{url}}/rooms/hotel/1
+### Login user
+POST {{url}}/auth/login
 Content-Type: application/json
-Authorization: Bearer {{jwt_token}}
 
 {
-  "roomNumber": 11,
-  "roomPrice": 1150,
-  "roomType": "SINGLE"
+  "email": "test@test.dk",
+  "password": "test123"
 }
+
+> {% client.global.set("auth_token", response.body.token); %}
+
+### Test protected user endpoint
+GET {{url}}/protected/user_demo
+Authorization: Bearer {{auth_token}}
+
+### Add admin role
+POST {{url}}/auth/user/addrole
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "role": "ADMIN"
+}
+
+### Test protected admin endpoint
+GET {{url}}/protected/admin_demo
+Authorization: Bearer {{auth_token}}
+
+### Salling API Endpoints ###
+
+### Sync all stores
+POST {{url}}/stores/sync
+Accept: application/json
+
+### Get all stores
+GET {{url}}/stores
+Accept: application/json
+
+### Get specific store
+GET {{url}}/stores/1
+Accept: application/json
+
+### Sync products for specific store
+POST {{url}}/stores/1/sync-products
+Accept: application/json
+
+### Get products for specific store
+GET {{url}}/stores/1/products
+Accept: application/json
+
+
+### Sync all stores
+POST http://localhost:7070/api/stores/sync
+Accept: application/json
+
+### Check result
+GET http://localhost:7070/api/stores
+Accept: application/json
+
