@@ -39,12 +39,6 @@ public class User implements Serializable {
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
-
-    // One-to-One: A user has one address
-    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "address_id")
-    private Address address;
-
     // Constructor to create a new user with a hashed password and role
     public User(String name, String email, String password, Role role) {
         this.name = name;
