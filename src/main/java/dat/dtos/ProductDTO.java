@@ -2,6 +2,7 @@ package dat.dtos;
 
 import dat.entities.Product;
 import lombok.*;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 public class ProductDTO {
     private Long id;
     private String productName;
-    private String imageUrl;
+    private String ean;
     private PriceDTO price;
     private TimingDTO timing;
     private Set<CategoryDTO> categories;
@@ -23,7 +24,7 @@ public class ProductDTO {
     public ProductDTO(Product product) {
         this.id = product.getId();
         this.productName = product.getProductName();
-        this.imageUrl = product.getImageUrl();
+        this.ean = product.getEan();
 
         if (product.getPrice() != null) {
             this.price = new PriceDTO(product.getPrice());

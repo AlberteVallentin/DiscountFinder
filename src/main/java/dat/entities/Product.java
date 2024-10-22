@@ -1,8 +1,6 @@
-// Product.java
 package dat.entities;
 
 import dat.dtos.ProductDTO;
-import dat.security.entities.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,8 +21,8 @@ public class Product {
     @Column(name = "product_name", nullable = false)
     private String productName;
 
-    @Column(name = "image_url")
-    private String imageUrl;
+    @Column(name = "ean", unique = true)
+    private String ean;
 
     // One-to-One relation with Price
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -61,7 +59,7 @@ public class Product {
 
     public void updateFromDTO(ProductDTO dto) {
         this.productName = dto.getProductName();
-        this.imageUrl = dto.getImageUrl();
+        this.ean = dto.getEan();
 
         // Update price if provided
         if (dto.getPrice() != null) {
@@ -82,6 +80,15 @@ public class Product {
                 this.timing = new Timing(dto.getTiming());
             } else {
                 this.timing.updateFromDTO(dto.getTiming());
+            }
+        }
+
+        // Update stock if provided
+        if (dto.getStock() != null) {
+            if (this.stock == null) {
+                this.stock = new Stock(dto.getStock());
+            } else {
+                this.stock.updateFromDTO(dto.getStock());
             }
         }
     }

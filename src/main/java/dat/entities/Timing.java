@@ -29,6 +29,7 @@ public class Timing {
     private Product product;
 
     public Timing(TimingDTO dto) {
+
         updateFromDTO(dto);
     }
 

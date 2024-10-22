@@ -37,7 +37,7 @@ public class Store {
     @Column(name = "has_products_in_db")
     private boolean hasProductsInDb;
 
-    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "store", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Product> products = new HashSet<>();
 
     // Constructor that takes a StoreDTO
