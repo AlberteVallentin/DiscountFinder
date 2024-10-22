@@ -1,16 +1,12 @@
 package dat.security.entities;
 
 import dat.entities.Address;
-import dat.entities.Store;
-import dat.entities.Product;
 import jakarta.persistence.*;
 import lombok.*;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
