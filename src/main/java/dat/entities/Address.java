@@ -1,6 +1,6 @@
 package dat.entities;
 
-import dat.security.entities.User;
+import dat.dtos.AddressDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,9 +16,14 @@ public class Address {
     @Column(name = "address_id", nullable = false)
     private Long id;
 
-
     @Column(name = "address_line", nullable = false)
     private String addressLine;
+
+    @Column(name = "longitude")
+    private Double longitude;
+
+    @Column(name = "latitude")
+    private Double latitude;
 
     // Many-to-One: Each address is tied to one postal code
     @ManyToOne(fetch = FetchType.EAGER)
@@ -26,12 +31,8 @@ public class Address {
     private PostalCode postalCode;
 
     // One-to-One: Each address is tied to one store
-    @OneToOne(mappedBy = "address", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, optional = false)
+    @OneToOne(mappedBy = "address", fetch = FetchType.EAGER)
     private Store store;
-
-    // One-to-One: An address can belong to a single user
-    @OneToOne(mappedBy = "address", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
-    private User user;
 
     // Constructor
     public Address(String addressLine, PostalCode postalCode) {
@@ -39,7 +40,20 @@ public class Address {
         this.postalCode = postalCode;
     }
 
+    // Constructor with coordinates
+    public Address(String addressLine, PostalCode postalCode, Double longitude, Double latitude) {
+        this.addressLine = addressLine;
+        this.postalCode = postalCode;
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
 
-
+    // Constructor from DTO
+    public Address(AddressDTO dto) {
+        this.id = dto.getId();
+        this.addressLine = dto.getAddressLine();
+        this.longitude = dto.getLongitude();
+        this.latitude = dto.getLatitude();
+        this.postalCode = new PostalCode(dto.getPostalCode());
+    }
 }
-

@@ -1,6 +1,6 @@
 package dat.dtos;
 
-import dat.enums.BrandName;
+import dat.enums.Brand;
 import lombok.*;
 
 @Getter
@@ -12,5 +12,5 @@ import lombok.*;
 public class StoreBrandDTO {
 
     private Long id;
-    private BrandName brandName;
+    private Brand brand;
 }
