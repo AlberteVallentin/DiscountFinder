@@ -107,26 +107,6 @@ Content-Type: application/json
   "hasProductsInDb": true
 }
 
-### Delete store (requires admin)
-DELETE {{url}}/stores/1
-Authorization: Bearer {{auth_token}}
-
-### Sync Operations ###
-
-### Sync all stores (requires admin)
-POST {{url}}/stores/sync
-Authorization: Bearer {{auth_token}}
-Accept: application/json
-
-### Sync products for specific store (requires admin)
-POST {{url}}/stores/1/sync-products
-Authorization: Bearer {{auth_token}}
-Accept: application/json
-
-### Get products for specific store (public)
-GET {{url}}/stores/1/products
-Accept: application/json
-
 ### Validation Tests ###
 
 ### Create store with missing fields (should fail)
