@@ -1,5 +1,6 @@
 package dat.dtos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import dat.entities.Timing;
 import lombok.*;
 import java.time.LocalDateTime;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class TimingDTO {
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long id;
     private LocalDateTime startTime;
     private LocalDateTime endTime;

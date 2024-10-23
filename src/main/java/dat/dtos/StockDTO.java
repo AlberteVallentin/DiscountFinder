@@ -1,5 +1,6 @@
 package dat.dtos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import dat.entities.Stock;
 import dat.enums.StockUnit;
 import lombok.*;
@@ -10,6 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class StockDTO {
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long id;
     private Double quantity;
     private StockUnit stockUnit;

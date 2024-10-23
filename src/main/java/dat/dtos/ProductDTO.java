@@ -1,5 +1,6 @@
 package dat.dtos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import dat.entities.Product;
 import lombok.*;
 
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Builder
 public class ProductDTO {
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long id;
     private String productName;
     private String ean;

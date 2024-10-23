@@ -2,12 +2,14 @@ package dat.daos.impl;
 
 import dat.daos.IDAO;
 import dat.dtos.StoreDTO;
+import dat.entities.Brand;
 import dat.entities.Store;
 import dat.entities.Address;
 import dat.entities.PostalCode;
 import dat.exceptions.ApiException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,25 +56,33 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
 
-            // Først check om PostalCode eksisterer
-            PostalCode postalCode = findOrCreatePostalCode(em, storeDTO.getAddress().getPostalCode().getPostalCode(),
+            // Find eksisterende brand direkte i EntityManager
+            Brand brand = em.createQuery("SELECT b FROM Brand b WHERE b.name = :name", Brand.class)
+                .setParameter("name", storeDTO.getBrand().getName())
+                .getSingleResult();
+
+            // Find eller opret PostalCode (eksisterende kode)
+            PostalCode postalCode = findOrCreatePostalCode(em,
+                storeDTO.getAddress().getPostalCode().getPostalCode(),
                 storeDTO.getAddress().getPostalCode().getCity());
 
             // Opret ny Address
             Address address = new Address(storeDTO.getAddress());
             address.setPostalCode(postalCode);
 
-            // Opret ny Store
+            // Opret ny Store og sæt relationer
             Store store = new Store(storeDTO);
+            store.setBrand(brand);
             store.setAddress(address);
 
-            em.persist(postalCode);
             em.persist(address);
             em.persist(store);
 
             em.getTransaction().commit();
 
             return new StoreDTO(store);
+        } catch (NoResultException e) {
+            throw new ApiException(400, "Brand not found: " + storeDTO.getBrand().getName());
         } catch (Exception e) {
             LOGGER.error("Error creating store", e);
             throw new ApiException(500, "Could not create store: " + e.getMessage());

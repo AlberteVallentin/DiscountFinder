@@ -1,5 +1,6 @@
 package dat.dtos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import dat.entities.Store;
 import dat.entities.Brand;
 import lombok.*;
@@ -14,11 +15,16 @@ import java.util.stream.Collectors;
 @Builder
 public class StoreDTO {
     private Long id;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String sallingStoreId;
     private String name;
     private BrandDTO brand;
     private AddressDTO address;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private boolean hasProductsInDb;
+
     private Set<ProductDTO> products;
 
     // Constructor from Entity

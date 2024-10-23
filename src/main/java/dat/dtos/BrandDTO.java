@@ -1,5 +1,6 @@
 package dat.dtos;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import dat.entities.Brand;
 import lombok.*;
 
@@ -9,8 +10,12 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class BrandDTO {
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long id;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String name;
+
     private String displayName;
 
 
