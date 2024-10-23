@@ -18,12 +18,35 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 public class StoreFetcher {
     private static final Logger LOGGER = LoggerFactory.getLogger(StoreFetcher.class);
     private static final String API_KEY = "77fcfa33-0e12-4dc9-aac6-c5d7cc9be766";
     private static final String STORES_URL = "https://api.sallinggroup.com/v2/stores";
-    private static final int MAX_SIZE = 1000; // Set a high value to get all stores
+    private static final int PER_PAGE = 100; // Number of stores to fetch per request
+
+    // Brand name mapping for various possible store brand names
+    private static final Map<String, Brand> BRAND_MAPPING = new HashMap<>();
+    static {
+        // Netto variations
+        BRAND_MAPPING.put("NETTO", Brand.NETTO);
+        BRAND_MAPPING.put("DØGNNETTO", Brand.NETTO);
+        BRAND_MAPPING.put("DOGNNETTO", Brand.NETTO);
+
+        // Føtex variations
+        BRAND_MAPPING.put("FØTEX", Brand.FOETEX);
+        BRAND_MAPPING.put("FOTEX", Brand.FOETEX);
+        BRAND_MAPPING.put("FOETEX", Brand.FOETEX);
+        BRAND_MAPPING.put("FØTEX FOOD", Brand.FOETEX);
+        BRAND_MAPPING.put("FOTEX FOOD", Brand.FOETEX);
+
+        // Bilka variations
+        BRAND_MAPPING.put("BILKA", Brand.BILKA);
+        BRAND_MAPPING.put("BILKA TOGO", Brand.BILKA);
+        BRAND_MAPPING.put("BILKA TO GO", Brand.BILKA);
+    }
 
     private final HttpClient client;
     private final ObjectMapper objectMapper;
@@ -35,21 +58,25 @@ public class StoreFetcher {
         this.storeDAO = StoreDAO.getInstance(HibernateConfig.getEntityManagerFactory());
     }
 
+    /**
+     * Fetches all stores from the Salling API and saves them to the database
+     * @return List of fetched store DTOs
+     * @throws ApiException if there's an error fetching or saving stores
+     */
     public List<StoreDTO> fetchAndSaveAllStores() throws ApiException {
         List<StoreDTO> allStores = new ArrayList<>();
-        int page = 1; // Start med første side
-        int storesFetched = 0;
-        int perPage = 100; // Juster dette til, hvor mange du vil hente per side (API'et tillader ofte 100)
+        int page = 1;
+        int totalStoresFetched = 0;
 
         try {
             LOGGER.info("Starting to fetch stores from Salling API");
 
             while (true) {
-                // Build URL with page and per_page parameters
-                String urlWithParams = STORES_URL + "?brand=foetex&country=dk&per_page=" + perPage + "&page=" + page;
-                LOGGER.info("Fetching stores with URL: {}", urlWithParams);
+                // Build URL with pagination parameters
+                String urlWithParams = String.format("%s?per_page=%d&page=%d", STORES_URL, PER_PAGE, page);
+                LOGGER.info("Fetching stores from URL: {}", urlWithParams);
 
-                // Create request
+                // Create and execute request
                 HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(urlWithParams))
                     .header("Authorization", "Bearer " + API_KEY)
@@ -57,7 +84,6 @@ public class StoreFetcher {
                     .GET()
                     .build();
 
-                // Send request and get response
                 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
                 // Check response status
@@ -66,55 +92,80 @@ public class StoreFetcher {
                     throw new ApiException(response.statusCode(), "Failed to fetch stores from Salling API: " + response.body());
                 }
 
-                // Parse response body
+                // Parse response
                 JsonNode rootNode = objectMapper.readTree(response.body());
 
+                // Check if we have any results
                 if (!rootNode.isArray() || rootNode.size() == 0) {
-                    LOGGER.info("No more stores found, ending pagination");
-                    break; // Slut hvis vi ikke modtager flere resultater
+                    LOGGER.info("No more stores to fetch. Total stores fetched: {}", totalStoresFetched);
+                    break;
                 }
 
-                // Parse stores and add to the list
-                List<StoreDTO> stores = new ArrayList<>();
+                // Process stores from current page
+                List<StoreDTO> pageStores = new ArrayList<>();
                 for (JsonNode storeNode : rootNode) {
                     try {
                         StoreDTO store = parseStoreNode(storeNode);
                         if (store != null) {
-                            stores.add(store);
-                            LOGGER.debug("Parsed store: {}", store.getName());
+                            pageStores.add(store);
+                            LOGGER.debug("Successfully parsed store: {}", store.getName());
                         }
                     } catch (Exception e) {
-                        LOGGER.error("Error parsing store: {}", e.getMessage());
+                        LOGGER.warn("Failed to parse store: {}", e.getMessage());
                     }
                 }
 
-                allStores.addAll(stores);
-                storesFetched += stores.size();
-                LOGGER.info("Fetched {} stores from API (Total: {})", stores.size(), storesFetched);
+                // Add stores from this page to total
+                allStores.addAll(pageStores);
+                totalStoresFetched += pageStores.size();
+                LOGGER.info("Fetched {} stores from page {} (Total: {})", pageStores.size(), page, totalStoresFetched);
 
-                // Increment page for the next batch of results
-                page++;
-
-                // If fewer results than perPage, we are on the last page
-                if (stores.size() < perPage) {
-                    break; // Vi er på sidste side, hvis vi får færre resultater end perPage
+                // Check if we should continue to next page
+                if (pageStores.size() < PER_PAGE) {
+                    LOGGER.info("Reached last page of results");
+                    break;
                 }
+
+                page++;
             }
 
-            // Save all stores to the database
+            // Save all stores to database
+            LOGGER.info("Saving {} stores to database", allStores.size());
             storeDAO.saveOrUpdateStores(allStores);
-            LOGGER.info("Saved {} stores to database", allStores.size());
+            LOGGER.info("Successfully saved all stores to database");
 
             return allStores;
 
         } catch (Exception e) {
-            LOGGER.error("Error during store fetch and save", e);
+            LOGGER.error("Error during store fetch and save operation", e);
             throw new ApiException(500, "Failed to fetch and save stores: " + e.getMessage());
         }
     }
 
+    /**
+     * Maps a brand string to the corresponding Brand enum value.
+     * @param brandStr The brand string from the API
+     * @return The corresponding Brand enum value
+     * @throws ApiException if the brand cannot be mapped
+     */
+    private Brand mapBrandString(String brandStr) throws ApiException {
+        String normalizedBrand = brandStr.trim().toUpperCase();
+        Brand mappedBrand = BRAND_MAPPING.get(normalizedBrand);
 
+        if (mappedBrand != null) {
+            return mappedBrand;
+        }
 
+        LOGGER.warn("Unknown brand encountered: {}. This brand will be skipped.", brandStr);
+        throw new ApiException(400, "Unsupported brand: " + brandStr);
+    }
+
+    /**
+     * Parses a JSON node containing store information into a StoreDTO
+     * @param storeNode JSON node containing store data
+     * @return StoreDTO object, or null if the store should be skipped
+     * @throws ApiException if there's an error parsing the store data
+     */
     private StoreDTO parseStoreNode(JsonNode storeNode) throws ApiException {
         try {
             // Parse address
@@ -123,10 +174,14 @@ public class StoreFetcher {
                 throw new ApiException(400, "Store has no address information");
             }
 
+            // Extract and validate required fields
+            String storeId = storeNode.get("id").asText();
+            String name = storeNode.get("name").asText();
             String street = addressNode.get("street").asText();
             String zipStr = addressNode.get("zip").asText();
             String city = addressNode.get("city").asText();
 
+            // Parse zip code
             int zipCode;
             try {
                 zipCode = Integer.parseInt(zipStr);
@@ -134,7 +189,7 @@ public class StoreFetcher {
                 throw new ApiException(400, "Invalid zip code format: " + zipStr);
             }
 
-            // Parse coordinates
+            // Parse coordinates if available
             Double longitude = null;
             Double latitude = null;
             JsonNode coordinatesNode = storeNode.get("coordinates");
@@ -156,42 +211,43 @@ public class StoreFetcher {
                 .latitude(latitude)
                 .build();
 
-            String brandStr = storeNode.get("brand").asText().toUpperCase();
+            // Try to map the brand
             Brand brand;
-            switch (brandStr) {
-                case "NETTO" -> brand = Brand.NETTO;
-                case "FOTEX", "FOETEX", "FØTEX" -> brand = Brand.FOETEX;
-                case "BILKA" -> brand = Brand.BILKA;
-                default -> {
-                    LOGGER.warn("Unknown brand: {}. Skipping this store.", brandStr);
-                    return null;
-                }
+            try {
+                brand = mapBrandString(storeNode.get("brand").asText());
+            } catch (ApiException e) {
+                LOGGER.info("Skipping store '{}' due to unsupported brand", name);
+                return null;
             }
 
-
-            // Create and return StoreDTO
+            // Create and return complete StoreDTO
             return StoreDTO.builder()
-                .sallingStoreId(storeNode.get("id").asText())
-                .name(storeNode.get("name").asText())
+                .sallingStoreId(storeId)
+                .name(name)
                 .brand(brand)
                 .address(addressDTO)
                 .hasProductsInDb(false)
                 .build();
 
         } catch (Exception e) {
-            LOGGER.error("Error parsing store node", e);
+            LOGGER.error("Error parsing store node: {}", e.getMessage());
             throw new ApiException(500, "Error parsing store data: " + e.getMessage());
         }
     }
 
-
+    /**
+     * Main method for testing the StoreFetcher
+     */
     public static void main(String[] args) {
         try {
             StoreFetcher fetcher = new StoreFetcher();
             List<StoreDTO> stores = fetcher.fetchAndSaveAllStores();
-            System.out.println("Successfully fetched and saved " + stores.size() + " stores");
 
-            // Print summary of stores by brand
+            // Print summary of results
+            System.out.println("\nFetch Summary:");
+            System.out.println("Total stores fetched: " + stores.size());
+
+            // Group and count stores by brand
             System.out.println("\nStores by brand:");
             stores.stream()
                 .collect(java.util.stream.Collectors.groupingBy(
@@ -201,7 +257,7 @@ public class StoreFetcher {
                     System.out.printf("%s: %d stores%n", brand, count));
 
         } catch (ApiException e) {
-            System.err.println("Error: " + e.getMessage());
+            System.err.println("Error during store fetch: " + e.getMessage());
         }
     }
 }
