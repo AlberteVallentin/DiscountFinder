@@ -78,8 +78,8 @@ public class StoreFetcher {
         int page = 1;
 
         while (true) {
-            // Byg URL med brand og pagination parametre
-            String urlWithParams = String.format("%s?brand=%s&per_page=%d&page=%d",
+            // Byg URL med brand, country og pagination parametre
+            String urlWithParams = String.format("%s?brand=%s&country=dk&per_page=%d&page=%d",
                 STORES_URL, brand, PER_PAGE, page);
 
             LOGGER.debug("Fetching from URL: {}", urlWithParams);
@@ -96,8 +96,7 @@ public class StoreFetcher {
 
             // Check response status
             if (response.statusCode() != 200) {
-                LOGGER.error("Failed to fetch stores. Status: {} Body: {}",
-                    response.statusCode(), response.body());
+                LOGGER.error("Failed to fetch stores. Status: {} Body: {}", response.statusCode(), response.body());
                 throw new ApiException(response.statusCode(),
                     "Failed to fetch stores from Salling API: " + response.body());
             }
