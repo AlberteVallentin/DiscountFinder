@@ -24,12 +24,14 @@ public class StoreFetcher {
     private static final String STORES_URL = "https://api.sallinggroup.com/v2/stores";
     private static final int PER_PAGE = 100;
 
+    // Liste af brands vi vil hente
+    private static final List<String> WANTED_BRANDS = List.of("netto", "bilka", "foetex");
+
     private final HttpClient client;
     private final ObjectMapper objectMapper;
     private final StoreDAO storeDAO;
     private final BrandDAO brandDAO;
 
-    // Singleton instance
     private static StoreFetcher instance;
 
     private StoreFetcher() {
@@ -46,76 +48,19 @@ public class StoreFetcher {
         return instance;
     }
 
-    /**
-     * Fetches all stores from Salling API and saves them to the database
-     */
     public List<StoreDTO> fetchAndSaveAllStores() throws ApiException {
         List<StoreDTO> allStores = new ArrayList<>();
-        int page = 1;
-        int totalStoresFetched = 0;
 
         try {
             LOGGER.info("Starting to fetch stores from Salling API");
 
-            while (true) {
-                // Build URL with pagination parameters
-                String urlWithParams = String.format("%s?per_page=%d&page=%d", STORES_URL, PER_PAGE, page);
-                LOGGER.info("Fetching stores from page {}: {}", page, urlWithParams);
-
-                // Create and execute request
-                HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(urlWithParams))
-                    .header("Authorization", "Bearer " + API_KEY)
-                    .header("Accept", "application/json")
-                    .GET()
-                    .build();
-
-                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-                // Check response status
-                if (response.statusCode() != 200) {
-                    LOGGER.error("Failed to fetch stores. Status: {} Body: {}", response.statusCode(), response.body());
-                    throw new ApiException(response.statusCode(), "Failed to fetch stores from Salling API: " + response.body());
-                }
-
-                // Parse response
-                JsonNode rootNode = objectMapper.readTree(response.body());
-
-                // Check if we have any results
-                if (!rootNode.isArray() || rootNode.size() == 0) {
-                    LOGGER.info("No more stores to fetch. Total stores fetched: {}", totalStoresFetched);
-                    break;
-                }
-
-                // Process stores from current page
-                List<StoreDTO> pageStores = new ArrayList<>();
-                for (JsonNode storeNode : rootNode) {
-                    try {
-                        StoreDTO store = parseStoreNode(storeNode);
-                        if (store != null) {
-                            pageStores.add(store);
-                            LOGGER.debug("Successfully parsed store: {}", store.getName());
-                        }
-                    } catch (Exception e) {
-                        LOGGER.warn("Failed to parse store: {}", e.getMessage());
-                    }
-                }
-
-                // Add stores from this page to total
-                allStores.addAll(pageStores);
-                totalStoresFetched += pageStores.size();
-                LOGGER.info("Fetched {} stores from page {} (Total: {})", pageStores.size(), page, totalStoresFetched);
-
-                // Check if we should continue to next page
-                if (pageStores.size() < PER_PAGE) {
-                    LOGGER.info("Reached last page of results");
-                    break;
-                }
-
-                page++;
+            // Hent butikker for hvert ønsket brand
+            for (String brand : WANTED_BRANDS) {
+                LOGGER.info("Fetching stores for brand: {}", brand);
+                allStores.addAll(fetchStoresForBrand(brand));
             }
 
-            // Save all stores to database
+            // Gem alle butikker i databasen
             LOGGER.info("Saving {} stores to database", allStores.size());
             storeDAO.saveOrUpdateStores(allStores);
             LOGGER.info("Successfully saved all stores to database");
@@ -128,9 +73,70 @@ public class StoreFetcher {
         }
     }
 
-    /**
-     * Parses a store node from the JSON response
-     */
+    private List<StoreDTO> fetchStoresForBrand(String brand) throws Exception {
+        List<StoreDTO> brandStores = new ArrayList<>();
+        int page = 1;
+
+        while (true) {
+            // Byg URL med brand og pagination parametre
+            String urlWithParams = String.format("%s?brand=%s&per_page=%d&page=%d",
+                STORES_URL, brand, PER_PAGE, page);
+
+            LOGGER.debug("Fetching from URL: {}", urlWithParams);
+
+            // Create and execute request
+            HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(urlWithParams))
+                .header("Authorization", "Bearer " + API_KEY)
+                .header("Accept", "application/json")
+                .GET()
+                .build();
+
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            // Check response status
+            if (response.statusCode() != 200) {
+                LOGGER.error("Failed to fetch stores. Status: {} Body: {}",
+                    response.statusCode(), response.body());
+                throw new ApiException(response.statusCode(),
+                    "Failed to fetch stores from Salling API: " + response.body());
+            }
+
+            // Parse response
+            JsonNode rootNode = objectMapper.readTree(response.body());
+
+            // Check if we have any results
+            if (!rootNode.isArray() || rootNode.size() == 0) {
+                LOGGER.info("No more stores to fetch for brand: {}", brand);
+                break;
+            }
+
+            // Process stores from current page
+            for (JsonNode storeNode : rootNode) {
+                try {
+                    StoreDTO store = parseStoreNode(storeNode);
+                    if (store != null) {
+                        brandStores.add(store);
+                        LOGGER.debug("Successfully parsed store: {}", store.getName());
+                    }
+                } catch (Exception e) {
+                    LOGGER.warn("Failed to parse store: {}", e.getMessage());
+                }
+            }
+
+            // Check if we should continue to next page
+            if (rootNode.size() < PER_PAGE) {
+                LOGGER.info("Reached last page for brand: {}", brand);
+                break;
+            }
+
+            page++;
+        }
+
+        LOGGER.info("Fetched {} stores for brand: {}", brandStores.size(), brand);
+        return brandStores;
+    }
+
     private StoreDTO parseStoreNode(JsonNode storeNode) throws ApiException {
         try {
             // Parse address
@@ -139,7 +145,6 @@ public class StoreFetcher {
                 throw new ApiException(400, "Store has no address information");
             }
 
-            // Extract and validate required fields
             String storeId = storeNode.get("id").asText();
             String name = storeNode.get("name").asText();
             String street = addressNode.get("street").asText();
@@ -179,12 +184,9 @@ public class StoreFetcher {
             // Handle brand
             String brandName = storeNode.get("brand").asText().trim().toUpperCase();
             String displayName = storeNode.get("brand").asText().trim();
-
-            // Find or create brand
             Brand brand = brandDAO.findOrCreateBrand(brandName, displayName);
             BrandDTO brandDTO = new BrandDTO(brand);
 
-            // Create and return complete StoreDTO
             return StoreDTO.builder()
                 .sallingStoreId(storeId)
                 .name(name)
@@ -199,19 +201,14 @@ public class StoreFetcher {
         }
     }
 
-    /**
-     * Main method for testing the StoreFetcher
-     */
     public static void main(String[] args) {
         try {
             StoreFetcher fetcher = StoreFetcher.getInstance();
             List<StoreDTO> stores = fetcher.fetchAndSaveAllStores();
 
-            // Print summary of results
             System.out.println("\nFetch Summary:");
             System.out.println("Total stores fetched: " + stores.size());
 
-            // Group and count stores by brand
             System.out.println("\nStores by brand:");
             stores.stream()
                 .collect(java.util.stream.Collectors.groupingBy(
