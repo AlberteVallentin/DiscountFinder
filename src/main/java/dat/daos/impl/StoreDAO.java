@@ -205,4 +205,6 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
             throw new ApiException(500, "Could not save/update stores: " + e.getMessage());
         }
     }
+
+
 }
