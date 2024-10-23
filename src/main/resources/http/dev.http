@@ -1,5 +1,4 @@
-
-### Environment variables - Make sure you have http-client.env.json file with these variables
+### Test API health
 GET {{url}}/auth/test
 
 ### Register new user
@@ -7,13 +6,15 @@ POST {{url}}/auth/register
 Content-Type: application/json
 
 {
-  "email": "test@test.dk",
   "name": "Test User",
-  "password": "test123"
-
+  "email": "test@test.dk",
+  "password": "test123",
+  "roleType": "USER"
 }
 
 > {% client.global.set("auth_token", response.body.token); %}
+
+
 
 ### Login user
 POST {{url}}/auth/login
@@ -26,11 +27,8 @@ Content-Type: application/json
 
 > {% client.global.set("auth_token", response.body.token); %}
 
-### Test protected user endpoint
-GET {{url}}/protected/user_demo
-Authorization: Bearer {{auth_token}}
 
-### Add admin role
+### Add admin role to user
 POST {{url}}/auth/user/addrole
 Content-Type: application/json
 Authorization: Bearer {{auth_token}}
@@ -39,38 +37,121 @@ Authorization: Bearer {{auth_token}}
   "role": "ADMIN"
 }
 
+### Reset token
+GET {{url}}/auth/test/
+
+> {%
+    client.global.set("jwt_token", null);
+    console.log("JWT Token:", client.global.get("jwt_token"));
+%}
+
+
+
+### Test protected user endpoint
+GET {{url}}/protected/user_demo
+Authorization: Bearer {{auth_token}}
+
 ### Test protected admin endpoint
 GET {{url}}/protected/admin_demo
 Authorization: Bearer {{auth_token}}
 
-### Salling API Endpoints ###
+### Store API Tests ###
 
-### Sync all stores
-POST {{url}}/stores/sync
-Accept: application/json
-
-### Get all stores
+### Get all stores (public)
 GET {{url}}/stores
 Accept: application/json
 
-### Get specific store
+### Get specific store (public)
 GET {{url}}/stores/1
 Accept: application/json
 
-### Sync products for specific store
-POST {{url}}/stores/1/sync-products
+### Create new store (requires admin)
+POST {{url}}/stores
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "sallingStoreId": "1234",
+  "name": "Netto Østerbro",
+  "brand": "NETTO",
+  "address": {
+    "addressLine": "Østerbrogade 140",
+    "longitude": 12.5683,
+    "latitude": 55.7317,
+    "postalCode": {
+      "postalCode": 2100,
+      "city": "København Ø"
+    }
+  },
+  "hasProductsInDb": false
+}
+
+### Update store (requires admin)
+PUT {{url}}/stores/1
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "sallingStoreId": "1234",
+  "name": "Netto Østerbro (Updated)",
+  "brand": "NETTO",
+  "address": {
+    "addressLine": "Østerbrogade 140",
+    "longitude": 12.5683,
+    "latitude": 55.7317,
+    "postalCode": {
+      "postalCode": 2100,
+      "city": "København Ø"
+    }
+  },
+  "hasProductsInDb": true
+}
+
+### Delete store (requires admin)
+DELETE {{url}}/stores/1
+Authorization: Bearer {{auth_token}}
+
+### Sync Operations ###
+
+### Sync all stores (requires admin)
+POST {{url}}/stores/sync
+Authorization: Bearer {{auth_token}}
 Accept: application/json
 
-### Get products for specific store
+### Sync products for specific store (requires admin)
+POST {{url}}/stores/1/sync-products
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+### Get products for specific store (public)
 GET {{url}}/stores/1/products
 Accept: application/json
 
+### Validation Tests ###
 
-### Sync all stores
-POST http://localhost:7070/api/stores/sync
-Accept: application/json
+### Create store with missing fields (should fail)
+POST {{url}}/stores
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
 
-### Check result
-GET http://localhost:7070/api/stores
-Accept: application/json
+{
+  "name": "Invalid Store"
+}
 
+### Create store with invalid postal code (should fail)
+POST {{url}}/stores
+Authorization: Bearer {{auth_token}}
+Content-Type: application/json
+
+{
+  "sallingStoreId": "9999",
+  "name": "Invalid Store",
+  "brand": "NETTO",
+  "address": {
+    "addressLine": "Test Address",
+    "postalCode": {
+      "postalCode": 99999,
+      "city": "Invalid City"
+    }
+  }
+}
