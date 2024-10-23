@@ -2,17 +2,17 @@ package dat.daos.impl;
 
 import dat.config.HibernateConfig;
 import dat.dtos.AddressDTO;
+import dat.dtos.BrandDTO;
 import dat.dtos.PostalCodeDTO;
 import dat.dtos.StoreDTO;
+import dat.entities.Brand;
 import dat.entities.Store;
-import dat.enums.Brand;
 import dat.exceptions.ApiException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.*;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,13 +21,17 @@ class StoreDAOTest {
 
     private static EntityManagerFactory emf;
     private static StoreDAO storeDAO;
+    private static BrandDAO brandDAO;
     private static StoreDTO s1;
     private static StoreDTO s2;
+    private static BrandDTO nettoBrand;
+    private static BrandDTO foetexBrand;
 
     @BeforeAll
     static void setUpBeforeAll() {
         emf = HibernateConfig.getEntityManagerFactoryForTest();
         storeDAO = StoreDAO.getInstance(emf);
+        brandDAO = BrandDAO.getInstance(emf);
     }
 
     @BeforeEach
@@ -38,8 +42,20 @@ class StoreDAOTest {
             em.createQuery("DELETE FROM Store").executeUpdate();
             em.createQuery("DELETE FROM Address").executeUpdate();
             em.createQuery("DELETE FROM PostalCode").executeUpdate();
+            em.createQuery("DELETE FROM Brand").executeUpdate();
             em.createNativeQuery("ALTER SEQUENCE stores_store_id_seq RESTART WITH 1").executeUpdate();
+            em.createNativeQuery("ALTER SEQUENCE brands_brand_id_seq RESTART WITH 1").executeUpdate();
             em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Create brands first
+        try {
+            Brand netto = brandDAO.findOrCreateBrand("NETTO", "Netto");
+            Brand foetex = brandDAO.findOrCreateBrand("FOETEX", "Føtex");
+            nettoBrand = new BrandDTO(netto);
+            foetexBrand = new BrandDTO(foetex);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -72,7 +88,7 @@ class StoreDAOTest {
         s1 = StoreDTO.builder()
             .sallingStoreId("1234")
             .name("Netto Østerbro")
-            .brand(Brand.NETTO)
+            .brand(nettoBrand)
             .address(address1)
             .hasProductsInDb(false)
             .build();
@@ -80,7 +96,7 @@ class StoreDAOTest {
         s2 = StoreDTO.builder()
             .sallingStoreId("5678")
             .name("Føtex Nørrebro")
-            .brand(Brand.FOETEX)
+            .brand(foetexBrand)
             .address(address2)
             .hasProductsInDb(false)
             .build();
@@ -97,7 +113,10 @@ class StoreDAOTest {
     @Test
     @DisplayName("Test create store")
     void testCreate() throws ApiException {
-        // Create a new store
+        // Create a new store with Bilka brand
+        Brand bilka = brandDAO.findOrCreateBrand("BILKA", "Bilka");
+        BrandDTO bilkaBrand = new BrandDTO(bilka);
+
         PostalCodeDTO postalCode = PostalCodeDTO.builder()
             .postalCode(2300)
             .city("København S")
@@ -113,7 +132,7 @@ class StoreDAOTest {
         StoreDTO s3 = StoreDTO.builder()
             .sallingStoreId("9012")
             .name("Bilka Amager")
-            .brand(Brand.BILKA)
+            .brand(bilkaBrand)
             .address(address)
             .hasProductsInDb(false)
             .build();
@@ -124,7 +143,7 @@ class StoreDAOTest {
         // Verify the store was created
         assertNotNull(createdStore.getId());
         assertEquals(s3.getName(), createdStore.getName());
-        assertEquals(s3.getBrand(), createdStore.getBrand());
+        assertEquals(s3.getBrand().getName(), createdStore.getBrand().getName());
     }
 
     @Test
@@ -135,7 +154,7 @@ class StoreDAOTest {
         // Verify the store was read correctly
         assertNotNull(store);
         assertEquals(s1.getName(), store.getName());
-        assertEquals(s1.getBrand(), store.getBrand());
+        assertEquals(s1.getBrand().getName(), store.getBrand().getName());
     }
 
     @Test
@@ -182,7 +201,7 @@ class StoreDAOTest {
         // Verify the store was found
         assertNotNull(store);
         assertEquals(s1.getName(), store.getName());
-        assertEquals(s1.getBrand(), store.getBrand());
+        assertEquals(s1.getBrand().getName(), store.getBrand().getName());
     }
 
     @Test
@@ -191,7 +210,7 @@ class StoreDAOTest {
         StoreDTO duplicate = StoreDTO.builder()
             .sallingStoreId("1234")
             .name("Duplicate Store")
-            .brand(Brand.NETTO)
+            .brand(nettoBrand)
             .address(s1.getAddress())
             .hasProductsInDb(false)
             .build();
