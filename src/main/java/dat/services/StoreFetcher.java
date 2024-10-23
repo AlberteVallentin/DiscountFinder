@@ -184,6 +184,16 @@ public class StoreFetcher {
             // Handle brand
             String brandName = storeNode.get("brand").asText().trim().toUpperCase();
             String displayName = storeNode.get("brand").asText().trim();
+
+            // Check if 'oe' should be replaced with 'ø'
+            if (displayName.toLowerCase().contains("oe")) {
+                displayName = displayName.replaceAll("(?i)oe", "ø"); // Replaces both 'oe' and 'OE' with 'ø'
+            }
+
+            // Ensure the first letter is capitalized and the rest is lowercase
+            displayName = displayName.substring(0, 1).toUpperCase() + displayName.substring(1).toLowerCase();
+
+            // Find or create the brand
             Brand brand = brandDAO.findOrCreateBrand(brandName, displayName);
             BrandDTO brandDTO = new BrandDTO(brand);
 
