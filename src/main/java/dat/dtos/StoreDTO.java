@@ -1,7 +1,7 @@
 package dat.dtos;
 
 import dat.entities.Store;
-import dat.enums.Brand;
+import dat.entities.Brand;
 import lombok.*;
 
 import java.util.Set;
@@ -16,7 +16,7 @@ public class StoreDTO {
     private Long id;
     private String sallingStoreId;
     private String name;
-    private Brand brand;
+    private BrandDTO brand;
     private AddressDTO address;
     private boolean hasProductsInDb;
     private Set<ProductDTO> products;
@@ -26,7 +26,7 @@ public class StoreDTO {
         this.id = store.getId();
         this.sallingStoreId = store.getSallingStoreId();
         this.name = store.getName();
-        this.brand = store.getBrand();
+        this.brand = new BrandDTO(store.getBrand());
         this.address = new AddressDTO(store.getAddress());
         this.hasProductsInDb = store.hasProductsInDb();  // Fixed this line
 

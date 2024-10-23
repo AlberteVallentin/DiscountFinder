@@ -1,7 +1,7 @@
 package dat.entities;
 
 import dat.dtos.StoreDTO;
-import dat.enums.Brand;
+import dat.entities.Brand;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,8 +26,8 @@ public class Store {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "brand", nullable = false)
-    @Enumerated(EnumType.STRING)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "brand_id", nullable = false)
     private Brand brand;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -44,7 +44,7 @@ public class Store {
     public Store(StoreDTO dto) {
         this.sallingStoreId = dto.getSallingStoreId();
         this.name = dto.getName();
-        this.brand = dto.getBrand();
+        this.brand = new Brand(dto.getBrand());
         this.address = new Address(dto.getAddress());
         this.hasProductsInDb = dto.hasProductsInDb();  // Fixed this line
     }

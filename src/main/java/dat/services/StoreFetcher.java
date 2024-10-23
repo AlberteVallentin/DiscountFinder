@@ -3,11 +3,10 @@ package dat.services;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dat.config.HibernateConfig;
+import dat.daos.impl.BrandDAO;
 import dat.daos.impl.StoreDAO;
-import dat.dtos.AddressDTO;
-import dat.dtos.PostalCodeDTO;
-import dat.dtos.StoreDTO;
-import dat.enums.Brand;
+import dat.dtos.*;
+import dat.entities.Brand;
 import dat.exceptions.ApiException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,50 +17,37 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
 
 public class StoreFetcher {
     private static final Logger LOGGER = LoggerFactory.getLogger(StoreFetcher.class);
     private static final String API_KEY = "77fcfa33-0e12-4dc9-aac6-c5d7cc9be766";
     private static final String STORES_URL = "https://api.sallinggroup.com/v2/stores";
-    private static final int PER_PAGE = 100; // Number of stores to fetch per request
-
-    // Brand name mapping for various possible store brand names
-    private static final Map<String, Brand> BRAND_MAPPING = new HashMap<>();
-    static {
-        // Netto variations
-        BRAND_MAPPING.put("NETTO", Brand.NETTO);
-        BRAND_MAPPING.put("DØGNNETTO", Brand.NETTO);
-        BRAND_MAPPING.put("DOGNNETTO", Brand.NETTO);
-
-        // Føtex variations
-        BRAND_MAPPING.put("FØTEX", Brand.FOETEX);
-        BRAND_MAPPING.put("FOTEX", Brand.FOETEX);
-        BRAND_MAPPING.put("FOETEX", Brand.FOETEX);
-        BRAND_MAPPING.put("FØTEX FOOD", Brand.FOETEX);
-        BRAND_MAPPING.put("FOTEX FOOD", Brand.FOETEX);
-
-        // Bilka variations
-        BRAND_MAPPING.put("BILKA", Brand.BILKA);
-        BRAND_MAPPING.put("BILKA TOGO", Brand.BILKA);
-        BRAND_MAPPING.put("BILKA TO GO", Brand.BILKA);
-    }
+    private static final int PER_PAGE = 100;
 
     private final HttpClient client;
     private final ObjectMapper objectMapper;
     private final StoreDAO storeDAO;
+    private final BrandDAO brandDAO;
 
-    public StoreFetcher() {
+    // Singleton instance
+    private static StoreFetcher instance;
+
+    private StoreFetcher() {
         this.client = HttpClient.newHttpClient();
         this.objectMapper = new ObjectMapper();
         this.storeDAO = StoreDAO.getInstance(HibernateConfig.getEntityManagerFactory());
+        this.brandDAO = BrandDAO.getInstance(HibernateConfig.getEntityManagerFactory());
+    }
+
+    public static StoreFetcher getInstance() {
+        if (instance == null) {
+            instance = new StoreFetcher();
+        }
+        return instance;
     }
 
     /**
-     * Fetches all stores from the Salling API and saves them to the database
-     * @return List of fetched store DTOs
-     * @throws ApiException if there's an error fetching or saving stores
+     * Fetches all stores from Salling API and saves them to the database
      */
     public List<StoreDTO> fetchAndSaveAllStores() throws ApiException {
         List<StoreDTO> allStores = new ArrayList<>();
@@ -74,7 +60,7 @@ public class StoreFetcher {
             while (true) {
                 // Build URL with pagination parameters
                 String urlWithParams = String.format("%s?per_page=%d&page=%d", STORES_URL, PER_PAGE, page);
-                LOGGER.info("Fetching stores from URL: {}", urlWithParams);
+                LOGGER.info("Fetching stores from page {}: {}", page, urlWithParams);
 
                 // Create and execute request
                 HttpRequest request = HttpRequest.newBuilder()
@@ -143,28 +129,7 @@ public class StoreFetcher {
     }
 
     /**
-     * Maps a brand string to the corresponding Brand enum value.
-     * @param brandStr The brand string from the API
-     * @return The corresponding Brand enum value
-     * @throws ApiException if the brand cannot be mapped
-     */
-    private Brand mapBrandString(String brandStr) throws ApiException {
-        String normalizedBrand = brandStr.trim().toUpperCase();
-        Brand mappedBrand = BRAND_MAPPING.get(normalizedBrand);
-
-        if (mappedBrand != null) {
-            return mappedBrand;
-        }
-
-        LOGGER.warn("Unknown brand encountered: {}. This brand will be skipped.", brandStr);
-        throw new ApiException(400, "Unsupported brand: " + brandStr);
-    }
-
-    /**
-     * Parses a JSON node containing store information into a StoreDTO
-     * @param storeNode JSON node containing store data
-     * @return StoreDTO object, or null if the store should be skipped
-     * @throws ApiException if there's an error parsing the store data
+     * Parses a store node from the JSON response
      */
     private StoreDTO parseStoreNode(JsonNode storeNode) throws ApiException {
         try {
@@ -211,20 +176,19 @@ public class StoreFetcher {
                 .latitude(latitude)
                 .build();
 
-            // Try to map the brand
-            Brand brand;
-            try {
-                brand = mapBrandString(storeNode.get("brand").asText());
-            } catch (ApiException e) {
-                LOGGER.info("Skipping store '{}' due to unsupported brand", name);
-                return null;
-            }
+            // Handle brand
+            String brandName = storeNode.get("brand").asText().trim().toUpperCase();
+            String displayName = storeNode.get("brand").asText().trim();
+
+            // Find or create brand
+            Brand brand = brandDAO.findOrCreateBrand(brandName, displayName);
+            BrandDTO brandDTO = new BrandDTO(brand);
 
             // Create and return complete StoreDTO
             return StoreDTO.builder()
                 .sallingStoreId(storeId)
                 .name(name)
-                .brand(brand)
+                .brand(brandDTO)
                 .address(addressDTO)
                 .hasProductsInDb(false)
                 .build();
@@ -240,7 +204,7 @@ public class StoreFetcher {
      */
     public static void main(String[] args) {
         try {
-            StoreFetcher fetcher = new StoreFetcher();
+            StoreFetcher fetcher = StoreFetcher.getInstance();
             List<StoreDTO> stores = fetcher.fetchAndSaveAllStores();
 
             // Print summary of results
@@ -251,7 +215,7 @@ public class StoreFetcher {
             System.out.println("\nStores by brand:");
             stores.stream()
                 .collect(java.util.stream.Collectors.groupingBy(
-                    StoreDTO::getBrand,
+                    store -> store.getBrand().getDisplayName(),
                     java.util.stream.Collectors.counting()))
                 .forEach((brand, count) ->
                     System.out.printf("%s: %d stores%n", brand, count));
