@@ -21,17 +21,13 @@ class StoreDAOTest {
 
     private static EntityManagerFactory emf;
     private static StoreDAO storeDAO;
-    private static BrandDAO brandDAO;
     private static StoreDTO s1;
     private static StoreDTO s2;
-    private static BrandDTO nettoBrand;
-    private static BrandDTO foetexBrand;
 
     @BeforeAll
     static void setUpBeforeAll() {
         emf = HibernateConfig.getEntityManagerFactoryForTest();
         storeDAO = StoreDAO.getInstance(emf);
-        brandDAO = BrandDAO.getInstance(emf);
     }
 
     @BeforeEach
@@ -42,20 +38,15 @@ class StoreDAOTest {
             em.createQuery("DELETE FROM Store").executeUpdate();
             em.createQuery("DELETE FROM Address").executeUpdate();
             em.createQuery("DELETE FROM PostalCode").executeUpdate();
-            em.createQuery("DELETE FROM Brand").executeUpdate();
             em.createNativeQuery("ALTER SEQUENCE stores_store_id_seq RESTART WITH 1").executeUpdate();
-            em.createNativeQuery("ALTER SEQUENCE brands_brand_id_seq RESTART WITH 1").executeUpdate();
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        // Create brands first
-        try {
-            Brand netto = brandDAO.findOrCreateBrand("NETTO", "Netto");
-            Brand foetex = brandDAO.findOrCreateBrand("FOETEX", "Føtex");
-            nettoBrand = new BrandDTO(netto);
-            foetexBrand = new BrandDTO(foetex);
+            // Opret test brands
+            Brand nettoBrand = new Brand("NETTO", "Netto");
+            Brand fotexBrand = new Brand("FOETEX", "Føtex");
+            em.persist(nettoBrand);
+            em.persist(fotexBrand);
+
+            em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -85,10 +76,20 @@ class StoreDAOTest {
             .latitude(55.6897)
             .build();
 
+        BrandDTO nettoBrandDTO = BrandDTO.builder()
+            .name("NETTO")
+            .displayName("Netto")
+            .build();
+
+        BrandDTO fotexBrandDTO = BrandDTO.builder()
+            .name("FOETEX")
+            .displayName("Føtex")
+            .build();
+
         s1 = StoreDTO.builder()
             .sallingStoreId("1234")
             .name("Netto Østerbro")
-            .brand(nettoBrand)
+            .brand(nettoBrandDTO)
             .address(address1)
             .hasProductsInDb(false)
             .build();
@@ -96,7 +97,7 @@ class StoreDAOTest {
         s2 = StoreDTO.builder()
             .sallingStoreId("5678")
             .name("Føtex Nørrebro")
-            .brand(foetexBrand)
+            .brand(fotexBrandDTO)
             .address(address2)
             .hasProductsInDb(false)
             .build();
@@ -113,10 +114,7 @@ class StoreDAOTest {
     @Test
     @DisplayName("Test create store")
     void testCreate() throws ApiException {
-        // Create a new store with Bilka brand
-        Brand bilka = brandDAO.findOrCreateBrand("BILKA", "Bilka");
-        BrandDTO bilkaBrand = new BrandDTO(bilka);
-
+        // Create a new store
         PostalCodeDTO postalCode = PostalCodeDTO.builder()
             .postalCode(2300)
             .city("København S")
@@ -129,10 +127,15 @@ class StoreDAOTest {
             .latitude(55.6597)
             .build();
 
+        BrandDTO nettoBrandDTO = BrandDTO.builder()
+            .name("NETTO")
+            .displayName("Netto")
+            .build();
+
         StoreDTO s3 = StoreDTO.builder()
             .sallingStoreId("9012")
-            .name("Bilka Amager")
-            .brand(bilkaBrand)
+            .name("Netto Amager")
+            .brand(nettoBrandDTO)
             .address(address)
             .hasProductsInDb(false)
             .build();
@@ -207,15 +210,39 @@ class StoreDAOTest {
     @Test
     void testStoreAlreadyExists() {
         // Try to create a store with existing Salling ID
+        BrandDTO nettoBrandDTO = BrandDTO.builder()
+            .name("NETTO")
+            .displayName("Netto")
+            .build();
+
         StoreDTO duplicate = StoreDTO.builder()
             .sallingStoreId("1234")
             .name("Duplicate Store")
-            .brand(nettoBrand)
+            .brand(nettoBrandDTO)
             .address(s1.getAddress())
             .hasProductsInDb(false)
             .build();
 
         // Verify that creating a duplicate store throws an exception
         assertThrows(ApiException.class, () -> storeDAO.create(duplicate));
+    }
+
+    @Test
+    void testCreateStoreWithNonExistentBrand() {
+        // Create a store with a brand that doesn't exist
+        BrandDTO invalidBrandDTO = BrandDTO.builder()
+            .name("INVALID")
+            .displayName("Invalid")
+            .build();
+
+        StoreDTO invalidStore = StoreDTO.builder()
+            .sallingStoreId("9999")
+            .name("Invalid Store")
+            .brand(invalidBrandDTO)
+            .address(s1.getAddress())
+            .build();
+
+        // Verify that creating a store with non-existent brand throws an exception
+        assertThrows(ApiException.class, () -> storeDAO.create(invalidStore));
     }
 }
