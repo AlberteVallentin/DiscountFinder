@@ -67,13 +67,14 @@ GET {{url}}/stores/1
 Accept: application/json
 
 
+
 ### Create new store (requires admin)
 POST {{url}}/stores
 Authorization: Bearer {{auth_token}}
 Content-Type: application/json
 
 {
-  "sallingStoreId": "12345",
+  "sallingStoreId": "123456",
   "name": "Netto Testbutik",
   "brand": {
     "name": "NETTO",

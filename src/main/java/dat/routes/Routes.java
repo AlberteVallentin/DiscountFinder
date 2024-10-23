@@ -9,7 +9,7 @@ public class Routes {
 
     public EndpointGroup getRoutes() {
         return () -> {
-            path("/stores", storeRoute.getRoutes());
+            path("stores", storeRoute.getRoutes());  // Fjernet forward slash før stores
         };
     }
 }

@@ -1,6 +1,6 @@
 package dat.config;
 
-
+import dat.entities.Brand;
 import dat.security.entities.Role;
 import dat.security.enums.RoleType;
 import jakarta.persistence.EntityManager;
@@ -16,10 +16,10 @@ import org.hibernate.engine.spi.SessionFactoryImplementor;
 public class Populate {
     public static void main(String[] args) {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
-        // Populate using SQL file
         try {
             loadSQLData(emf);
             populateRoles(emf);
+            populateBrands(emf);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -29,12 +29,10 @@ public class Populate {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
 
-            // Get the DataSource from the EntityManagerFactory
             SessionFactoryImplementor sfi = emf.unwrap(SessionFactoryImplementor.class);
             ConnectionProvider cp = sfi.getServiceRegistry().getService(ConnectionProvider.class);
             try (Connection connection = cp.getConnection()) {
 
-                // Read the SQL file from resources/data/data.sql
                 InputStream inputStream = Populate.class.getClassLoader().getResourceAsStream("data/postal_code_and_city.sql");
                 if (inputStream == null) {
                     throw new IllegalArgumentException("data.sql not found in resources/data directory");
@@ -50,14 +48,12 @@ public class Populate {
                         }
 
                         sqlStatement.append(line);
-                        // If we find a semicolon, it indicates the end of a statement
                         if (line.endsWith(";")) {
                             try (var statement = connection.createStatement()) {
                                 statement.execute(sqlStatement.toString());
                             } catch (SQLException e) {
                                 e.printStackTrace();
                             }
-                            // Clear for the next statement
                             sqlStatement.setLength(0);
                         }
                     }
@@ -74,10 +70,8 @@ public class Populate {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
 
-            // Check if roles already exist
             Long roleCount = em.createQuery("SELECT COUNT(r) FROM Role r", Long.class).getSingleResult();
             if (roleCount == 0) {
-                // Create and persist roles
                 Role userRole = new Role(RoleType.USER);
                 Role adminRole = new Role(RoleType.ADMIN);
 
@@ -87,6 +81,35 @@ public class Populate {
 
             em.getTransaction().commit();
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void populateBrands(EntityManagerFactory emf) {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+
+            // Check if brands already exist
+            Long brandCount = em.createQuery("SELECT COUNT(b) FROM Brand b", Long.class).getSingleResult();
+
+            if (brandCount == 0) {
+                // Create and persist the three main brands
+                Brand netto = new Brand("NETTO", "Netto");
+                Brand bilka = new Brand("BILKA", "Bilka");
+                Brand foetex = new Brand("FOETEX", "Føtex");
+
+                em.persist(netto);
+                em.persist(bilka);
+                em.persist(foetex);
+
+                System.out.println("Brands populated successfully.");
+            } else {
+                System.out.println("Brands already exist in the database.");
+            }
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            System.err.println("Error populating brands: " + e.getMessage());
             e.printStackTrace();
         }
     }

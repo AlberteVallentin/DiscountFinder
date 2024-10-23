@@ -56,12 +56,12 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
 
-            // Find eksisterende brand direkte i EntityManager
+            // Find eksisterende brand
             Brand brand = em.createQuery("SELECT b FROM Brand b WHERE b.name = :name", Brand.class)
                 .setParameter("name", storeDTO.getBrand().getName())
                 .getSingleResult();
 
-            // Find eller opret PostalCode (eksisterende kode)
+            // Find eller opret PostalCode
             PostalCode postalCode = findOrCreatePostalCode(em,
                 storeDTO.getAddress().getPostalCode().getPostalCode(),
                 storeDTO.getAddress().getPostalCode().getCity());
