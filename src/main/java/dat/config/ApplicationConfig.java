@@ -7,10 +7,12 @@ import dat.security.controllers.SecurityController;
 import dat.security.enums.RoleType;
 import dat.security.exceptions.ApiException;
 import dat.security.routes.SecurityRoutes;
+import dat.services.StoreSyncService;
 import dat.utils.Utils;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.Context;
+import jakarta.persistence.EntityManagerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,6 +35,21 @@ public class ApplicationConfig {
     }
 
     public static Javalin startServer(int port) {
+
+        // Initialize EntityManagerFactory
+        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
+
+        // Initialize StoreSyncService
+        StoreSyncService storeSyncService = StoreSyncService.getInstance(emf);
+
+        // Sync all stores
+        try {
+            storeSyncService.syncAllStores();
+        } catch (Exception e) {
+            logger.error("Error during store sync", e);
+        }
+
+
         Javalin app = Javalin.create(ApplicationConfig::configuration);
 
         app.beforeMatched(accessController::accessHandler);
