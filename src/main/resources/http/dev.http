@@ -17,6 +17,7 @@ Content-Type: application/json
 > {% client.global.set("auth_token", response.body.token); %}
 
 
+
 ### Login user
 POST {{url}}/auth/login
 Content-Type: application/json
@@ -62,9 +63,11 @@ Authorization: Bearer {{auth_token}}
 GET {{url}}/stores
 Accept: application/json
 
+
 ### Get specific store (public)
-GET {{url}}/stores/1
+GET {{url}}/stores/685
 Accept: application/json
+
 
 
 
@@ -74,7 +77,7 @@ Authorization: Bearer {{auth_token}}
 Content-Type: application/json
 
 {
-  "sallingStoreId": "123456",
+  "sallingStoreId": "1234567",
   "name": "Netto Testbutik",
   "brand": {
     "name": "NETTO",
@@ -91,25 +94,26 @@ Content-Type: application/json
   }
 }
 
+
+
 ### Update store (requires admin)
-PUT {{url}}/stores/1
+PUT {{url}}/stores/685
 Authorization: Bearer {{auth_token}}
 Content-Type: application/json
 
 {
-  "sallingStoreId": "1234",
-  "name": "Netto Østerbro (Updated)",
-  "brand": "NETTO",
+  "sallingStoreId": "1234567",
+  "name": "Netto Testbutik (opdateret)",
+  "brand": {
+    "name": "NETTO",
+    "displayName": "Netto"
+  },
   "address": {
-    "addressLine": "Østerbrogade 140",
+    "addressLine": "Testvej 123",
     "longitude": 12.5683,
     "latitude": 55.7317,
-    "postalCode": {
-      "postalCode": 2100,
-      "city": "København Ø"
-    }
-  },
-  "hasProductsInDb": true
+    "postalCode": 2100
+  }
 }
 
 ### Validation Tests ###

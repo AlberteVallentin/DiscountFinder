@@ -34,7 +34,7 @@ public class StoreDTO {
         this.name = store.getName();
         this.brand = new BrandDTO(store.getBrand());
         this.address = new AddressDTO(store.getAddress());
-        this.hasProductsInDb = store.hasProductsInDb();  // Fixed this line
+        this.hasProductsInDb = store.hasProductsInDb();
 
         if (store.getProducts() != null) {
             this.products = store.getProducts().stream()
@@ -48,11 +48,11 @@ public class StoreDTO {
         return hasProductsInDb;
     }
 
-    // Helper method to create Address from Salling API data
-    public static AddressDTO createAddressFromSallingApi(String street, String zipCode) {
-        return AddressDTO.builder()
-            .addressLine(street)
-            .postalCode(new PostalCodeDTO(Integer.parseInt(zipCode), null))  // City will be populated from existing PostalCode data
-            .build();
-    }
+//    // Helper method to create Address from Salling API data
+//    public static AddressDTO createAddressFromSallingApi(String street, String zipCode) {
+//        return AddressDTO.builder()
+//            .addressLine(street)
+//            .postalCode(new PostalCodeDTO(Integer.parseInt(zipCode), null))  // City will be populated from existing PostalCode data
+//            .build();
+//    }
 }
