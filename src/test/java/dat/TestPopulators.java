@@ -1,160 +1,183 @@
 package dat;
 
-import dat.daos.impl.BrandDAO;
-import dat.daos.impl.StoreDAO;
-import dat.dtos.*;
-import dat.entities.Brand;
-import dat.exceptions.ApiException;
+import dat.entities.*;
+import dat.security.entities.Role;
+import dat.security.entities.User;
+import dat.security.enums.RoleType;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.sql.Connection;
 import java.util.List;
+import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
+import org.hibernate.engine.spi.SessionFactoryImplementor;
 
 public class TestPopulators {
     private static final Logger LOGGER = LoggerFactory.getLogger(TestPopulators.class);
-    private static EntityManagerFactory emf;
-    private static StoreDAO storeDAO;
-    private static BrandDAO brandDAO;
+    private static final String TEST_USER_EMAIL = "test@test.dk";
+    private static final String TEST_ADMIN_EMAIL = "admin@test.dk";
+    private static final String TEST_PASSWORD = "test123";
 
-    public static void setEntityManagerFactory(EntityManagerFactory _emf) {
-        emf = _emf;
-        storeDAO = StoreDAO.getInstance(emf);
-        brandDAO = BrandDAO.getInstance(emf);
-    }
-
-    private static void populateBrands() {
-        try (EntityManager em = emf.createEntityManager()) {
-            em.getTransaction().begin();
-
-            // Check if brands already exist
-            Long brandCount = em.createQuery("SELECT COUNT(b) FROM Brand b", Long.class)
-                .getSingleResult();
-
-            if (brandCount == 0) {
-                // Create the three main brands
-                Brand netto = new Brand("NETTO", "Netto");
-                Brand bilka = new Brand("BILKA", "Bilka");
-                Brand foetex = new Brand("FOETEX", "Føtex");
-
-                em.persist(netto);
-                em.persist(bilka);
-                em.persist(foetex);
-
-                LOGGER.info("Created test brands");
-            }
-
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            LOGGER.error("Error populating brands", e);
-            throw new RuntimeException("Could not populate brands", e);
-        }
-    }
-
-    public static List<StoreDTO> populateStores() {
-        List<StoreDTO> stores = new ArrayList<>();
-
+    public static void populateTestData(EntityManagerFactory emf) {
         try {
-            // Ensure brands exist first
-            populateBrands();
-
-            // Create test stores
-            stores.add(createAndPersistTestStore(
-                "1234", "Netto Østerbro",
-                "Østerbrogade 1", 2100, "København Ø",
-                12.5683, 55.7317,
-                "NETTO", "Netto"
-            ));
-
-            stores.add(createAndPersistTestStore(
-                "5678", "Føtex Nørrebro",
-                "Nørrebrogade 1", 2200, "København N",
-                12.5633, 55.6897,
-                "FOETEX", "Føtex"
-            ));
-
-            stores.add(createAndPersistTestStore(
-                "9012", "Bilka Amager",
-                "Amagerbrogade 1", 2300, "København S",
-                12.5933, 55.6597,
-                "BILKA", "Bilka"
-            ));
-
-            LOGGER.info("Populated {} test stores", stores.size());
-            return stores;
+            LOGGER.info("Starting test data population");
+            cleanDatabase(emf);
+            createRolesAndUsers(emf);
+            populatePostalCodes(emf);
+            createBrands(emf);
+            createTestStores(emf);
+            LOGGER.info("Test data population completed");
         } catch (Exception e) {
-            LOGGER.error("Error populating stores", e);
-            throw new RuntimeException("Could not populate stores", e);
+            LOGGER.error("Error populating test data", e);
+            throw new RuntimeException("Failed to populate test data", e);
         }
     }
 
-    public static StoreDTO createTestStoreDTO(
-        String sallingId, String name,
-        String addressLine, int postalCode, String city,
-        double longitude, double latitude,
-        String brandName, String brandDisplayName
-    ) {
-        PostalCodeDTO postalCodeDTO = PostalCodeDTO.builder()
-            .postalCode(postalCode)
-            .city(city)
-            .build();
-
-        AddressDTO addressDTO = AddressDTO.builder()
-            .addressLine(addressLine)
-            .postalCode(postalCodeDTO)
-            .longitude(longitude)
-            .latitude(latitude)
-            .build();
-
-        BrandDTO brandDTO = BrandDTO.builder()
-            .name(brandName)
-            .displayName(brandDisplayName)
-            .build();
-
-        return StoreDTO.builder()
-            .sallingStoreId(sallingId)
-            .name(name)
-            .brand(brandDTO)
-            .address(addressDTO)
-            .hasProductsInDb(false)
-            .build();
-    }
-
-    private static StoreDTO createAndPersistTestStore(
-        String sallingId, String name,
-        String addressLine, int postalCode, String city,
-        double longitude, double latitude,
-        String brandName, String brandDisplayName
-    ) throws ApiException {
-        // Create DTO
-        StoreDTO storeDTO = createTestStoreDTO(
-            sallingId, name,
-            addressLine, postalCode, city,
-            longitude, latitude,
-            brandName, brandDisplayName
-        );
-
-        // Persist using DAO
-        return storeDAO.create(storeDTO);
-    }
-
-    public static void cleanUpStores() {
+    private static void cleanDatabase(EntityManagerFactory emf) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
 
-            // Delete in correct order to maintain referential integrity
+            // Clear all existing data in the correct order
+            em.createQuery("DELETE FROM Product").executeUpdate();
             em.createQuery("DELETE FROM Store").executeUpdate();
             em.createQuery("DELETE FROM Address").executeUpdate();
             em.createQuery("DELETE FROM PostalCode").executeUpdate();
             em.createQuery("DELETE FROM Brand").executeUpdate();
+            em.createQuery("DELETE FROM User").executeUpdate();
+            em.createQuery("DELETE FROM Role").executeUpdate();
 
             em.getTransaction().commit();
-            LOGGER.info("Cleaned up all test data");
-        } catch (Exception e) {
-            LOGGER.error("Error cleaning up stores", e);
-            throw new RuntimeException("Could not clean up stores", e);
+            LOGGER.info("Database cleaned successfully");
         }
+    }
+
+    private static void createRolesAndUsers(EntityManagerFactory emf) {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+
+            // Create roles
+            Role userRole = new Role(RoleType.USER);
+            Role adminRole = new Role(RoleType.ADMIN);
+            em.persist(userRole);
+            em.persist(adminRole);
+
+            // Create test users
+            User testUser = new User("Test User", TEST_USER_EMAIL, TEST_PASSWORD, userRole);
+            User adminUser = new User("Admin User", TEST_ADMIN_EMAIL, TEST_PASSWORD, adminRole);
+            em.persist(testUser);
+            em.persist(adminUser);
+
+            em.getTransaction().commit();
+            LOGGER.info("Roles and users created successfully");
+        }
+    }
+
+    private static void populatePostalCodes(EntityManagerFactory emf) {
+        try {
+            SessionFactoryImplementor sfi = emf.unwrap(SessionFactoryImplementor.class);
+            ConnectionProvider cp = sfi.getServiceRegistry().getService(ConnectionProvider.class);
+
+            try (Connection connection = cp.getConnection()) {
+                InputStream inputStream = TestPopulators.class.getClassLoader()
+                    .getResourceAsStream("data/postal_code_and_city.sql");
+
+                if (inputStream == null) {
+                    throw new RuntimeException("postal_code_and_city.sql not found in resources/data directory");
+                }
+
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                    StringBuilder sqlStatement = new StringBuilder();
+                    String line;
+
+                    while ((line = reader.readLine()) != null) {
+                        if (line.startsWith("--") || line.trim().isEmpty()) {
+                            continue;
+                        }
+
+                        sqlStatement.append(line);
+                        if (line.trim().endsWith(";")) {
+                            try (var statement = connection.createStatement()) {
+                                statement.execute(sqlStatement.toString());
+                            }
+                            sqlStatement.setLength(0);
+                        }
+                    }
+                }
+            }
+            LOGGER.info("Postal codes populated successfully");
+        } catch (Exception e) {
+            LOGGER.error("Error populating postal codes", e);
+            throw new RuntimeException("Failed to populate postal codes", e);
+        }
+    }
+
+    private static void createBrands(EntityManagerFactory emf) {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+
+            // Create brands
+            List<Object[]> brandData = List.of(
+                new Object[]{"NETTO", "Netto"},
+                new Object[]{"FOETEX", "Føtex"},
+                new Object[]{"BILKA", "Bilka"}
+            );
+
+            for (Object[] data : brandData) {
+                Brand brand = new Brand();
+                brand.setName((String) data[0]);
+                brand.setDisplayName((String) data[1]);
+                em.persist(brand);
+            }
+
+            em.getTransaction().commit();
+            LOGGER.info("Brands created successfully");
+        }
+    }
+
+    private static void createTestStores(EntityManagerFactory emf) {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+
+            // Get brands
+            Brand netto = em.createQuery("SELECT b FROM Brand b WHERE b.name = :name", Brand.class)
+                .setParameter("name", "NETTO")
+                .getSingleResult();
+
+            Brand foetex = em.createQuery("SELECT b FROM Brand b WHERE b.name = :name", Brand.class)
+                .setParameter("name", "FOETEX")
+                .getSingleResult();
+
+            // Create test stores using existing postal codes
+            createTestStore(em, "Netto Østerbro", "1234", netto, "Østerbrogade 1", 2100, 12.5683, 55.7317);
+            createTestStore(em, "Føtex Nørrebro", "5678", foetex, "Nørrebrogade 1", 2200, 12.5633, 55.6897);
+            createTestStore(em, "Netto Amager", "9012", netto, "Amagerbrogade 1", 2300, 12.5933, 55.6597);
+
+            em.getTransaction().commit();
+            LOGGER.info("Test stores created successfully");
+        }
+    }
+
+    private static void createTestStore(EntityManager em, String name, String sallingId, Brand brand,
+                                        String addressLine, int postalCode, double longitude, double latitude) {
+        PostalCode pc = em.find(PostalCode.class, postalCode);
+        if (pc == null) {
+            throw new RuntimeException("Postal code " + postalCode + " not found");
+        }
+
+        Address address = new Address(addressLine, pc, longitude, latitude);
+        em.persist(address);
+
+        Store store = new Store();
+        store.setSallingStoreId(sallingId);
+        store.setName(name);
+        store.setBrand(brand);
+        store.setAddress(address);
+        store.setHasProductsInDb(false);
+        em.persist(store);
     }
 }

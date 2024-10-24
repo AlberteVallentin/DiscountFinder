@@ -63,9 +63,19 @@ public class StoreController {
         return storeDAO.validatePrimaryKey(id);
     }
 
-    public void getStoresByPostalCode(Context ctx) throws ApiException {
+    public void getStoresByPostalCode(Context ctx) {
         try {
-            Integer postalCode = ctx.pathParamAsClass("postal_code", Integer.class).get();
+            String postalCodeStr = ctx.pathParam("postal_code");
+            Integer postalCode;
+
+            try {
+                postalCode = Integer.parseInt(postalCodeStr);
+            } catch (NumberFormatException e) {
+                ctx.status(400);
+                ctx.json(Utils.convertToJsonMessage(ctx, "warning", "Invalid postal code format"));
+                return;
+            }
+
             List<StoreDTO> stores = storeDAO.findByPostalCode(postalCode);
 
             if (stores.isEmpty()) {
@@ -77,17 +87,13 @@ public class StoreController {
 
             ctx.status(200);
             ctx.json(stores);
-        } catch (NumberFormatException e) {
-            ctx.status(400);
-            ctx.json(Utils.convertToJsonMessage(ctx, "warning",
-                "Invalid postal code format"));
+
         } catch (Exception e) {
             ctx.status(500);
             ctx.json(Utils.convertToJsonMessage(ctx, "error",
                 "An unexpected error occurred"));
         }
     }
-
 
 
 
