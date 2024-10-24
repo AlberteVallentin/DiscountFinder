@@ -11,7 +11,7 @@ import jakarta.persistence.EntityManagerFactory;
 
 import java.util.List;
 
-public class StoreController implements IController<StoreDTO, Long> {
+public class StoreController {
     private final StoreDAO dao;
 
     public StoreController() {
@@ -19,14 +19,12 @@ public class StoreController implements IController<StoreDTO, Long> {
         this.dao = StoreDAO.getInstance(emf);
     }
 
-    @Override
     public void read(Context ctx) {
         try {
             Long id = ctx.pathParamAsClass("id", Long.class).get();
 
-            // Tjek om ID'et er gyldigt og om butikken eksisterer
             if (!validatePrimaryKey(id)) {
-                ctx.status(404);  // Returner 404 hvis ID'et ikke findes
+                ctx.status(404);
                 ctx.json(Utils.convertToJsonMessage(ctx, "warning", "Store not found with ID: " + id));
                 return;
             }
@@ -43,8 +41,6 @@ public class StoreController implements IController<StoreDTO, Long> {
         }
     }
 
-
-    @Override
     public void readAll(Context ctx) {
         // List of DTOs
         List<StoreDTO> storeDTOS = dao.readAll();
@@ -53,7 +49,7 @@ public class StoreController implements IController<StoreDTO, Long> {
         ctx.json(storeDTOS, StoreDTO.class);
     }
 
-    @Override
+
     public void create(Context ctx) throws ApiException {
         // Request
         StoreDTO jsonRequest = ctx.bodyAsClass(StoreDTO.class);
@@ -64,42 +60,46 @@ public class StoreController implements IController<StoreDTO, Long> {
         ctx.json(storeDTO, StoreDTO.class);
     }
 
-    @Override
-    public void update(Context ctx) throws ApiException {
-        // Request
-        long id = ctx.pathParamAsClass("id", Long.class)
-            .check(this::validatePrimaryKey, "Not a valid store ID").get();
-        // DTO
-        StoreDTO storeDTO = dao.update(id, validateEntity(ctx));
-        // Response
-        ctx.status(200);
-        ctx.json(storeDTO, StoreDTO.class);
-    }
-
-    @Override
-    public void delete(Context ctx) {
-        // Request
-        long id = ctx.pathParamAsClass("id", Long.class)
-            .check(this::validatePrimaryKey, "Not a valid store ID").get();
-        dao.delete(id);
-        // Response
-        ctx.status(204);
-    }
-
-    @Override
     public boolean validatePrimaryKey(Long id) {
         return dao.validatePrimaryKey(id);
     }
 
-    @Override
-    public StoreDTO validateEntity(Context ctx) {
-        return ctx.bodyValidator(StoreDTO.class)
-            .check(s -> s.getSallingStoreId() != null && !s.getSallingStoreId().trim().isEmpty(), "Salling Store ID must be set")
-            .check(s -> s.getName() != null && !s.getName().trim().isEmpty(), "Store name must be set")
-            .check(s -> s.getBrand() != null, "Store brand must be set")
-            .check(s -> s.getAddress() != null, "Store address must be set")
-            .check(s -> s.getAddress().getPostalCode() != null, "Postal code must be set")
-            .check(s -> s.getAddress().getAddressLine() != null && !s.getAddress().getAddressLine().trim().isEmpty(), "Address line must be set")
-            .get();
-    }
+
+
+
+
+
+//    @Override
+//    public void update(Context ctx) throws ApiException {
+//        // Request
+//        long id = ctx.pathParamAsClass("id", Long.class)
+//            .check(this::validatePrimaryKey, "Not a valid store ID").get();
+//        // DTO
+//        StoreDTO storeDTO = dao.update(id, validateEntity(ctx));
+//        // Response
+//        ctx.status(200);
+//        ctx.json(storeDTO, StoreDTO.class);
+//    }
+//
+//    @Override
+//    public void delete(Context ctx) {
+//        // Request
+//        long id = ctx.pathParamAsClass("id", Long.class)
+//            .check(this::validatePrimaryKey, "Not a valid store ID").get();
+//        dao.delete(id);
+//        // Response
+//        ctx.status(204);
+//    }
+//
+//    @Override
+//    public StoreDTO validateEntity(Context ctx) {
+//        return ctx.bodyValidator(StoreDTO.class)
+//            .check(s -> s.getSallingStoreId() != null && !s.getSallingStoreId().trim().isEmpty(), "Salling Store ID must be set")
+//            .check(s -> s.getName() != null && !s.getName().trim().isEmpty(), "Store name must be set")
+//            .check(s -> s.getBrand() != null, "Store brand must be set")
+//            .check(s -> s.getAddress() != null, "Store address must be set")
+//            .check(s -> s.getAddress().getPostalCode() != null, "Postal code must be set")
+//            .check(s -> s.getAddress().getAddressLine() != null && !s.getAddress().getAddressLine().trim().isEmpty(), "Address line must be set")
+//            .get();
+//    }
 }

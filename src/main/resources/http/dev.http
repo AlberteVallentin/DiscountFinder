@@ -18,12 +18,13 @@ Content-Type: application/json
 
 
 
+
 ### Login user
 POST {{url}}/auth/login
 Content-Type: application/json
 
 {
-  "email": "test@test.dk",
+  "email": "test@admin.dk",
   "password": "test123"
 }
 
@@ -67,7 +68,6 @@ Accept: application/json
 ### Get specific store (public)
 GET {{url}}/stores/685
 Accept: application/json
-
 
 
 

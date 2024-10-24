@@ -18,8 +18,6 @@ public class StoreRoute {
 
             // PROTECTED endpoints - only ADMIN can modify stores
             post("/", storeController::create, RoleType.ADMIN);
-            put("/{id}", storeController::update, RoleType.ADMIN);
-            delete("/{id}", storeController::delete, RoleType.ADMIN);
         };
     }
 }
