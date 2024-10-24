@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class StoreFetcher {
     private static final Logger LOGGER = LoggerFactory.getLogger(StoreFetcher.class);
-    private static final String API_KEY = "77fcfa33-0e12-4dc9-aac6-c5d7cc9be766";
+    private static final String API_KEY = System.getenv("SALLING_API_KEY");
     private static final String STORES_URL = "https://api.sallinggroup.com/v2/stores";
     private static final int PER_PAGE = 100;
     private static final List<String> WANTED_BRANDS = List.of("netto", "bilka", "foetex");
