@@ -1,15 +1,12 @@
 package dat.security.entities;
 
-import dat.entities.Store;
-import dat.security.enums.RoleType;
+import dat.entities.Address;
 import jakarta.persistence.*;
 import lombok.*;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -37,19 +34,10 @@ public class User implements Serializable {
     @Column(name = "password", nullable = false)
     private String password;
 
-    // Role association
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    // Many-to-One: A user has one role
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
-
-    // One-to-Many: A store manager can manage multiple stores
-    @OneToMany(mappedBy = "storeManager", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Store> stores = new HashSet<>();
-
-    // Many-to-One: An employee can only work in one store
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "store_id")
-    private Store employeeInStore;
 
     // Constructor to create a new user with a hashed password and role
     public User(String name, String email, String password, Role role) {
@@ -64,30 +52,5 @@ public class User implements Serializable {
         return BCrypt.checkpw(password, this.password);
     }
 
-    // Method to add a store to the list of managed stores
-    public void addStore(Store store) {
-        this.stores.add(store);
-        store.setStoreManager(this);  // Synchronize on the store side
-    }
-
-    // Method to remove a store from the list of managed stores
-    public void removeStore(Store store) {
-        this.stores.remove(store);
-        store.setStoreManager(null);  // Remove manager reference from the store
-    }
-
-    // Method to set the employee's store
-    public void setEmployeeInStore(Store store) {
-        this.employeeInStore = store;
-        store.getEmployees().add(this);  // Synchronize on the store side
-    }
-
-    // Method to remove the employee from the store
-    public void removeEmployeeFromStore() {
-        if (this.employeeInStore != null) {
-            this.employeeInStore.getEmployees().remove(this);  // Remove from store's employee list
-            this.employeeInStore = null;
-        }
-    }
 }
 

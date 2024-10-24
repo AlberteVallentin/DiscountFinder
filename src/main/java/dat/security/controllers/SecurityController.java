@@ -84,7 +84,7 @@ public class SecurityController implements ISecurityController {
                 RoleType roleType = (userInput.getRoleType() != null) ? userInput.getRoleType() : null;
 
                 // Create a new user with the role (throws error if role is not provided or if role is ADMIN)
-                User created = securityDAO.createUser(userInput.getEmail(), userInput.getName(), userInput.getPassword(), roleType);
+                User created = securityDAO.createUser(userInput.getName(), userInput.getEmail(), userInput.getPassword(), roleType);
 
                 // Generate a token for the newly created user
                 String token = createToken(new UserDTO(created.getEmail(), created.getRole().getRoleType()));

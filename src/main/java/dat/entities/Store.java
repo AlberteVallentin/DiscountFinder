@@ -1,6 +1,7 @@
 package dat.entities;
 
-import dat.security.entities.User;
+import dat.dtos.StoreDTO;
+import dat.entities.Brand;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,6 +9,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "stores")
 public class Store {
 
@@ -16,63 +20,59 @@ public class Store {
     @Column(name = "store_id", nullable = false)
     private Long id;
 
-    @Column(name = "store_name", nullable = false)
-    private String storeName;
+    @Column(name = "salling_store_id", unique = true, nullable = false)
+    private String sallingStoreId;
 
-    // Many-to-One: Each store has one manager, but a manager can manage multiple stores
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "store_manager_id")
-    private User storeManager;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    // One-to-Many: A store can have many employees, but an employee can only work in one store
-    @OneToMany(mappedBy = "employeeInStore", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<User> employees = new HashSet<>();
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "brand_id", nullable = false)
+    private Brand brand;
 
-    // Constructor, getters, and setters
-    public Long getId() {
-        return id;
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "address_id", referencedColumnName = "address_id", nullable = false)
+    private Address address;
+
+    @Column(name = "has_products_in_db")
+    private boolean hasProductsInDb;
+
+    @OneToMany(mappedBy = "store", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<Product> products = new HashSet<>();
+
+    // Constructor that takes a StoreDTO
+    public Store(StoreDTO dto) {
+        this.sallingStoreId = dto.getSallingStoreId();
+        this.name = dto.getName();
+        this.brand = new Brand(dto.getBrand());
+        this.address = new Address(dto.getAddress());
+        this.hasProductsInDb = dto.hasProductsInDb();  // Fixed this line
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    // Helper method to update store from Salling API data
+    public void updateFromSallingApi(StoreDTO dto) {
+        this.name = dto.getName();
+        if (this.address == null) {
+            this.address = new Address(dto.getAddress());
+        } else {
+            this.address.setAddressLine(dto.getAddress().getAddressLine());
+            this.address.setPostalCode(new PostalCode(dto.getAddress().getPostalCode()));
+            this.address.setLongitude(dto.getAddress().getLongitude());
+            this.address.setLatitude(dto.getAddress().getLatitude());
+        }
+        this.hasProductsInDb = dto.hasProductsInDb();  // Fixed this line
     }
 
-    public String getStoreName() {
-        return storeName;
+    // Manual getter for hasProductsInDb to avoid Lombok's "is" prefix
+    public boolean hasProductsInDb() {
+        return hasProductsInDb;
     }
 
-    public void setStoreName(String storeName) {
-        this.storeName = storeName;
-    }
-
-    // Getter and setter for storeManager
-    public User getStoreManager() {
-        return storeManager;
-    }
-
-    public void setStoreManager(User storeManager) {
-        this.storeManager = storeManager;
-    }
-
-    // Getter and setter for employees
-    public Set<User> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(Set<User> employees) {
-        this.employees = employees;
-    }
-
-    // Add an employee to the store
-    public void addEmployee(User employee) {
-        this.employees.add(employee);
-        employee.setEmployeeInStore(this);  // Synkroniser på brugerens side
-    }
-
-    // Remove an employee from the store
-    public void removeEmployee(User employee) {
-        this.employees.remove(employee);
-        employee.removeEmployeeFromStore();  // Synkroniser på brugerens side
+    // Helper method to add products from Salling API
+    public void addProductsFromSallingApi(Set<Product> newProducts) {
+        this.products.clear();  // Clear existing products
+        this.products.addAll(newProducts);
+        this.hasProductsInDb = true;
+        newProducts.forEach(product -> product.setStore(this));
     }
 }
-
