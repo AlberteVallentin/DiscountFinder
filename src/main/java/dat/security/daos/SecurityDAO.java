@@ -64,7 +64,7 @@ public class SecurityDAO implements ISecurityDAO {
 
 
     @Override
-    public User createUser(String email, String name, String password, RoleType roleType) {
+    public User createUser(String name, String email,  String password, RoleType roleType) {
         try (EntityManager em = getEntityManager()) {
             // Check if the user already exists
             User userEntity = em.createQuery("SELECT u FROM User u WHERE u.email = :email", User.class)
@@ -93,7 +93,7 @@ public class SecurityDAO implements ISecurityDAO {
                 .getSingleResult();
 
             // Create the new user with the specified role
-            userEntity = new User(email, name, password, role);
+            userEntity = new User(name, email, password, role);
             em.getTransaction().begin();
             em.persist(userEntity);
             em.getTransaction().commit();

@@ -1,100 +1,80 @@
-### A simple get request to the test endpoint. No need for login
+
+### Test API health
+GET {{url}}/auth/test
+
+
+### Register new user
+POST {{url}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Test User",
+  "email": "test@admin.dk",
+  "password": "test123",
+  "roleType": "USER"
+}
+
+> {% client.global.set("auth_token", response.body.token); %}
+
+
+
+### Login user
+POST {{url}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@admin.dk",
+  "password": "test123"
+}
+
+> {% client.global.set("auth_token", response.body.token); %}
+
+
+### Add admin role to user
+POST {{url}}/auth/user/addrole
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "role": "ADMIN"
+}
+
+### Reset token
 GET {{url}}/auth/test/
 
-### Populate the database with some data
-GET {{url}}/hotels/populate/
-
-### Create a new user - this one will only get a USER roleType by default
-POST {{url}}/auth/register/
-
-{
-    "username": "user",
-    "password": "test123"
-}
-
-###
-POST {{url}}/auth/login/
-
-{
-    "username": "user",
-    "password": "test123"
-}
-
 > {%
-    client.global.set("jwt_token", response.body.token);
+    client.global.set("jwt_token", null);
     console.log("JWT Token:", client.global.get("jwt_token"));
 %}
 
-###
-GET {{url}}/protected/user_demo/
+
+
+### Test protected user endpoint
+GET {{url}}/protected/user_demo
+Authorization: Bearer {{auth_token}}
+
+### Test protected admin endpoint
+GET {{url}}/protected/admin_demo
+Authorization: Bearer {{auth_token}}
+
+### Store API Tests ###
+
+
+
+### Get all stores (public)
+GET {{url}}/stores
 Accept: application/json
-Authorization: Bearer {{jwt_token}}
 
-###
-GET {{url}}/protected/admin_demo/
+
+
+
+### Get specific store (public)
+GET {{url}}/stores/1
 Accept: application/json
-Authorization: Bearer {{jwt_token}}
 
-### Add admin roleType to user
-POST {{url}}/auth/user/addrole/
+
+### Get stores by postal code (public)
+GET {{url}}/stores/postal_code/2300
 Accept: application/json
-Authorization: Bearer {{jwt_token}}
 
-{
-    "roleType": "ADMIN"
-}
-Accept: application/json
-Authorization: Bearer {{jwt_token}}
 
-###
-GET {{url}}/hotels
-Accept: application/json
-Authorization: Bearer {{jwt_token}}
-
-###
-GET {{url}}/hotels/2
-
-###
-POST {{url}}/hotels
-Content-Type: application/json
-Authorization: Bearer {{jwt_token}}
-
-{
-  "hotelName": "Holiday Inn",
-  "hotelAddress": "Stuttgart",
-  "hotelType": "STANDARD"
-}
-
-###
-PUT {{url}}/hotels/3
-Content-Type: application/json
-
-{
-  "hotelName": "Ritz Carlton",
-  "hotelAddress": "London City",
-  "hotelType": "LUXURY"
-}
-
-###
-DELETE {{url}}/hotels/5
-Authorization: Bearer {{jwt_token}}
-
-// Room API
-###
-GET {{url}}/rooms
-Authorization: Bearer {{jwt_token}}
-
-###
-GET {{url}}/rooms/1
-Authorization: Bearer {{jwt_token}}
-
-###
-POST {{url}}/rooms/hotel/1
-Content-Type: application/json
-Authorization: Bearer {{jwt_token}}
-
-{
-  "roomNumber": 11,
-  "roomPrice": 1150,
-  "roomType": "SINGLE"
-}

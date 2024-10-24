@@ -1,7 +1,6 @@
 package dat.entities;
 
 import dat.dtos.CategoryDTO;
-import dat.enums.CategoryName;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,43 +13,37 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "categories")
 public class Category {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id", nullable = false)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "category_name", nullable = false)
-    private CategoryName categoryName;
+    @Column(name = "name_da", nullable = false)
+    private String nameDa;
 
-    public Category(CategoryName categoryName) {
-        this.categoryName = categoryName;
-    }
+    @Column(name = "name_en", nullable = false)
+    private String nameEn;
 
-    @ManyToMany(mappedBy = "categories", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @Column(name = "path_da")
+    private String pathDa;
+
+    @Column(name = "path_en")
+    private String pathEn;
+
+    @ManyToMany(mappedBy = "categories")
     private Set<Product> products = new HashSet<>();
 
-    // Add or remove products from category
-    public void addProduct(Product product) {
-        if (product != null) {
-            this.products.add(product);
-            product.getCategories().add(this);
-        }
+    public Category(String nameDa, String nameEn, String pathDa, String pathEn) {
+        this.nameDa = nameDa;
+        this.nameEn = nameEn;
+        this.pathDa = pathDa;
+        this.pathEn = pathEn;
     }
 
-    public void removeProduct(Product product) {
-        if (product != null) {
-            this.products.remove(product);
-            product.getCategories().remove(this);
-        }
+    public Category(CategoryDTO dto) {
+        this.nameDa = dto.getNameDa();
+        this.nameEn = dto.getNameEn();
+        this.pathDa = dto.getPathDa();
+        this.pathEn = dto.getPathEn();
     }
-
-    public Category(CategoryDTO categoryDTO) {
-        this.id = categoryDTO.getId();
-        this.categoryName = categoryDTO.getCategoryName();
-    }
-
 }
-
-

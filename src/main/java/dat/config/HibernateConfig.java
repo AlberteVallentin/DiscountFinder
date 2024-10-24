@@ -50,9 +50,9 @@ public class HibernateConfig {
         configuration.addAnnotatedClass(Price.class);
         configuration.addAnnotatedClass(Product.class);
         configuration.addAnnotatedClass(Stock.class);
-        configuration.addAnnotatedClass(StockUnit.class);
+        configuration.addAnnotatedClass(Timing.class);
         configuration.addAnnotatedClass(Store.class);
-        configuration.addAnnotatedClass(StoreBrand.class);
+        configuration.addAnnotatedClass(Brand.class);
 
 
     }

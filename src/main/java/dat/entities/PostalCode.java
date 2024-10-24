@@ -8,22 +8,19 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@ToString
 @Table(name = "postal_code_and_city")
 public class PostalCode {
 
     @Id
-    @Column(name = "postal_code", nullable = false, unique = true)
+    @Column(name = "postal_code", nullable = false)
     private Integer postalCode;
 
     @Column(name = "city", nullable = false)
     private String city;
 
-    public PostalCode(PostalCodeDTO postalCodeDTO) {
-        this.postalCode = postalCodeDTO.getPostalCode();
-        this.city = postalCodeDTO.getCity();
+    // Constructor from DTO
+    public PostalCode(PostalCodeDTO dto) {
+        this.postalCode = dto.getPostalCode();
+        this.city = dto.getCity();
     }
-
-
 }

@@ -1,7 +1,7 @@
 package dat.entities;
 
 import dat.dtos.StoreDTO;
-import dat.security.entities.User;
+import dat.entities.Brand;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,87 +20,59 @@ public class Store {
     @Column(name = "store_id", nullable = false)
     private Long id;
 
-    @Column(name = "store_name", nullable = false)
-    private String storeName;
+    @Column(name = "salling_store_id", unique = true, nullable = false)
+    private String sallingStoreId;
+
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "brand_id")
-    private StoreBrand brand;
+    @JoinColumn(name = "brand_id", nullable = false)
+    private Brand brand;
 
-    // One-to-One: A store has one address
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "address_id", referencedColumnName = "address_id", nullable = false)
     private Address address;
-
-    // Many-to-One: Each store has one manager, but a manager can manage multiple stores
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "store_manager_id")
-    private User storeManager;
-
-    // One-to-Many: A store can have many products
-    @OneToMany(mappedBy = "store", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
-    private Set<Product> products = new HashSet<>();
-
-    // One-to-Many: A store can have many employees, but an employee can only work in one store
-    @OneToMany(mappedBy = "employeeInStore", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, orphanRemoval = true)
-    private Set<User> employees = new HashSet<>();
 
     @Column(name = "has_products_in_db")
     private boolean hasProductsInDb;
 
-    @Column(name = "salling_id")
-    private String sallingId;
+    @OneToMany(mappedBy = "store", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<Product> products = new HashSet<>();
 
-    // Many-to-Many: Stores can be saved by multiple users
-    @ManyToMany(mappedBy = "savedStores", fetch = FetchType.LAZY)
-    private Set<User> savedByUsers = new HashSet<>();
-
-    // Add an employee to the store
-    public void addEmployee(User employee) {
-        this.employees.add(employee);
-        employee.setEmployeeInStore(this);  // Synchronize on the user's side
+    // Constructor that takes a StoreDTO
+    public Store(StoreDTO dto) {
+        this.sallingStoreId = dto.getSallingStoreId();
+        this.name = dto.getName();
+        this.brand = new Brand(dto.getBrand());
+        this.address = new Address(dto.getAddress());
+        this.hasProductsInDb = dto.hasProductsInDb();  // Fixed this line
     }
 
-    // Remove an employee from the store
-    public void removeEmployee(User employee) {
-        this.employees.remove(employee);
-        employee.removeEmployeeFromStore();  // Synchronize on the user's side
-    }
-
-    // Add a store manager
-    public void setStoreManager(User manager) {
-        if (this.storeManager != null) {
-            this.storeManager.getStores().remove(this);  // Remove this store from the previous manager's list
+    // Helper method to update store from Salling API data
+    public void updateFromSallingApi(StoreDTO dto) {
+        this.name = dto.getName();
+        if (this.address == null) {
+            this.address = new Address(dto.getAddress());
+        } else {
+            this.address.setAddressLine(dto.getAddress().getAddressLine());
+            this.address.setPostalCode(new PostalCode(dto.getAddress().getPostalCode()));
+            this.address.setLongitude(dto.getAddress().getLongitude());
+            this.address.setLatitude(dto.getAddress().getLatitude());
         }
-        this.storeManager = manager;
-        if (manager != null) {
-            manager.getStores().add(this);  // Add this store to the new manager's list
-        }
+        this.hasProductsInDb = dto.hasProductsInDb();  // Fixed this line
     }
 
-    public void addProduct(Product product) {
-        this.products.add(product);
-        product.setStore(this);
+    // Manual getter for hasProductsInDb to avoid Lombok's "is" prefix
+    public boolean hasProductsInDb() {
+        return hasProductsInDb;
     }
 
-    public void removeProduct(Product product) {
-        this.products.remove(product);
-        product.setStore(null);
+    // Helper method to add products from Salling API
+    public void addProductsFromSallingApi(Set<Product> newProducts) {
+        this.products.clear();  // Clear existing products
+        this.products.addAll(newProducts);
+        this.hasProductsInDb = true;
+        newProducts.forEach(product -> product.setStore(this));
     }
-
-    public Store(StoreDTO storeDTO) {
-        this.id = storeDTO.getId();
-        this.storeName = storeDTO.getStoreName();
-        this.address = new Address(storeDTO.getAddress());
-        if (storeDTO.getBrand() != null) {
-            this.brand = new StoreBrand(storeDTO.getBrand());
-        }
-        if (storeDTO.getStoreManager() != null) {
-            this.storeManager = new User(storeDTO.getStoreManager());
-        }
-        this.hasProductsInDb = storeDTO.isHasProductsInDb();
-        this.sallingId = storeDTO.getSallingId();
-    }
-
-
 }
