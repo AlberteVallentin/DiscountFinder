@@ -187,4 +187,16 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
             throw new PersistenceException("Failed to save/update stores: " + e.getMessage(), e);
         }
     }
+
+    public List<StoreDTO> findByPostalCode(Integer postalCode) {
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Store> query = em.createQuery(
+                "SELECT s FROM Store s WHERE s.address.postalCode.postalCode = :postalCode",
+                Store.class);
+            query.setParameter("postalCode", postalCode);
+            return query.getResultList().stream()
+                .map(StoreDTO::new)
+                .collect(Collectors.toList());
+        }
+    }
 }

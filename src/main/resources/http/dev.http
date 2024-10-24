@@ -60,9 +60,12 @@ Authorization: Bearer {{auth_token}}
 ### Store API Tests ###
 
 
+
 ### Get all stores (public)
 GET {{url}}/stores
 Accept: application/json
+
+
 
 
 ### Get specific store (public)
@@ -70,16 +73,8 @@ GET {{url}}/stores/1
 Accept: application/json
 
 
-
-### Validation Tests ###
-
-### Create store with missing fields (should fail)
-POST {{url}}/stores
-Authorization: Bearer {{auth_token}}
-Content-Type: application/json
-
-{
-  "name": "Invalid Store"
-}
+### Get stores by postal code (public)
+GET {{url}}/stores/postal_code/2300
+Accept: application/json
 
 

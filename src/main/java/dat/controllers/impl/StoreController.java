@@ -1,7 +1,6 @@
 package dat.controllers.impl;
 
 import dat.config.HibernateConfig;
-import dat.controllers.IController;
 import dat.daos.impl.StoreDAO;
 import dat.dtos.StoreDTO;
 import dat.exceptions.ApiException;
@@ -12,11 +11,11 @@ import jakarta.persistence.EntityManagerFactory;
 import java.util.List;
 
 public class StoreController {
-    private final StoreDAO dao;
+    private final StoreDAO storeDAO;
 
     public StoreController() {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
-        this.dao = StoreDAO.getInstance(emf);
+        this.storeDAO = StoreDAO.getInstance(emf);
     }
 
     public void read(Context ctx) {
@@ -29,7 +28,7 @@ public class StoreController {
                 return;
             }
 
-            StoreDTO storeDTO = dao.read(id);
+            StoreDTO storeDTO = storeDAO.read(id);
             ctx.status(200);
             ctx.json(storeDTO, StoreDTO.class);
         } catch (NumberFormatException e) {
@@ -43,7 +42,7 @@ public class StoreController {
 
     public void readAll(Context ctx) {
         // List of DTOs
-        List<StoreDTO> storeDTOS = dao.readAll();
+        List<StoreDTO> storeDTOS = storeDAO.readAll();
         // Response
         ctx.status(200);
         ctx.json(storeDTOS, StoreDTO.class);
@@ -54,14 +53,39 @@ public class StoreController {
         // Request
         StoreDTO jsonRequest = ctx.bodyAsClass(StoreDTO.class);
         // DTO
-        StoreDTO storeDTO = dao.create(jsonRequest);
+        StoreDTO storeDTO = storeDAO.create(jsonRequest);
         // Response
         ctx.status(201);
         ctx.json(storeDTO, StoreDTO.class);
     }
 
     public boolean validatePrimaryKey(Long id) {
-        return dao.validatePrimaryKey(id);
+        return storeDAO.validatePrimaryKey(id);
+    }
+
+    public void getStoresByPostalCode(Context ctx) throws ApiException {
+        try {
+            Integer postalCode = ctx.pathParamAsClass("postal_code", Integer.class).get();
+            List<StoreDTO> stores = storeDAO.findByPostalCode(postalCode);
+
+            if (stores.isEmpty()) {
+                ctx.status(404);
+                ctx.json(Utils.convertToJsonMessage(ctx, "warning",
+                    "No stores found for postal code: " + postalCode));
+                return;
+            }
+
+            ctx.status(200);
+            ctx.json(stores);
+        } catch (NumberFormatException e) {
+            ctx.status(400);
+            ctx.json(Utils.convertToJsonMessage(ctx, "warning",
+                "Invalid postal code format"));
+        } catch (Exception e) {
+            ctx.status(500);
+            ctx.json(Utils.convertToJsonMessage(ctx, "error",
+                "An unexpected error occurred"));
+        }
     }
 
 
