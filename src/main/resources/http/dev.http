@@ -18,7 +18,6 @@ Content-Type: application/json
 
 
 
-
 ### Login user
 POST {{url}}/auth/login
 Content-Type: application/json
@@ -60,61 +59,17 @@ Authorization: Bearer {{auth_token}}
 
 ### Store API Tests ###
 
+
 ### Get all stores (public)
 GET {{url}}/stores
 Accept: application/json
 
 
 ### Get specific store (public)
-GET {{url}}/stores/685
+GET {{url}}/stores/1
 Accept: application/json
 
 
-
-### Create new store (requires admin)
-POST {{url}}/stores
-Authorization: Bearer {{auth_token}}
-Content-Type: application/json
-
-{
-  "sallingStoreId": "1234567",
-  "name": "Netto Testbutik",
-  "brand": {
-    "name": "NETTO",
-    "displayName": "Netto"
-  },
-  "address": {
-    "addressLine": "Testvej 123",
-    "longitude": 12.5683,
-    "latitude": 55.7317,
-    "postalCode": {
-      "postalCode": 2100,
-      "city": "København Ø"
-    }
-  }
-}
-
-
-
-### Update store (requires admin)
-PUT {{url}}/stores/685
-Authorization: Bearer {{auth_token}}
-Content-Type: application/json
-
-{
-  "sallingStoreId": "1234567",
-  "name": "Netto Testbutik (opdateret)",
-  "brand": {
-    "name": "NETTO",
-    "displayName": "Netto"
-  },
-  "address": {
-    "addressLine": "Testvej 123",
-    "longitude": 12.5683,
-    "latitude": 55.7317,
-    "postalCode": 2100
-  }
-}
 
 ### Validation Tests ###
 
@@ -127,20 +82,4 @@ Content-Type: application/json
   "name": "Invalid Store"
 }
 
-### Create store with invalid postal code (should fail)
-POST {{url}}/stores
-Authorization: Bearer {{auth_token}}
-Content-Type: application/json
 
-{
-  "sallingStoreId": "9999",
-  "name": "Invalid Store",
-  "brand": "NETTO",
-  "address": {
-    "addressLine": "Test Address",
-    "postalCode": {
-      "postalCode": 99999,
-      "city": "Invalid City"
-    }
-  }
-}
