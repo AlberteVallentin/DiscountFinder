@@ -24,61 +24,38 @@ import static org.hamcrest.Matchers.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class StoreControllerTest {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(StoreControllerTest.class);
+    private static final EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryForTest();
+    private static final SecurityController securityController = SecurityController.getInstance();
+    private static final SecurityDAO securityDAO = new SecurityDAO(emf);
     private static Javalin app;
-    private static String userToken, adminToken;
-    private static final String BASE_URL = "http://localhost:7070/api";
     private static Store[] stores;
     private static Store netto, foetex, bilka;
     private static UserDTO userDTO, adminDTO;
-
-    // Ændret til instance variables i stedet for static
-    private EntityManagerFactory emf;
-    private SecurityController securityController;
-    private SecurityDAO securityDAO;
+    private static String userToken, adminToken;
+    private static final String BASE_URL = "http://localhost:7070/api";
 
     @BeforeAll
     void setUpAll() {
         HibernateConfig.setTest(true);
-        // Initialiser EMF og controllers i BeforeAll, men sørg for at EMF kun bliver oprettet, hvis den ikke allerede er åben
-        if (emf == null || !emf.isOpen()) {
-            emf = HibernateConfig.getEntityManagerFactoryForTest();
-        }
-        securityController = SecurityController.getInstance();
-        securityDAO = new SecurityDAO(emf);
-        app = ApplicationConfig.startServer(7070); // Start serveren
+
+        // Start api
+        app = ApplicationConfig.startServer(7070);
     }
 
     @BeforeEach
     void setUp() {
-        // Sørg for at EMF er åben
-        if (emf == null || !emf.isOpen()) {
-            emf = HibernateConfig.getEntityManagerFactoryForTest();
-        }
-
-        // Ryd databasen før hver test
-        try (EntityManager em = emf.createEntityManager()) {
-            em.getTransaction().begin();
-            em.createQuery("DELETE FROM Store").executeUpdate();
-            em.createQuery("DELETE FROM Address").executeUpdate();
-            em.createQuery("DELETE FROM PostalCode").executeUpdate();
-            em.createQuery("DELETE FROM Brand").executeUpdate();
-            em.createQuery("DELETE FROM User").executeUpdate();
-            em.createQuery("DELETE FROM Role").executeUpdate();
-            em.getTransaction().commit();
-        }
-
-        // Populer testdata
-        UserDTO[] users = Populator.populateUsers(emf);
-        userDTO = users[0];
-        adminDTO = users[1];
-
+        // Populate the database with stores
+        LOGGER.info("Populating database with stores");
         stores = Populator.populateStores(emf);
         netto = stores[0];
         foetex = stores[1];
         bilka = stores[2];
+        UserDTO[] users = Populator.populateUsers(emf);
+        userDTO = users[0];
+        adminDTO = users[1];
 
-        // Opret tokens for bruger og admin
         try {
             UserDTO verifiedUser = securityDAO.getVerifiedUser(userDTO.getEmail(), "test123");
             UserDTO verifiedAdmin = securityDAO.getVerifiedUser(adminDTO.getEmail(), "admin123");
@@ -87,11 +64,11 @@ class StoreControllerTest {
         } catch (ValidationException e) {
             throw new RuntimeException(e);
         }
+
     }
 
     @AfterEach
     void tearDown() {
-        // Ryd databasen efter hver test
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.createQuery("DELETE FROM Store").executeUpdate();
@@ -101,32 +78,31 @@ class StoreControllerTest {
             em.createQuery("DELETE FROM User").executeUpdate();
             em.createQuery("DELETE FROM Role").executeUpdate();
             em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     @AfterAll
     void tearDownAll() {
-        // Luk EMF og stop serveren efter alle tests
-        if (emf != null && emf.isOpen()) {
-            emf.close();
-        }
         ApplicationConfig.stopServer(app);
     }
-
-    // Testmetoder
 
     @Test
     void getAllStores() {
         List<StoreDTO> fetchedStores =
             given()
                 .when()
+                .header("Authorization", userToken)
                 .get(BASE_URL + "/stores")
                 .then()
                 .statusCode(200)
+                .body("size()", is(3))
+                .log().all()
                 .extract()
                 .as(new TypeRef<List<StoreDTO>>() {});
 
-        assertThat(fetchedStores, hasSize(3));
+        assertThat(fetchedStores.size(), is(3));
         assertThat(fetchedStores.stream().map(StoreDTO::getName).toList(),
             containsInAnyOrder(netto.getName(), foetex.getName(), bilka.getName()));
     }
@@ -136,6 +112,7 @@ class StoreControllerTest {
         StoreDTO fetchedStore =
             given()
                 .when()
+                .header("Authorization", userToken)
                 .get(BASE_URL + "/stores/" + netto.getId())
                 .then()
                 .statusCode(200)
