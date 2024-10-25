@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class StoreFetcher {
     private static final Logger LOGGER = LoggerFactory.getLogger(StoreFetcher.class);
-    private static final String API_KEY = System.getenv("SALLING_API_KEY");
+    private static final String SALLING_API_KEY = System.getenv("SALLING_API_KEY");
     private static final String STORES_URL = "https://api.sallinggroup.com/v2/stores";
     private static final int PER_PAGE = 100;
     private static final List<String> WANTED_BRANDS = List.of("netto", "bilka", "foetex");
@@ -117,7 +117,7 @@ public class StoreFetcher {
 
             HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(urlWithParams))
-                .header("Authorization", "Bearer " + API_KEY)
+                .header("Authorization", "Bearer " + SALLING_API_KEY)
                 .header("Accept", "application/json")
                 .GET()
                 .build();
