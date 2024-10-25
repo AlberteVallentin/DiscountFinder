@@ -2,9 +2,9 @@ package dat.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dat.entities.Store;
-import dat.entities.Brand;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -25,9 +25,11 @@ public class StoreDTO {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private boolean hasProductsInDb;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private LocalDateTime lastFetched;
+
     private Set<ProductDTO> products;
 
-    // Constructor from Entity
     public StoreDTO(Store store) {
         this.id = store.getId();
         this.sallingStoreId = store.getSallingStoreId();
@@ -35,6 +37,7 @@ public class StoreDTO {
         this.brand = new BrandDTO(store.getBrand());
         this.address = new AddressDTO(store.getAddress());
         this.hasProductsInDb = store.hasProductsInDb();
+        this.lastFetched = store.getLastFetched();
 
         if (store.getProducts() != null) {
             this.products = store.getProducts().stream()
@@ -43,16 +46,7 @@ public class StoreDTO {
         }
     }
 
-    // Manual getter for hasProductsInDb to avoid Lombok's "is" prefix
     public boolean hasProductsInDb() {
         return hasProductsInDb;
     }
-
-//    // Helper method to create Address from Salling API data
-//    public static AddressDTO createAddressFromSallingApi(String street, String zipCode) {
-//        return AddressDTO.builder()
-//            .addressLine(street)
-//            .postalCode(new PostalCodeDTO(Integer.parseInt(zipCode), null))  // City will be populated from existing PostalCode data
-//            .build();
-//    }
 }

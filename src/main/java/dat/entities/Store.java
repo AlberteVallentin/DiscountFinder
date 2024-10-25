@@ -1,10 +1,10 @@
 package dat.entities;
 
 import dat.dtos.StoreDTO;
-import dat.entities.Brand;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -37,19 +37,21 @@ public class Store {
     @Column(name = "has_products_in_db")
     private boolean hasProductsInDb;
 
+    @Column(name = "last_fetched")
+    private LocalDateTime lastFetched;
+
     @OneToMany(mappedBy = "store", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Product> products = new HashSet<>();
 
-    // Constructor that takes a StoreDTO
     public Store(StoreDTO dto) {
         this.sallingStoreId = dto.getSallingStoreId();
         this.name = dto.getName();
         this.brand = new Brand(dto.getBrand());
         this.address = new Address(dto.getAddress());
-        this.hasProductsInDb = dto.hasProductsInDb();  // Fixed this line
+        this.hasProductsInDb = dto.hasProductsInDb();
+        this.lastFetched = dto.getLastFetched();
     }
 
-    // Helper method to update store from Salling API data
     public void updateFromSallingApi(StoreDTO dto) {
         this.name = dto.getName();
         if (this.address == null) {
@@ -60,19 +62,25 @@ public class Store {
             this.address.setLongitude(dto.getAddress().getLongitude());
             this.address.setLatitude(dto.getAddress().getLatitude());
         }
-        this.hasProductsInDb = dto.hasProductsInDb();  // Fixed this line
+        this.hasProductsInDb = dto.hasProductsInDb();
+        this.lastFetched = dto.getLastFetched();
     }
 
-    // Manual getter for hasProductsInDb to avoid Lombok's "is" prefix
     public boolean hasProductsInDb() {
         return hasProductsInDb;
     }
 
-    // Helper method to add products from Salling API
     public void addProductsFromSallingApi(Set<Product> newProducts) {
-        this.products.clear();  // Clear existing products
+        this.products.clear();
         this.products.addAll(newProducts);
         this.hasProductsInDb = true;
+        this.lastFetched = LocalDateTime.now();
         newProducts.forEach(product -> product.setStore(this));
+    }
+
+    public boolean needsProductUpdate() {
+        if (!hasProductsInDb) return true;
+        if (lastFetched == null) return true;
+        return LocalDateTime.now().minusHours(24).isAfter(lastFetched);
     }
 }

@@ -1,7 +1,9 @@
 package dat.daos.impl;
 
 import dat.daos.IDAO;
+import dat.dtos.ProductDTO;
 import dat.dtos.StoreDTO;
+import dat.entities.Product;
 import dat.entities.Store;
 import dat.entities.Address;
 import dat.entities.PostalCode;
@@ -9,6 +11,7 @@ import jakarta.persistence.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -197,6 +200,59 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
             return query.getResultList().stream()
                 .map(StoreDTO::new)
                 .collect(Collectors.toList());
+        }
+    }
+
+    public Store findById(Long id) {
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Store> query = em.createQuery(
+                "SELECT s FROM Store s " +
+                    "LEFT JOIN FETCH s.products p " +
+                    "LEFT JOIN FETCH p.price " +
+                    "LEFT JOIN FETCH p.stock " +
+                    "LEFT JOIN FETCH p.timing " +
+                    "LEFT JOIN FETCH p.categories " +
+                    "WHERE s.id = :id", Store.class);
+            query.setParameter("id", id);
+            return query.getResultStream().findFirst().orElse(null);
+        }
+    }
+
+    public void updateStoreProducts(Long id, List<ProductDTO> products) {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+
+            // Find store using internal ID
+            Store store = em.find(Store.class, id);
+            if (store == null) {
+                throw new IllegalArgumentException("Store not found with ID: " + id);
+            }
+
+            LOGGER.info("Updating products for store {} ({}) with Salling ID: {}",
+                id, store.getName(), store.getSallingStoreId());
+
+            // Remove existing products
+            store.getProducts().clear();
+
+            // Convert DTOs to entities and associate with store
+            products.forEach(dto -> {
+                Product product = new Product(dto);
+                product.setStore(store);
+                em.persist(product);
+                store.getProducts().add(product);
+            });
+
+            store.setHasProductsInDb(true);
+            store.setLastFetched(LocalDateTime.now());
+
+            em.merge(store);
+            em.getTransaction().commit();
+
+            LOGGER.info("Successfully updated {} products for store {} ({})",
+                products.size(), id, store.getName());
+        } catch (Exception e) {
+            LOGGER.error("Error updating products for store {}: {}", id, e.getMessage());
+            throw new RuntimeException("Failed to update store products: " + e.getMessage(), e);
         }
     }
 }

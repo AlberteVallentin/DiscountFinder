@@ -3,19 +3,26 @@ package dat.controllers.impl;
 import dat.config.HibernateConfig;
 import dat.daos.impl.StoreDAO;
 import dat.dtos.StoreDTO;
+import dat.entities.Store;
 import dat.exceptions.ApiException;
+import dat.services.ProductFetcher;
 import dat.utils.Utils;
 import io.javalin.http.Context;
 import jakarta.persistence.EntityManagerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class StoreController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(StoreController.class);
     private final StoreDAO storeDAO;
+    private final ProductFetcher productFetcher;
 
     public StoreController() {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
         this.storeDAO = StoreDAO.getInstance(emf);
+        this.productFetcher = ProductFetcher.getInstance();
     }
 
     public void read(Context ctx) {
@@ -27,13 +34,39 @@ public class StoreController {
                 return;
             }
 
+            // Først henter vi butikken for at få Salling ID
             StoreDTO storeDTO = storeDAO.read(id);
+            if (storeDTO == null) {
+                ctx.status(404);
+                ctx.json(Utils.convertToJsonMessage(ctx, "warning", "Store not found with ID: " + id));
+                return;
+            }
+
+            Store store = storeDAO.findById(id);
+
+            // Check if we need to update products
+            if (store.needsProductUpdate()) {
+                LOGGER.info("Fetching fresh products for store {} ({}) with Salling ID: {}",
+                    store.getId(), store.getName(), store.getSallingStoreId());
+                try {
+                    var products = productFetcher.fetchProductsForStore(store.getSallingStoreId());
+                    storeDAO.updateStoreProducts(id, products); // Bruger vores interne ID
+                    // Get the updated store
+                    storeDTO = storeDAO.read(id);
+                } catch (Exception e) {
+                    LOGGER.error("Error fetching products for store {} (Salling ID: {}): {}",
+                        id, store.getSallingStoreId(), e.getMessage());
+                    // Continue with existing products if fetch fails
+                }
+            }
+
             ctx.status(200);
             ctx.json(storeDTO, StoreDTO.class);
         } catch (NumberFormatException e) {
             ctx.status(400);
             ctx.json(Utils.convertToJsonMessage(ctx, "warning", "Invalid store ID format"));
         } catch (Exception e) {
+            LOGGER.error("Error processing request", e);
             ctx.status(500);
             ctx.json(Utils.convertToJsonMessage(ctx, "error", "An unexpected error occurred"));
         }
