@@ -12,13 +12,12 @@ public class StoreRoute {
 
     protected EndpointGroup getRoutes() {
         return () -> {
-            // PUBLIC endpoints - anyone can view stores
+            // Public endpoints - anyone kan tilgå disse
             get("/", storeController::readAll, RoleType.ANYONE);
-            get("/postal_code/{postal_code}", storeController::getStoresByPostalCode, RoleType.ANYONE);
             get("/{id}", storeController::read, RoleType.ANYONE);
 
-
-            // PROTECTED endpoints - only ADMIN can modify stores
+            // Protected endpoints - kræver authentication
+            get("/postal_code/{postal_code}", storeController::getStoresByPostalCode, RoleType.USER, RoleType.ADMIN);
             post("/", storeController::create, RoleType.ADMIN);
         };
     }
