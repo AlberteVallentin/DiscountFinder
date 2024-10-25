@@ -16,14 +16,14 @@ import static org.hamcrest.Matchers.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class StoreRestTest {
     private static Javalin app;
-    private static final String BASE_URL = "http://localhost:7777/api";
+    private static final String BASE_URL = "http://localhost:7070/api";
     private static EntityManagerFactory emf;
 
     @BeforeAll
     static void setUpAll() {
         HibernateConfig.setTest(true);
         emf = HibernateConfig.getEntityManagerFactoryForTest();
-        app = ApplicationConfig.startServer(7777);
+        app = ApplicationConfig.startServer(7070);
         RestAssured.baseURI = BASE_URL;
 
         // Populate test data
