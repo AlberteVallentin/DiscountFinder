@@ -16,3 +16,4 @@ public class Main {
         ApplicationConfig.startServer(7070);
     }
 }
+
