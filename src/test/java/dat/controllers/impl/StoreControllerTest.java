@@ -2,7 +2,6 @@ package dat.controllers.impl;
 
 import dat.config.ApplicationConfig;
 import dat.config.HibernateConfig;
-import dat.controllers.impl.StoreController;
 import dat.dtos.StoreDTO;
 import dat.entities.Store;
 import dat.security.controllers.SecurityController;
@@ -25,9 +24,6 @@ import static org.hamcrest.Matchers.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class StoreControllerTest {
-    private static final EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryForTest();
-    private static final SecurityController securityController = SecurityController.getInstance();
-    private static final SecurityDAO securityDAO = new SecurityDAO(emf);
     private static final Logger LOGGER = LoggerFactory.getLogger(StoreControllerTest.class);
     private static Javalin app;
     private static String userToken, adminToken;
@@ -36,9 +32,18 @@ class StoreControllerTest {
     private static Store netto, foetex, bilka;
     private static UserDTO userDTO, adminDTO;
 
+    // Ændret til instance variables i stedet for static
+    private EntityManagerFactory emf;
+    private SecurityController securityController;
+    private SecurityDAO securityDAO;
+
     @BeforeAll
     void setUpAll() {
         HibernateConfig.setTest(true);
+        // Initialiser EMF og controllers i BeforeAll
+        emf = HibernateConfig.getEntityManagerFactoryForTest();
+        securityController = SecurityController.getInstance();
+        securityDAO = new SecurityDAO(emf);
         app = ApplicationConfig.startServer(7070);
     }
 
@@ -90,9 +95,12 @@ class StoreControllerTest {
 
     @AfterAll
     void tearDownAll() {
+        // Luk EMF efter alle tests er kørt
+        if (emf != null && emf.isOpen()) {
+            emf.close();
+        }
         ApplicationConfig.stopServer(app);
     }
-
     @Test
     void getAllStores() {
         List<StoreDTO> fetchedStores =
