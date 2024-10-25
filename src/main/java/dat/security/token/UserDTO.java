@@ -24,6 +24,12 @@ public class UserDTO {
     private Set<StoreDTO> stores; // Set of StoreDTOs, applicable for Store Managers
     private String password;      // User's password
 
+    public UserDTO(String email, String password, RoleType roleType) {
+        this.email = email;
+        this.password = password;
+        this.roleType = roleType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -31,25 +37,23 @@ public class UserDTO {
         UserDTO dto = (UserDTO) o;
         return Objects.equals(email, dto.email) && roleType == dto.roleType && Objects.equals(stores, dto.stores);
     }
-
-    /**
-     * Constructs a UserDTO with the specified name, email, and role.
-     *
-     * @param name  the name of the user
-     * @param email the email of the user
-     * @param roleType  the role of the user (as an enum)
-     */
-    public UserDTO(String name, String email, RoleType roleType) {
-        this.name = name;
-        this.email = email;
-        this.roleType = roleType;
-        this.stores = new HashSet<>();  // Initialize empty store set
-    }
+//
+//    /**
+//     * Constructs a UserDTO with the specified name, email, and role.
+//     *
+//     * @param name  the name of the user
+//     * @param email the email of the user
+//     * @param roleType  the role of the user (as an enum)
+//     */
+//    public UserDTO(String name, String email, RoleType roleType) {
+//        this.name = name;
+//        this.email = email;
+//        this.roleType = roleType;
+//    }
 
     public UserDTO(String email, RoleType roleType) {
         this.email = email;
         this.roleType = roleType;
-        this.stores = new HashSet<>();  // Initialize empty store set
     }
 
     @Override

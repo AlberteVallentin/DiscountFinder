@@ -46,35 +46,41 @@ class StoreControllerTest {
 
     @BeforeEach
     void setUp() {
-        // Populate the database with stores
-        LOGGER.info("Populating database with stores");
-        stores = Populator.populateStores(emf);
-        netto = stores[0];
-        foetex = stores[1];
-        bilka = stores[2];
+        // Først opretter vi brugere
+        LOGGER.info("Populating database with users");
         UserDTO[] users = Populator.populateUsers(emf);
         userDTO = users[0];
         adminDTO = users[1];
 
         try {
+            // Så verificerer vi brugerne
             UserDTO verifiedUser = securityDAO.getVerifiedUser(userDTO.getEmail(), "test123");
             UserDTO verifiedAdmin = securityDAO.getVerifiedUser(adminDTO.getEmail(), "admin123");
             userToken = "Bearer " + securityController.createToken(verifiedUser);
             adminToken = "Bearer " + securityController.createToken(verifiedAdmin);
+
+            // Til sidst opretter vi butikkerne
+            LOGGER.info("Populating database with stores");
+            stores = Populator.populateStores(emf);
+            netto = stores[0];
+            foetex = stores[1];
+            bilka = stores[2];
         } catch (ValidationException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     @AfterEach
     void tearDown() {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
+            // Først sletter vi butikker og relaterede entiteter
             em.createQuery("DELETE FROM Store").executeUpdate();
             em.createQuery("DELETE FROM Address").executeUpdate();
             em.createQuery("DELETE FROM PostalCode").executeUpdate();
             em.createQuery("DELETE FROM Brand").executeUpdate();
+
+            // Så sletter vi brugere og roller
             em.createQuery("DELETE FROM User").executeUpdate();
             em.createQuery("DELETE FROM Role").executeUpdate();
             em.getTransaction().commit();

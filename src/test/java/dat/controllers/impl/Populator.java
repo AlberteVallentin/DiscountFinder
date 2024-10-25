@@ -26,8 +26,8 @@ public class Populator {
         adminRole = new Role(RoleType.ADMIN);
 
         // Create users with all required fields
-        user = new User("testuser@test.dk", "User Test", "test123", userRole);
-        admin = new User("adminuser@test.dk", "Admin Test", "admin123", adminRole);
+        user = new User("User", "testuser@test.dk", "test123", userRole);
+        admin = new User("Admin", "adminuser@test.dk", "admin123", adminRole);
 
         try (var em = emf.createEntityManager()) {
             em.getTransaction().begin();
@@ -38,8 +38,8 @@ public class Populator {
             em.getTransaction().commit();
         }
 
-        UserDTO userDTO = new UserDTO(user.getEmail(), RoleType.USER);
-        UserDTO adminDTO = new UserDTO(admin.getEmail(), RoleType.ADMIN);
+        UserDTO userDTO = new UserDTO(user.getEmail(), user.getPassword(), RoleType.USER);
+        UserDTO adminDTO = new UserDTO(admin.getEmail(), user.getPassword(), RoleType.ADMIN);
         return new UserDTO[]{userDTO, adminDTO};
     }
 
