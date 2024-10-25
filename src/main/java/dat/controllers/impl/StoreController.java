@@ -21,7 +21,6 @@ public class StoreController {
     public void read(Context ctx) {
         try {
             Long id = ctx.pathParamAsClass("id", Long.class).get();
-
             if (!validatePrimaryKey(id)) {
                 ctx.status(404);
                 ctx.json(Utils.convertToJsonMessage(ctx, "warning", "Store not found with ID: " + id));
