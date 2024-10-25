@@ -40,15 +40,23 @@ class StoreControllerTest {
     @BeforeAll
     void setUpAll() {
         HibernateConfig.setTest(true);
-        // Initialiser EMF og controllers i BeforeAll
-        emf = HibernateConfig.getEntityManagerFactoryForTest();
+        // Initialiser EMF og controllers i BeforeAll, men sørg for at EMF kun bliver oprettet, hvis den ikke allerede er åben
+        if (emf == null || !emf.isOpen()) {
+            emf = HibernateConfig.getEntityManagerFactoryForTest();
+        }
         securityController = SecurityController.getInstance();
         securityDAO = new SecurityDAO(emf);
-        app = ApplicationConfig.startServer(7070);
+        app = ApplicationConfig.startServer(7070); // Start serveren
     }
 
     @BeforeEach
     void setUp() {
+        // Sørg for at EMF er åben
+        if (emf == null || !emf.isOpen()) {
+            emf = HibernateConfig.getEntityManagerFactoryForTest();
+        }
+
+        // Ryd databasen før hver test
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.createQuery("DELETE FROM Store").executeUpdate();
@@ -60,6 +68,7 @@ class StoreControllerTest {
             em.getTransaction().commit();
         }
 
+        // Populer testdata
         UserDTO[] users = Populator.populateUsers(emf);
         userDTO = users[0];
         adminDTO = users[1];
@@ -69,6 +78,7 @@ class StoreControllerTest {
         foetex = stores[1];
         bilka = stores[2];
 
+        // Opret tokens for bruger og admin
         try {
             UserDTO verifiedUser = securityDAO.getVerifiedUser(userDTO.getEmail(), "test123");
             UserDTO verifiedAdmin = securityDAO.getVerifiedUser(adminDTO.getEmail(), "admin123");
@@ -81,6 +91,7 @@ class StoreControllerTest {
 
     @AfterEach
     void tearDown() {
+        // Ryd databasen efter hver test
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.createQuery("DELETE FROM Store").executeUpdate();
@@ -95,12 +106,15 @@ class StoreControllerTest {
 
     @AfterAll
     void tearDownAll() {
-        // Luk EMF efter alle tests er kørt
+        // Luk EMF og stop serveren efter alle tests
         if (emf != null && emf.isOpen()) {
             emf.close();
         }
         ApplicationConfig.stopServer(app);
     }
+
+    // Testmetoder
+
     @Test
     void getAllStores() {
         List<StoreDTO> fetchedStores =
