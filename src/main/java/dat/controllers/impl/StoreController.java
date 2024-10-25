@@ -1,133 +1,90 @@
 package dat.controllers.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dat.config.HibernateConfig;
 import dat.daos.impl.StoreDAO;
 import dat.dtos.StoreDTO;
 import dat.entities.Store;
 import dat.exceptions.ApiException;
 import dat.services.ProductFetcher;
-import dat.utils.Utils;
 import io.javalin.http.Context;
-import jakarta.persistence.EntityManagerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.List;
 
 public class StoreController {
     private static final Logger LOGGER = LoggerFactory.getLogger(StoreController.class);
     private final StoreDAO storeDAO;
     private final ProductFetcher productFetcher;
+    private final ObjectMapper objectMapper;
 
     public StoreController() {
-        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
-        this.storeDAO = StoreDAO.getInstance(emf);
+        this.storeDAO = StoreDAO.getInstance(HibernateConfig.getEntityManagerFactory());
         this.productFetcher = ProductFetcher.getInstance();
+        this.objectMapper = new ObjectMapper()
+            .enable(com.fasterxml.jackson.databind.SerializationFeature.INDENT_OUTPUT)
+            .registerModule(new com.fasterxml.jackson.datatype.jsr310.JavaTimeModule());
     }
 
-    public void read(Context ctx) {
+    public void read(Context ctx) throws ApiException {
         try {
-            Long id = ctx.pathParamAsClass("id", Long.class).get();
-            if (!validatePrimaryKey(id)) {
-                ctx.status(404);
-                ctx.json(Utils.convertToJsonMessage(ctx, "warning", "Store not found with ID: " + id));
-                return;
-            }
-
-            // Først henter vi butikken for at få Salling ID
-            StoreDTO storeDTO = storeDAO.read(id);
-            if (storeDTO == null) {
-                ctx.status(404);
-                ctx.json(Utils.convertToJsonMessage(ctx, "warning", "Store not found with ID: " + id));
-                return;
-            }
+            Long id = Long.parseLong(ctx.pathParam("id"));
 
             Store store = storeDAO.findById(id);
+            if (store == null) {
+                throw new ApiException(404, "Store not found with ID: " + id);
+            }
 
-            // Check if we need to update products
             if (store.needsProductUpdate()) {
-                LOGGER.info("Fetching fresh products for store {} ({}) with Salling ID: {}",
-                    store.getId(), store.getName(), store.getSallingStoreId());
+                LOGGER.info("Fetching products for store {} ({})", store.getId(), store.getName());
                 try {
                     var products = productFetcher.fetchProductsForStore(store.getSallingStoreId());
-                    storeDAO.updateStoreProducts(id, products); // Bruger vores interne ID
-                    // Get the updated store
-                    storeDTO = storeDAO.read(id);
+                    storeDAO.updateStoreProducts(store.getId(), products);
+
+                    // Refresh store data after product update
+                    store = storeDAO.findById(id);
                 } catch (Exception e) {
-                    LOGGER.error("Error fetching products for store {} (Salling ID: {}): {}",
-                        id, store.getSallingStoreId(), e.getMessage());
-                    // Continue with existing products if fetch fails
+                    LOGGER.error("Error fetching products for store {}: {}", id, e.getMessage());
+                    throw new ApiException(500, "Error fetching products: " + e.getMessage());
                 }
             }
 
-            ctx.status(200);
-            ctx.json(storeDTO, StoreDTO.class);
+            // Convert to DTO and return formatted JSON
+            StoreDTO storeDTO = new StoreDTO(store);
+            String jsonOutput = objectMapper.writeValueAsString(storeDTO);
+            ctx.contentType("application/json").result(jsonOutput);
+
         } catch (NumberFormatException e) {
-            ctx.status(400);
-            ctx.json(Utils.convertToJsonMessage(ctx, "warning", "Invalid store ID format"));
+            throw new ApiException(400, "Invalid store ID format");
         } catch (Exception e) {
-            LOGGER.error("Error processing request", e);
-            ctx.status(500);
-            ctx.json(Utils.convertToJsonMessage(ctx, "error", "An unexpected error occurred"));
+            throw new ApiException(500, e.getMessage());
         }
     }
 
-    public void readAll(Context ctx) {
-        // List of DTOs
-        List<StoreDTO> storeDTOS = storeDAO.readAll();
-        // Response
-        ctx.status(200);
-        ctx.json(storeDTOS, StoreDTO.class);
-    }
-
-
-    public void create(Context ctx) throws ApiException {
-        // Request
-        StoreDTO jsonRequest = ctx.bodyAsClass(StoreDTO.class);
-        // DTO
-        StoreDTO storeDTO = storeDAO.create(jsonRequest);
-        // Response
-        ctx.status(201);
-        ctx.json(storeDTO, StoreDTO.class);
-    }
-
-    public boolean validatePrimaryKey(Long id) {
-        return storeDAO.validatePrimaryKey(id);
-    }
-
-    public void getStoresByPostalCode(Context ctx) {
+    public void readAll(Context ctx) throws ApiException {
         try {
-            String postalCodeStr = ctx.pathParam("postal_code");
-            Integer postalCode;
-
-            try {
-                postalCode = Integer.parseInt(postalCodeStr);
-            } catch (NumberFormatException e) {
-                ctx.status(400);
-                ctx.json(Utils.convertToJsonMessage(ctx, "warning", "Invalid postal code format"));
-                return;
-            }
-
-            List<StoreDTO> stores = storeDAO.findByPostalCode(postalCode);
-
-            if (stores.isEmpty()) {
-                ctx.status(404);
-                ctx.json(Utils.convertToJsonMessage(ctx, "warning",
-                    "No stores found for postal code: " + postalCode));
-                return;
-            }
-
-            ctx.status(200);
+            var stores = storeDAO.readAll();
+            LOGGER.info("Retrieved {} stores", stores.size());
             ctx.json(stores);
-
         } catch (Exception e) {
-            ctx.status(500);
-            ctx.json(Utils.convertToJsonMessage(ctx, "error",
-                "An unexpected error occurred"));
+            LOGGER.error("Error fetching stores", e);
+            throw new ApiException(500, "Error fetching stores: " + e.getMessage());
         }
     }
 
-
+    public void getStoresByPostalCode(Context ctx) throws ApiException {
+        try {
+            Integer postalCode = Integer.parseInt(ctx.pathParam("postal_code"));
+            var stores = storeDAO.findByPostalCode(postalCode);
+            LOGGER.info("Found {} stores in postal code {}", stores.size(), postalCode);
+            ctx.json(stores);
+        } catch (NumberFormatException e) {
+            throw new ApiException(400, "Invalid postal code format");
+        } catch (Exception e) {
+            LOGGER.error("Error fetching stores by postal code", e);
+            throw new ApiException(500, "Error fetching stores: " + e.getMessage());
+        }
+    }
+}
 
 
 
@@ -164,4 +121,4 @@ public class StoreController {
 //            .check(s -> s.getAddress().getAddressLine() != null && !s.getAddress().getAddressLine().trim().isEmpty(), "Address line must be set")
 //            .get();
 //    }
-}
+

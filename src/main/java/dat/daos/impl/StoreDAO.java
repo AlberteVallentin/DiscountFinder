@@ -12,7 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class StoreDAO implements IDAO<StoreDTO, Long> {
@@ -222,7 +224,6 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
 
-            // Find store using internal ID
             Store store = em.find(Store.class, id);
             if (store == null) {
                 throw new IllegalArgumentException("Store not found with ID: " + id);
@@ -231,16 +232,45 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
             LOGGER.info("Updating products for store {} ({}) with Salling ID: {}",
                 id, store.getName(), store.getSallingStoreId());
 
-            // Remove existing products
+            // Clear existing products but keep references for comparison
+            Set<Product> existingProducts = new HashSet<>(store.getProducts());
             store.getProducts().clear();
 
-            // Convert DTOs to entities and associate with store
-            products.forEach(dto -> {
-                Product product = new Product(dto);
-                product.setStore(store);
-                em.persist(product);
-                store.getProducts().add(product);
-            });
+            // Process each product from the API
+            for (ProductDTO dto : products) {
+                // Try to find existing product by EAN
+                Product existingProduct = existingProducts.stream()
+                    .filter(p -> p.getEan().equals(dto.getEan()))
+                    .findFirst()
+                    .orElse(null);
+
+                if (existingProduct != null) {
+                    // Update existing product
+                    existingProduct.updateFromDTO(dto);
+                    store.getProducts().add(existingProduct);
+                    em.merge(existingProduct);
+                    LOGGER.debug("Updated existing product: {}", dto.getProductName());
+                } else {
+                    // Create new product
+                    Product newProduct = new Product(dto);
+                    newProduct.setStore(store);
+                    em.persist(newProduct);
+                    store.getProducts().add(newProduct);
+                    LOGGER.debug("Created new product: {}", dto.getProductName());
+                }
+            }
+
+            // Remove products that no longer exist in the API
+            Set<String> newEans = products.stream()
+                .map(ProductDTO::getEan)
+                .collect(Collectors.toSet());
+
+            existingProducts.stream()
+                .filter(p -> !newEans.contains(p.getEan()))
+                .forEach(p -> {
+                    LOGGER.debug("Removing obsolete product: {}", p.getProductName());
+                    em.remove(p);
+                });
 
             store.setHasProductsInDb(true);
             store.setLastFetched(LocalDateTime.now());

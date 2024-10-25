@@ -18,7 +18,7 @@ public class StoreRoute {
 
             // Protected endpoints - kræver authentication
             get("/postal_code/{postal_code}", storeController::getStoresByPostalCode, RoleType.USER, RoleType.ADMIN);
-            post("/", storeController::create, RoleType.ADMIN);
+            //post("/", storeController::create, RoleType.ADMIN);
         };
     }
 }
