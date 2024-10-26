@@ -2,9 +2,7 @@ package dat.daos.impl;
 import dat.config.HibernateConfig;
 import dat.daos.impl.StoreDAO;
 import dat.dtos.*;
-import dat.entities.Brand;
-import dat.entities.PostalCode;
-import dat.entities.Store;
+import dat.entities.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityNotFoundException;
@@ -13,9 +11,13 @@ import org.junit.jupiter.api.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -396,4 +398,191 @@ class StoreDAOTest {
                 containsInAnyOrder("1234", "5678", "9012"));
         }
     }
+
+
+
+    @Test
+    @DisplayName("Test updateStoreProducts removes obsolete products")
+    void testUpdateStoreProductsRemovesObsoleteProducts() {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+
+            // Arrange: Find en butik og opret produkter direkte med korrekt reference til butikken
+            Store store = em.find(Store.class, 1L);
+
+            // Opret PriceDTO, TimingDTO og CategoryDTO'er for produktet
+            PriceDTO price1 = PriceDTO.builder()
+                .originalPrice(new BigDecimal("20.00"))
+                .newPrice(new BigDecimal("15.00"))
+                .discount(new BigDecimal("5.00"))
+                .percentDiscount(new BigDecimal("25.00"))
+                .build();
+            TimingDTO timing1 = TimingDTO.builder()
+                .endTime(LocalDateTime.now().plusDays(1))
+                .build();
+            CategoryDTO category1 = CategoryDTO.builder()
+                .nameDa("Mejeri")
+                .nameEn("Dairy")
+                .pathDa("Dagligvarer/Mejeri")
+                .pathEn("Groceries/Dairy")
+                .build();
+
+            ProductDTO productDto1 = ProductDTO.builder()
+                .productName("Milk")
+                .ean("1234567890123")
+                .price(price1)
+                .timing(timing1)
+                .categories(Set.of(category1))
+                .build();
+
+            PriceDTO price2 = PriceDTO.builder()
+                .originalPrice(new BigDecimal("15.00"))
+                .newPrice(new BigDecimal("10.00"))
+                .discount(new BigDecimal("5.00"))
+                .percentDiscount(new BigDecimal("33.00"))
+                .build();
+            TimingDTO timing2 = TimingDTO.builder()
+                .endTime(LocalDateTime.now().plusDays(1))
+                .build();
+            CategoryDTO category2 = CategoryDTO.builder()
+                .nameDa("Bageri")
+                .nameEn("Bakery")
+                .pathDa("Dagligvarer/Bageri")
+                .pathEn("Groceries/Bakery")
+                .build();
+
+            ProductDTO productDto2 = ProductDTO.builder()
+                .productName("Bread")
+                .ean("2345678901234")
+                .price(price2)
+                .timing(timing2)
+                .categories(Set.of(category2))
+                .build();
+
+            // Skab produkter fra ProductDTO'er og tilknyt dem til butikken
+            Product product1 = new Product(productDto1);
+            product1.setStore(store); // Sæt butikken på produktet
+            Product product2 = new Product(productDto2);
+            product2.setStore(store); // Sæt butikken på produktet
+
+            // Gem produkterne i databasen
+            em.persist(product1);
+            em.persist(product2);
+
+            em.getTransaction().commit();
+
+            // Simuler API-data: kun "Milk" findes stadig
+            List<ProductDTO> updatedProducts = List.of(
+                ProductDTO.builder()
+                    .productName("Milk")
+                    .ean("1234567890123")
+                    .price(price1)
+                    .timing(timing1)
+                    .categories(Set.of(category1))
+                    .build()
+            );
+
+            // Act: Kør opdateringsmetoden for at fjerne forældede produkter
+            storeDAO.updateStoreProducts(store.getId(), updatedProducts);
+
+            // Refresh butikken for at sikre, at JPA opdaterer produktlisten i 'store'
+            em.getTransaction().begin();
+            em.refresh(store);
+            em.getTransaction().commit();
+
+            // Assert: Kontrollér, at kun "Milk" er tilbage
+            Store updatedStore = em.find(Store.class, store.getId());
+            assertAll(
+                () -> assertThat("Only one product should remain", updatedStore.getProducts(), hasSize(1)),
+                () -> assertThat(updatedStore.getProducts().stream()
+                        .map(Product::getEan)
+                        .collect(Collectors.toList()),
+                    contains("1234567890123")),
+                () -> assertThat(updatedStore.getProducts().stream()
+                        .map(Product::getEan)
+                        .collect(Collectors.toList()),
+                    not(contains("2345678901234")))
+            );
+        }
+    }
+
+    @Test
+    @DisplayName("Test updateStoreProducts adds new products and removes obsolete ones")
+    void testUpdateStoreProductsAddsNewAndRemovesObsoleteProducts() {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+
+            // Arrange: Find en butik og opret eksisterende produkter direkte i databasen
+            Store store = em.find(Store.class, 1L);
+
+            // Eksisterende produkt (før synkronisering)
+            ProductDTO productDto1 = ProductDTO.builder()
+                .productName("Milk")
+                .ean("1234567890123")
+                .price(new PriceDTO(null, new BigDecimal("20.00"), new BigDecimal("15.00"), new BigDecimal("5.00"), new BigDecimal("25.00")))
+                .timing(TimingDTO.builder()
+                    .startTime(LocalDateTime.now().minusDays(1))
+                    .endTime(LocalDateTime.now().plusDays(1))
+                    .lastUpdated(LocalDateTime.now())
+                    .build())
+                .categories(Set.of(new CategoryDTO(null, "Mejeri", "Dairy", "Dagligvarer/Mejeri", "Groceries/Dairy")))
+                .build();
+
+            Product product1 = new Product(productDto1);
+            product1.setStore(store);
+            em.persist(product1);
+            em.getTransaction().commit();
+
+            // Act: Simuler en API-respons fra Salling, der indeholder "Milk" og et nyt produkt "Cheese"
+            List<ProductDTO> sallingProducts = List.of(
+                ProductDTO.builder()
+                    .productName("Milk")
+                    .ean("1234567890123")
+                    .price(new PriceDTO(null, new BigDecimal("20.00"), new BigDecimal("15.00"), new BigDecimal("5.00"), new BigDecimal("25.00")))
+                    .timing(TimingDTO.builder()
+                        .startTime(LocalDateTime.now().minusDays(1))
+                        .endTime(LocalDateTime.now().plusDays(1))
+                        .lastUpdated(LocalDateTime.now())
+                        .build())
+                    .categories(Set.of(new CategoryDTO(null, "Mejeri", "Dairy", "Dagligvarer/Mejeri", "Groceries/Dairy")))
+                    .build(),
+                ProductDTO.builder()
+                    .productName("Cheese")
+                    .ean("3456789012345")  // Nyt produkt med unik EAN
+                    .price(new PriceDTO(null, new BigDecimal("40.00"), new BigDecimal("30.00"), new BigDecimal("10.00"), new BigDecimal("25.00")))
+                    .timing(TimingDTO.builder()
+                        .startTime(LocalDateTime.now().minusDays(1))
+                        .endTime(LocalDateTime.now().plusDays(5))
+                        .lastUpdated(LocalDateTime.now())
+                        .build())
+                    .categories(Set.of(new CategoryDTO(null, "Mejeri", "Dairy", "Dagligvarer/Mejeri", "Groceries/Dairy")))
+                    .build()
+            );
+
+            // Opdater databasen for at matche Salling's API-data
+            em.getTransaction().begin();
+            storeDAO.updateStoreProducts(store.getId(), sallingProducts);
+            em.flush();
+            em.getTransaction().commit();
+
+            // Refresh for at sikre, at entiteten er opdateret korrekt i persistence-konteksten
+            em.refresh(store);
+
+            // Assert: Tjek at "Milk" forbliver, og at "Cheese" tilføjes i databasen
+            Store updatedStore = em.find(Store.class, store.getId());
+            assertAll(
+                () -> assertThat("Two products should remain", updatedStore.getProducts(), hasSize(2)),
+                () -> assertThat(updatedStore.getProducts().stream()
+                        .map(Product::getEan)
+                        .collect(Collectors.toList()),
+                    containsInAnyOrder("1234567890123", "3456789012345"))
+            );
+        }
+    }
+
+
+
+
+
+
 }

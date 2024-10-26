@@ -4,13 +4,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dat.config.HibernateConfig;
 import dat.daos.impl.StoreDAO;
 import dat.dtos.StoreDTO;
+import dat.entities.Category;
 import dat.entities.Store;
 import dat.exceptions.ApiException;
 import dat.services.ProductFetcher;
 import io.javalin.http.Context;
+import jakarta.persistence.EntityManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class StoreController {
@@ -116,41 +119,9 @@ public class StoreController {
             throw new ApiException(500, "Error fetching stores: " + e.getMessage());
         }
     }
+
 }
 
 
 
-//    @Override
-//    public void update(Context ctx) throws ApiException {
-//        // Request
-//        long id = ctx.pathParamAsClass("id", Long.class)
-//            .check(this::validatePrimaryKey, "Not a valid store ID").get();
-//        // DTO
-//        StoreDTO storeDTO = dao.update(id, validateEntity(ctx));
-//        // Response
-//        ctx.status(200);
-//        ctx.json(storeDTO, StoreDTO.class);
-//    }
-//
-//    @Override
-//    public void delete(Context ctx) {
-//        // Request
-//        long id = ctx.pathParamAsClass("id", Long.class)
-//            .check(this::validatePrimaryKey, "Not a valid store ID").get();
-//        dao.delete(id);
-//        // Response
-//        ctx.status(204);
-//    }
-//
-//    @Override
-//    public StoreDTO validateEntity(Context ctx) {
-//        return ctx.bodyValidator(StoreDTO.class)
-//            .check(s -> s.getSallingStoreId() != null && !s.getSallingStoreId().trim().isEmpty(), "Salling Store ID must be set")
-//            .check(s -> s.getName() != null && !s.getName().trim().isEmpty(), "Store name must be set")
-//            .check(s -> s.getBrand() != null, "Store brand must be set")
-//            .check(s -> s.getAddress() != null, "Store address must be set")
-//            .check(s -> s.getAddress().getPostalCode() != null, "Postal code must be set")
-//            .check(s -> s.getAddress().getAddressLine() != null && !s.getAddress().getAddressLine().trim().isEmpty(), "Address line must be set")
-//            .get();
-//    }
 

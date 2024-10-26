@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -215,91 +216,73 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
             LOGGER.info("Updating products for store {} ({}) with Salling ID: {}",
                 id, store.getName(), store.getSallingStoreId());
 
-            // Clear existing products but keep references for comparison
-            Set<Product> existingProducts = new HashSet<>(store.getProducts());
-            store.getProducts().clear();
+            // Map eksisterende produkter efter EAN for hurtig adgang
+            Map<String, Product> existingProductMap = store.getProducts().stream()
+                .collect(Collectors.toMap(Product::getEan, p -> p));
 
-            // Process each product from the API
+            Set<String> newProductEans = products.stream()
+                .map(ProductDTO::getEan)
+                .collect(Collectors.toSet());
+
+            // Fjern produkter, der ikke længere findes i API-listen
+            List<Product> productsToRemove = store.getProducts().stream()
+                .filter(p -> !newProductEans.contains(p.getEan()))
+                .collect(Collectors.toList());
+
+            for (Product product : productsToRemove) {
+                product.clearCategories();
+                store.getProducts().remove(product);
+                em.remove(product);
+            }
+
+            // Tilføj eller opdater produkter fra API-data
             for (ProductDTO dto : products) {
-                try {
-                    // Try to find existing product by EAN
-                    Product existingProduct = existingProducts.stream()
-                        .filter(p -> p.getEan().equals(dto.getEan()))
-                        .findFirst()
-                        .orElse(null);
+                Product product = existingProductMap.get(dto.getEan());
 
-                    Product product;
-                    if (existingProduct != null) {
-                        // Update existing product
-                        existingProduct.updateFromDTO(dto);
-                        product = existingProduct;
-                        LOGGER.debug("Updated existing product: {}", dto.getProductName());
-                    } else {
-                        // Create new product
-                        product = new Product(dto);
-                        LOGGER.debug("Created new product: {}", dto.getProductName());
-                    }
-
-                    // Handle categories
-                    if (dto.getCategories() != null && !dto.getCategories().isEmpty()) {
-                        // Clear existing categories
-                        product.getCategories().clear();
-
-                        // Process each category
-                        for (CategoryDTO categoryDTO : dto.getCategories()) {
-                            // Try to find existing category
-                            TypedQuery<Category> query = em.createQuery(
-                                "SELECT c FROM Category c WHERE c.nameDa = :nameDa AND c.nameEn = :nameEn",
-                                Category.class);
-                            query.setParameter("nameDa", categoryDTO.getNameDa());
-                            query.setParameter("nameEn", categoryDTO.getNameEn());
-
-                            Category category;
-                            List<Category> existingCategories = query.getResultList();
-
-                            if (!existingCategories.isEmpty()) {
-                                category = existingCategories.get(0);
-                                LOGGER.debug("Found existing category: {}", category.getNameDa());
-                            } else {
-                                category = new Category(categoryDTO);
-                                em.persist(category);
-                                LOGGER.debug("Created new category: {}", category.getNameDa());
-                            }
-
-                            product.addCategory(category);
-                        }
-
-                        LOGGER.debug("Added {} categories to product {}",
-                            product.getCategories().size(), product.getProductName());
-                    }
-
+                // Tilføj denne kode her
+                if (product == null) { // Hvis produktet ikke findes, opret et nyt produkt
+                    product = new Product(dto);
                     product.setStore(store);
-                    if (existingProduct == null) {
-                        em.persist(product);
-                    } else {
-                        product = em.merge(product);
-                    }
-                    store.getProducts().add(product);
-
-                } catch (Exception e) {
-                    LOGGER.error("Error processing product {}: {}", dto.getProductName(), e.getMessage());
+                    em.persist(product); // Gem det nye produkt
+                } else {
+                    product.updateFromDTO(dto); // Opdater eksisterende produkt
                 }
             }
 
             store.setHasProductsInDb(true);
             store.setLastFetched(LocalDateTime.now());
-
             em.merge(store);
             em.getTransaction().commit();
-
-            LOGGER.info("Successfully updated {} products for store {} ({})",
-                products.size(), id, store.getName());
         } catch (Exception e) {
             LOGGER.error("Error updating products for store {}: {}", id, e.getMessage());
             throw new RuntimeException("Failed to update store products: " + e.getMessage());
         }
     }
 
+
+
+    private void updateProductCategories(Product product, ProductDTO dto, EntityManager em) {
+        if (dto.getCategories() != null && !dto.getCategories().isEmpty()) {
+            product.clearCategories();
+
+            for (CategoryDTO categoryDTO : dto.getCategories()) {
+                Category category = em.createQuery(
+                        "SELECT c FROM Category c WHERE c.pathDa = :pathDa AND c.pathEn = :pathEn",
+                        Category.class)
+                    .setParameter("pathDa", categoryDTO.getPathDa())
+                    .setParameter("pathEn", categoryDTO.getPathEn())
+                    .getResultStream()
+                    .findFirst()
+                    .orElseGet(() -> {
+                        Category newCategory = new Category(categoryDTO);
+                        em.persist(newCategory);
+                        return newCategory;
+                    });
+
+                product.addCategory(category);
+            }
+        }
+    }
     public Store findById(Long id) {
         try (EntityManager em = emf.createEntityManager()) {
             TypedQuery<Store> query = em.createQuery(
@@ -323,6 +306,25 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
             }
 
             return store;
+        }
+    }
+
+    private void cleanupUnusedCategories(EntityManager em) {
+        List<Category> unusedCategories = em.createQuery(
+                "SELECT c FROM Category c WHERE c.products IS EMPTY",
+                Category.class)
+            .getResultList();
+
+        if (!unusedCategories.isEmpty()) {
+            LOGGER.info("Found {} unused categories to remove", unusedCategories.size());
+            for (Category category : unusedCategories) {
+                LOGGER.debug("Removing unused category: {} ({}) with path: {} / {}",
+                    category.getNameDa(),
+                    category.getNameEn(),
+                    category.getPathDa(),
+                    category.getPathEn());
+                em.remove(category);
+            }
         }
     }
 }
