@@ -1,6 +1,7 @@
 package dat.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import dat.entities.Store;
 import lombok.*;
 
@@ -28,6 +29,7 @@ public class StoreDTO {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private LocalDateTime lastFetched;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Set<ProductDTO> products;
 
     public StoreDTO(Store store) {
@@ -38,8 +40,12 @@ public class StoreDTO {
         this.address = new AddressDTO(store.getAddress());
         this.hasProductsInDb = store.hasProductsInDb();
         this.lastFetched = store.getLastFetched();
+    }
 
-        if (store.getProducts() != null) {
+    // Constructor that includes products
+    public StoreDTO(Store store, boolean includeProducts) {
+        this(store); // Call the basic constructor first
+        if (includeProducts && store.getProducts() != null) {
             this.products = store.getProducts().stream()
                 .map(ProductDTO::new)
                 .collect(Collectors.toSet());

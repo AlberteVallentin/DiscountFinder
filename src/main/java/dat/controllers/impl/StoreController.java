@@ -47,9 +47,7 @@ public class StoreController {
                     throw new ApiException(500, "Error fetching products: " + e.getMessage());
                 }
             }
-
-            // Convert to DTO and return formatted JSON
-            StoreDTO storeDTO = new StoreDTO(store);
+            StoreDTO storeDTO = new StoreDTO(store, true);
             String jsonOutput = objectMapper.writeValueAsString(storeDTO);
             ctx.contentType("application/json").result(jsonOutput);
 

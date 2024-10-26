@@ -36,8 +36,8 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
     @Override
     public StoreDTO read(Long id) {
         try (EntityManager em = emf.createEntityManager()) {
-            Store store = em.find(Store.class, id);
-            return store != null ? new StoreDTO(store) : null;
+            Store store = findById(id);
+            return store != null ? new StoreDTO(store, true) : null;  // Include products for single store fetch
         }
     }
 
@@ -46,7 +46,7 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
         try (EntityManager em = emf.createEntityManager()) {
             TypedQuery<Store> query = em.createQuery("SELECT s FROM Store s", Store.class);
             return query.getResultList().stream()
-                .map(StoreDTO::new)
+                .map(store -> new StoreDTO(store, false)) // Don't include products
                 .collect(Collectors.toList());
         }
     }
@@ -208,7 +208,7 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
     public Store findById(Long id) {
         try (EntityManager em = emf.createEntityManager()) {
             TypedQuery<Store> query = em.createQuery(
-                "SELECT s FROM Store s " +
+                "SELECT DISTINCT s FROM Store s " +
                     "LEFT JOIN FETCH s.products p " +
                     "LEFT JOIN FETCH p.price " +
                     "LEFT JOIN FETCH p.stock " +

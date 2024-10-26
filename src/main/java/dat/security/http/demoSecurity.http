@@ -14,6 +14,17 @@ POST {{url}}/auth/register/
 }
 
 
+### Create a new user with ADMIN role (fail)
+POST {{url}}/auth/register/
+
+{
+    "email": "admin@admin.com",
+    "name": "admin",
+    "password": "test123",
+    "roleType": "ADMIN"
+}
+
+
 ### Login as the user
 POST {{url}}/auth/login/
 
