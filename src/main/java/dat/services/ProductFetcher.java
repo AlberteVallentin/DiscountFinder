@@ -43,8 +43,6 @@ public class ProductFetcher {
     }
 
     public List<ProductDTO> fetchProductsForStore(String storeId) throws ApiException {
-        List<ProductDTO> products = new ArrayList<>();
-
         try {
             String url = String.format(FOODWASTE_URL, storeId);
             HttpRequest request = buildRequest(url);
@@ -55,22 +53,18 @@ public class ProductFetcher {
             JsonNode clearances = rootNode.get("clearances");
 
             if (clearances == null || !clearances.isArray()) {
-                LOGGER.warn("No clearances found for store {}", storeId);
-                return products;
+                return new ArrayList<>();
             }
 
+            List<ProductDTO> products = new ArrayList<>();
             for (JsonNode clearanceNode : clearances) {
-                try {
-                    ProductDTO product = parseProduct(clearanceNode);
-                    if (product != null) {
-                        products.add(product);
-                    }
-                } catch (Exception e) {
-                    LOGGER.warn("Failed to parse product in store {}: {}", storeId, e.getMessage());
+                ProductDTO product = parseProduct(clearanceNode);
+                if (product != null) {
+                    products.add(product);
                 }
             }
 
-            LOGGER.info("Successfully fetched {} products for store {}", products.size(), storeId);
+            LOGGER.info("Fetched {} products for store {}", products.size(), storeId);
             return products;
 
         } catch (ApiException e) {
@@ -91,19 +85,14 @@ public class ProductFetcher {
     }
 
     private void validateResponse(HttpResponse<String> response) throws ApiException {
-        switch (response.statusCode()) {
-            case 200:
-                break;
-            case 404:
-                throw new ApiException(404, "Store not found");
-            case 401:
-                throw new ApiException(401, "Invalid API key");
-            case 429:
-                throw new ApiException(429, "Rate limit exceeded");
-            default:
-                LOGGER.error("Unexpected API response: {} - {}", response.statusCode(), response.body());
-                throw new ApiException(response.statusCode(),
-                    "Unexpected error from Salling API: " + response.body());
+        if (response.statusCode() != 200) {
+            switch (response.statusCode()) {
+                case 404 -> throw new ApiException(404, "Store not found");
+                case 401 -> throw new ApiException(401, "Invalid API key");
+                case 429 -> throw new ApiException(429, "Rate limit exceeded");
+                default -> throw new ApiException(response.statusCode(),
+                    "Unexpected error from Salling API");
+            }
         }
     }
 
@@ -113,7 +102,7 @@ public class ProductFetcher {
             JsonNode productNode = clearanceNode.get("product");
 
             if (offerNode == null || productNode == null) {
-                throw new IllegalArgumentException("Missing required offer or product data");
+                return null;
             }
 
             return ProductDTO.builder()
@@ -126,7 +115,6 @@ public class ProductFetcher {
                 .build();
 
         } catch (Exception e) {
-            LOGGER.error("Error parsing product: {}", e.getMessage());
             return null;
         }
     }
@@ -156,32 +144,25 @@ public class ProductFetcher {
             .build();
     }
 
-
     private TimingDTO parseTimingDTO(JsonNode offerNode) {
-        try {
-            String startTimeStr = getRequiredText(offerNode, "startTime");
-            String endTimeStr = getRequiredText(offerNode, "endTime");
+        String startTimeStr = getRequiredText(offerNode, "startTime");
+        String endTimeStr = getRequiredText(offerNode, "endTime");
 
-            // Parse ISO 8601 timestamps til Instant og konverter til LocalDateTime
-            LocalDateTime startTime = LocalDateTime.ofInstant(
-                Instant.parse(startTimeStr),
-                ZoneId.systemDefault()
-            );
+        LocalDateTime startTime = LocalDateTime.ofInstant(
+            Instant.parse(startTimeStr),
+            ZoneId.systemDefault()
+        );
 
-            LocalDateTime endTime = LocalDateTime.ofInstant(
-                Instant.parse(endTimeStr),
-                ZoneId.systemDefault()
-            );
+        LocalDateTime endTime = LocalDateTime.ofInstant(
+            Instant.parse(endTimeStr),
+            ZoneId.systemDefault()
+        );
 
-            return TimingDTO.builder()
-                .startTime(startTime)
-                .endTime(endTime)
-                .lastUpdated(LocalDateTime.now())
-                .build();
-        } catch (Exception e) {
-            LOGGER.error("Error parsing dates: {} - {}", offerNode, e.getMessage());
-            throw new IllegalArgumentException("Could not parse dates: " + e.getMessage());
-        }
+        return TimingDTO.builder()
+            .startTime(startTime)
+            .endTime(endTime)
+            .lastUpdated(LocalDateTime.now())
+            .build();
     }
 
     private Set<CategoryDTO> parseCategories(JsonNode productNode) {
@@ -205,50 +186,5 @@ public class ProductFetcher {
 
     private String extractLastCategory(String categoryPath) {
         return categoryPath.substring(categoryPath.lastIndexOf(">") + 1).trim();
-    }
-
-    public static void main(String[] args) {
-        ProductFetcher fetcher = ProductFetcher.getInstance();
-
-        // Din specifikke store ID
-        String sallingStoreId = "8710a1fc-c8cd-4708-8035-667ea7ff5afd";
-
-        System.out.println("\nFetching products for Salling Store ID: " + sallingStoreId);
-        try {
-            List<ProductDTO> products = fetcher.fetchProductsForStore(sallingStoreId);
-            System.out.println("Found " + products.size() + " products with discounts");
-
-            if (products.isEmpty()) {
-                System.out.println("No discounted products found for this store at the moment.");
-            } else {
-                System.out.println("\nShowing all discounted products:");
-                products.forEach(p -> System.out.printf("""
-                    
-                    Product: %s
-                    Price: %.2f kr → %.2f kr (%.0f%% off)
-                    Quantity: %.1f %s
-                    Expires: %s
-                    Categories: %s
-                    ----------------------------------------
-                    """,
-                    p.getProductName(),
-                    p.getPrice().getOriginalPrice(),
-                    p.getPrice().getNewPrice(),
-                    p.getPrice().getPercentDiscount(),
-                    p.getStock().getQuantity(),
-                    p.getStock().getStockUnit(),
-                    p.getTiming().getEndTime(),
-                    p.getCategories().stream()
-                        .map(CategoryDTO::getNameDa)
-                        .collect(java.util.stream.Collectors.joining(", "))
-                ));
-            }
-
-        } catch (ApiException e) {
-            System.out.println("API Error (" + e.getStatusCode() + "): " + e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Unexpected error: " + e.getMessage());
-            e.printStackTrace();
-        }
     }
 }
