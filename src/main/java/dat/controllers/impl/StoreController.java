@@ -11,8 +11,6 @@ import io.javalin.http.Context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.stream.Collectors;
-
 public class StoreController {
     private static final Logger LOGGER = LoggerFactory.getLogger(StoreController.class);
     private final StoreDAO storeDAO;
@@ -40,30 +38,8 @@ public class StoreController {
                 LOGGER.info("Fetching products for store {} ({})", store.getId(), store.getName());
                 try {
                     var products = productFetcher.fetchProductsForStore(store.getSallingStoreId());
-
-                    // Debug log products before saving
-                    LOGGER.debug("Products before saving:");
-                    products.forEach(p -> LOGGER.debug("Product: {}, Categories: {}",
-                        p.getProductName(),
-                        p.getCategories().stream()
-                            .map(c -> c.getNameDa() + " (" + c.getNameEn() + ")")
-                            .collect(Collectors.joining(" > "))
-                    ));
-
                     storeDAO.updateStoreProducts(store.getId(), products);
-
-                    // Refresh store data after product update
                     store = storeDAO.findById(id);
-
-                    // Debug log products after fetching from database
-                    LOGGER.debug("Products after database fetch:");
-                    store.getProducts().forEach(p -> LOGGER.debug("Product: {}, Categories: {}",
-                        p.getProductName(),
-                        p.getCategories().stream()
-                            .map(c -> c.getNameDa() + " (" + c.getNameEn() + ")")
-                            .collect(Collectors.joining(" > "))
-                    ));
-
                 } catch (Exception e) {
                     LOGGER.error("Error fetching products for store {}: {}", id, e.getMessage());
                     throw new ApiException(500, "Error fetching products: " + e.getMessage());
@@ -71,16 +47,6 @@ public class StoreController {
             }
 
             StoreDTO storeDTO = new StoreDTO(store, true);
-
-            // Debug log final DTO
-            LOGGER.debug("Final StoreDTO products:");
-            storeDTO.getProducts().forEach(p -> LOGGER.debug("Product: {}, Categories: {}",
-                p.getProductName(),
-                p.getCategories().stream()
-                    .map(c -> c.getNameDa() + " (" + c.getNameEn() + ")")
-                    .collect(Collectors.joining(" > "))
-            ));
-
             String jsonOutput = objectMapper.writeValueAsString(storeDTO);
             ctx.contentType("application/json").result(jsonOutput);
 
@@ -90,7 +56,6 @@ public class StoreController {
             throw new ApiException(500, e.getMessage());
         }
     }
-
 
     public void readAll(Context ctx) throws ApiException {
         try {
@@ -117,40 +82,3 @@ public class StoreController {
         }
     }
 }
-
-
-
-//    @Override
-//    public void update(Context ctx) throws ApiException {
-//        // Request
-//        long id = ctx.pathParamAsClass("id", Long.class)
-//            .check(this::validatePrimaryKey, "Not a valid store ID").get();
-//        // DTO
-//        StoreDTO storeDTO = dao.update(id, validateEntity(ctx));
-//        // Response
-//        ctx.status(200);
-//        ctx.json(storeDTO, StoreDTO.class);
-//    }
-//
-//    @Override
-//    public void delete(Context ctx) {
-//        // Request
-//        long id = ctx.pathParamAsClass("id", Long.class)
-//            .check(this::validatePrimaryKey, "Not a valid store ID").get();
-//        dao.delete(id);
-//        // Response
-//        ctx.status(204);
-//    }
-//
-//    @Override
-//    public StoreDTO validateEntity(Context ctx) {
-//        return ctx.bodyValidator(StoreDTO.class)
-//            .check(s -> s.getSallingStoreId() != null && !s.getSallingStoreId().trim().isEmpty(), "Salling Store ID must be set")
-//            .check(s -> s.getName() != null && !s.getName().trim().isEmpty(), "Store name must be set")
-//            .check(s -> s.getBrand() != null, "Store brand must be set")
-//            .check(s -> s.getAddress() != null, "Store address must be set")
-//            .check(s -> s.getAddress().getPostalCode() != null, "Postal code must be set")
-//            .check(s -> s.getAddress().getAddressLine() != null && !s.getAddress().getAddressLine().trim().isEmpty(), "Address line must be set")
-//            .get();
-//    }
-

@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ProductFetcher {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductFetcher.class);
@@ -108,6 +107,30 @@ public class ProductFetcher {
         }
     }
 
+    private ProductDTO parseProduct(JsonNode clearanceNode) {
+        try {
+            JsonNode offerNode = clearanceNode.get("offer");
+            JsonNode productNode = clearanceNode.get("product");
+
+            if (offerNode == null || productNode == null) {
+                throw new IllegalArgumentException("Missing required offer or product data");
+            }
+
+            return ProductDTO.builder()
+                .productName(getRequiredText(productNode, "description"))
+                .ean(getRequiredText(productNode, "ean"))
+                .price(parsePriceDTO(offerNode))
+                .stock(parseStockDTO(offerNode))
+                .timing(parseTimingDTO(offerNode))
+                .categories(parseCategories(productNode))
+                .build();
+
+        } catch (Exception e) {
+            LOGGER.error("Error parsing product: {}", e.getMessage());
+            return null;
+        }
+    }
+
     private String getRequiredText(JsonNode node, String field) {
         JsonNode fieldNode = node.get(field);
         if (fieldNode == null || fieldNode.isNull()) {
@@ -166,98 +189,18 @@ public class ProductFetcher {
         JsonNode categoriesNode = productNode.get("categories");
 
         if (categoriesNode != null) {
-            try {
-                // Get the category paths directly from da and en fields
-                String pathDa = categoriesNode.get("da").asText();
-                String pathEn = categoriesNode.get("en").asText();
+            String categoryDa = categoriesNode.get("da").asText();
+            String categoryEn = categoriesNode.get("en").asText();
 
-                LOGGER.debug("Parsing category paths - DA: {}, EN: {}", pathDa, pathEn);
-
-                // Split on > to get hierarchy
-                String[] categoryPathsDa = pathDa.split(">");
-                String[] categoryPathsEn = pathEn.split(">");
-
-                if (categoryPathsDa.length != categoryPathsEn.length) {
-                    LOGGER.warn("Mismatched category path lengths: DA={}, EN={}", pathDa, pathEn);
-                    return categories;
-                }
-
-                StringBuilder currentPathDa = new StringBuilder();
-                StringBuilder currentPathEn = new StringBuilder();
-
-                // Create a category for each level in the hierarchy
-                for (int i = 0; i < categoryPathsDa.length; i++) {
-                    String categoryNameDa = categoryPathsDa[i].trim();
-                    String categoryNameEn = categoryPathsEn[i].trim();
-
-                    // Build the cumulative path
-                    if (currentPathDa.length() > 0) {
-                        currentPathDa.append(">");
-                        currentPathEn.append(">");
-                    }
-                    currentPathDa.append(categoryNameDa);
-                    currentPathEn.append(categoryNameEn);
-
-                    // Create a category for this level
-                    CategoryDTO categoryDTO = CategoryDTO.builder()
-                        .nameDa(categoryNameDa)
-                        .nameEn(categoryNameEn)
-                        .pathDa(currentPathDa.toString())
-                        .pathEn(currentPathEn.toString())
-                        .build();
-
-                    categories.add(categoryDTO);
-                    LOGGER.debug("Added category: {} ({}) with path: {}",
-                        categoryNameDa, categoryNameEn, currentPathDa.toString());
-                }
-            } catch (Exception e) {
-                LOGGER.error("Error parsing categories: {}", e.getMessage(), e);
-            }
-        } else {
-            LOGGER.debug("No categories found for product");
+            categories.add(CategoryDTO.fromSallingCategory(
+                extractLastCategory(categoryDa),
+                extractLastCategory(categoryEn),
+                categoryDa,
+                categoryEn
+            ));
         }
 
-        LOGGER.debug("Final categories set size: {}", categories.size());
         return categories;
-    }
-
-    private ProductDTO parseProduct(JsonNode clearanceNode) {
-        try {
-            JsonNode offerNode = clearanceNode.get("offer");
-            JsonNode productNode = clearanceNode.get("product");
-
-            if (offerNode == null || productNode == null) {
-                throw new IllegalArgumentException("Missing required offer or product data");
-            }
-
-            ProductDTO product = ProductDTO.builder()
-                .productName(getRequiredText(productNode, "description"))
-                .ean(getRequiredText(productNode, "ean"))
-                .price(parsePriceDTO(offerNode))
-                .stock(parseStockDTO(offerNode))
-                .timing(parseTimingDTO(offerNode))
-                .categories(parseCategories(productNode))
-                .build();
-
-            // Add debug logging
-            LOGGER.debug("Parsed product: {} with {} categories",
-                product.getProductName(),
-                product.getCategories().size());
-
-            if (!product.getCategories().isEmpty()) {
-                LOGGER.debug("Categories for {}: {}",
-                    product.getProductName(),
-                    product.getCategories().stream()
-                        .map(c -> c.getNameDa() + " (" + c.getNameEn() + ")")
-                        .collect(Collectors.joining(" > ")));
-            }
-
-            return product;
-
-        } catch (Exception e) {
-            LOGGER.error("Error parsing product: {}", e.getMessage());
-            return null;
-        }
     }
 
     private String extractLastCategory(String categoryPath) {

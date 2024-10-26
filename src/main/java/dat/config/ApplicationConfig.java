@@ -30,15 +30,12 @@ public class ApplicationConfig {
         config.router.apiBuilder(routes.getRoutes());
         config.router.apiBuilder(SecurityRoutes.getSecuredRoutes());
         config.router.apiBuilder(SecurityRoutes.getSecurityRoutes());
-        // Use Javalin's default JSON mapper
     }
 
     public static Javalin startServer(int port) {
 
         // Initialize EntityManagerFactory
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
-
-
 
         Javalin app = Javalin.create(ApplicationConfig::configuration);
 

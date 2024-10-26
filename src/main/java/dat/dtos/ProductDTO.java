@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 public class ProductDTO {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Long id;
-
     private String productName;
     private String ean;
     private PriceDTO price;
@@ -41,41 +40,12 @@ public class ProductDTO {
             this.stock = new StockDTO(product.getStock());
         }
 
-        // Initialize categories as empty set
-        this.categories = new HashSet<>();
-
-        // Map categories if they exist
-        if (product.getCategories() != null && !product.getCategories().isEmpty()) {
+        if (product.getCategories() != null) {
             this.categories = product.getCategories().stream()
-                .map(category -> CategoryDTO.fromSallingCategory(
-                    category.getNameDa(),
-                    category.getNameEn(),
-                    category.getPathDa(),
-                    category.getPathEn()
-                ))
+                .map(CategoryDTO::new)
                 .collect(Collectors.toSet());
+        } else {
+            this.categories = new HashSet<>();
         }
-    }
-
-    @Override
-    public String toString() {
-        return String.format("""
-            Product: %s
-            Categories: %s
-            Price: %.2f kr → %.2f kr (%.0f%% off)
-            Stock: %.1f %s
-            Valid until: %s
-            """,
-            productName,
-            categories.stream()
-                .map(cat -> cat.getNameDa() + " (" + cat.getNameEn() + ")")
-                .collect(Collectors.joining(" > ")),
-            price.getOriginalPrice(),
-            price.getNewPrice(),
-            price.getPercentDiscount(),
-            stock.getQuantity(),
-            stock.getStockUnit(),
-            timing.getEndTime()
-        );
     }
 }

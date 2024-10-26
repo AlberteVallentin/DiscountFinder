@@ -63,12 +63,14 @@ GET {{url}}/stores
 Accept: application/json
 
 
+
+
 ### Get specific store (public)
-GET {{url}}/stores/15
+GET {{url}}/stores/1
 Accept: application/json
 
 
-### Get stores by postal code (public)
+### Get stores by postal code (admin / user)
 GET {{url}}/stores/postal_code/2300
 Accept: application/json
 
