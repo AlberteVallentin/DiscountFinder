@@ -1,12 +1,10 @@
 package dat.daos.impl;
 
 import dat.daos.IDAO;
+import dat.dtos.CategoryDTO;
 import dat.dtos.ProductDTO;
 import dat.dtos.StoreDTO;
-import dat.entities.Product;
-import dat.entities.Store;
-import dat.entities.Address;
-import dat.entities.PostalCode;
+import dat.entities.*;
 import jakarta.persistence.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -205,21 +203,6 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
         }
     }
 
-    public Store findById(Long id) {
-        try (EntityManager em = emf.createEntityManager()) {
-            TypedQuery<Store> query = em.createQuery(
-                "SELECT DISTINCT s FROM Store s " +
-                    "LEFT JOIN FETCH s.products p " +
-                    "LEFT JOIN FETCH p.price " +
-                    "LEFT JOIN FETCH p.stock " +
-                    "LEFT JOIN FETCH p.timing " +
-                    "LEFT JOIN FETCH p.categories " +
-                    "WHERE s.id = :id", Store.class);
-            query.setParameter("id", id);
-            return query.getResultStream().findFirst().orElse(null);
-        }
-    }
-
     public void updateStoreProducts(Long id, List<ProductDTO> products) {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
@@ -238,39 +221,70 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
 
             // Process each product from the API
             for (ProductDTO dto : products) {
-                // Try to find existing product by EAN
-                Product existingProduct = existingProducts.stream()
-                    .filter(p -> p.getEan().equals(dto.getEan()))
-                    .findFirst()
-                    .orElse(null);
+                try {
+                    // Try to find existing product by EAN
+                    Product existingProduct = existingProducts.stream()
+                        .filter(p -> p.getEan().equals(dto.getEan()))
+                        .findFirst()
+                        .orElse(null);
 
-                if (existingProduct != null) {
-                    // Update existing product
-                    existingProduct.updateFromDTO(dto);
-                    store.getProducts().add(existingProduct);
-                    em.merge(existingProduct);
-                    LOGGER.debug("Updated existing product: {}", dto.getProductName());
-                } else {
-                    // Create new product
-                    Product newProduct = new Product(dto);
-                    newProduct.setStore(store);
-                    em.persist(newProduct);
-                    store.getProducts().add(newProduct);
-                    LOGGER.debug("Created new product: {}", dto.getProductName());
+                    Product product;
+                    if (existingProduct != null) {
+                        // Update existing product
+                        existingProduct.updateFromDTO(dto);
+                        product = existingProduct;
+                        LOGGER.debug("Updated existing product: {}", dto.getProductName());
+                    } else {
+                        // Create new product
+                        product = new Product(dto);
+                        LOGGER.debug("Created new product: {}", dto.getProductName());
+                    }
+
+                    // Handle categories
+                    if (dto.getCategories() != null && !dto.getCategories().isEmpty()) {
+                        // Clear existing categories
+                        product.getCategories().clear();
+
+                        // Process each category
+                        for (CategoryDTO categoryDTO : dto.getCategories()) {
+                            // Try to find existing category
+                            TypedQuery<Category> query = em.createQuery(
+                                "SELECT c FROM Category c WHERE c.nameDa = :nameDa AND c.nameEn = :nameEn",
+                                Category.class);
+                            query.setParameter("nameDa", categoryDTO.getNameDa());
+                            query.setParameter("nameEn", categoryDTO.getNameEn());
+
+                            Category category;
+                            List<Category> existingCategories = query.getResultList();
+
+                            if (!existingCategories.isEmpty()) {
+                                category = existingCategories.get(0);
+                                LOGGER.debug("Found existing category: {}", category.getNameDa());
+                            } else {
+                                category = new Category(categoryDTO);
+                                em.persist(category);
+                                LOGGER.debug("Created new category: {}", category.getNameDa());
+                            }
+
+                            product.addCategory(category);
+                        }
+
+                        LOGGER.debug("Added {} categories to product {}",
+                            product.getCategories().size(), product.getProductName());
+                    }
+
+                    product.setStore(store);
+                    if (existingProduct == null) {
+                        em.persist(product);
+                    } else {
+                        product = em.merge(product);
+                    }
+                    store.getProducts().add(product);
+
+                } catch (Exception e) {
+                    LOGGER.error("Error processing product {}: {}", dto.getProductName(), e.getMessage());
                 }
             }
-
-            // Remove products that no longer exist in the API
-            Set<String> newEans = products.stream()
-                .map(ProductDTO::getEan)
-                .collect(Collectors.toSet());
-
-            existingProducts.stream()
-                .filter(p -> !newEans.contains(p.getEan()))
-                .forEach(p -> {
-                    LOGGER.debug("Removing obsolete product: {}", p.getProductName());
-                    em.remove(p);
-                });
 
             store.setHasProductsInDb(true);
             store.setLastFetched(LocalDateTime.now());
@@ -282,7 +296,33 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
                 products.size(), id, store.getName());
         } catch (Exception e) {
             LOGGER.error("Error updating products for store {}: {}", id, e.getMessage());
-            throw new RuntimeException("Failed to update store products: " + e.getMessage(), e);
+            throw new RuntimeException("Failed to update store products: " + e.getMessage());
+        }
+    }
+
+    public Store findById(Long id) {
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Store> query = em.createQuery(
+                "SELECT DISTINCT s FROM Store s " +
+                    "LEFT JOIN FETCH s.products p " +
+                    "LEFT JOIN FETCH p.price " +
+                    "LEFT JOIN FETCH p.stock " +
+                    "LEFT JOIN FETCH p.timing " +
+                    "LEFT JOIN FETCH p.categories " +
+                    "WHERE s.id = :id", Store.class);
+            query.setParameter("id", id);
+            Store store = query.getResultStream().findFirst().orElse(null);
+
+            if (store != null) {
+                LOGGER.debug("Found store {} with {} products", store.getName(),
+                    store.getProducts().size());
+                for (Product p : store.getProducts()) {
+                    LOGGER.debug("Product {} has {} categories", p.getProductName(),
+                        p.getCategories().size());
+                }
+            }
+
+            return store;
         }
     }
 }
