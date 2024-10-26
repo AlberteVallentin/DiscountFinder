@@ -57,18 +57,18 @@ Authorization: Bearer {{auth_token}}
 GET {{url}}/protected/admin_demo
 Authorization: Bearer {{auth_token}}
 
-
 ### Get all stores (public)
 GET {{url}}/stores
 Accept: application/json
 
+
 ### Get specific store (public)
-GET {{url}}/stores/55
+GET {{url}}/stores/56
 Accept: application/json
 
 
 
-### Get stores by postal code (admin / user)
+### Get stores by postal code (public)
 GET {{url}}/stores/postal_code/2300
 Accept: application/json
 

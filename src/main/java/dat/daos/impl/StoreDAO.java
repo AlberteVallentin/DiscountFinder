@@ -20,8 +20,7 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
     private static StoreDAO instance;
     private static EntityManagerFactory emf;
 
-    private StoreDAO() {
-    }
+    private StoreDAO() {}
 
     public static StoreDAO getInstance(EntityManagerFactory _emf) {
         if (instance == null) {
@@ -35,7 +34,7 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
     public StoreDTO read(Long id) {
         try (EntityManager em = emf.createEntityManager()) {
             Store store = findById(id);
-            return store != null ? new StoreDTO(store, true) : null;  // Include products for single store fetch
+            return store != null ? new StoreDTO(store, true) : null;
         }
     }
 
@@ -44,7 +43,7 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
         try (EntityManager em = emf.createEntityManager()) {
             TypedQuery<Store> query = em.createQuery("SELECT s FROM Store s", Store.class);
             return query.getResultList().stream()
-                .map(store -> new StoreDTO(store, false)) // Don't include products
+                .map(store -> new StoreDTO(store, false))
                 .collect(Collectors.toList());
         }
     }
@@ -54,20 +53,15 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
 
-            // Find existing store by Salling ID
             Store existingStore = findBySallingId(storeDTO.getSallingStoreId());
             if (existingStore != null) {
                 throw new IllegalStateException("Store with Salling ID already exists: " + storeDTO.getSallingStoreId());
             }
 
-            // Find postal code
             PostalCode postalCode = findPostalCode(em, storeDTO.getAddress().getPostalCode().getPostalCode());
-
-            // Create new address
             Address address = new Address(storeDTO.getAddress());
             address.setPostalCode(postalCode);
 
-            // Create new store
             Store store = new Store(storeDTO);
             store.setAddress(address);
 
@@ -75,8 +69,6 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
             em.getTransaction().commit();
 
             return new StoreDTO(store);
-        } catch (Exception e) {
-            throw new PersistenceException("Could not create store: " + e.getMessage(), e);
         }
     }
 
@@ -91,7 +83,6 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
             }
 
             PostalCode postalCode = findPostalCode(em, storeDTO.getAddress().getPostalCode().getPostalCode());
-
             Address address = existingStore.getAddress();
             if (address == null) {
                 address = new Address(storeDTO.getAddress());
@@ -107,8 +98,6 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
             em.getTransaction().commit();
 
             return new StoreDTO(existingStore);
-        } catch (Exception e) {
-            throw new PersistenceException("Could not update store: " + e.getMessage(), e);
         }
     }
 
@@ -134,7 +123,6 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
     private PostalCode findPostalCode(EntityManager em, int postalCodeNumber) {
         PostalCode postalCode = em.find(PostalCode.class, postalCodeNumber);
         if (postalCode == null) {
-            LOGGER.error("PostalCode {} not found in database", postalCodeNumber);
             throw new IllegalArgumentException("Invalid postal code: " + postalCodeNumber);
         }
         return postalCode;
@@ -155,39 +143,27 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
             em.getTransaction().begin();
 
             for (StoreDTO storeDTO : stores) {
-                try {
-                    Store existingStore = findBySallingId(storeDTO.getSallingStoreId());
-                    PostalCode postalCode = findPostalCode(em,
-                        storeDTO.getAddress().getPostalCode().getPostalCode());
+                Store existingStore = findBySallingId(storeDTO.getSallingStoreId());
+                PostalCode postalCode = findPostalCode(em,
+                    storeDTO.getAddress().getPostalCode().getPostalCode());
 
-                    if (existingStore == null) {
-                        Address address = new Address(storeDTO.getAddress());
-                        address.setPostalCode(postalCode);
-
-                        Store store = new Store(storeDTO);
-                        store.setAddress(address);
-
-                        em.persist(store);
-                        LOGGER.debug("Created new store: {}", store.getName());
-                    } else {
-                        existingStore.updateFromSallingApi(storeDTO);
-                        Address address = existingStore.getAddress();
-                        address.updateFromDTO(storeDTO.getAddress());
-                        address.setPostalCode(postalCode);
-
-                        em.merge(existingStore);
-                        LOGGER.debug("Updated existing store: {}", existingStore.getName());
-                    }
-                } catch (IllegalArgumentException e) {
-                    // Log og fortsæt med næste butik
-                    LOGGER.error("Error processing store {}: {}", storeDTO.getName(), e.getMessage());
+                if (existingStore == null) {
+                    Address address = new Address(storeDTO.getAddress());
+                    address.setPostalCode(postalCode);
+                    Store store = new Store(storeDTO);
+                    store.setAddress(address);
+                    em.persist(store);
+                } else {
+                    existingStore.updateFromSallingApi(storeDTO);
+                    Address address = existingStore.getAddress();
+                    address.updateFromDTO(storeDTO.getAddress());
+                    address.setPostalCode(postalCode);
+                    em.merge(existingStore);
                 }
             }
 
             em.getTransaction().commit();
-            LOGGER.info("Successfully processed {} stores", stores.size());
-        } catch (Exception e) {
-            throw new PersistenceException("Failed to save/update stores: " + e.getMessage(), e);
+            LOGGER.info("Processed {} stores", stores.size());
         }
     }
 
@@ -212,78 +188,32 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
                 throw new IllegalArgumentException("Store not found with ID: " + id);
             }
 
-            LOGGER.info("Updating products for store {} ({}) with Salling ID: {}",
-                id, store.getName(), store.getSallingStoreId());
-
-            // Clear existing products but keep references for comparison
             Set<Product> existingProducts = new HashSet<>(store.getProducts());
             store.getProducts().clear();
 
-            // Process each product from the API
             for (ProductDTO dto : products) {
-                try {
-                    // Try to find existing product by EAN
-                    Product existingProduct = existingProducts.stream()
-                        .filter(p -> p.getEan().equals(dto.getEan()))
-                        .findFirst()
-                        .orElse(null);
+                Product product = existingProducts.stream()
+                    .filter(p -> p.getEan().equals(dto.getEan()))
+                    .findFirst()
+                    .orElse(new Product(dto));
 
-                    Product product;
-                    if (existingProduct != null) {
-                        // Update existing product
-                        existingProduct.updateFromDTO(dto);
-                        product = existingProduct;
-                        LOGGER.debug("Updated existing product: {}", dto.getProductName());
-                    } else {
-                        // Create new product
-                        product = new Product(dto);
-                        LOGGER.debug("Created new product: {}", dto.getProductName());
-                    }
-
-                    // Handle categories
-                    if (dto.getCategories() != null && !dto.getCategories().isEmpty()) {
-                        // Clear existing categories
-                        product.getCategories().clear();
-
-                        // Process each category
-                        for (CategoryDTO categoryDTO : dto.getCategories()) {
-                            // Try to find existing category
-                            TypedQuery<Category> query = em.createQuery(
-                                "SELECT c FROM Category c WHERE c.nameDa = :nameDa AND c.nameEn = :nameEn",
-                                Category.class);
-                            query.setParameter("nameDa", categoryDTO.getNameDa());
-                            query.setParameter("nameEn", categoryDTO.getNameEn());
-
-                            Category category;
-                            List<Category> existingCategories = query.getResultList();
-
-                            if (!existingCategories.isEmpty()) {
-                                category = existingCategories.get(0);
-                                LOGGER.debug("Found existing category: {}", category.getNameDa());
-                            } else {
-                                category = new Category(categoryDTO);
-                                em.persist(category);
-                                LOGGER.debug("Created new category: {}", category.getNameDa());
-                            }
-
-                            product.addCategory(category);
-                        }
-
-                        LOGGER.debug("Added {} categories to product {}",
-                            product.getCategories().size(), product.getProductName());
-                    }
-
-                    product.setStore(store);
-                    if (existingProduct == null) {
-                        em.persist(product);
-                    } else {
-                        product = em.merge(product);
-                    }
-                    store.getProducts().add(product);
-
-                } catch (Exception e) {
-                    LOGGER.error("Error processing product {}: {}", dto.getProductName(), e.getMessage());
+                if (existingProducts.contains(product)) {
+                    product.updateFromDTO(dto);
                 }
+
+                if (dto.getCategories() != null) {
+                    product.getCategories().clear();
+                    for (CategoryDTO categoryDTO : dto.getCategories()) {
+                        Category category = findOrCreateCategory(em, categoryDTO);
+                        product.addCategory(category);
+                    }
+                }
+
+                product.setStore(store);
+                if (!existingProducts.contains(product)) {
+                    em.persist(product);
+                }
+                store.getProducts().add(product);
             }
 
             store.setHasProductsInDb(true);
@@ -291,13 +221,24 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
 
             em.merge(store);
             em.getTransaction().commit();
-
-            LOGGER.info("Successfully updated {} products for store {} ({})",
-                products.size(), id, store.getName());
-        } catch (Exception e) {
-            LOGGER.error("Error updating products for store {}: {}", id, e.getMessage());
-            throw new RuntimeException("Failed to update store products: " + e.getMessage());
         }
+    }
+
+    private Category findOrCreateCategory(EntityManager em, CategoryDTO dto) {
+        TypedQuery<Category> query = em.createQuery(
+            "SELECT c FROM Category c WHERE c.nameDa = :nameDa AND c.nameEn = :nameEn",
+            Category.class);
+        query.setParameter("nameDa", dto.getNameDa());
+        query.setParameter("nameEn", dto.getNameEn());
+
+        List<Category> existingCategories = query.getResultList();
+        if (!existingCategories.isEmpty()) {
+            return existingCategories.get(0);
+        }
+
+        Category newCategory = new Category(dto);
+        em.persist(newCategory);
+        return newCategory;
     }
 
     public Store findById(Long id) {
@@ -311,18 +252,7 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
                     "LEFT JOIN FETCH p.categories " +
                     "WHERE s.id = :id", Store.class);
             query.setParameter("id", id);
-            Store store = query.getResultStream().findFirst().orElse(null);
-
-            if (store != null) {
-                LOGGER.debug("Found store {} with {} products", store.getName(),
-                    store.getProducts().size());
-                for (Product p : store.getProducts()) {
-                    LOGGER.debug("Product {} has {} categories", p.getProductName(),
-                        p.getCategories().size());
-                }
-            }
-
-            return store;
+            return query.getResultStream().findFirst().orElse(null);
         }
     }
 }
