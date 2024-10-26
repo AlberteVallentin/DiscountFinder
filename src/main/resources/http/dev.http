@@ -63,8 +63,9 @@ GET {{url}}/stores
 Accept: application/json
 
 
+
 ### Get specific store (public)
-GET {{url}}/stores/15
+GET {{url}}/stores/88
 Accept: application/json
 
 
