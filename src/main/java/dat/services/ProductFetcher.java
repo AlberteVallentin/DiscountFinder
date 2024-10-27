@@ -263,49 +263,4 @@ public class ProductFetcher {
     private String extractLastCategory(String categoryPath) {
         return categoryPath.substring(categoryPath.lastIndexOf(">") + 1).trim();
     }
-
-    public static void main(String[] args) {
-        ProductFetcher fetcher = ProductFetcher.getInstance();
-
-        // Din specifikke store ID
-        String sallingStoreId = "8710a1fc-c8cd-4708-8035-667ea7ff5afd";
-
-        System.out.println("\nFetching products for Salling Store ID: " + sallingStoreId);
-        try {
-            List<ProductDTO> products = fetcher.fetchProductsForStore(sallingStoreId);
-            System.out.println("Found " + products.size() + " products with discounts");
-
-            if (products.isEmpty()) {
-                System.out.println("No discounted products found for this store at the moment.");
-            } else {
-                System.out.println("\nShowing all discounted products:");
-                products.forEach(p -> System.out.printf("""
-                    
-                    Product: %s
-                    Price: %.2f kr → %.2f kr (%.0f%% off)
-                    Quantity: %.1f %s
-                    Expires: %s
-                    Categories: %s
-                    ----------------------------------------
-                    """,
-                    p.getProductName(),
-                    p.getPrice().getOriginalPrice(),
-                    p.getPrice().getNewPrice(),
-                    p.getPrice().getPercentDiscount(),
-                    p.getStock().getQuantity(),
-                    p.getStock().getStockUnit(),
-                    p.getTiming().getEndTime(),
-                    p.getCategories().stream()
-                        .map(CategoryDTO::getNameDa)
-                        .collect(java.util.stream.Collectors.joining(", "))
-                ));
-            }
-
-        } catch (ApiException e) {
-            System.out.println("API Error (" + e.getStatusCode() + "): " + e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Unexpected error: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
 }
