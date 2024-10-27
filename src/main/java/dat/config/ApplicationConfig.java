@@ -34,11 +34,7 @@ public class ApplicationConfig {
     }
 
     public static Javalin startServer(int port) {
-
-        // Initialize EntityManagerFactory
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
-
-
 
         Javalin app = Javalin.create(ApplicationConfig::configuration);
 
