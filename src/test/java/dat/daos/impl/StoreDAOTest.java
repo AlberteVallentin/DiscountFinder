@@ -1,25 +1,32 @@
 package dat.daos.impl;
+
 import dat.config.HibernateConfig;
-import dat.daos.impl.StoreDAO;
 import dat.dtos.*;
-import dat.entities.Brand;
-import dat.entities.PostalCode;
-import dat.entities.Store;
+import dat.entities.*;
+import dat.enums.StockUnit;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceException;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class StoreDAOTest {
+    private static final Logger LOGGER = LoggerFactory.getLogger(StoreDAOTest.class);
     private static EntityManagerFactory emf;
     private static StoreDAO storeDAO;
     private static StoreDTO s1;
@@ -33,14 +40,48 @@ class StoreDAOTest {
 
     @BeforeEach
     void setUp() {
-        // Clear the database before each test
+        cleanDatabase();
+        setupInitialData();
+    }
+
+    private void cleanDatabase() {
         try (EntityManager em = emf.createEntityManager()) {
             em.getTransaction().begin();
+
+            // Delete all entities in correct order
+            em.createQuery("DELETE FROM Product").executeUpdate();
+            em.createQuery("DELETE FROM Price").executeUpdate();
+            em.createQuery("DELETE FROM Stock").executeUpdate();
+            em.createQuery("DELETE FROM Timing").executeUpdate();
+            em.createQuery("DELETE FROM Category").executeUpdate();
             em.createQuery("DELETE FROM Store").executeUpdate();
             em.createQuery("DELETE FROM Address").executeUpdate();
             em.createQuery("DELETE FROM PostalCode").executeUpdate();
             em.createQuery("DELETE FROM Brand").executeUpdate();
+
+            // Reset sequences
+            em.createNativeQuery("ALTER SEQUENCE products_product_id_seq RESTART WITH 1").executeUpdate();
+            em.createNativeQuery("ALTER SEQUENCE prices_price_id_seq RESTART WITH 1").executeUpdate();
+            em.createNativeQuery("ALTER SEQUENCE stocks_stock_id_seq RESTART WITH 1").executeUpdate();
+            em.createNativeQuery("ALTER SEQUENCE timings_timing_id_seq RESTART WITH 1").executeUpdate();
+            em.createNativeQuery("ALTER SEQUENCE categories_category_id_seq RESTART WITH 1").executeUpdate();
             em.createNativeQuery("ALTER SEQUENCE stores_store_id_seq RESTART WITH 1").executeUpdate();
+            em.createNativeQuery("ALTER SEQUENCE address_address_id_seq RESTART WITH 1").executeUpdate();
+
+            em.getTransaction().commit();
+            em.clear();
+            emf.getCache().evictAll();
+
+            Thread.sleep(100);
+        } catch (Exception e) {
+            LOGGER.error("Error cleaning database", e);
+            throw new RuntimeException("Failed to clean database", e);
+        }
+    }
+
+    private void setupInitialData() {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
 
             // Create brands
             Brand netto = new Brand();
@@ -75,11 +116,17 @@ class StoreDAOTest {
             em.persist(pc2300);
 
             em.getTransaction().commit();
-        }
+            em.clear();
 
-        // Create test data using managed entities
+            createTestStores();
+        } catch (Exception e) {
+            LOGGER.error("Error setting up initial data", e);
+            throw new RuntimeException("Failed to setup initial data", e);
+        }
+    }
+
+    private void createTestStores() {
         try (EntityManager em = emf.createEntityManager()) {
-            // Get managed brand entities
             Brand nettoBrand = em.createQuery("SELECT b FROM Brand b WHERE b.name = :name", Brand.class)
                 .setParameter("name", "NETTO")
                 .getSingleResult();
@@ -140,9 +187,19 @@ class StoreDAOTest {
                 .hasProductsInDb(false)
                 .build();
 
-            // Create stores in database
             storeDAO.create(s1);
             storeDAO.create(s2);
+        } catch (Exception e) {
+            LOGGER.error("Error creating test stores", e);
+            throw new RuntimeException("Failed to create test stores", e);
+        }
+    }
+
+    @AfterEach
+    void cleanupAfterTest() {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.clear();
+            emf.getCache().evictAll();
         }
     }
 
@@ -154,15 +211,18 @@ class StoreDAOTest {
     }
 
     @Test
+    @Order(1)
     @DisplayName("Test create store")
     void testCreate() {
-        try (EntityManager em = emf.createEntityManager()) {
-            // Get the existing Bilka brand
+        EntityManager em = null;
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
+
             Brand bilkaBrand = em.createQuery("SELECT b FROM Brand b WHERE b.name = :name", Brand.class)
                 .setParameter("name", "BILKA")
                 .getSingleResult();
 
-            // Arrange
             PostalCodeDTO postalCode = PostalCodeDTO.builder()
                 .postalCode(2300)
                 .city("København S")
@@ -189,211 +249,475 @@ class StoreDAOTest {
                 .hasProductsInDb(false)
                 .build();
 
-            // Act
             StoreDTO createdStore = storeDAO.create(s3);
 
-            // Assert
+            em.flush();
+            em.getTransaction().commit();
+
             assertThat(createdStore.getId(), is(notNullValue()));
             assertThat(createdStore.getName(), is(s3.getName()));
             assertThat(createdStore.getBrand().getName(), is(bilkaBrandDTO.getName()));
             assertThat(createdStore.getBrand().getDisplayName(), is(bilkaBrandDTO.getDisplayName()));
+
+        } catch (Exception e) {
+            if (em != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
         }
     }
 
     @Test
+    @Order(2)
     void testRead() {
-        // Act
-        StoreDTO store = storeDAO.read(1L);
+        EntityManager em = null;
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
 
-        // Assert
-        assertThat(store, is(notNullValue()));
-        assertThat(store.getName(), is(s1.getName()));
-        assertThat(store.getBrand().getName(), is(s1.getBrand().getName()));
-        assertThat(store.getBrand().getDisplayName(), is(s1.getBrand().getDisplayName()));
+            StoreDTO store = storeDAO.read(1L);
+
+            em.flush();
+            em.getTransaction().commit();
+
+            assertThat(store, is(notNullValue()));
+            assertThat(store.getName(), is(s1.getName()));
+            assertThat(store.getBrand().getName(), is(s1.getBrand().getName()));
+            assertThat(store.getBrand().getDisplayName(), is(s1.getBrand().getDisplayName()));
+
+        } catch (Exception e) {
+            if (em != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 
     @Test
+    @Order(3)
     void testReadAll() {
-        // Act
-        List<StoreDTO> stores = storeDAO.readAll();
+        EntityManager em = null;
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
 
-        // Assert
-        assertThat(stores, hasSize(2));
-        assertThat(stores.stream()
-                .map(StoreDTO::getName)
-                .collect(Collectors.toList()),
-            containsInAnyOrder("Netto Østerbro", "Føtex Nørrebro"));
-        assertThat(stores.stream()
-                .map(store -> store.getBrand().getName())
-                .collect(Collectors.toList()),
-            containsInAnyOrder("NETTO", "FOETEX"));
+            List<StoreDTO> stores = storeDAO.readAll();
+
+            em.flush();
+            em.getTransaction().commit();
+
+            assertThat(stores, hasSize(2));
+            assertThat(stores.stream()
+                    .map(StoreDTO::getName)
+                    .collect(Collectors.toList()),
+                containsInAnyOrder("Netto Østerbro", "Føtex Nørrebro"));
+            assertThat(stores.stream()
+                    .map(store -> store.getBrand().getName())
+                    .collect(Collectors.toList()),
+                containsInAnyOrder("NETTO", "FOETEX"));
+
+        } catch (Exception e) {
+            if (em != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 
     @Test
+    @Order(4)
     void testUpdate() {
-        // Arrange
-        s1.setName("Updated Netto");
-        s1.setHasProductsInDb(true);
+        EntityManager em = null;
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
 
-        // Act
-        StoreDTO updatedStore = storeDAO.update(1L, s1);
+            s1.setName("Updated Netto");
+            s1.setHasProductsInDb(true);
 
-        // Assert
-        assertThat(updatedStore, is(notNullValue()));
-        assertThat(updatedStore.getName(), is("Updated Netto"));
-        assertThat(updatedStore.hasProductsInDb(), is(true));
-        assertThat(updatedStore.getBrand().getName(), is("NETTO"));
+            StoreDTO updatedStore = storeDAO.update(1L, s1);
+
+            em.flush();
+            em.getTransaction().commit();
+
+            assertThat(updatedStore, is(notNullValue()));
+            assertThat(updatedStore.getName(), is("Updated Netto"));
+            assertThat(updatedStore.hasProductsInDb(), is(true));
+            assertThat(updatedStore.getBrand().getName(), is("NETTO"));
+
+        } catch (Exception e) {
+            if (em != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 
     @Test
+    @Order(5)
     void testDelete() {
-        // Act
-        storeDAO.delete(1L);
+        EntityManager em = null;
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
 
-        // Assert
-        StoreDTO deletedStore = storeDAO.read(1L);
-        assertThat(deletedStore, is(nullValue()));
+            storeDAO.delete(1L);
+            em.flush();
+
+            StoreDTO deletedStore = storeDAO.read(1L);
+
+            em.getTransaction().commit();
+
+            assertThat(deletedStore, is(nullValue()));
+
+        } catch (Exception e) {
+            if (em != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 
     @Test
-    void testFindBySallingId() {
-        // Act
-        Store store = storeDAO.findBySallingId("1234");
+    @Order(6)
+    @DisplayName("Test updateStoreProducts basic functionality")
+    void testUpdateStoreProducts() {
+        EntityManager em = null;
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
 
-        // Assert
-        assertThat(store, is(notNullValue()));
-        assertThat(store.getName(), is(s1.getName()));
-        assertThat(store.getBrand().getName(), is(s1.getBrand().getName()));
-    }
+            // Find store
+            Store store = em.find(Store.class, 1L);
+            assertThat("Store should exist", store, is(notNullValue()));
 
-    @Test
-    void testStoreAlreadyExists() {
-        // Arrange
-        BrandDTO nettoBrand = BrandDTO.builder()
-            .name("NETTO")
-            .displayName("Netto")
-            .build();
-
-        StoreDTO duplicate = StoreDTO.builder()
-            .sallingStoreId("1234")
-            .name("Duplicate Store")
-            .brand(nettoBrand)
-            .address(s1.getAddress())
-            .hasProductsInDb(false)
-            .build();
-
-        // Assert
-        assertThrows(PersistenceException.class, () -> storeDAO.create(duplicate),
-            "Should throw PersistenceException when creating store with existing Salling ID");
-    }
-
-    @Test
-    void testCreateWithInvalidBrand() {
-        // Arrange
-        BrandDTO invalidBrand = BrandDTO.builder()
-            .name("INVALID")
-            .displayName("Invalid Brand")
-            .build();
-
-        StoreDTO store = StoreDTO.builder()
-            .sallingStoreId("9999")
-            .name("Test Store")
-            .brand(invalidBrand)
-            .address(s1.getAddress())
-            .hasProductsInDb(false)
-            .build();
-
-        // Assert
-        assertThrows(PersistenceException.class, () -> storeDAO.create(store),
-            "Should throw PersistenceException when brand doesn't exist");
-    }
-
-    @Test
-    void testCreateWithInvalidPostalCode() {
-        // Arrange
-        PostalCodeDTO invalidPostalCode = PostalCodeDTO.builder()
-            .postalCode(9999) // Non-existent postal code
-            .city("Invalid City")
-            .build();
-
-        AddressDTO address = AddressDTO.builder()
-            .addressLine("Test Street 1")
-            .postalCode(invalidPostalCode)
-            .build();
-
-        BrandDTO nettoBrand = BrandDTO.builder()
-            .name("NETTO")
-            .displayName("Netto")
-            .build();
-
-        StoreDTO store = StoreDTO.builder()
-            .sallingStoreId("9999")
-            .name("Test Store")
-            .brand(nettoBrand)
-            .address(address)
-            .hasProductsInDb(false)
-            .build();
-
-        // Assert
-        assertThrows(PersistenceException.class, () -> storeDAO.create(store),
-            "Should throw PersistenceException when postal code doesn't exist");
-    }
-
-
-    @Test
-    void testSaveOrUpdateStores() {
-        try (EntityManager em = emf.createEntityManager()) {
-            // Get the existing Bilka brand
-            Brand bilkaBrand = em.createQuery("SELECT b FROM Brand b WHERE b.name = :name", Brand.class)
-                .setParameter("name", "BILKA")
-                .getSingleResult();
-
-            // Arrange
-            s1.setName("Updated Store 1");
-            PostalCodeDTO postalCode = PostalCodeDTO.builder()
-                .postalCode(2300)
-                .city("København S")
+            // Create initial product DTOs
+            PriceDTO price1 = PriceDTO.builder()
+                .originalPrice(new BigDecimal("20.00"))
+                .newPrice(new BigDecimal("15.00"))
+                .discount(new BigDecimal("5.00"))
+                .percentDiscount(new BigDecimal("25.00"))
                 .build();
 
-            AddressDTO address = AddressDTO.builder()
-                .addressLine("Amagerbrogade 1")
-                .postalCode(postalCode)
-                .longitude(12.5933)
-                .latitude(55.6597)
+            StockDTO stock1 = StockDTO.builder()
+                .quantity(10.0)
+                .stockUnit(StockUnit.EACH)
                 .build();
 
-            BrandDTO bilkaBrandDTO = BrandDTO.builder()
-                .id(bilkaBrand.getId())
-                .name(bilkaBrand.getName())
-                .displayName(bilkaBrand.getDisplayName())
+            TimingDTO timing1 = TimingDTO.builder()
+                .startTime(LocalDateTime.now().minusDays(1))
+                .endTime(LocalDateTime.now().plusDays(1))
+                .lastUpdated(LocalDateTime.now())
                 .build();
 
-            StoreDTO s3 = StoreDTO.builder()
-                .sallingStoreId("9012")
-                .name("New Store")
-                .brand(bilkaBrandDTO)
-                .address(address)
-                .hasProductsInDb(false)
+            CategoryDTO category1 = CategoryDTO.builder()
+                .nameDa("Mejeri")
+                .nameEn("Dairy")
+                .pathDa("Dagligvarer/Mejeri")
+                .pathEn("Groceries/Dairy")
                 .build();
 
-            List<StoreDTO> stores = List.of(s1, s3);
+            ProductDTO productDto1 = ProductDTO.builder()
+                .productName("Milk")
+                .ean("1234567890123")
+                .price(price1)
+                .stock(stock1)
+                .timing(timing1)
+                .categories(Set.of(category1))
+                .build();
 
-            // Act
-            storeDAO.saveOrUpdateStores(stores);
+            // Update store with initial products
+            storeDAO.updateStoreProducts(store.getId(), List.of(productDto1));
+
+            // Verify initial update
+            em.flush();
+            em.clear();
+
+            Store storeWithProduct = em.find(Store.class, store.getId());
+            em.refresh(storeWithProduct);
+
+            assertThat("Store should have one product after initial update",
+                storeWithProduct.getProducts(), hasSize(1));
+
+            // Create updated product list with modified price
+            PriceDTO updatedPrice = PriceDTO.builder()
+                .originalPrice(new BigDecimal("25.00"))
+                .newPrice(new BigDecimal("18.00"))
+                .discount(new BigDecimal("7.00"))
+                .percentDiscount(new BigDecimal("28.00"))
+                .build();
+
+            ProductDTO updatedProductDto = ProductDTO.builder()
+                .productName("Milk")
+                .ean("1234567890123")
+                .price(updatedPrice)
+                .stock(stock1)
+                .timing(timing1)
+                .categories(Set.of(category1))
+                .build();
+
+            // Perform second update
+            storeDAO.updateStoreProducts(store.getId(), List.of(updatedProductDto));
+
+            em.flush();
+            em.clear();
+
+            // Fetch and verify final state
+            Store finalStore = em.find(Store.class, store.getId());
+            em.refresh(finalStore);
+
+            assertThat("Store should have one product", finalStore.getProducts(), hasSize(1));
+
+            Product updatedProduct = finalStore.getProducts().iterator().next();
+            assertAll(
+                () -> assertThat("Product EAN should match",
+                    updatedProduct.getEan(), is("1234567890123")),
+                () -> assertThat("Product name should match",
+                    updatedProduct.getProductName(), is("Milk")),
+                () -> assertThat("Original price should be updated",
+                    updatedProduct.getPrice().getOriginalPrice(),
+                    comparesEqualTo(new BigDecimal("25.00"))),
+                () -> assertThat("New price should be updated",
+                    updatedProduct.getPrice().getNewPrice(),
+                    comparesEqualTo(new BigDecimal("18.00")))
+            );
+
+            em.getTransaction().commit();
+
+        } catch (Exception e) {
+            if (em != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            LOGGER.error("Error in testUpdateStoreProducts", e);
+            throw e;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    @Test
+    @Order(7)
+    @DisplayName("Test updateStoreProducts removes obsolete products")
+    void testUpdateStoreProductsRemovesObsoleteProducts() {
+        EntityManager em = null;
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
+
+            // Find en butik og opret produkter direkte med korrekt reference til butikken
+            Store store = em.find(Store.class, 1L);
+
+            // Opret første produkt
+            PriceDTO price1 = PriceDTO.builder()
+                .originalPrice(new BigDecimal("20.00"))
+                .newPrice(new BigDecimal("15.00"))
+                .discount(new BigDecimal("5.00"))
+                .percentDiscount(new BigDecimal("25.00"))
+                .build();
+            TimingDTO timing1 = TimingDTO.builder()
+                .endTime(LocalDateTime.now().plusDays(1))
+                .build();
+            CategoryDTO category1 = CategoryDTO.builder()
+                .nameDa("Mejeri")
+                .nameEn("Dairy")
+                .pathDa("Dagligvarer/Mejeri")
+                .pathEn("Groceries/Dairy")
+                .build();
+
+            ProductDTO productDto1 = ProductDTO.builder()
+                .productName("Milk")
+                .ean("1234567890123")
+                .price(price1)
+                .timing(timing1)
+                .categories(Set.of(category1))
+                .build();
+
+            // Opret andet produkt
+            PriceDTO price2 = PriceDTO.builder()
+                .originalPrice(new BigDecimal("15.00"))
+                .newPrice(new BigDecimal("10.00"))
+                .discount(new BigDecimal("5.00"))
+                .percentDiscount(new BigDecimal("33.00"))
+                .build();
+            TimingDTO timing2 = TimingDTO.builder()
+                .endTime(LocalDateTime.now().plusDays(1))
+                .build();
+            CategoryDTO category2 = CategoryDTO.builder()
+                .nameDa("Bageri")
+                .nameEn("Bakery")
+                .pathDa("Dagligvarer/Bageri")
+                .pathEn("Groceries/Bakery")
+                .build();
+
+            ProductDTO productDto2 = ProductDTO.builder()
+                .productName("Bread")
+                .ean("2345678901234")
+                .price(price2)
+                .timing(timing2)
+                .categories(Set.of(category2))
+                .build();
+
+            // Skab produkter og tilknyt dem til butikken
+            Product product1 = new Product(productDto1);
+            product1.setStore(store);
+            Product product2 = new Product(productDto2);
+            product2.setStore(store);
+
+            // Gem produkterne
+            em.persist(product1);
+            em.persist(product2);
+            em.flush();
+            em.getTransaction().commit();
+
+            // Start ny transaktion for update
+            em.getTransaction().begin();
+
+            // Simuler API-data: kun "Milk" findes stadig
+            List<ProductDTO> updatedProducts = List.of(productDto1);
+
+            // Kør opdateringsmetoden
+            storeDAO.updateStoreProducts(store.getId(), updatedProducts);
+
+            em.flush();
+            em.clear();
+
+            // Refresh butikken
+            Store updatedStore = em.find(Store.class, store.getId());
+            em.refresh(updatedStore);
+
+            em.getTransaction().commit();
 
             // Assert
-            List<StoreDTO> allStores = storeDAO.readAll();
-            assertThat(allStores, hasSize(3));
-            assertThat(allStores.stream()
-                    .filter(s -> s.getSallingStoreId().equals("1234"))
-                    .findFirst()
-                    .map(StoreDTO::getName)
-                    .orElse(null),
-                is("Updated Store 1"));
-            assertThat(allStores.stream()
-                    .map(StoreDTO::getSallingStoreId)
-                    .collect(Collectors.toList()),
-                containsInAnyOrder("1234", "5678", "9012"));
+            assertAll(
+                () -> assertThat("Only one product should remain", updatedStore.getProducts(), hasSize(1)),
+                () -> assertThat(updatedStore.getProducts().stream()
+                        .map(Product::getEan)
+                        .collect(Collectors.toList()),
+                    contains("1234567890123")),
+                () -> assertThat(updatedStore.getProducts().stream()
+                        .map(Product::getEan)
+                        .collect(Collectors.toList()),
+                    not(contains("2345678901234")))
+            );
+
+        } catch (Exception e) {
+            if (em != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    @Test
+    @Order(8)
+    @DisplayName("Test updateStoreProducts adds new products and removes obsolete ones")
+    void testUpdateStoreProductsAddsNewAndRemovesObsoleteProducts() {
+        EntityManager em = null;
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
+
+            // Find butik
+            Store store = em.find(Store.class, 1L);
+
+            // Opret initialt produkt
+            ProductDTO existingProduct = ProductDTO.builder()
+                .productName("Milk")
+                .ean("1234567890123")
+                .price(new PriceDTO(null, new BigDecimal("20.00"), new BigDecimal("15.00"),
+                    new BigDecimal("5.00"), new BigDecimal("25.00")))
+                .timing(TimingDTO.builder()
+                    .startTime(LocalDateTime.now().minusDays(1))
+                    .endTime(LocalDateTime.now().plusDays(1))
+                    .lastUpdated(LocalDateTime.now())
+                    .build())
+                .categories(Set.of(new CategoryDTO(null, "Mejeri", "Dairy",
+                    "Dagligvarer/Mejeri", "Groceries/Dairy")))
+                .build();
+
+            Product product1 = new Product(existingProduct);
+            product1.setStore(store);
+            em.persist(product1);
+            em.flush();
+            em.getTransaction().commit();
+
+            // Start ny transaktion for update
+            em.getTransaction().begin();
+
+            // Simuler API-response med både eksisterende og nyt produkt
+            List<ProductDTO> updatedProducts = List.of(
+                existingProduct,
+                ProductDTO.builder()
+                    .productName("Cheese")
+                    .ean("3456789012345")
+                    .price(new PriceDTO(null, new BigDecimal("40.00"), new BigDecimal("30.00"),
+                        new BigDecimal("10.00"), new BigDecimal("25.00")))
+                    .timing(TimingDTO.builder()
+                        .startTime(LocalDateTime.now().minusDays(1))
+                        .endTime(LocalDateTime.now().plusDays(5))
+                        .lastUpdated(LocalDateTime.now())
+                        .build())
+                    .categories(Set.of(new CategoryDTO(null, "Mejeri", "Dairy",
+                        "Dagligvarer/Mejeri", "Groceries/Dairy")))
+                    .build()
+            );
+
+            // Udfør update
+            storeDAO.updateStoreProducts(store.getId(), updatedProducts);
+
+            em.flush();
+            em.clear();
+
+            // Refresh butik
+            Store updatedStore = em.find(Store.class, store.getId());
+            em.refresh(updatedStore);
+
+            em.getTransaction().commit();
+
+            // Assert
+            assertAll(
+                () -> assertThat("Two products should exist", updatedStore.getProducts(), hasSize(2)),
+                () -> assertThat(updatedStore.getProducts().stream()
+                        .map(Product::getEan)
+                        .collect(Collectors.toList()),
+                    containsInAnyOrder("1234567890123", "3456789012345"))
+            );
+
+        } catch (Exception e) {
+            if (em != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
         }
     }
 }

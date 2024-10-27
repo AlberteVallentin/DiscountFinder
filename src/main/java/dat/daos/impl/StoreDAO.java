@@ -1,15 +1,19 @@
 package dat.daos.impl;
 
 import dat.daos.IDAO;
+import dat.dtos.CategoryDTO;
+import dat.dtos.ProductDTO;
 import dat.dtos.StoreDTO;
-import dat.entities.Store;
-import dat.entities.Address;
-import dat.entities.PostalCode;
+import dat.entities.*;
 import jakarta.persistence.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class StoreDAO implements IDAO<StoreDTO, Long> {
@@ -31,8 +35,8 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
     @Override
     public StoreDTO read(Long id) {
         try (EntityManager em = emf.createEntityManager()) {
-            Store store = em.find(Store.class, id);
-            return store != null ? new StoreDTO(store) : null;
+            Store store = findById(id);
+            return store != null ? new StoreDTO(store, true) : null;  // Include products for single store fetch
         }
     }
 
@@ -41,7 +45,7 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
         try (EntityManager em = emf.createEntityManager()) {
             TypedQuery<Store> query = em.createQuery("SELECT s FROM Store s", Store.class);
             return query.getResultList().stream()
-                .map(StoreDTO::new)
+                .map(store -> new StoreDTO(store, false)) // Don't include products
                 .collect(Collectors.toList());
         }
     }
@@ -197,6 +201,130 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
             return query.getResultList().stream()
                 .map(StoreDTO::new)
                 .collect(Collectors.toList());
+        }
+    }
+
+    public void updateStoreProducts(Long id, List<ProductDTO> products) {
+        try (EntityManager em = emf.createEntityManager()) {
+            em.getTransaction().begin();
+
+            Store store = em.find(Store.class, id);
+            if (store == null) {
+                throw new IllegalArgumentException("Store not found with ID: " + id);
+            }
+
+            LOGGER.info("Updating products for store {} ({}) with Salling ID: {}",
+                id, store.getName(), store.getSallingStoreId());
+
+            // Map eksisterende produkter efter EAN for hurtig adgang
+            Map<String, Product> existingProductMap = store.getProducts().stream()
+                .collect(Collectors.toMap(Product::getEan, p -> p));
+
+            Set<String> newProductEans = products.stream()
+                .map(ProductDTO::getEan)
+                .collect(Collectors.toSet());
+
+            // Fjern produkter, der ikke længere findes i API-listen
+            List<Product> productsToRemove = store.getProducts().stream()
+                .filter(p -> !newProductEans.contains(p.getEan()))
+                .collect(Collectors.toList());
+
+            for (Product product : productsToRemove) {
+                product.clearCategories();
+                store.getProducts().remove(product);
+                em.remove(product);
+            }
+
+            // Tilføj eller opdater produkter fra API-data
+            for (ProductDTO dto : products) {
+                Product product = existingProductMap.get(dto.getEan());
+
+                // Tilføj denne kode her
+                if (product == null) { // Hvis produktet ikke findes, opret et nyt produkt
+                    product = new Product(dto);
+                    product.setStore(store);
+                    em.persist(product); // Gem det nye produkt
+                } else {
+                    product.updateFromDTO(dto); // Opdater eksisterende produkt
+                }
+            }
+
+            store.setHasProductsInDb(true);
+            store.setLastFetched(LocalDateTime.now());
+            em.merge(store);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            LOGGER.error("Error updating products for store {}: {}", id, e.getMessage());
+            throw new RuntimeException("Failed to update store products: " + e.getMessage());
+        }
+    }
+
+
+
+    private void updateProductCategories(Product product, ProductDTO dto, EntityManager em) {
+        if (dto.getCategories() != null && !dto.getCategories().isEmpty()) {
+            product.clearCategories();
+
+            for (CategoryDTO categoryDTO : dto.getCategories()) {
+                Category category = em.createQuery(
+                        "SELECT c FROM Category c WHERE c.pathDa = :pathDa AND c.pathEn = :pathEn",
+                        Category.class)
+                    .setParameter("pathDa", categoryDTO.getPathDa())
+                    .setParameter("pathEn", categoryDTO.getPathEn())
+                    .getResultStream()
+                    .findFirst()
+                    .orElseGet(() -> {
+                        Category newCategory = new Category(categoryDTO);
+                        em.persist(newCategory);
+                        return newCategory;
+                    });
+
+                product.addCategory(category);
+            }
+        }
+    }
+    public Store findById(Long id) {
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Store> query = em.createQuery(
+                "SELECT DISTINCT s FROM Store s " +
+                    "LEFT JOIN FETCH s.products p " +
+                    "LEFT JOIN FETCH p.price " +
+                    "LEFT JOIN FETCH p.stock " +
+                    "LEFT JOIN FETCH p.timing " +
+                    "LEFT JOIN FETCH p.categories " +
+                    "WHERE s.id = :id", Store.class);
+            query.setParameter("id", id);
+            Store store = query.getResultStream().findFirst().orElse(null);
+
+            if (store != null) {
+                LOGGER.debug("Found store {} with {} products", store.getName(),
+                    store.getProducts().size());
+                for (Product p : store.getProducts()) {
+                    LOGGER.debug("Product {} has {} categories", p.getProductName(),
+                        p.getCategories().size());
+                }
+            }
+
+            return store;
+        }
+    }
+
+    private void cleanupUnusedCategories(EntityManager em) {
+        List<Category> unusedCategories = em.createQuery(
+                "SELECT c FROM Category c WHERE c.products IS EMPTY",
+                Category.class)
+            .getResultList();
+
+        if (!unusedCategories.isEmpty()) {
+            LOGGER.info("Found {} unused categories to remove", unusedCategories.size());
+            for (Category category : unusedCategories) {
+                LOGGER.debug("Removing unused category: {} ({}) with path: {} / {}",
+                    category.getNameDa(),
+                    category.getNameEn(),
+                    category.getPathDa(),
+                    category.getPathEn());
+                em.remove(category);
+            }
         }
     }
 }

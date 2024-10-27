@@ -92,7 +92,8 @@ public class CategoryDAO implements IDAO<CategoryDTO, Long> {
         }
     }
 
-    // Helper method to find or create category by path
+
+
     public Category findOrCreateByPath(String pathDa, String pathEn) {
         try (EntityManager em = emf.createEntityManager()) {
             TypedQuery<Category> query = em.createQuery(
@@ -107,13 +108,13 @@ public class CategoryDAO implements IDAO<CategoryDTO, Long> {
             }
 
             // If not found, create new category
-            String[] pathPartsDa = pathDa.split("/");
-            String[] pathPartsEn = pathEn.split("/");
-            String nameDa = pathPartsDa[pathPartsDa.length - 1];
-            String nameEn = pathPartsEn[pathPartsEn.length - 1];
+            em.getTransaction().begin();
+            String[] pathPartsDa = pathDa.split(">");
+            String[] pathPartsEn = pathEn.split(">");
+            String nameDa = pathPartsDa[pathPartsDa.length - 1].trim();
+            String nameEn = pathPartsEn[pathPartsEn.length - 1].trim();
 
             Category newCategory = new Category(nameDa, nameEn, pathDa, pathEn);
-            em.getTransaction().begin();
             em.persist(newCategory);
             em.getTransaction().commit();
             return newCategory;

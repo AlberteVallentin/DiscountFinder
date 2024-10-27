@@ -57,9 +57,6 @@ Authorization: Bearer {{auth_token}}
 GET {{url}}/protected/admin_demo
 Authorization: Bearer {{auth_token}}
 
-### Store API Tests ###
-
-
 
 ### Get all stores (public)
 GET {{url}}/stores
@@ -67,9 +64,8 @@ Accept: application/json
 
 
 
-
 ### Get specific store (public)
-GET {{url}}/stores/1
+GET {{url}}/stores/76
 Accept: application/json
 
 

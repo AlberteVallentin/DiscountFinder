@@ -1,6 +1,6 @@
 package dat.dtos;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dat.entities.Category;
 import lombok.*;
 
@@ -10,15 +10,13 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class CategoryDTO {
+    @JsonIgnore
     private Long id;
-
     private String nameDa;
     private String nameEn;
-
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonIgnore
     private String pathDa;
-
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonIgnore
     private String pathEn;
 
     public CategoryDTO(Category category) {
@@ -29,13 +27,17 @@ public class CategoryDTO {
         this.pathEn = category.getPathEn();
     }
 
-    // Hjælpemetode til at oprette CategoryDTO fra en Salling API kategori-sti
-    public static CategoryDTO fromSallingCategory(String nameDa, String nameEn, String fullPathDa, String fullPathEn) {
+    public CategoryDTO(String nameDa, String nameEn) {
+        this.nameDa = nameDa;
+        this.nameEn = nameEn;
+    }
+
+    public static CategoryDTO fromSallingCategory(String nameDa, String nameEn, String pathDa, String pathEn) {
         return CategoryDTO.builder()
             .nameDa(nameDa.trim())
             .nameEn(nameEn.trim())
-            .pathDa(fullPathDa.trim())
-            .pathEn(fullPathEn.trim())
+            .pathDa(pathDa.trim())
+            .pathEn(pathEn.trim())
             .build();
     }
 }
