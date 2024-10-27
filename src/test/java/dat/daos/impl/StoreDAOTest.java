@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -411,6 +412,16 @@ class StoreDAOTest {
             Store store = em.find(Store.class, 1L);
             assertThat("Store should exist", store, is(notNullValue()));
 
+            // Create and persist categories first
+            Category parentCategory = new Category("Dagligvarer", "Groceries",
+                "Dagligvarer", "Groceries");
+            Category childCategory = new Category("Mejeri", "Dairy",
+                "Dagligvarer>Mejeri", "Groceries>Dairy");
+
+            em.persist(parentCategory);
+            em.persist(childCategory);
+            em.flush();
+
             // Create initial product DTOs
             PriceDTO price1 = PriceDTO.builder()
                 .originalPrice(new BigDecimal("20.00"))
@@ -430,36 +441,46 @@ class StoreDAOTest {
                 .lastUpdated(LocalDateTime.now())
                 .build();
 
-            CategoryDTO category1 = CategoryDTO.builder()
+            Set<CategoryDTO> categories = new HashSet<>();
+            categories.add(CategoryDTO.builder()
+                .id(parentCategory.getId())
+                .nameDa("Dagligvarer")
+                .nameEn("Groceries")
+                .pathDa("Dagligvarer")
+                .pathEn("Groceries")
+                .build());
+
+            categories.add(CategoryDTO.builder()
+                .id(childCategory.getId())
                 .nameDa("Mejeri")
                 .nameEn("Dairy")
-                .pathDa("Dagligvarer/Mejeri")
-                .pathEn("Groceries/Dairy")
-                .build();
+                .pathDa("Dagligvarer>Mejeri")
+                .pathEn("Groceries>Dairy")
+                .build());
 
-            ProductDTO productDto1 = ProductDTO.builder()
+            ProductDTO product1 = ProductDTO.builder()
                 .productName("Milk")
                 .ean("1234567890123")
                 .price(price1)
                 .stock(stock1)
                 .timing(timing1)
-                .categories(Set.of(category1))
+                .categories(categories)
                 .build();
 
-            // Update store with initial products
-            storeDAO.updateStoreProducts(store.getId(), List.of(productDto1));
+            // Initial update with single product
+            storeDAO.updateStoreProducts(store.getId(), List.of(product1));
 
-            // Verify initial update
             em.flush();
             em.clear();
 
-            Store storeWithProduct = em.find(Store.class, store.getId());
-            em.refresh(storeWithProduct);
+            // Verify initial state
+            Store storeWithInitialProduct = em.find(Store.class, store.getId());
+            em.refresh(storeWithInitialProduct);
 
             assertThat("Store should have one product after initial update",
-                storeWithProduct.getProducts(), hasSize(1));
+                storeWithInitialProduct.getProducts(), hasSize(1));
 
-            // Create updated product list with modified price
+            // Create updated version with modified price and same categories
             PriceDTO updatedPrice = PriceDTO.builder()
                 .originalPrice(new BigDecimal("25.00"))
                 .newPrice(new BigDecimal("18.00"))
@@ -467,39 +488,51 @@ class StoreDAOTest {
                 .percentDiscount(new BigDecimal("28.00"))
                 .build();
 
-            ProductDTO updatedProductDto = ProductDTO.builder()
+            ProductDTO updatedProduct = ProductDTO.builder()
                 .productName("Milk")
                 .ean("1234567890123")
                 .price(updatedPrice)
                 .stock(stock1)
                 .timing(timing1)
-                .categories(Set.of(category1))
+                .categories(categories)
                 .build();
 
-            // Perform second update
-            storeDAO.updateStoreProducts(store.getId(), List.of(updatedProductDto));
+            // Perform update
+            storeDAO.updateStoreProducts(store.getId(), List.of(updatedProduct));
 
             em.flush();
             em.clear();
 
-            // Fetch and verify final state
+            // Verify final state
             Store finalStore = em.find(Store.class, store.getId());
             em.refresh(finalStore);
 
-            assertThat("Store should have one product", finalStore.getProducts(), hasSize(1));
+            // Get the actual product for verification
+            Product persistedProduct = finalStore.getProducts().iterator().next();
 
-            Product updatedProduct = finalStore.getProducts().iterator().next();
             assertAll(
+                () -> assertThat("Store should have one product",
+                    finalStore.getProducts(), hasSize(1)),
                 () -> assertThat("Product EAN should match",
-                    updatedProduct.getEan(), is("1234567890123")),
+                    persistedProduct.getEan(), is("1234567890123")),
                 () -> assertThat("Product name should match",
-                    updatedProduct.getProductName(), is("Milk")),
+                    persistedProduct.getProductName(), is("Milk")),
                 () -> assertThat("Original price should be updated",
-                    updatedProduct.getPrice().getOriginalPrice(),
+                    persistedProduct.getPrice().getOriginalPrice(),
                     comparesEqualTo(new BigDecimal("25.00"))),
                 () -> assertThat("New price should be updated",
-                    updatedProduct.getPrice().getNewPrice(),
-                    comparesEqualTo(new BigDecimal("18.00")))
+                    persistedProduct.getPrice().getNewPrice(),
+                    comparesEqualTo(new BigDecimal("18.00"))),
+                () -> assertThat("Categories should be preserved",
+                    persistedProduct.getCategories(), hasSize(2)),
+                () -> {
+                    Set<String> categoryPaths = new HashSet<>();
+                    for(Category cat : persistedProduct.getCategories()) {
+                        categoryPaths.add(cat.getPathDa());
+                    }
+                    assertThat("Category paths should match", categoryPaths,
+                        containsInAnyOrder("Dagligvarer", "Dagligvarer>Mejeri"));
+                }
             );
 
             em.getTransaction().commit();
