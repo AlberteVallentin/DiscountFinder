@@ -97,6 +97,9 @@ public class Product {
 
     // Helper methods for managing categories
     public void addCategory(Category category) {
+        if (categories == null) {
+            categories = new HashSet<>();
+        }
         categories.add(category);
         category.getProducts().add(this);
     }

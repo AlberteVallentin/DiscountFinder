@@ -239,26 +239,33 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
             for (ProductDTO dto : products) {
                 Product product = existingProductMap.get(dto.getEan());
 
-                // Tilføj denne kode her
-                if (product == null) { // Hvis produktet ikke findes, opret et nyt produkt
+                if (product == null) {
                     product = new Product(dto);
                     product.setStore(store);
-                    em.persist(product); // Gem det nye produkt
+                    store.getProducts().add(product);  // Tilføj produkt til store
+                    em.persist(product);
                 } else {
-                    product.updateFromDTO(dto); // Opdater eksisterende produkt
+                    product.updateFromDTO(dto);
                 }
+
+                // Opdater kategorier for produktet
+                updateProductCategories(product, dto, em);
+                em.flush();  // Flush for at sikre at ændringer bliver gemt
             }
 
             store.setHasProductsInDb(true);
             store.setLastFetched(LocalDateTime.now());
             em.merge(store);
+            em.flush();
             em.getTransaction().commit();
+
+            LOGGER.info("Successfully updated {} products for store {}",
+                products.size(), store.getName());
         } catch (Exception e) {
             LOGGER.error("Error updating products for store {}: {}", id, e.getMessage());
             throw new RuntimeException("Failed to update store products: " + e.getMessage());
         }
     }
-
 
 
     private void updateProductCategories(Product product, ProductDTO dto, EntityManager em) {
