@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 public class ProductFetcher {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductFetcher.class);
-    private static final String API_KEY = "77fcfa33-0e12-4dc9-aac6-c5d7cc9be766";
+    private static final String SALLING_API_KEY = System.getenv("SALLING_API_KEY");
     private static final String FOODWASTE_URL = "https://api.sallinggroup.com/v1/food-waste/%s";
 
     private final HttpClient client;
@@ -85,7 +85,7 @@ public class ProductFetcher {
     private HttpRequest buildRequest(String url) {
         return HttpRequest.newBuilder()
             .uri(URI.create(url))
-            .header("Authorization", "Bearer " + API_KEY)
+            .header("Authorization", "Bearer " + SALLING_API_KEY)
             .header("Accept", "application/json")
             .GET()
             .build();
