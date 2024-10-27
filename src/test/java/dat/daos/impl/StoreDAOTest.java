@@ -7,6 +7,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceException;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -148,6 +149,7 @@ class StoreDAOTest {
         }
     }
 
+
     @AfterAll
     void tearDown() {
         if (emf != null) {
@@ -156,6 +158,7 @@ class StoreDAOTest {
     }
 
     @Test
+    @Transactional
     @DisplayName("Test create store")
     void testCreate() {
         try (EntityManager em = emf.createEntityManager()) {
@@ -203,6 +206,7 @@ class StoreDAOTest {
     }
 
     @Test
+    @Transactional
     void testRead() {
         // Act
         StoreDTO store = storeDAO.read(1L);
@@ -215,6 +219,7 @@ class StoreDAOTest {
     }
 
     @Test
+    @Transactional
     void testReadAll() {
         // Act
         List<StoreDTO> stores = storeDAO.readAll();
@@ -232,6 +237,7 @@ class StoreDAOTest {
     }
 
     @Test
+    @Transactional
     void testUpdate() {
         // Arrange
         s1.setName("Updated Netto");
@@ -248,6 +254,7 @@ class StoreDAOTest {
     }
 
     @Test
+    @Transactional
     void testDelete() {
         // Act
         storeDAO.delete(1L);
@@ -258,6 +265,7 @@ class StoreDAOTest {
     }
 
     @Test
+    @Transactional
     void testFindBySallingId() {
         // Act
         Store store = storeDAO.findBySallingId("1234");
@@ -269,6 +277,7 @@ class StoreDAOTest {
     }
 
     @Test
+    @Transactional
     void testStoreAlreadyExists() {
         // Arrange
         BrandDTO nettoBrand = BrandDTO.builder()
@@ -290,6 +299,7 @@ class StoreDAOTest {
     }
 
     @Test
+    @Transactional
     void testCreateWithInvalidBrand() {
         // Arrange
         BrandDTO invalidBrand = BrandDTO.builder()
@@ -311,6 +321,7 @@ class StoreDAOTest {
     }
 
     @Test
+    @Transactional
     void testCreateWithInvalidPostalCode() {
         // Arrange
         PostalCodeDTO invalidPostalCode = PostalCodeDTO.builder()
@@ -343,6 +354,7 @@ class StoreDAOTest {
 
 
     @Test
+    @Transactional
     void testSaveOrUpdateStores() {
         try (EntityManager em = emf.createEntityManager()) {
             // Get the existing Bilka brand
@@ -402,6 +414,7 @@ class StoreDAOTest {
 
 
     @Test
+    @Transactional
     @DisplayName("Test updateStoreProducts removes obsolete products")
     void testUpdateStoreProductsRemovesObsoleteProducts() {
         try (EntityManager em = emf.createEntityManager()) {
@@ -507,6 +520,7 @@ class StoreDAOTest {
     }
 
     @Test
+    @Transactional
     @DisplayName("Test updateStoreProducts adds new products and removes obsolete ones")
     void testUpdateStoreProductsAddsNewAndRemovesObsoleteProducts() {
         try (EntityManager em = emf.createEntityManager()) {
@@ -579,10 +593,6 @@ class StoreDAOTest {
             );
         }
     }
-
-
-
-
 
 
 }
