@@ -66,6 +66,7 @@ Accept: application/json
 
 ### Get specific store (public)
 GET {{url}}/stores/76
+Authorization: Bearer {{auth_token}}
 Accept: application/json
 
 

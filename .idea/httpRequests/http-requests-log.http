@@ -1,0 +1,81 @@
+GET http://localhost:7070/api/stores/76
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBbGJlcnRlIFZhbGxlbnRpbiIsInN1YiI6InRlc3RAYWRtaW4uZGsiLCJyb2xlIjoiVVNFUiIsImV4cCI6MTczMzgyMjEyOCwiZW1haWwiOiJ0ZXN0QGFkbWluLmRrIn0.fxldEVKix7rgI1W_9CKqu2EN_FpuQXtOWDhGGuvtmLA
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+
+<> 2024-12-10T094615.200.json
+
+###
+
+GET http://localhost:7070/api/stores/76
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+
+<> 2024-12-10T094538.401.json
+
+###
+
+GET http://localhost:7070/api/protected/user_demo
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBbGJlcnRlIFZhbGxlbnRpbiIsInN1YiI6InRlc3RAYWRtaW4uZGsiLCJyb2xlIjoiVVNFUiIsImV4cCI6MTczMzgyMjEyOCwiZW1haWwiOiJ0ZXN0QGFkbWluLmRrIn0.fxldEVKix7rgI1W_9CKqu2EN_FpuQXtOWDhGGuvtmLA
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2024-12-10T094534.200.json
+
+###
+
+POST http://localhost:7070/api/auth/login
+Content-Type: application/json
+Content-Length: 55
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "test@admin.dk",
+  "password": "test123"
+}
+
+<> 2024-12-10T094528.200.json
+
+###
+
+POST http://localhost:7070/api/auth/register
+Content-Type: application/json
+Content-Length: 100
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "name": "Test User",
+  "email": "test@admin.dk",
+  "password": "test123",
+  "roleType": "USER"
+}
+
+<> 2024-12-10T094524.201.json
+
+###
+
+GET http://localhost:7070/api/stores/76
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+
+<> 2024-12-10T094513.401.json
+
+###
+
+GET http://localhost:7070/api/stores
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+
+<> 2024-12-10T094510.200.json
+
+###
+

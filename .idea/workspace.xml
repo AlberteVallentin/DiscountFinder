@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="50970898-f021-40ab-8b7d-ce8447e2a8a2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/albertevallentin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/javalin-app.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/javalin-app.log" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "AlberteVallentin"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:AlberteVallentin/DiscountFinder.git",
+    "accountId": "70815846-3421-42c2-9020-67d544e3d5b1"
+  }
+}]]></component>
+  <component name="HttpClientSelectedEnvironments">
+    <file url="file://$PROJECT_DIR$/src/main/resources/http/dev.http" environment="dev" />
+  </component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
+  <component name="ProjectId" id="2q191s6XMg6RC5KUOGppAulswyW" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.MainWithKey.executor": "Run",
+    "HTTP Request.dev | Get all stores (public).executor": "Run",
+    "HTTP Request.dev | Get specific store (public).executor": "Run",
+    "HTTP Request.dev | Login user.executor": "Run",
+    "HTTP Request.dev | Register new user.executor": "Run",
+    "HTTP Request.dev | Test protected user endpoint.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "main",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.stylelint": "",
+    "nodejs_package_manager_path": "npm",
+    "rest.client.default.execution.environment": "dev",
+    "settings.editor.selected.configurable": "fileTemplates"
+  }
+}]]></component>
+  <component name="RunManager" selected="HTTP Request.dev | Get specific store (public)">
+    <configuration name="dev | Get all stores (public)" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="Get all stores (public)" index="8" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="dev | Get specific store (public)" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="Get specific store (public)" index="9" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="dev | Login user" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="Login user" index="3" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="dev | Register new user" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="Register new user" index="2" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="dev | Test protected user endpoint" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="Test protected user endpoint" index="6" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="HTTP Request.dev | Get all stores (public)" />
+      <item itemvalue="HTTP Request.dev | Get specific store (public)" />
+      <item itemvalue="HTTP Request.dev | Login user" />
+      <item itemvalue="HTTP Request.dev | Register new user" />
+      <item itemvalue="HTTP Request.dev | Test protected user endpoint" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.dev | Get specific store (public)" />
+        <item itemvalue="HTTP Request.dev | Test protected user endpoint" />
+        <item itemvalue="HTTP Request.dev | Login user" />
+        <item itemvalue="HTTP Request.dev | Register new user" />
+        <item itemvalue="HTTP Request.dev | Get all stores (public)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <created>1733819002127</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1733819002127</updated>
+      <workItem from="1733819003762" duration="1209000" />
+    </task>
+    <servers />
+  </component>
+</project>
