@@ -35,7 +35,7 @@
   }
 }]]></component>
   <component name="HttpClientSelectedEnvironments">
-    <file url="file://$PROJECT_DIR$/src/main/resources/http/dev.http" environment="dev" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/http/dev.http" environment="prod" />
   </component>
   <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
   <component name="KubernetesApiProvider"><![CDATA[{
@@ -51,8 +51,13 @@
     "Application.MainWithKey.executor": "Run",
     "HTTP Request.dev | Get all stores (public).executor": "Run",
     "HTTP Request.dev | Get specific store (public).executor": "Run",
+    "HTTP Request.dev | Get specific store (user).executor": "Run",
+    "HTTP Request.dev | Log out (reset token).executor": "Run",
     "HTTP Request.dev | Login user.executor": "Run",
     "HTTP Request.dev | Register new user.executor": "Run",
+    "HTTP Request.dev | Reset token.executor": "Run",
+    "HTTP Request.dev | Test API health.executor": "Run",
+    "HTTP Request.dev | Test protected admin endpoint.executor": "Run",
     "HTTP Request.dev | Test protected user endpoint.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.codeium.enabled": "true",
@@ -60,40 +65,40 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.stylelint": "",
     "nodejs_package_manager_path": "npm",
-    "rest.client.default.execution.environment": "dev",
+    "rest.client.default.execution.environment": "prod",
     "settings.editor.selected.configurable": "fileTemplates"
   }
 }]]></component>
-  <component name="RunManager" selected="HTTP Request.dev | Get specific store (public)">
+  <component name="RunManager" selected="HTTP Request.dev | Get specific store (user)">
     <configuration name="dev | Get all stores (public)" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="Get all stores (public)" index="8" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="dev | Get specific store (public)" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="Get specific store (public)" index="9" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="dev | Login user" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="Login user" index="3" runType="Run single request">
+    <configuration name="dev | Get specific store (user)" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="Get specific store (user)" index="9" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="dev | Register new user" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="Register new user" index="2" runType="Run single request">
+    <configuration name="dev | Reset token" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="Reset token" index="5" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="dev | Test protected user endpoint" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="Test protected user endpoint" index="6" runType="Run single request">
+    <configuration name="dev | Test protected admin endpoint" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="Test protected admin endpoint" index="7" runType="Run single request">
       <method v="2" />
     </configuration>
     <list>
       <item itemvalue="HTTP Request.dev | Get all stores (public)" />
+      <item itemvalue="HTTP Request.dev | Get specific store (user)" />
+      <item itemvalue="HTTP Request.dev | Reset token" />
+      <item itemvalue="HTTP Request.dev | Test protected admin endpoint" />
       <item itemvalue="HTTP Request.dev | Get specific store (public)" />
-      <item itemvalue="HTTP Request.dev | Login user" />
-      <item itemvalue="HTTP Request.dev | Register new user" />
-      <item itemvalue="HTTP Request.dev | Test protected user endpoint" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="HTTP Request.dev | Get specific store (public)" />
-        <item itemvalue="HTTP Request.dev | Test protected user endpoint" />
-        <item itemvalue="HTTP Request.dev | Login user" />
-        <item itemvalue="HTTP Request.dev | Register new user" />
+        <item itemvalue="HTTP Request.dev | Get specific store (user)" />
+        <item itemvalue="HTTP Request.dev | Reset token" />
         <item itemvalue="HTTP Request.dev | Get all stores (public)" />
+        <item itemvalue="HTTP Request.dev | Get specific store (public)" />
+        <item itemvalue="HTTP Request.dev | Test protected admin endpoint" />
       </list>
     </recent_temporary>
   </component>
@@ -104,7 +109,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1733819002127</updated>
-      <workItem from="1733819003762" duration="1209000" />
+      <workItem from="1733819003762" duration="6018000" />
     </task>
     <servers />
   </component>
