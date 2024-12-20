@@ -1,0 +1,3 @@
+{
+  "msg": "An error occurred while verifying the user: No result found for query [SELECT u FROM User u WHERE u.email = :email]"
+}

@@ -32,6 +32,9 @@ public class StoreDTO {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Set<ProductDTO> products;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private boolean isFavorite;
+
     public StoreDTO(Store store) {
         this.id = store.getId();
         this.sallingStoreId = store.getSallingStoreId();
@@ -49,6 +52,14 @@ public class StoreDTO {
             this.products = store.getProducts().stream()
                 .map(ProductDTO::new)
                 .collect(Collectors.toSet());
+        }
+    }
+
+    public StoreDTO(Store store, boolean includeProducts, String userEmail) {
+        this(store, includeProducts);
+        if (userEmail != null && store.getFavoredByUsers() != null) {
+            this.isFavorite = store.getFavoredByUsers().stream()
+                .anyMatch(user -> user.getEmail().equals(userEmail));
         }
     }
 

@@ -1,0 +1,19 @@
+[
+  {
+    "id": 19,
+    "name": "Netto Trøjborggade",
+    "brand": {
+      "displayName": "Netto"
+    },
+    "address": {
+      "addressLine": "Trøjborggade 1",
+      "longitude": 12.540357,
+      "latitude": 55.669325,
+      "postalCode": {
+        "postalCode": 1757,
+        "city": "København V"
+      }
+    },
+    "favorite": true
+  }
+]

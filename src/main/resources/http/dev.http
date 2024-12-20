@@ -9,12 +9,25 @@ Content-Type: application/json
 
 {
   "name": "Test User",
-  "email": "test@admin.dk",
-  "password": "test123",
+  "email": "user@user.dk",
+  "password": "user123",
   "roleType": "USER"
 }
 
 > {% client.global.set("auth_token", response.body.token); %}
+
+
+### Login user
+POST {{url}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@user.dk",
+  "password": "user123"
+}
+
+> {% client.global.set("auth_token", response.body.token); %}
+
 
 
 
@@ -65,7 +78,7 @@ Accept: application/json
 
 
 ### Get specific store (user)
-GET {{url}}/stores/76
+GET {{url}}/stores/19
 Authorization: Bearer {{auth_token}}
 Accept: application/json
 
@@ -74,3 +87,53 @@ Accept: application/json
 GET {{url}}/stores/postal_code/2300
 Accept: application/json
 
+### Get user's favorite stores (requires auth)
+GET {{url}}/stores/favorites
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+### Add store to favorites (requires auth)
+POST {{url}}/stores/19/favorite
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+### Remove store from favorites (requires auth)
+DELETE {{url}}/stores/19/favorite
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+### Full test flow for favorites
+# 1. First check store is not favorite
+GET {{url}}/stores/19
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+###
+# 2. Add to favorites
+POST {{url}}/stores/21/favorite
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+###
+# 3. Verify store is now favorite
+GET {{url}}/stores/19
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+###
+# 4. Get all favorite stores
+GET {{url}}/stores/favorites
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+###
+# 5. Remove from favorites
+DELETE {{url}}/stores/19/favorite
+Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+###
+# 6. Verify store is no longer favorite
+GET {{url}}/stores/19
+Authorization: Bearer {{auth_token}}
+Accept: application/json
