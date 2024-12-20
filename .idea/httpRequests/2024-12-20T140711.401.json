@@ -1,0 +1,6 @@
+{
+  "title": "You need to log in, dude! Or you token is invalid.",
+  "status": 401,
+  "type": "https://javalin.io/documentation#unauthorizedresponse",
+  "details": {}
+}

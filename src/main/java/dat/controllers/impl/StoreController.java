@@ -39,6 +39,9 @@ public class StoreController {
             UserDTO userDTO = ctx.attribute("user");
             String userEmail = userDTO != null ? userDTO.getEmail() : null;
 
+            // Debug log for bruger information
+            LOGGER.info("Request for store {} from user: {}", id, userEmail != null ? userEmail : "not logged in");
+
             // Vælg den rigtige find metode baseret på om bruger er logget ind
             Store store = userEmail != null ?
                 storeDAO.findByIdWithFavorites(id) :
@@ -46,6 +49,18 @@ public class StoreController {
 
             if (store == null) {
                 throw new ApiException(404, "Store not found with ID: " + id);
+            }
+
+            // Debug log for favorit information
+            if (userEmail != null) {
+                LOGGER.info("Store {} has {} users who favorited it",
+                    id,
+                    store.getFavoredByUsers() != null ? store.getFavoredByUsers().size() : 0);
+                if (store.getFavoredByUsers() != null) {
+                    store.getFavoredByUsers().forEach(user ->
+                        LOGGER.info("Favored by user: {}", user.getEmail())
+                    );
+                }
             }
 
             if (store.needsProductUpdate()) {
@@ -85,6 +100,11 @@ public class StoreController {
             }
 
             StoreDTO storeDTO = new StoreDTO(store, true, userEmail);
+
+            // Debug log for DTO favorit status
+            LOGGER.info("StoreDTO created with isFavorite: {} for user: {}",
+                storeDTO.getIsFavorite(),
+                userEmail != null ? userEmail : "not logged in");
 
             // Debug log final DTO
             LOGGER.debug("Final StoreDTO products:");

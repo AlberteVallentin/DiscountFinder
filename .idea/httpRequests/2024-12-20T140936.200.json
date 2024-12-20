@@ -1,0 +1,1917 @@
+{
+  "id": 50,
+  "name": "Netto Blistrup",
+  "brand": {
+    "displayName": "Netto"
+  },
+  "address": {
+    "addressLine": "Helsingevej 75a",
+    "longitude": 12.212827,
+    "latitude": 56.085814,
+    "postalCode": {
+      "postalCode": 3230,
+      "city": "Græsted"
+    }
+  },
+  "products": [
+    {
+      "productName": "KRYDDERBOLLER FK GAMLE M#LLE",
+      "ean": "5712874603977",
+      "price": {
+        "originalPrice": 10.50,
+        "newPrice": 8.00,
+        "discount": 2.50,
+        "percentDiscount": 23.81
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:44:02",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:03"
+      },
+      "categories": [
+        {
+          "nameDa": "Boller",
+          "nameEn": "Light Dark Buns"
+        },
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        },
+        {
+          "nameDa": "Lyst & groft brød",
+          "nameEn": "Light Breads Dark Breads"
+        }
+      ],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "SVINEMØRBRAD VELSMAG",
+      "ean": "5707196304077",
+      "price": {
+        "originalPrice": 124.95,
+        "newPrice": 80.00,
+        "discount": 44.95,
+        "percentDiscount": 35.97
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:28:56",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Kød & fisk",
+          "nameEn": "Meat Fish"
+        },
+        {
+          "nameDa": "Grisekød",
+          "nameEn": "Pork"
+        },
+        {
+          "nameDa": "Stege & hele kødstykker",
+          "nameEn": "Roasted Whole Pork Pieces"
+        },
+        {
+          "nameDa": "Svinemørbrad",
+          "nameEn": "Pork Tenderloin"
+        }
+      ],
+      "stock": {
+        "quantity": 10.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 10
+      }
+    },
+    {
+      "productName": "JULEMEDISTER PREMIEUR",
+      "ean": "5707196303810",
+      "price": {
+        "originalPrice": 34.95,
+        "newPrice": 27.00,
+        "discount": 7.95,
+        "percentDiscount": 22.75
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:33:56",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Grisekød",
+          "nameEn": "Pork"
+        },
+        {
+          "nameDa": "Medister",
+          "nameEn": "Thick Sausages"
+        },
+        {
+          "nameDa": "Kød & fisk",
+          "nameEn": "Meat Fish"
+        }
+      ],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "KOTELETTER VELSMAG",
+      "ean": "5707196282061",
+      "price": {
+        "originalPrice": 47.50,
+        "newPrice": 29.00,
+        "discount": 18.50,
+        "percentDiscount": 38.95
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:32:23",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Grisekød",
+          "nameEn": "Pork"
+        },
+        {
+          "nameDa": "Kød & fisk",
+          "nameEn": "Meat Fish"
+        },
+        {
+          "nameDa": "Koteletter, flæsk & schnitzler",
+          "nameEn": "Pork Chops Pork Schnitzels"
+        }
+      ],
+      "stock": {
+        "quantity": 6.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 6
+      }
+    },
+    {
+      "productName": "LAMMECULOTTE PREMIEUR",
+      "ean": "5710405641603",
+      "price": {
+        "originalPrice": 79.00,
+        "newPrice": 63.00,
+        "discount": 16.00,
+        "percentDiscount": 20.25
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:10:41",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Kød & fisk",
+          "nameEn": "Meat Fish"
+        },
+        {
+          "nameDa": "Lammekød",
+          "nameEn": "Lamb"
+        }
+      ],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "SOLSIKKERUGBRØD GAMLE MØLLE",
+      "ean": "5701012408499",
+      "price": {
+        "originalPrice": 8.95,
+        "newPrice": 7.00,
+        "discount": 1.95,
+        "percentDiscount": 21.79
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:28:15",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        },
+        {
+          "nameDa": "Solsikkerugbrød",
+          "nameEn": "Sun Flower Seeded Rye Breads"
+        },
+        {
+          "nameDa": "Rugbrød",
+          "nameEn": "Rye Breads"
+        }
+      ],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "SOLSTYKKER PÅGEN",
+      "ean": "7311070031515",
+      "price": {
+        "originalPrice": 23.95,
+        "newPrice": 12.00,
+        "discount": 11.95,
+        "percentDiscount": 49.90
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:16:41",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        },
+        {
+          "nameDa": "Lyst & groft brød",
+          "nameEn": "Light Breads Dark Breads"
+        },
+        {
+          "nameDa": "Boller",
+          "nameEn": "Light Dark Buns"
+        }
+      ],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "HK. GRIS/KALV 4-7% VELSMAG",
+      "ean": "5707196301618",
+      "price": {
+        "originalPrice": 39.95,
+        "newPrice": 19.00,
+        "discount": 20.95,
+        "percentDiscount": 52.44
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:23:45",
+        "endTime": "2024-12-20 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Hakket grise- & kalvekød",
+          "nameEn": "Minced Pork Veal"
+        },
+        {
+          "nameDa": "Grisekød",
+          "nameEn": "Pork"
+        },
+        {
+          "nameDa": "Kød & fisk",
+          "nameEn": "Meat Fish"
+        }
+      ],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "ENERGISE INNOCENT",
+      "ean": "5038862231107",
+      "price": {
+        "originalPrice": 23.95,
+        "newPrice": 15.00,
+        "discount": 8.95,
+        "percentDiscount": 37.37
+      },
+      "timing": {
+        "startTime": "2024-12-19 09:30:33",
+        "endTime": "2024-12-20 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Juice & smoothies",
+          "nameEn": "Juice Smoothies"
+        },
+        {
+          "nameDa": "Drikkevarer",
+          "nameEn": "Beverages"
+        },
+        {
+          "nameDa": "Smoothies",
+          "nameEn": "Smoothies"
+        }
+      ],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "KYLLINGEBRYST DEN GRØNNE SLAGTER",
+      "ean": "5707196093254",
+      "price": {
+        "originalPrice": 16.95,
+        "newPrice": 9.00,
+        "discount": 7.95,
+        "percentDiscount": 46.90
+      },
+      "timing": {
+        "startTime": "2024-12-19 14:06:29",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Kyllingepålæg",
+          "nameEn": "Cold Cuts Chicken"
+        },
+        {
+          "nameDa": "Pålæg",
+          "nameEn": "Lunch Meats"
+        },
+        {
+          "nameDa": "Kødpålæg",
+          "nameEn": "Meat"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        }
+      ],
+      "stock": {
+        "quantity": 6.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 6
+      }
+    },
+    {
+      "productName": "KOTELETTER VELSMAG",
+      "ean": "5712875758423",
+      "price": {
+        "originalPrice": 69.95,
+        "newPrice": 48.00,
+        "discount": 21.95,
+        "percentDiscount": 31.38
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:31:30",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:03"
+      },
+      "categories": [
+        {
+          "nameDa": "Kød & fisk",
+          "nameEn": "Meat Fish"
+        },
+        {
+          "nameDa": "Koteletter, flæsk & schnitzler",
+          "nameEn": "Pork Chops Pork Schnitzels"
+        },
+        {
+          "nameDa": "Grisekød",
+          "nameEn": "Pork"
+        }
+      ],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "SPICY BRIO. HOT DAILY DELI",
+      "ean": "5704383008527",
+      "price": {
+        "originalPrice": 25.00,
+        "newPrice": 19.00,
+        "discount": 6.00,
+        "percentDiscount": 24.00
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:14:37",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 6.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 6
+      }
+    },
+    {
+      "productName": "PØLSEBRØD BAKERSFIELD",
+      "ean": "5712874555948",
+      "price": {
+        "originalPrice": 14.75,
+        "newPrice": 11.00,
+        "discount": 3.75,
+        "percentDiscount": 25.42
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:19:15",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Hotdog- & pølsebrød",
+          "nameEn": "Hotdog Buns"
+        },
+        {
+          "nameDa": "Mad- & specialbrød",
+          "nameEn": "Bread Specialities"
+        },
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        }
+      ],
+      "stock": {
+        "quantity": 5.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 5
+      }
+    },
+    {
+      "productName": "RØGET RULLEPØLSE EGELYKKE",
+      "ean": "5712876534347",
+      "price": {
+        "originalPrice": 15.75,
+        "newPrice": 12.00,
+        "discount": 3.75,
+        "percentDiscount": 23.81
+      },
+      "timing": {
+        "startTime": "2024-12-19 13:59:31",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Pålæg",
+          "nameEn": "Lunch Meats"
+        },
+        {
+          "nameDa": "Rullepølse",
+          "nameEn": "Sausage Roll"
+        },
+        {
+          "nameDa": "Kødpålæg",
+          "nameEn": "Meat"
+        }
+      ],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "KERNERUGBRØD GAMLE MØLLE",
+      "ean": "5701012523833",
+      "price": {
+        "originalPrice": 7.75,
+        "newPrice": 6.00,
+        "discount": 1.75,
+        "percentDiscount": 22.58
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:38:48",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:03"
+      },
+      "categories": [
+        {
+          "nameDa": "Kernerugbrød",
+          "nameEn": "Seeded Rye Breads"
+        },
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        },
+        {
+          "nameDa": "Rugbrød",
+          "nameEn": "Rye Breads"
+        }
+      ],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "SURDEJSBOLLER ØGO",
+      "ean": "5712874935726",
+      "price": {
+        "originalPrice": 18.95,
+        "newPrice": 10.00,
+        "discount": 8.95,
+        "percentDiscount": 47.23
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:30:59",
+        "endTime": "2024-12-20 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        },
+        {
+          "nameDa": "Lyst & groft brød",
+          "nameEn": "Light Breads Dark Breads"
+        },
+        {
+          "nameDa": "Toastbrød",
+          "nameEn": "Toast Breads"
+        }
+      ],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "TZATZIKI LA CAMPAGNA",
+      "ean": "5712875606281",
+      "price": {
+        "originalPrice": 19.95,
+        "newPrice": 15.00,
+        "discount": 4.95,
+        "percentDiscount": 24.81
+      },
+      "timing": {
+        "startTime": "2024-12-19 13:53:40",
+        "endTime": "2024-12-20 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Tapas & specialiteter",
+          "nameEn": "Tapas Specialities"
+        },
+        {
+          "nameDa": "Oliven & andet tilbehør",
+          "nameEn": "Olives Other Attachments"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        }
+      ],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "GUL KRYSTAL 46+ ØGO",
+      "ean": "5712875848858",
+      "price": {
+        "originalPrice": 20.00,
+        "newPrice": 15.00,
+        "discount": 5.00,
+        "percentDiscount": 25.00
+      },
+      "timing": {
+        "startTime": "2024-12-19 14:11:44",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Ost",
+          "nameEn": "Cheese"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Mejeri",
+          "nameEn": "Dairy"
+        },
+        {
+          "nameDa": "Specialost",
+          "nameEn": "Cheese Specialities"
+        }
+      ],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "MANGO/PAS SKYR LØGISMOSE",
+      "ean": "5713507060778",
+      "price": {
+        "originalPrice": 10.00,
+        "newPrice": 5.00,
+        "discount": 5.00,
+        "percentDiscount": 50.00
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:04:35",
+        "endTime": "2024-12-20 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Yoghurt & syrnede mælkeprodukter",
+          "nameEn": "Yoghurt Soured Milk Products"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Mejeri",
+          "nameEn": "Dairy"
+        },
+        {
+          "nameDa": "Yoghurt & syrnede mælkeprodukter",
+          "nameEn": "Yoghurt Soured Milk Products"
+        },
+        {
+          "nameDa": "Skyr",
+          "nameEn": "Skyr"
+        },
+        {
+          "nameDa": "Mejeri",
+          "nameEn": "Dairy"
+        },
+        {
+          "nameDa": "Yoghurt",
+          "nameEn": "Yoghurt"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        }
+      ],
+      "stock": {
+        "quantity": 5.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 5
+      }
+    },
+    {
+      "productName": "GULLASH NAEMT",
+      "ean": "5712877164673",
+      "price": {
+        "originalPrice": 30.00,
+        "newPrice": 16.00,
+        "discount": 14.00,
+        "percentDiscount": 46.67
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:42:34",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Færdigretter",
+          "nameEn": "Ready To Eat Meals"
+        },
+        {
+          "nameDa": "Middagsretter",
+          "nameEn": "Dinner Meals"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        }
+      ],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "DET GODE GULEROD SCHULSTAD",
+      "ean": "5701205009731",
+      "price": {
+        "originalPrice": 14.95,
+        "newPrice": 11.00,
+        "discount": 3.95,
+        "percentDiscount": 26.42
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:38:25",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:03"
+      },
+      "categories": [
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        },
+        {
+          "nameDa": "Gulerodsrugbrød",
+          "nameEn": "Rye Breads With Carrots"
+        },
+        {
+          "nameDa": "Rugbrød",
+          "nameEn": "Rye Breads"
+        }
+      ],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "EGELUND MØRK GAMLE MØLLE",
+      "ean": "5701012523789",
+      "price": {
+        "originalPrice": 5.75,
+        "newPrice": 4.00,
+        "discount": 1.75,
+        "percentDiscount": 30.43
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:39:53",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:03"
+      },
+      "categories": [
+        {
+          "nameDa": "Andre rugbrød",
+          "nameEn": "Other Rye Breads"
+        },
+        {
+          "nameDa": "Rugbrød",
+          "nameEn": "Rye Breads"
+        },
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        }
+      ],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "ROASTBEEF EGELYKKE",
+      "ean": "5712875801112",
+      "price": {
+        "originalPrice": 14.50,
+        "newPrice": 11.00,
+        "discount": 3.50,
+        "percentDiscount": 24.14
+      },
+      "timing": {
+        "startTime": "2024-12-19 13:59:46",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Roastbeef",
+          "nameEn": "Roastbeef"
+        },
+        {
+          "nameDa": "Kødpålæg",
+          "nameEn": "Meat"
+        },
+        {
+          "nameDa": "Pålæg",
+          "nameEn": "Lunch Meats"
+        }
+      ],
+      "stock": {
+        "quantity": 7.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 7
+      }
+    },
+    {
+      "productName": "HK. GRISEKØD 4-7% VELSMAG",
+      "ean": "5707196301632",
+      "price": {
+        "originalPrice": 39.95,
+        "newPrice": 23.00,
+        "discount": 16.95,
+        "percentDiscount": 42.43
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:22:10",
+        "endTime": "2024-12-20 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Grisekød",
+          "nameEn": "Pork"
+        },
+        {
+          "nameDa": "Hakket grisekød",
+          "nameEn": "Minced Pork"
+        },
+        {
+          "nameDa": "Kød & fisk",
+          "nameEn": "Meat Fish"
+        }
+      ],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "GULERODSBOLLER GAMLE MØLLE",
+      "ean": "5712874603953",
+      "price": {
+        "originalPrice": 15.95,
+        "newPrice": 12.00,
+        "discount": 3.95,
+        "percentDiscount": 24.76
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:32:18",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Lyst & groft brød",
+          "nameEn": "Light Breads Dark Breads"
+        },
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        },
+        {
+          "nameDa": "Boller",
+          "nameEn": "Light Dark Buns"
+        }
+      ],
+      "stock": {
+        "quantity": 6.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 6
+      }
+    },
+    {
+      "productName": "FLÆSKESTEG VELSMAG",
+      "ean": "5707196312775",
+      "price": {
+        "originalPrice": 89.95,
+        "newPrice": 71.00,
+        "discount": 18.95,
+        "percentDiscount": 21.07
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:31:53",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Kød & fisk",
+          "nameEn": "Meat Fish"
+        },
+        {
+          "nameDa": "Stege & hele kødstykker",
+          "nameEn": "Roasted Whole Pork Pieces"
+        },
+        {
+          "nameDa": "Flæskesteg & ribbenssteg",
+          "nameEn": "Roasted Pork"
+        },
+        {
+          "nameDa": "Grisekød",
+          "nameEn": "Pork"
+        },
+        {
+          "nameDa": "Kød & fisk",
+          "nameEn": "Meat Fish"
+        },
+        {
+          "nameDa": "Grisekød",
+          "nameEn": "Pork"
+        },
+        {
+          "nameDa": "Andet grisekød",
+          "nameEn": "Other Pork"
+        }
+      ],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "BØFFEL MOZZARELLA PREMIEUR",
+      "ean": "5712871019948",
+      "price": {
+        "originalPrice": 19.95,
+        "newPrice": 15.00,
+        "discount": 4.95,
+        "percentDiscount": 24.81
+      },
+      "timing": {
+        "startTime": "2024-12-19 14:13:48",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Mejeri",
+          "nameEn": "Dairy"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Ost",
+          "nameEn": "Cheese"
+        },
+        {
+          "nameDa": "Mozzarella",
+          "nameEn": "Mozarella"
+        }
+      ],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "RIS M/KYLLING/LEMON NÆMT",
+      "ean": "8595175259152",
+      "price": {
+        "originalPrice": 30.00,
+        "newPrice": 23.00,
+        "discount": 7.00,
+        "percentDiscount": 23.33
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:41:18",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Færdigretter",
+          "nameEn": "Ready To Eat Meals"
+        },
+        {
+          "nameDa": "Middagsretter",
+          "nameEn": "Dinner Meals"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        }
+      ],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "REVET SPIR",
+      "ean": "5712876791153",
+      "price": {
+        "originalPrice": 13.45,
+        "newPrice": 9.00,
+        "discount": 4.45,
+        "percentDiscount": 33.09
+      },
+      "timing": {
+        "startTime": "2024-12-19 14:16:19",
+        "endTime": "2024-12-20 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Ost",
+          "nameEn": "Cheese"
+        },
+        {
+          "nameDa": "Ost i skiver",
+          "nameEn": "Sliced Cheese"
+        },
+        {
+          "nameDa": "Mejeri",
+          "nameEn": "Dairy"
+        }
+      ],
+      "stock": {
+        "quantity": 8.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 8
+      }
+    },
+    {
+      "productName": "SANDWICH M/SALAMI NÆMT",
+      "ean": "5712874224172",
+      "price": {
+        "originalPrice": 22.95,
+        "newPrice": 18.00,
+        "discount": 4.95,
+        "percentDiscount": 21.57
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:39:26",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Sandwiches & wraps",
+          "nameEn": "Sandwiches Wraps"
+        },
+        {
+          "nameDa": "Færdigretter",
+          "nameEn": "Ready To Eat Meals"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        }
+      ],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "KARTOF. HVIDLØG PEKA",
+      "ean": "8711118034499",
+      "price": {
+        "originalPrice": 19.95,
+        "newPrice": 10.00,
+        "discount": 9.95,
+        "percentDiscount": 49.87
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:32:53",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Tilberedte kartofler",
+          "nameEn": "Prepared Potatoes"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Kartoffeltilbehør",
+          "nameEn": "Potato Accessories"
+        }
+      ],
+      "stock": {
+        "quantity": 6.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 6
+      }
+    },
+    {
+      "productName": "RULLEPØLSE DEN GRØNNE SLAGTER",
+      "ean": "5707196213379",
+      "price": {
+        "originalPrice": 16.95,
+        "newPrice": 9.00,
+        "discount": 7.95,
+        "percentDiscount": 46.90
+      },
+      "timing": {
+        "startTime": "2024-12-19 14:04:41",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Rullepølse",
+          "nameEn": "Sausage Roll"
+        },
+        {
+          "nameDa": "Pålæg",
+          "nameEn": "Lunch Meats"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Kødpålæg",
+          "nameEn": "Meat"
+        }
+      ],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "BURGERBØF ØGO",
+      "ean": "5701050360636",
+      "price": {
+        "originalPrice": 33.25,
+        "newPrice": 26.00,
+        "discount": 7.25,
+        "percentDiscount": 21.80
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:14:09",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Kød & fisk",
+          "nameEn": "Meat Fish"
+        },
+        {
+          "nameDa": "Oksekød",
+          "nameEn": "Beef"
+        },
+        {
+          "nameDa": "Hakket oksekød",
+          "nameEn": "Minced Beef"
+        }
+      ],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "MULTIKERNE SANDWICH SCHULSTAD",
+      "ean": "5701205005542",
+      "price": {
+        "originalPrice": 25.00,
+        "newPrice": 14.00,
+        "discount": 11.00,
+        "percentDiscount": 44.00
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:34:15",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Lyst & groft brød",
+          "nameEn": "Light Breads Dark Breads"
+        },
+        {
+          "nameDa": "Toastbrød",
+          "nameEn": "Toast Breads"
+        },
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        }
+      ],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "MARINERET SVINEFILET VELSMAG",
+      "ean": "5707196306897",
+      "price": {
+        "originalPrice": 44.95,
+        "newPrice": 35.00,
+        "discount": 9.95,
+        "percentDiscount": 22.14
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:30:33",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:03"
+      },
+      "categories": [
+        {
+          "nameDa": "Svinemørbrad",
+          "nameEn": "Pork Tenderloin"
+        },
+        {
+          "nameDa": "Stege & hele kødstykker",
+          "nameEn": "Roasted Whole Pork Pieces"
+        },
+        {
+          "nameDa": "Grisekød",
+          "nameEn": "Pork"
+        },
+        {
+          "nameDa": "Kød & fisk",
+          "nameEn": "Meat Fish"
+        }
+      ],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "BRYGHUSET MØN SCHULSTAD",
+      "ean": "5701205009298",
+      "price": {
+        "originalPrice": 25.50,
+        "newPrice": 12.00,
+        "discount": 13.50,
+        "percentDiscount": 52.94
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:20:09",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:03"
+      },
+      "categories": [
+        {
+          "nameDa": "Kernerugbrød",
+          "nameEn": "Seeded Rye Breads"
+        },
+        {
+          "nameDa": "Rugbrød",
+          "nameEn": "Rye Breads"
+        },
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        }
+      ],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "CHILIHUMMUS LØGISMOSE",
+      "ean": "5713507056283",
+      "price": {
+        "originalPrice": 21.95,
+        "newPrice": 17.00,
+        "discount": 4.95,
+        "percentDiscount": 22.55
+      },
+      "timing": {
+        "startTime": "2024-12-19 13:51:36",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Tapas & specialiteter",
+          "nameEn": "Tapas Specialities"
+        },
+        {
+          "nameDa": "Pesto & hummus",
+          "nameEn": "Pesto Hummus"
+        }
+      ],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "JAVISST PÅGEN",
+      "ean": "7311070032161",
+      "price": {
+        "originalPrice": 23.95,
+        "newPrice": 12.00,
+        "discount": 11.95,
+        "percentDiscount": 49.90
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:17:53",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Boller",
+          "nameEn": "Light Dark Buns"
+        },
+        {
+          "nameDa": "Lyst & groft brød",
+          "nameEn": "Light Breads Dark Breads"
+        },
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        }
+      ],
+      "stock": {
+        "quantity": 5.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 5
+      }
+    },
+    {
+      "productName": "JUICE APPELSIN TROPICANA",
+      "ean": "1210002016247",
+      "price": {
+        "originalPrice": 9.95,
+        "newPrice": 7.00,
+        "discount": 2.95,
+        "percentDiscount": 29.65
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:03:11",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Drikkevarer",
+          "nameEn": "Beverages"
+        },
+        {
+          "nameDa": "Appelsinjuice",
+          "nameEn": "Orange Juices"
+        },
+        {
+          "nameDa": "Juice & smoothies",
+          "nameEn": "Juice Smoothies"
+        }
+      ],
+      "stock": {
+        "quantity": 6.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 6
+      }
+    },
+    {
+      "productName": "BACON LEVERPOSTEJ TULIP",
+      "ean": "5707196246698",
+      "price": {
+        "originalPrice": 19.95,
+        "newPrice": 12.00,
+        "discount": 7.95,
+        "percentDiscount": 39.85
+      },
+      "timing": {
+        "startTime": "2024-12-19 14:07:18",
+        "endTime": "2024-12-20 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Pålæg",
+          "nameEn": "Lunch Meats"
+        },
+        {
+          "nameDa": "Leverpostej & paté",
+          "nameEn": "Liver Paste Patee"
+        }
+      ],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "RUGSANDWICH KOHBERG",
+      "ean": "5701246036727",
+      "price": {
+        "originalPrice": 14.95,
+        "newPrice": 8.00,
+        "discount": 6.95,
+        "percentDiscount": 46.49
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:36:14",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Lyst & groft brød",
+          "nameEn": "Light Breads Dark Breads"
+        },
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        },
+        {
+          "nameDa": "Toastbrød",
+          "nameEn": "Toast Breads"
+        }
+      ],
+      "stock": {
+        "quantity": 13.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 13
+      }
+    },
+    {
+      "productName": "KALKUNBRYST EGELYKKE",
+      "ean": "4005097700259",
+      "price": {
+        "originalPrice": 14.25,
+        "newPrice": 10.00,
+        "discount": 4.25,
+        "percentDiscount": 29.82
+      },
+      "timing": {
+        "startTime": "2024-12-19 14:00:45",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Kødpålæg",
+          "nameEn": "Meat"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Kalkunpålæg",
+          "nameEn": "Cold Cuts Turkey"
+        },
+        {
+          "nameDa": "Pålæg",
+          "nameEn": "Lunch Meats"
+        }
+      ],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "SCHWARZBROT GAMLE MØLLE",
+      "ean": "5701012824183",
+      "price": {
+        "originalPrice": 8.50,
+        "newPrice": 6.00,
+        "discount": 2.50,
+        "percentDiscount": 29.41
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:26:18",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Andre rugbrød",
+          "nameEn": "Other Rye Breads"
+        },
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        },
+        {
+          "nameDa": "Rugbrød",
+          "nameEn": "Rye Breads"
+        }
+      ],
+      "stock": {
+        "quantity": 23.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 23
+      }
+    },
+    {
+      "productName": "SANDWICH M/KYLLING NÆMT",
+      "ean": "5712874224196",
+      "price": {
+        "originalPrice": 22.95,
+        "newPrice": 14.00,
+        "discount": 8.95,
+        "percentDiscount": 39.00
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:38:51",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:03"
+      },
+      "categories": [
+        {
+          "nameDa": "Færdigretter",
+          "nameEn": "Ready To Eat Meals"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Sandwiches & wraps",
+          "nameEn": "Sandwiches Wraps"
+        }
+      ],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "JULEMEDISTER VELSMAG",
+      "ean": "5707196304053",
+      "price": {
+        "originalPrice": 34.95,
+        "newPrice": 27.00,
+        "discount": 7.95,
+        "percentDiscount": 22.75
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:34:12",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Grisekød",
+          "nameEn": "Pork"
+        },
+        {
+          "nameDa": "Kød & fisk",
+          "nameEn": "Meat Fish"
+        },
+        {
+          "nameDa": "Medister",
+          "nameEn": "Thick Sausages"
+        }
+      ],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "HK. GRISEKØD 8-12% VELSMAG",
+      "ean": "5701050368632",
+      "price": {
+        "originalPrice": 39.95,
+        "newPrice": 24.00,
+        "discount": 15.95,
+        "percentDiscount": 39.92
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:24:54",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Grisekød",
+          "nameEn": "Pork"
+        },
+        {
+          "nameDa": "Hakket grisekød",
+          "nameEn": "Minced Pork"
+        },
+        {
+          "nameDa": "Kød & fisk",
+          "nameEn": "Meat Fish"
+        }
+      ],
+      "stock": {
+        "quantity": 6.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 6
+      }
+    },
+    {
+      "productName": "FRIKADELLEPØLSE EGELYKKE",
+      "ean": "5712876146373",
+      "price": {
+        "originalPrice": 13.95,
+        "newPrice": 7.00,
+        "discount": 6.95,
+        "percentDiscount": 49.82
+      },
+      "timing": {
+        "startTime": "2024-12-19 14:01:43",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Øvrigt pålæg",
+          "nameEn": "Sliced Lunch Meats"
+        },
+        {
+          "nameDa": "Kødpålæg",
+          "nameEn": "Meat"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Pålæg",
+          "nameEn": "Lunch Meats"
+        }
+      ],
+      "stock": {
+        "quantity": 6.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 6
+      }
+    },
+    {
+      "productName": "KØDBOLLER VELSMAG",
+      "ean": "5707735940490",
+      "price": {
+        "originalPrice": 32.95,
+        "newPrice": 26.00,
+        "discount": 6.95,
+        "percentDiscount": 21.09
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:33:38",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Middagsretter",
+          "nameEn": "Dinner Meals"
+        },
+        {
+          "nameDa": "Færdigretter",
+          "nameEn": "Ready To Eat Meals"
+        }
+      ],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "HERKULES KOHBERG",
+      "ean": "5710405068103",
+      "price": {
+        "originalPrice": 21.95,
+        "newPrice": 11.00,
+        "discount": 10.95,
+        "percentDiscount": 49.89
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:29:17",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Rugbrød",
+          "nameEn": "Rye Breads"
+        },
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        },
+        {
+          "nameDa": "Kernerugbrød",
+          "nameEn": "Seeded Rye Breads"
+        }
+      ],
+      "stock": {
+        "quantity": 8.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 8
+      }
+    },
+    {
+      "productName": "HÖNÖ BOHUSKAKA PÅGEN",
+      "ean": "7311070014488",
+      "price": {
+        "originalPrice": 22.00,
+        "newPrice": 11.00,
+        "discount": 11.00,
+        "percentDiscount": 50.00
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:19:58",
+        "endTime": "2024-12-20 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Lyst & groft brød",
+          "nameEn": "Light Breads Dark Breads"
+        },
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        },
+        {
+          "nameDa": "Boller",
+          "nameEn": "Light Dark Buns"
+        }
+      ],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "HAYDARI LØGISMOSE",
+      "ean": "5713507057952",
+      "price": {
+        "originalPrice": 21.95,
+        "newPrice": 14.00,
+        "discount": 7.95,
+        "percentDiscount": 36.22
+      },
+      "timing": {
+        "startTime": "2024-12-19 13:51:11",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Pesto & hummus",
+          "nameEn": "Pesto Hummus"
+        },
+        {
+          "nameDa": "Tapas & specialiteter",
+          "nameEn": "Tapas Specialities"
+        }
+      ],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "BONDEBR#D GAMLE M#LLE",
+      "ean": "5712874821685",
+      "price": {
+        "originalPrice": 6.95,
+        "newPrice": 5.00,
+        "discount": 1.95,
+        "percentDiscount": 28.06
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:22:36",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        },
+        {
+          "nameDa": "Rugbrød",
+          "nameEn": "Rye Breads"
+        },
+        {
+          "nameDa": "Andre rugbrød",
+          "nameEn": "Other Rye Breads"
+        }
+      ],
+      "stock": {
+        "quantity": 10.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 10
+      }
+    },
+    {
+      "productName": "KRYDDERBOLLER GAMLE M#LLE",
+      "ean": "5712874603960",
+      "price": {
+        "originalPrice": 8.50,
+        "newPrice": 6.00,
+        "discount": 2.50,
+        "percentDiscount": 29.41
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:42:26",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:03"
+      },
+      "categories": [
+        {
+          "nameDa": "Lyst & groft brød",
+          "nameEn": "Light Breads Dark Breads"
+        },
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        },
+        {
+          "nameDa": "Boller",
+          "nameEn": "Light Dark Buns"
+        }
+      ],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "SKOVMAND SCHULSTAD",
+      "ean": "5701205005481",
+      "price": {
+        "originalPrice": 12.95,
+        "newPrice": 9.00,
+        "discount": 3.95,
+        "percentDiscount": 30.50
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:25:01",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 14:09:02"
+      },
+      "categories": [
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        },
+        {
+          "nameDa": "Kernerugbrød",
+          "nameEn": "Seeded Rye Breads"
+        },
+        {
+          "nameDa": "Rugbrød",
+          "nameEn": "Rye Breads"
+        }
+      ],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    }
+  ]
+}

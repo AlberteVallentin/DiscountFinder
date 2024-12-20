@@ -5,27 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50970898-f021-40ab-8b7d-ce8447e2a8a2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-10T101041.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-10T101102.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-10T101116.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-10T101133.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-10T101138.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-10T101141.401.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-10T101144.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-10T101214.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-10T101218.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-10T101825.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-10T101838.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-10T101844.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-11T211909.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-11T211917.401.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T120716.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T120726.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T120729.401.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T120732.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T120736.500.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T120928.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T120937.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T120954.500.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T121320.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T121413.200.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/javalin-app.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/javalin-app.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/javalin-app.log" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dat/controllers/impl/StoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/controllers/impl/StoreController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dat/daos/impl/StoreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/daos/impl/StoreDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dat/dtos/StoreDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/dtos/StoreDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dat/routes/StoreRoute.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/routes/StoreRoute.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dat/security/controllers/AccessController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/security/controllers/AccessController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/http/dev.http" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/http/dev.http" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -85,6 +81,7 @@
     "HTTP Request.dev | #18.executor": "Run",
     "HTTP Request.dev | #19.executor": "Run",
     "HTTP Request.dev | #20.executor": "Run",
+    "HTTP Request.dev | #21.executor": "Run",
     "HTTP Request.dev | Add store to favorites (requires auth).executor": "Run",
     "HTTP Request.dev | Get all stores (public).executor": "Run",
     "HTTP Request.dev | Get specific store (public).executor": "Run",
@@ -114,25 +111,38 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="HTTP Request.dev | #20">
-    <configuration name="dev | Login user#1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="Login user#1" index="3" runType="Run single request">
-      <method v="2" />
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <envs>
+        <env name="SALLING_API_KEY" value="77fcfa33-0e12-4dc9-aac6-c5d7cc9be766" />
+      </envs>
+      <option name="MAIN_CLASS_NAME" value="dat.Main" />
+      <module name="DiscountFinder" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dat.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="dev | #16" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="#16" index="16" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="dev | #18" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="#18" index="18" runType="Run single request">
+    <configuration name="dev | #17" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="#17" index="17" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="dev | #19" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="#19" index="19" runType="Run single request">
+    <configuration name="dev | #18" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="#18" index="18" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="dev | #20" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="#20" index="20" runType="Run single request">
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="HTTP Request.dev | #19" />
-      <item itemvalue="HTTP Request.dev | Login user#1" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="HTTP Request.dev | #17" />
       <item itemvalue="HTTP Request.dev | #16" />
       <item itemvalue="HTTP Request.dev | #18" />
       <item itemvalue="HTTP Request.dev | #20" />
@@ -141,9 +151,8 @@
       <list>
         <item itemvalue="HTTP Request.dev | #20" />
         <item itemvalue="HTTP Request.dev | #18" />
+        <item itemvalue="HTTP Request.dev | #17" />
         <item itemvalue="HTTP Request.dev | #16" />
-        <item itemvalue="HTTP Request.dev | #19" />
-        <item itemvalue="HTTP Request.dev | Login user#1" />
       </list>
     </recent_temporary>
   </component>
@@ -157,7 +166,7 @@
       <workItem from="1733819003762" duration="6826000" />
       <workItem from="1733948280518" duration="1496000" />
       <workItem from="1734082299037" duration="3826000" />
-      <workItem from="1734691429947" duration="3196000" />
+      <workItem from="1734691429947" duration="4424000" />
     </task>
     <servers />
   </component>

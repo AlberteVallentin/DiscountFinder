@@ -45,6 +45,28 @@ public class StoreDTO {
         this.lastFetched = store.getLastFetched();
     }
 
+    // Primær constructor
+    public StoreDTO(Store store, boolean includeProducts, String userEmail) {
+        this.id = store.getId();
+        this.sallingStoreId = store.getSallingStoreId();
+        this.name = store.getName();
+        this.brand = new BrandDTO(store.getBrand());
+        this.address = new AddressDTO(store.getAddress());
+        this.hasProductsInDb = store.hasProductsInDb();
+        this.lastFetched = store.getLastFetched();
+
+        if (includeProducts && store.getProducts() != null) {
+            this.products = store.getProducts().stream()
+                .map(ProductDTO::new)
+                .collect(Collectors.toSet());
+        }
+
+        if (userEmail != null && store.getFavoredByUsers() != null) {
+            this.isFavorite = store.getFavoredByUsers().stream()
+                .anyMatch(user -> user.getEmail().equals(userEmail));
+        }
+    }
+
     // Constructor that includes products
     public StoreDTO(Store store, boolean includeProducts) {
         this(store); // Call the basic constructor first
@@ -55,16 +77,8 @@ public class StoreDTO {
         }
     }
 
-    // Constructor der tager højde for bruger-specifik favorit-status
-    public StoreDTO(Store store, boolean includeProducts, String userEmail) {
-        this(store, includeProducts);
-        if (userEmail != null && store.getFavoredByUsers() != null) {
-            this.isFavorite = store.getFavoredByUsers().stream()
-                .anyMatch(user -> user.getEmail().equals(userEmail));
-        } else {
-            this.isFavorite = null;  // Eksplicit sæt til null hvis ingen bruger
-        }
-    }
+
+
 
     public boolean hasProductsInDb() {
         return hasProductsInDb;
