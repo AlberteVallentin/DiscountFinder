@@ -110,7 +110,7 @@ Accept: application/json
 
 ###
 # 2. Add to favorites
-POST {{url}}/stores/21/favorite
+POST {{url}}/stores/49/favorite
 Authorization: Bearer {{auth_token}}
 Accept: application/json
 
@@ -128,12 +128,17 @@ Accept: application/json
 
 ###
 # 5. Remove from favorites
-DELETE {{url}}/stores/19/favorite
+DELETE {{url}}/stores/49/favorite
 Authorization: Bearer {{auth_token}}
 Accept: application/json
 
 ###
 # 6. Verify store is no longer favorite
-GET {{url}}/stores/19
+GET {{url}}/stores/49
 Authorization: Bearer {{auth_token}}
+Accept: application/json
+
+###
+# 6. Verify store is no longer favorite
+GET {{url}}/stores/49
 Accept: application/json

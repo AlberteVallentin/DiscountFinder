@@ -16,11 +16,8 @@ public class StoreRoute {
         return () -> {
             get("/favorites", favoriteStoreController::getFavoriteStores, RoleType.USER);
             get("/", storeController::readAll, RoleType.ANYONE);
-            get("/{id}", storeController::read, RoleType.USER);
-
+            get("/{id}", storeController::read, RoleType.ANYONE);  // Ændret fra USER til ANYONE
             get("/postal_code/{postal_code}", storeController::getStoresByPostalCode, RoleType.ANYONE);
-            //post("/", storeController::create, RoleType.ADMIN);
-
 
             post("/{id}/favorite", favoriteStoreController::addFavoriteStore, RoleType.USER);
             delete("/{id}/favorite", favoriteStoreController::removeFavoriteStore, RoleType.USER);

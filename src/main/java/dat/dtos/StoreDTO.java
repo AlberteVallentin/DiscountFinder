@@ -33,7 +33,7 @@ public class StoreDTO {
     private Set<ProductDTO> products;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private boolean isFavorite;
+    private Boolean isFavorite;
 
     public StoreDTO(Store store) {
         this.id = store.getId();
@@ -55,11 +55,14 @@ public class StoreDTO {
         }
     }
 
+    // Constructor der tager højde for bruger-specifik favorit-status
     public StoreDTO(Store store, boolean includeProducts, String userEmail) {
         this(store, includeProducts);
         if (userEmail != null && store.getFavoredByUsers() != null) {
             this.isFavorite = store.getFavoredByUsers().stream()
                 .anyMatch(user -> user.getEmail().equals(userEmail));
+        } else {
+            this.isFavorite = null;  // Eksplicit sæt til null hvis ingen bruger
         }
     }
 

@@ -1,3 +1,212 @@
+GET http://localhost:7070/api/stores/49
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBbGJlcnRlIFZhbGxlbnRpbiIsInN1YiI6InVzZXJAdXNlci5kayIsInJvbGUiOiJVU0VSIiwiZXhwIjoxNzM0Njk2NDcwLCJlbWFpbCI6InVzZXJAdXNlci5kayJ9.exB2KiPL-1J2qqEsALfVAFrOQ6cE716NmiiURxJMuXE
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+
+<> 2024-12-20T123833.200.json
+
+###
+
+GET http://localhost:7070/api/stores/favorites
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBbGJlcnRlIFZhbGxlbnRpbiIsInN1YiI6InVzZXJAdXNlci5kayIsInJvbGUiOiJVU0VSIiwiZXhwIjoxNzM0Njk2NDcwLCJlbWFpbCI6InVzZXJAdXNlci5kayJ9.exB2KiPL-1J2qqEsALfVAFrOQ6cE716NmiiURxJMuXE
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+
+<> 2024-12-20T123826.200.json
+
+###
+
+POST http://localhost:7070/api/stores/49/favorite
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBbGJlcnRlIFZhbGxlbnRpbiIsInN1YiI6InVzZXJAdXNlci5kayIsInJvbGUiOiJVU0VSIiwiZXhwIjoxNzM0Njk2NDcwLCJlbWFpbCI6InVzZXJAdXNlci5kayJ9.exB2KiPL-1J2qqEsALfVAFrOQ6cE716NmiiURxJMuXE
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+content-length: 0
+
+###
+
+DELETE http://localhost:7070/api/stores/49/favorite
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBbGJlcnRlIFZhbGxlbnRpbiIsInN1YiI6InVzZXJAdXNlci5kayIsInJvbGUiOiJVU0VSIiwiZXhwIjoxNzM0Njk2NDcwLCJlbWFpbCI6InVzZXJAdXNlci5kayJ9.exB2KiPL-1J2qqEsALfVAFrOQ6cE716NmiiURxJMuXE
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+content-length: 0
+
+###
+
+GET http://localhost:7070/api/stores/49
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBbGJlcnRlIFZhbGxlbnRpbiIsInN1YiI6InVzZXJAdXNlci5kayIsInJvbGUiOiJVU0VSIiwiZXhwIjoxNzM0Njk2NDcwLCJlbWFpbCI6InVzZXJAdXNlci5kayJ9.exB2KiPL-1J2qqEsALfVAFrOQ6cE716NmiiURxJMuXE
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+
+<> 2024-12-20T123806.200.json
+
+###
+
+POST http://localhost:7070/api/auth/login
+Content-Type: application/json
+Content-Length: 54
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+{
+  "email": "user@user.dk",
+  "password": "user123"
+}
+
+<> 2024-12-20T123750.200.json
+
+###
+
+GET http://localhost:7070/api/stores/48
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+
+<> 2024-12-20T123730.200.json
+
+###
+
+GET http://localhost:7070/api/stores/48
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBbGJlcnRlIFZhbGxlbnRpbiIsInN1YiI6InVzZXJAdXNlci5kayIsInJvbGUiOiJVU0VSIiwiZXhwIjoxNzM0Njk1MjI3LCJlbWFpbCI6InVzZXJAdXNlci5kayJ9.KOvHrSRzuT_CR8raWZIqF_fDndZ4eyxS_1iP0Qd_j0w
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+
+<> 2024-12-20T123317.200.json
+
+###
+
+GET http://localhost:7070/api/stores/48
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBbGJlcnRlIFZhbGxlbnRpbiIsInN1YiI6InVzZXJAdXNlci5kayIsInJvbGUiOiJVU0VSIiwiZXhwIjoxNzM0Njk1MjI3LCJlbWFpbCI6InVzZXJAdXNlci5kayJ9.KOvHrSRzuT_CR8raWZIqF_fDndZ4eyxS_1iP0Qd_j0w
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+
+<> 2024-12-20T123222.500.json
+
+###
+
+GET http://localhost:7070/api/stores/favorites
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBbGJlcnRlIFZhbGxlbnRpbiIsInN1YiI6InVzZXJAdXNlci5kayIsInJvbGUiOiJVU0VSIiwiZXhwIjoxNzM0Njk1MjI3LCJlbWFpbCI6InVzZXJAdXNlci5kayJ9.KOvHrSRzuT_CR8raWZIqF_fDndZ4eyxS_1iP0Qd_j0w
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+
+<> 2024-12-20T123209.200.json
+
+###
+
+POST http://localhost:7070/api/stores/48/favorite
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBbGJlcnRlIFZhbGxlbnRpbiIsInN1YiI6InVzZXJAdXNlci5kayIsInJvbGUiOiJVU0VSIiwiZXhwIjoxNzM0Njk1MjI3LCJlbWFpbCI6InVzZXJAdXNlci5kayJ9.KOvHrSRzuT_CR8raWZIqF_fDndZ4eyxS_1iP0Qd_j0w
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+content-length: 0
+
+###
+
+GET http://localhost:7070/api/auth/test
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2024-12-20T123150.200.json
+
+###
+
+GET http://localhost:7070/api/stores/19
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBbGJlcnRlIFZhbGxlbnRpbiIsInN1YiI6InVzZXJAdXNlci5kayIsInJvbGUiOiJVU0VSIiwiZXhwIjoxNzM0Njk1MjI3LCJlbWFpbCI6InVzZXJAdXNlci5kayJ9.KOvHrSRzuT_CR8raWZIqF_fDndZ4eyxS_1iP0Qd_j0w
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+
+<> 2024-12-20T123139.200.json
+
+###
+
+GET http://localhost:7070/api/stores/19
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+content-length: 24
+
+Accept: application/json
+
+<> 2024-12-20T123132.200.json
+
+###
+
+GET http://localhost:7070/api/protected/user_demo
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBbGJlcnRlIFZhbGxlbnRpbiIsInN1YiI6InVzZXJAdXNlci5kayIsInJvbGUiOiJVU0VSIiwiZXhwIjoxNzM0Njk1MjI3LCJlbWFpbCI6InVzZXJAdXNlci5kayJ9.KOvHrSRzuT_CR8raWZIqF_fDndZ4eyxS_1iP0Qd_j0w
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2024-12-20T123029.200.json
+
+###
+
+GET http://localhost:7070/api/auth/test/
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2024-12-20T123010.200.json
+
+###
+
+GET http://localhost:7070/api/stores/19
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBbGJlcnRlIFZhbGxlbnRpbiIsInN1YiI6InVzZXJAdXNlci5kayIsInJvbGUiOiJVU0VSIiwiZXhwIjoxNzM0Njk1MjI3LCJlbWFpbCI6InVzZXJAdXNlci5kayJ9.KOvHrSRzuT_CR8raWZIqF_fDndZ4eyxS_1iP0Qd_j0w
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+
+<> 2024-12-20T122947.200.json
+
+###
+
+GET http://localhost:7070/api/stores
+Accept: application/json
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+
+<> 2024-12-20T122944.200.json
+
+###
+
+GET http://localhost:7070/api/auth/test/
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2024-12-20T122938.200.json
+
+###
+
+GET http://localhost:7070/api/protected/user_demo
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBbGJlcnRlIFZhbGxlbnRpbiIsInN1YiI6InVzZXJAdXNlci5kayIsInJvbGUiOiJVU0VSIiwiZXhwIjoxNzM0Njk1MjI3LCJlbWFpbCI6InVzZXJAdXNlci5kayJ9.KOvHrSRzuT_CR8raWZIqF_fDndZ4eyxS_1iP0Qd_j0w
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2024-12-20T122930.200.json
+
+###
+
+GET http://localhost:7070/api/auth/test/
+User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
+Accept-Encoding: br, deflate, gzip, x-gzip
+Accept: */*
+
+<> 2024-12-20T122927.200.json
+
+###
+
 GET http://localhost:7070/api/stores/favorites
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBbGJlcnRlIFZhbGxlbnRpbiIsInN1YiI6InVzZXJAdXNlci5kayIsInJvbGUiOiJVU0VSIiwiZXhwIjoxNzM0Njk1MjI3LCJlbWFpbCI6InVzZXJAdXNlci5kayJ9.KOvHrSRzuT_CR8raWZIqF_fDndZ4eyxS_1iP0Qd_j0w
 Accept: application/json
@@ -314,242 +523,6 @@ Accept: */*
 }
 
 <> 2024-12-20T120716.200.json
-
-###
-
-GET http://localhost:7070/api/stores
-Accept: application/json
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-
-<> 2024-12-20T115006.200.json
-
-###
-
-GET https://discountfinder.api.albertevallentin.dk/api/stores
-Accept: application/json
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-
-<> 2024-12-20T114952.200.json
-
-###
-
-GET https://discountfinder.api.albertevallentin.dk/api/stores/19
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBbGJlcnRlIFZhbGxlbnRpbiIsInN1YiI6InRlc3RAYWRtaW4uZGsiLCJyb2xlIjoiVVNFUiIsImV4cCI6MTczNDEwNjU2NiwiZW1haWwiOiJ0ZXN0QGFkbWluLmRrIn0.h1bWQWUBrrYBqC2VDHx3r5pS0nnebge1V7HwjNIgNm0
-Accept: application/json
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-
-<> 2024-12-13T164614.200.json
-
-###
-
-POST https://discountfinder.api.albertevallentin.dk/api/auth/login
-Content-Type: application/json
-Content-Length: 55
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-x-http2-scheme: https
-
-{
-  "email": "test@admin.dk",
-  "password": "test123"
-}
-
-<> 2024-12-13T164606.200.json
-
-###
-
-POST https://discountfinder.api.albertevallentin.dk/api/auth/login
-Content-Type: application/json
-Content-Length: 55
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-x-http2-scheme: https
-
-{
-  "email": "test@admin.dk",
-  "password": "test123"
-}
-
-<> 2024-12-11T212057.200.json
-
-###
-
-POST https://discountfinder.api.albertevallentin.dk/api/auth/register
-Content-Type: application/json
-Content-Length: 100
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-x-http2-scheme: https
-
-{
-  "name": "Test User",
-  "email": "test@admin.dk",
-  "password": "test123",
-  "roleType": "USER"
-}
-
-<> 2024-12-11T211959.201.json
-
-###
-
-GET https://discountfinder.api.albertevallentin.dk/api/stores
-Accept: application/json
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-
-<> 2024-12-11T211940.200.json
-
-###
-
-POST https://discountfinder.api.albertevallentin.dk/api/auth/login
-Content-Type: application/json
-Content-Length: 55
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-x-http2-scheme: https
-
-{
-  "email": "test@admin.dk",
-  "password": "test123"
-}
-
-<> 2024-12-11T211917.401.json
-
-###
-
-GET https://discountfinder.api.albertevallentin.dk/api/auth/test
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-<> 2024-12-11T211909.200.json
-
-###
-
-GET https://discountfinder.albertevallentin.dk/api/stores/76
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBbGJlcnRlIFZhbGxlbnRpbiIsInN1YiI6InRlc3RAYWRtaW4uZGsiLCJyb2xlIjoiVVNFUiIsImV4cCI6MTczMzgyMzY5MywiZW1haWwiOiJ0ZXN0QGFkbWluLmRrIn0.jMLcv0JwhUppNSwpPfuq9rh9cg_ZdU9tA2LXlbl5FHE
-Accept: application/json
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-
-<> 2024-12-10T101844.200.json
-
-###
-
-GET https://discountfinder.albertevallentin.dk/api/auth/test/
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-<> 2024-12-10T101838.200.json
-
-###
-
-GET https://discountfinder.albertevallentin.dk/api/stores
-Accept: application/json
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-
-<> 2024-12-10T101825.200.json
-
-###
-
-GET https://discountfinder.albertevallentin.dk/api/stores/76
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBbGJlcnRlIFZhbGxlbnRpbiIsInN1YiI6InRlc3RAYWRtaW4uZGsiLCJyb2xlIjoiVVNFUiIsImV4cCI6MTczMzgyMzY5MywiZW1haWwiOiJ0ZXN0QGFkbWluLmRrIn0.jMLcv0JwhUppNSwpPfuq9rh9cg_ZdU9tA2LXlbl5FHE
-Accept: application/json
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-
-<> 2024-12-10T101218.200.json
-
-###
-
-GET https://discountfinder.albertevallentin.dk/api/stores
-Accept: application/json
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-
-<> 2024-12-10T101214.200.json
-
-###
-
-GET http://localhost:7070/api/stores/76
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBbGJlcnRlIFZhbGxlbnRpbiIsInN1YiI6InRlc3RAYWRtaW4uZGsiLCJyb2xlIjoiVVNFUiIsImV4cCI6MTczMzgyMzY5MywiZW1haWwiOiJ0ZXN0QGFkbWluLmRrIn0.jMLcv0JwhUppNSwpPfuq9rh9cg_ZdU9tA2LXlbl5FHE
-Accept: application/json
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-
-<> 2024-12-10T101144.200.json
-
-###
-
-GET http://localhost:7070/api/protected/admin_demo
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBbGJlcnRlIFZhbGxlbnRpbiIsInN1YiI6InRlc3RAYWRtaW4uZGsiLCJyb2xlIjoiVVNFUiIsImV4cCI6MTczMzgyMzY5MywiZW1haWwiOiJ0ZXN0QGFkbWluLmRrIn0.jMLcv0JwhUppNSwpPfuq9rh9cg_ZdU9tA2LXlbl5FHE
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-<> 2024-12-10T101141.401.txt
-
-###
-
-GET http://localhost:7070/api/protected/user_demo
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBbGJlcnRlIFZhbGxlbnRpbiIsInN1YiI6InRlc3RAYWRtaW4uZGsiLCJyb2xlIjoiVVNFUiIsImV4cCI6MTczMzgyMzY5MywiZW1haWwiOiJ0ZXN0QGFkbWluLmRrIn0.jMLcv0JwhUppNSwpPfuq9rh9cg_ZdU9tA2LXlbl5FHE
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-<> 2024-12-10T101138.200.json
-
-###
-
-POST http://localhost:7070/api/auth/login
-Content-Type: application/json
-Content-Length: 55
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-{
-  "email": "test@admin.dk",
-  "password": "test123"
-}
-
-<> 2024-12-10T101133.200.json
-
-###
-
-GET http://localhost:7070/api/stores
-Accept: application/json
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-
-<> 2024-12-10T101116.200.json
-
-###
-
-GET http://localhost:7070/api/auth/test
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-<> 2024-12-10T101102.200.json
-
-###
-
-GET http://localhost:7070/api/auth/test/
-User-Agent: IntelliJ HTTP Client/IntelliJ IDEA 2024.3.1
-Accept-Encoding: br, deflate, gzip, x-gzip
-Accept: */*
-
-<> 2024-12-10T101041.200.json
 
 ###
 

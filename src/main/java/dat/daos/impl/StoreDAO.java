@@ -50,6 +50,24 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
         }
     }
 
+    public Store findByIdWithFavorites(Long id) {
+        try (EntityManager em = emf.createEntityManager()) {
+            return em.createQuery(
+                    "SELECT DISTINCT s FROM Store s " +
+                        "LEFT JOIN FETCH s.products p " +
+                        "LEFT JOIN FETCH s.favoredByUsers u " +  // Fetch favoredByUsers også
+                        "LEFT JOIN FETCH p.price " +
+                        "LEFT JOIN FETCH p.stock " +
+                        "LEFT JOIN FETCH p.timing " +
+                        "LEFT JOIN FETCH p.categories " +
+                        "WHERE s.id = :id", Store.class)
+                .setParameter("id", id)
+                .getResultStream()
+                .findFirst()
+                .orElse(null);
+        }
+    }
+
     @Override
     public StoreDTO create(StoreDTO storeDTO) {
         try (EntityManager em = emf.createEntityManager()) {

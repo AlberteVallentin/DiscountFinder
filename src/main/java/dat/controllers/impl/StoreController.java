@@ -7,6 +7,7 @@ import dat.dtos.StoreDTO;
 import dat.entities.Category;
 import dat.entities.Store;
 import dat.exceptions.ApiException;
+import dat.security.token.UserDTO;
 import dat.services.ProductFetcher;
 import io.javalin.http.Context;
 import jakarta.persistence.EntityManager;
@@ -34,7 +35,15 @@ public class StoreController {
         try {
             Long id = Long.parseLong(ctx.pathParam("id"));
 
-            Store store = storeDAO.findById(id);
+            // Get user email if user is logged in
+            UserDTO userDTO = ctx.attribute("user");
+            String userEmail = userDTO != null ? userDTO.getEmail() : null;
+
+            // Vælg den rigtige find metode baseret på om bruger er logget ind
+            Store store = userEmail != null ?
+                storeDAO.findByIdWithFavorites(id) :
+                storeDAO.findById(id);
+
             if (store == null) {
                 throw new ApiException(404, "Store not found with ID: " + id);
             }
@@ -56,7 +65,9 @@ public class StoreController {
                     storeDAO.updateStoreProducts(store.getId(), products);
 
                     // Refresh store data after product update
-                    store = storeDAO.findById(id);
+                    store = userEmail != null ?
+                        storeDAO.findByIdWithFavorites(id) :
+                        storeDAO.findById(id);
 
                     // Debug log products after fetching from database
                     LOGGER.debug("Products after database fetch:");
@@ -73,7 +84,7 @@ public class StoreController {
                 }
             }
 
-            StoreDTO storeDTO = new StoreDTO(store, true);
+            StoreDTO storeDTO = new StoreDTO(store, true, userEmail);
 
             // Debug log final DTO
             LOGGER.debug("Final StoreDTO products:");
