@@ -32,6 +32,9 @@ public class StoreDTO {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Set<ProductDTO> products;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Boolean isFavorite;
+
     public StoreDTO(Store store) {
         this.id = store.getId();
         this.sallingStoreId = store.getSallingStoreId();
@@ -40,6 +43,28 @@ public class StoreDTO {
         this.address = new AddressDTO(store.getAddress());
         this.hasProductsInDb = store.hasProductsInDb();
         this.lastFetched = store.getLastFetched();
+    }
+
+    // Primær constructor
+    public StoreDTO(Store store, boolean includeProducts, String userEmail) {
+        this.id = store.getId();
+        this.sallingStoreId = store.getSallingStoreId();
+        this.name = store.getName();
+        this.brand = new BrandDTO(store.getBrand());
+        this.address = new AddressDTO(store.getAddress());
+        this.hasProductsInDb = store.hasProductsInDb();
+        this.lastFetched = store.getLastFetched();
+
+        if (includeProducts && store.getProducts() != null) {
+            this.products = store.getProducts().stream()
+                .map(ProductDTO::new)
+                .collect(Collectors.toSet());
+        }
+
+        if (userEmail != null && store.getFavoredByUsers() != null) {
+            this.isFavorite = store.getFavoredByUsers().stream()
+                .anyMatch(user -> user.getEmail().equals(userEmail));
+        }
     }
 
     // Constructor that includes products
@@ -51,6 +76,9 @@ public class StoreDTO {
                 .collect(Collectors.toSet());
         }
     }
+
+
+
 
     public boolean hasProductsInDb() {
         return hasProductsInDb;

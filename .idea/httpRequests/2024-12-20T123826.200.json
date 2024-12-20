@@ -1,0 +1,87 @@
+[
+  {
+    "id": 20,
+    "name": "Netto Lyngby",
+    "brand": {
+      "displayName": "Netto"
+    },
+    "address": {
+      "addressLine": "Kollegiebakken 7",
+      "longitude": 12.524157,
+      "latitude": 55.783828,
+      "postalCode": {
+        "postalCode": 2800,
+        "city": "Kongens Lyngby"
+      }
+    },
+    "isFavorite": true
+  },
+  {
+    "id": 19,
+    "name": "Netto Trøjborggade",
+    "brand": {
+      "displayName": "Netto"
+    },
+    "address": {
+      "addressLine": "Trøjborggade 1",
+      "longitude": 12.540357,
+      "latitude": 55.669325,
+      "postalCode": {
+        "postalCode": 1757,
+        "city": "København V"
+      }
+    },
+    "isFavorite": true
+  },
+  {
+    "id": 21,
+    "name": "Netto Søborg Hovedgade 121-127",
+    "brand": {
+      "displayName": "Netto"
+    },
+    "address": {
+      "addressLine": "Søborg Hovedgade 121-127",
+      "longitude": 12.507216,
+      "latitude": 55.738026,
+      "postalCode": {
+        "postalCode": 2860,
+        "city": "Søborg"
+      }
+    },
+    "isFavorite": true
+  },
+  {
+    "id": 48,
+    "name": "Netto Jernbane Allé 36",
+    "brand": {
+      "displayName": "Netto"
+    },
+    "address": {
+      "addressLine": "Jernbane Allé 36, ST",
+      "longitude": 12.4913,
+      "latitude": 55.686648,
+      "postalCode": {
+        "postalCode": 2720,
+        "city": "Vanløse"
+      }
+    },
+    "isFavorite": true
+  },
+  {
+    "id": 49,
+    "name": "Netto Norvangen Korsør",
+    "brand": {
+      "displayName": "Netto"
+    },
+    "address": {
+      "addressLine": "Norvangen 1A",
+      "longitude": 11.144636,
+      "latitude": 55.328857,
+      "postalCode": {
+        "postalCode": 4220,
+        "city": "Korsør"
+      }
+    },
+    "isFavorite": true
+  }
+]

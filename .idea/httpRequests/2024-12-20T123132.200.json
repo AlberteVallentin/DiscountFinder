@@ -1,0 +1,1365 @@
+{
+  "id": 19,
+  "name": "Netto Trøjborggade",
+  "brand": {
+    "displayName": "Netto"
+  },
+  "address": {
+    "addressLine": "Trøjborggade 1",
+    "longitude": 12.540357,
+    "latitude": 55.669325,
+    "postalCode": {
+      "postalCode": 1757,
+      "city": "København V"
+    }
+  },
+  "products": [
+    {
+      "productName": "SVINEMØRBRAD VELSMAG",
+      "ean": "5707196304077",
+      "price": {
+        "originalPrice": 124.95,
+        "newPrice": 79.00,
+        "discount": 45.95,
+        "percentDiscount": 36.77
+      },
+      "timing": {
+        "startTime": "2024-12-19 11:57:41",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Stege & hele kødstykker",
+          "nameEn": "Roasted Whole Pork Pieces"
+        },
+        {
+          "nameDa": "Kød & fisk",
+          "nameEn": "Meat Fish"
+        },
+        {
+          "nameDa": "Svinemørbrad",
+          "nameEn": "Pork Tenderloin"
+        },
+        {
+          "nameDa": "Grisekød",
+          "nameEn": "Pork"
+        }
+      ],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "TUNSALAT GRAASTEN",
+      "ean": "5704000501929",
+      "price": {
+        "originalPrice": 10.00,
+        "newPrice": 5.00,
+        "discount": 5.00,
+        "percentDiscount": 50.00
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:11:46",
+        "endTime": "2024-12-29 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Fiske- & skaldyrssalat",
+          "nameEn": "Fish Mayo Salads"
+        },
+        {
+          "nameDa": "Pålæg",
+          "nameEn": "Lunch Meats"
+        },
+        {
+          "nameDa": "Pålægssalater",
+          "nameEn": "Mayo Salads"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        }
+      ],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "KYLLINGETERN SMART COOKING",
+      "ean": "5712874220877",
+      "price": {
+        "originalPrice": 15.50,
+        "newPrice": 12.00,
+        "discount": 3.50,
+        "percentDiscount": 22.58
+      },
+      "timing": {
+        "startTime": "2024-12-16 12:20:59",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Andet topping",
+          "nameEn": "Other Toppings"
+        },
+        {
+          "nameDa": "Bacon, pølser & toppings",
+          "nameEn": "Bacon Sausages Toppings"
+        }
+      ],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "ITALIENSK SALAT GRAASTEN",
+      "ean": "5704000500564",
+      "price": {
+        "originalPrice": 7.00,
+        "newPrice": 5.00,
+        "discount": 2.00,
+        "percentDiscount": 28.57
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:21:40",
+        "endTime": "2024-12-31 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Pålæg",
+          "nameEn": "Lunch Meats"
+        },
+        {
+          "nameDa": "Italiensk salat",
+          "nameEn": "Italian Mayo Salads"
+        },
+        {
+          "nameDa": "Pålægssalater",
+          "nameEn": "Mayo Salads"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        }
+      ],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "SØDMÆLKSFRANSKBRØD 600 G",
+      "ean": "5701205004873",
+      "price": {
+        "originalPrice": 20.00,
+        "newPrice": 11.00,
+        "discount": 9.00,
+        "percentDiscount": 45.00
+      },
+      "timing": {
+        "startTime": "2024-12-19 13:28:21",
+        "endTime": "2024-12-20 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Hele brød",
+          "nameEn": "Whole Breads"
+        },
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        },
+        {
+          "nameDa": "Lyst & groft brød",
+          "nameEn": "Light Breads Dark Breads"
+        }
+      ],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "CREAMY WHITE CASTELLO",
+      "ean": "5711953070266",
+      "price": {
+        "originalPrice": 10.00,
+        "newPrice": 7.00,
+        "discount": 3.00,
+        "percentDiscount": 30.00
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:24:30",
+        "endTime": "2024-12-31 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Ost",
+          "nameEn": "Cheese"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Mejeri",
+          "nameEn": "Dairy"
+        },
+        {
+          "nameDa": "Skimmelost & brie",
+          "nameEn": "Blue Cheese Brie"
+        }
+      ],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "KERNEGROV SCHULSTAD",
+      "ean": "5701205002015",
+      "price": {
+        "originalPrice": 25.00,
+        "newPrice": 14.00,
+        "discount": 11.00,
+        "percentDiscount": 44.00
+      },
+      "timing": {
+        "startTime": "2024-12-19 13:31:25",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        },
+        {
+          "nameDa": "Rugbrød",
+          "nameEn": "Rye Breads"
+        },
+        {
+          "nameDa": "Kernerugbrød",
+          "nameEn": "Seeded Rye Breads"
+        }
+      ],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "FLÆSK I SKIVER VELSMAG",
+      "ean": "5707196280654",
+      "price": {
+        "originalPrice": 39.95,
+        "newPrice": 21.00,
+        "discount": 18.95,
+        "percentDiscount": 47.43
+      },
+      "timing": {
+        "startTime": "2024-12-19 12:38:09",
+        "endTime": "2024-12-20 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Grisekød",
+          "nameEn": "Pork"
+        },
+        {
+          "nameDa": "Kød & fisk",
+          "nameEn": "Meat Fish"
+        },
+        {
+          "nameDa": "Koteletter, flæsk & schnitzler",
+          "nameEn": "Pork Chops Pork Schnitzels"
+        }
+      ],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "BRUN SAUCE LØGISMOSE",
+      "ean": "5713507062468",
+      "price": {
+        "originalPrice": 20.00,
+        "newPrice": 9.00,
+        "discount": 11.00,
+        "percentDiscount": 55.00
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:10:10",
+        "endTime": "2024-12-29 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "SOYA YOFU NATUREL",
+      "ean": "5411188110675",
+      "price": {
+        "originalPrice": 21.55,
+        "newPrice": 11.00,
+        "discount": 10.55,
+        "percentDiscount": 48.96
+      },
+      "timing": {
+        "startTime": "2024-12-16 11:14:46",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Plantebaserede alternativer",
+          "nameEn": "Plant Based Alternatives"
+        },
+        {
+          "nameDa": "Mejeri",
+          "nameEn": "Dairy"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Syrnet plantebaseret",
+          "nameEn": "Plant Based Yoghurt Alternatives"
+        }
+      ],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "ANDESAUCE LØGISMOSE",
+      "ean": "5713507062758",
+      "price": {
+        "originalPrice": 20.00,
+        "newPrice": 11.00,
+        "discount": 9.00,
+        "percentDiscount": 45.00
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:10:24",
+        "endTime": "2024-12-29 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "HVIDLØG PHILADELPHIA",
+      "ean": "7622210968142",
+      "price": {
+        "originalPrice": 12.00,
+        "newPrice": 9.00,
+        "discount": 3.00,
+        "percentDiscount": 25.00
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:10:41",
+        "endTime": "2024-12-29 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Smøreost",
+          "nameEn": "Cream Cheese"
+        },
+        {
+          "nameDa": "Mejeri",
+          "nameEn": "Dairy"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Ost",
+          "nameEn": "Cheese"
+        }
+      ],
+      "stock": {
+        "quantity": 10.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 10
+      }
+    },
+    {
+      "productName": "SKINKESTRIMLER NÆMT",
+      "ean": "5712877150898",
+      "price": {
+        "originalPrice": 16.95,
+        "newPrice": 13.00,
+        "discount": 3.95,
+        "percentDiscount": 23.30
+      },
+      "timing": {
+        "startTime": "2024-12-16 12:39:42",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Skinke i tern & strimler",
+          "nameEn": "Chopped Ham"
+        },
+        {
+          "nameDa": "Bacon, pølser & toppings",
+          "nameEn": "Bacon Sausages Toppings"
+        }
+      ],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "ÆG'BACON SANDWICH NATURLI",
+      "ean": "5701977002558",
+      "price": {
+        "originalPrice": 22.95,
+        "newPrice": 13.00,
+        "discount": 9.95,
+        "percentDiscount": 43.36
+      },
+      "timing": {
+        "startTime": "2024-12-19 11:22:34",
+        "endTime": "2024-12-20 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Sandwiches & wraps",
+          "nameEn": "Sandwiches Wraps"
+        },
+        {
+          "nameDa": "Færdigretter",
+          "nameEn": "Ready To Eat Meals"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        }
+      ],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "BONDEBR#D GAMLE M#LLE",
+      "ean": "5712874821685",
+      "price": {
+        "originalPrice": 6.95,
+        "newPrice": 4.00,
+        "discount": 2.95,
+        "percentDiscount": 42.45
+      },
+      "timing": {
+        "startTime": "2024-12-19 13:29:59",
+        "endTime": "2024-12-20 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Rugbrød",
+          "nameEn": "Rye Breads"
+        },
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        },
+        {
+          "nameDa": "Andre rugbrød",
+          "nameEn": "Other Rye Breads"
+        }
+      ],
+      "stock": {
+        "quantity": 6.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 6
+      }
+    },
+    {
+      "productName": "HÖNÖ BOHUSKAKA PÅGEN",
+      "ean": "7311070014488",
+      "price": {
+        "originalPrice": 22.00,
+        "newPrice": 17.00,
+        "discount": 5.00,
+        "percentDiscount": 22.73
+      },
+      "timing": {
+        "startTime": "2024-12-19 13:29:01",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Boller",
+          "nameEn": "Light Dark Buns"
+        },
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        },
+        {
+          "nameDa": "Lyst & groft brød",
+          "nameEn": "Light Breads Dark Breads"
+        }
+      ],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "SØDCHILI PHILADELPHIA",
+      "ean": "5710405310509",
+      "price": {
+        "originalPrice": 12.00,
+        "newPrice": 9.00,
+        "discount": 3.00,
+        "percentDiscount": 25.00
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:11:12",
+        "endTime": "2024-12-29 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Smøreost",
+          "nameEn": "Cream Cheese"
+        },
+        {
+          "nameDa": "Mejeri",
+          "nameEn": "Dairy"
+        },
+        {
+          "nameDa": "Ost",
+          "nameEn": "Cheese"
+        }
+      ],
+      "stock": {
+        "quantity": 9.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 9
+      }
+    },
+    {
+      "productName": "HONNINGSKINKE MINIMUM",
+      "ean": "5712875648755",
+      "price": {
+        "originalPrice": 15.95,
+        "newPrice": 10.00,
+        "discount": 5.95,
+        "percentDiscount": 37.30
+      },
+      "timing": {
+        "startTime": "2024-12-16 12:24:40",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Kødpålæg",
+          "nameEn": "Meat"
+        },
+        {
+          "nameDa": "Skinke",
+          "nameEn": "Cold Cuts Ham"
+        },
+        {
+          "nameDa": "Pålæg",
+          "nameEn": "Lunch Meats"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        }
+      ],
+      "stock": {
+        "quantity": 13.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 13
+      }
+    },
+    {
+      "productName": "BACON I SKIVER BRUNCHY",
+      "ean": "5712876199027",
+      "price": {
+        "originalPrice": 13.95,
+        "newPrice": 5.00,
+        "discount": 8.95,
+        "percentDiscount": 64.16
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:27:46",
+        "endTime": "2024-12-31 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Bacon",
+          "nameEn": "Bacon"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Bacon, pølser & toppings",
+          "nameEn": "Bacon Sausages Toppings"
+        },
+        {
+          "nameDa": "Bacon i skiver",
+          "nameEn": "Sliced Bacon"
+        }
+      ],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "APPELSIN/MANGO INNOCENT",
+      "ean": "5038862003797",
+      "price": {
+        "originalPrice": 36.95,
+        "newPrice": 11.00,
+        "discount": 25.95,
+        "percentDiscount": 70.23
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:19:50",
+        "endTime": "2024-12-31 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Drikkevarer",
+          "nameEn": "Beverages"
+        },
+        {
+          "nameDa": "Juice & smoothies",
+          "nameEn": "Juice Smoothies"
+        },
+        {
+          "nameDa": "Multifrugtjuice",
+          "nameEn": "Multi Fruit Juices"
+        }
+      ],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "KERNERUGBRØD GAMLE MØLLE",
+      "ean": "5701012523833",
+      "price": {
+        "originalPrice": 7.75,
+        "newPrice": 6.00,
+        "discount": 1.75,
+        "percentDiscount": 22.58
+      },
+      "timing": {
+        "startTime": "2024-12-19 13:31:42",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Kernerugbrød",
+          "nameEn": "Seeded Rye Breads"
+        },
+        {
+          "nameDa": "Rugbrød",
+          "nameEn": "Rye Breads"
+        },
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        }
+      ],
+      "stock": {
+        "quantity": 6.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 6
+      }
+    },
+    {
+      "productName": "HØNSESALAT GRAASTEN",
+      "ean": "5704000501974",
+      "price": {
+        "originalPrice": 10.00,
+        "newPrice": 5.00,
+        "discount": 5.00,
+        "percentDiscount": 50.00
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:11:59",
+        "endTime": "2024-12-29 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Pålægssalater",
+          "nameEn": "Mayo Salads"
+        },
+        {
+          "nameDa": "Hønse- & kyllingesalat",
+          "nameEn": "Poultry Mayo Salads"
+        },
+        {
+          "nameDa": "Pålæg",
+          "nameEn": "Lunch Meats"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        }
+      ],
+      "stock": {
+        "quantity": 13.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 13
+      }
+    },
+    {
+      "productName": "LEVAIN SURDEJ PÅGEN",
+      "ean": "7311070031959",
+      "price": {
+        "originalPrice": 22.00,
+        "newPrice": 11.00,
+        "discount": 11.00,
+        "percentDiscount": 50.00
+      },
+      "timing": {
+        "startTime": "2024-12-19 13:28:46",
+        "endTime": "2024-12-20 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Brød & kager",
+          "nameEn": "Bread And Cakes"
+        },
+        {
+          "nameDa": "Lyst & groft brød",
+          "nameEn": "Light Breads Dark Breads"
+        },
+        {
+          "nameDa": "Toastbrød",
+          "nameEn": "Toast Breads"
+        }
+      ],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "BACONTERN TULIP",
+      "ean": "5707196310481",
+      "price": {
+        "originalPrice": 20.00,
+        "newPrice": 11.00,
+        "discount": 9.00,
+        "percentDiscount": 45.00
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:27:21",
+        "endTime": "2024-12-31 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Bacon",
+          "nameEn": "Bacon"
+        },
+        {
+          "nameDa": "Bacon, pølser & toppings",
+          "nameEn": "Bacon Sausages Toppings"
+        },
+        {
+          "nameDa": "Bacon i tern",
+          "nameEn": "Chopped Bacon Bits"
+        }
+      ],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "TAPASPLATTE JUAN LUNA",
+      "ean": "8435115054570",
+      "price": {
+        "originalPrice": 30.00,
+        "newPrice": 18.00,
+        "discount": 12.00,
+        "percentDiscount": 40.00
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:09:32",
+        "endTime": "2024-12-29 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Specialost",
+          "nameEn": "Cheese Specialities"
+        },
+        {
+          "nameDa": "Ost",
+          "nameEn": "Cheese"
+        },
+        {
+          "nameDa": "Mejeri",
+          "nameEn": "Dairy"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        }
+      ],
+      "stock": {
+        "quantity": 12.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 12
+      }
+    },
+    {
+      "productName": "FRIKADELLEPØLSE EGELYKKE",
+      "ean": "5712876146373",
+      "price": {
+        "originalPrice": 13.95,
+        "newPrice": 7.00,
+        "discount": 6.95,
+        "percentDiscount": 49.82
+      },
+      "timing": {
+        "startTime": "2024-12-16 12:38:43",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Pålæg",
+          "nameEn": "Lunch Meats"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Kødpålæg",
+          "nameEn": "Meat"
+        },
+        {
+          "nameDa": "Øvrigt pålæg",
+          "nameEn": "Sliced Lunch Meats"
+        }
+      ],
+      "stock": {
+        "quantity": 5.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 5
+      }
+    },
+    {
+      "productName": "SANDWICH M/SALAMI NÆMT",
+      "ean": "5712874224172",
+      "price": {
+        "originalPrice": 22.95,
+        "newPrice": 16.00,
+        "discount": 6.95,
+        "percentDiscount": 30.28
+      },
+      "timing": {
+        "startTime": "2024-12-19 11:22:09",
+        "endTime": "2024-12-21 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Sandwiches & wraps",
+          "nameEn": "Sandwiches Wraps"
+        },
+        {
+          "nameDa": "Færdigretter",
+          "nameEn": "Ready To Eat Meals"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        }
+      ],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "TULIP BACON 125 G",
+      "ean": "5707196242485",
+      "price": {
+        "originalPrice": 10.00,
+        "newPrice": 5.00,
+        "discount": 5.00,
+        "percentDiscount": 50.00
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:24:08",
+        "endTime": "2024-12-31 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Bacon i skiver",
+          "nameEn": "Sliced Bacon"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Bacon",
+          "nameEn": "Bacon"
+        },
+        {
+          "nameDa": "Bacon, pølser & toppings",
+          "nameEn": "Bacon Sausages Toppings"
+        }
+      ],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "MYSEOST TINE",
+      "ean": "7038010028830",
+      "price": {
+        "originalPrice": 62.95,
+        "newPrice": 32.00,
+        "discount": 30.95,
+        "percentDiscount": 49.17
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:09:43",
+        "endTime": "2024-12-29 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Specialost",
+          "nameEn": "Cheese Specialities"
+        },
+        {
+          "nameDa": "Ost",
+          "nameEn": "Cheese"
+        },
+        {
+          "nameDa": "Mejeri",
+          "nameEn": "Dairy"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        }
+      ],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "ØKO MEDISTER ØGO",
+      "ean": "5707196264654",
+      "price": {
+        "originalPrice": 42.95,
+        "newPrice": 21.00,
+        "discount": 21.95,
+        "percentDiscount": 51.11
+      },
+      "timing": {
+        "startTime": "2024-12-19 12:37:59",
+        "endTime": "2024-12-20 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Medister",
+          "nameEn": "Thick Sausages"
+        },
+        {
+          "nameDa": "Grisekød",
+          "nameEn": "Pork"
+        },
+        {
+          "nameDa": "Kød & fisk",
+          "nameEn": "Meat Fish"
+        }
+      ],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "WRAP N' ROLL NATURLI",
+      "ean": "5701977700041",
+      "price": {
+        "originalPrice": 22.95,
+        "newPrice": 16.00,
+        "discount": 6.95,
+        "percentDiscount": 30.28
+      },
+      "timing": {
+        "startTime": "2024-12-19 11:22:22",
+        "endTime": "2024-12-20 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Færdigretter",
+          "nameEn": "Ready To Eat Meals"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Sandwiches & wraps",
+          "nameEn": "Sandwiches Wraps"
+        }
+      ],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "SALCHICHON I SKIVER LA CAMPAGNA",
+      "ean": "5712875593888",
+      "price": {
+        "originalPrice": 12.95,
+        "newPrice": 7.00,
+        "discount": 5.95,
+        "percentDiscount": 45.95
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:07:50",
+        "endTime": "2024-12-29 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Tapas & specialiteter",
+          "nameEn": "Tapas Specialities"
+        },
+        {
+          "nameDa": "Specialpålæg",
+          "nameEn": "Cold Cuts Specialities"
+        }
+      ],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "PLANTEBASERET PHILADELPHIA",
+      "ean": "7622201733681",
+      "price": {
+        "originalPrice": 13.00,
+        "newPrice": 10.00,
+        "discount": 3.00,
+        "percentDiscount": 23.08
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:10:54",
+        "endTime": "2024-12-29 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Mejeri",
+          "nameEn": "Dairy"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Smøreost",
+          "nameEn": "Cream Cheese"
+        },
+        {
+          "nameDa": "Ost",
+          "nameEn": "Cheese"
+        }
+      ],
+      "stock": {
+        "quantity": 7.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 7
+      }
+    },
+    {
+      "productName": "ROSETTE SALAMI LA CAMPAGNA",
+      "ean": "5712875905759",
+      "price": {
+        "originalPrice": 14.95,
+        "newPrice": 6.00,
+        "discount": 8.95,
+        "percentDiscount": 59.87
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:06:57",
+        "endTime": "2024-12-29 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Specialpålæg",
+          "nameEn": "Cold Cuts Specialities"
+        },
+        {
+          "nameDa": "Tapas & specialiteter",
+          "nameEn": "Tapas Specialities"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        }
+      ],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "KARRY SALAT GRAASTEN",
+      "ean": "5704000500571",
+      "price": {
+        "originalPrice": 7.00,
+        "newPrice": 5.00,
+        "discount": 2.00,
+        "percentDiscount": 28.57
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:20:43",
+        "endTime": "2024-12-31 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Pålægssalater",
+          "nameEn": "Mayo Salads"
+        },
+        {
+          "nameDa": "Pålæg",
+          "nameEn": "Lunch Meats"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Andre salater",
+          "nameEn": "Other Mayo Salads"
+        }
+      ],
+      "stock": {
+        "quantity": 5.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 5
+      }
+    },
+    {
+      "productName": "FRANSK CAMEMBER MON AMI",
+      "ean": "5704025026445",
+      "price": {
+        "originalPrice": 20.00,
+        "newPrice": 14.00,
+        "discount": 6.00,
+        "percentDiscount": 30.00
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:09:56",
+        "endTime": "2024-12-29 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Mejeri",
+          "nameEn": "Dairy"
+        },
+        {
+          "nameDa": "Ost",
+          "nameEn": "Cheese"
+        },
+        {
+          "nameDa": "Skimmelost & brie",
+          "nameEn": "Blue Cheese Brie"
+        }
+      ],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "LAKTOSEFRI SMØR ARLA",
+      "ean": "7310860565025",
+      "price": {
+        "originalPrice": 32.95,
+        "newPrice": 20.00,
+        "discount": 12.95,
+        "percentDiscount": 39.30
+      },
+      "timing": {
+        "startTime": "2024-12-15 11:28:24",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Smør",
+          "nameEn": "Butter"
+        },
+        {
+          "nameDa": "Smør & fedtstof",
+          "nameEn": "Butter Fats"
+        },
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Mejeri",
+          "nameEn": "Dairy"
+        }
+      ],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "KYLLING-BACON GRAASTEN",
+      "ean": "5704000501950",
+      "price": {
+        "originalPrice": 10.00,
+        "newPrice": 5.00,
+        "discount": 5.00,
+        "percentDiscount": 50.00
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:11:33",
+        "endTime": "2024-12-29 23:59:59",
+        "lastUpdated": "2024-12-20 12:09:37"
+      },
+      "categories": [
+        {
+          "nameDa": "Mejeri & køl",
+          "nameEn": "Dairy And Cold Storage"
+        },
+        {
+          "nameDa": "Pålæg",
+          "nameEn": "Lunch Meats"
+        },
+        {
+          "nameDa": "Hønse- & kyllingesalat",
+          "nameEn": "Poultry Mayo Salads"
+        },
+        {
+          "nameDa": "Pålægssalater",
+          "nameEn": "Mayo Salads"
+        }
+      ],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    }
+  ],
+  "favorite": false
+}

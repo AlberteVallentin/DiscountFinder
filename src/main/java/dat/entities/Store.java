@@ -1,6 +1,7 @@
 package dat.entities;
 
 import dat.dtos.StoreDTO;
+import dat.security.entities.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -43,6 +44,9 @@ public class Store {
     @OneToMany(mappedBy = "store", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Product> products = new HashSet<>();
 
+    @ManyToMany(mappedBy = "favoriteStores", fetch = FetchType.EAGER)
+    private Set<User> favoredByUsers = new HashSet<>();
+
     public Store(StoreDTO dto) {
         this.sallingStoreId = dto.getSallingStoreId();
         this.name = dto.getName();
@@ -50,6 +54,7 @@ public class Store {
         this.address = new Address(dto.getAddress());
         this.hasProductsInDb = dto.hasProductsInDb();
         this.lastFetched = dto.getLastFetched();
+        this.favoredByUsers = new HashSet<>();
     }
 
     public void updateFromSallingApi(StoreDTO dto) {
