@@ -1,0 +1,481 @@
+{
+  "id": 19,
+  "name": "Netto Trøjborggade",
+  "brand": {
+    "displayName": "Netto"
+  },
+  "address": {
+    "addressLine": "Trøjborggade 1",
+    "longitude": 12.540357,
+    "latitude": 55.669325,
+    "postalCode": {
+      "postalCode": 1757,
+      "city": "København V"
+    }
+  },
+  "products": [
+    {
+      "productName": "PASTASALAT TIKKA MA. SALLING",
+      "ean": "5712876789648",
+      "price": {
+        "originalPrice": 11.95,
+        "newPrice": 9.00,
+        "discount": 2.95,
+        "percentDiscount": 24.69
+      },
+      "timing": {
+        "startTime": "2024-12-21 12:07:53",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:28:29"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "SOLSIKKERUGBRØD GAMLE MØLLE",
+      "ean": "5701012408499",
+      "price": {
+        "originalPrice": 8.95,
+        "newPrice": 5.00,
+        "discount": 3.95,
+        "percentDiscount": 44.13
+      },
+      "timing": {
+        "startTime": "2024-12-21 13:16:23",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:28:29"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "SANDWICH M/SALAMI NÆMT",
+      "ean": "5712874224172",
+      "price": {
+        "originalPrice": 22.95,
+        "newPrice": 18.00,
+        "discount": 4.95,
+        "percentDiscount": 21.57
+      },
+      "timing": {
+        "startTime": "2024-12-21 12:08:04",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:28:29"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "FRIKADELLEPØLSE EGELYKKE",
+      "ean": "5712876146373",
+      "price": {
+        "originalPrice": 13.95,
+        "newPrice": 7.00,
+        "discount": 6.95,
+        "percentDiscount": 49.82
+      },
+      "timing": {
+        "startTime": "2024-12-16 12:38:43",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:28:29"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "TVEBAKKER OXFORD",
+      "ean": "5740001203868",
+      "price": {
+        "originalPrice": 15.00,
+        "newPrice": 11.00,
+        "discount": 4.00,
+        "percentDiscount": 26.67
+      },
+      "timing": {
+        "startTime": "2024-11-09 08:17:24",
+        "endTime": "2024-12-31 23:59:59",
+        "lastUpdated": "2024-12-22 13:28:29"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 85.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 85
+      }
+    },
+    {
+      "productName": "HVEDESANDWICH GAMLE MØLLE",
+      "ean": "5701246044418",
+      "price": {
+        "originalPrice": 14.95,
+        "newPrice": 11.00,
+        "discount": 3.95,
+        "percentDiscount": 26.42
+      },
+      "timing": {
+        "startTime": "2024-12-21 13:22:22",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:28:29"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "HERKULES KOHBERG",
+      "ean": "5710405068103",
+      "price": {
+        "originalPrice": 21.95,
+        "newPrice": 11.00,
+        "discount": 10.95,
+        "percentDiscount": 49.89
+      },
+      "timing": {
+        "startTime": "2024-12-21 13:28:48",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:28:29"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 10.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 10
+      }
+    },
+    {
+      "productName": "TIKKA MASALA LØGISMOSE",
+      "ean": "5713507042279",
+      "price": {
+        "originalPrice": 41.95,
+        "newPrice": 33.00,
+        "discount": 8.95,
+        "percentDiscount": 21.33
+      },
+      "timing": {
+        "startTime": "2024-12-22 12:08:46",
+        "endTime": "2024-12-24 23:59:59",
+        "lastUpdated": "2024-12-22 13:28:29"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "OKSESPEGEPØLSE ØGO",
+      "ean": "5712876489944",
+      "price": {
+        "originalPrice": 18.95,
+        "newPrice": 15.00,
+        "discount": 3.95,
+        "percentDiscount": 20.84
+      },
+      "timing": {
+        "startTime": "2024-12-18 09:28:46",
+        "endTime": "2024-12-26 23:59:59",
+        "lastUpdated": "2024-12-22 13:28:29"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "4 OSTE PIZZA CASA T.",
+      "ean": "8410762872043",
+      "price": {
+        "originalPrice": 31.95,
+        "newPrice": 12.00,
+        "discount": 19.95,
+        "percentDiscount": 62.44
+      },
+      "timing": {
+        "startTime": "2024-12-21 12:08:35",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:28:29"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "H#RFR# RUGBR#D GAMLE M#LLE",
+      "ean": "5712875981937",
+      "price": {
+        "originalPrice": 9.75,
+        "newPrice": 6.00,
+        "discount": 3.75,
+        "percentDiscount": 38.46
+      },
+      "timing": {
+        "startTime": "2024-12-21 13:28:25",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:28:29"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 16.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 16
+      }
+    },
+    {
+      "productName": "EGELUND MØRK GAMLE MØLLE",
+      "ean": "5701012523789",
+      "price": {
+        "originalPrice": 5.75,
+        "newPrice": 3.00,
+        "discount": 2.75,
+        "percentDiscount": 47.83
+      },
+      "timing": {
+        "startTime": "2024-12-21 13:27:04",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:28:29"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 12.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 12
+      }
+    },
+    {
+      "productName": "HK. GRISEKØD 8-12% VELSMAG",
+      "ean": "5701050368632",
+      "price": {
+        "originalPrice": 39.95,
+        "newPrice": 24.00,
+        "discount": 15.95,
+        "percentDiscount": 39.92
+      },
+      "timing": {
+        "startTime": "2024-12-21 12:45:00",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:28:29"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "HAKKET GRIS 8-12% ØGO",
+      "ean": "5707196301755",
+      "price": {
+        "originalPrice": 51.95,
+        "newPrice": 32.00,
+        "discount": 19.95,
+        "percentDiscount": 38.40
+      },
+      "timing": {
+        "startTime": "2024-12-21 12:43:31",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:28:29"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "RIBBENSTEG VELSMAG",
+      "ean": "5712876783608",
+      "price": {
+        "originalPrice": 99.00,
+        "newPrice": 73.00,
+        "discount": 26.00,
+        "percentDiscount": 26.26
+      },
+      "timing": {
+        "startTime": "2024-12-22 12:35:17",
+        "endTime": "2024-12-24 23:59:59",
+        "lastUpdated": "2024-12-22 13:28:29"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "RUGSANDWICH KOHBERG",
+      "ean": "5701246036727",
+      "price": {
+        "originalPrice": 14.95,
+        "newPrice": 10.00,
+        "discount": 4.95,
+        "percentDiscount": 33.11
+      },
+      "timing": {
+        "startTime": "2024-12-21 13:21:27",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:28:29"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 9.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 9
+      }
+    },
+    {
+      "productName": "MAR. KOTELETTER VELSMAG",
+      "ean": "5707196279689",
+      "price": {
+        "originalPrice": 29.95,
+        "newPrice": 22.00,
+        "discount": 7.95,
+        "percentDiscount": 26.54
+      },
+      "timing": {
+        "startTime": "2024-12-21 12:44:26",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:28:29"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "MULTIKERNE SANDWICH SCHULSTAD",
+      "ean": "5701205005542",
+      "price": {
+        "originalPrice": 25.00,
+        "newPrice": 14.00,
+        "discount": 11.00,
+        "percentDiscount": 44.00
+      },
+      "timing": {
+        "startTime": "2024-12-21 13:22:02",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:28:29"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "SCHWARZBROT GAMLE MØLLE",
+      "ean": "5701012824183",
+      "price": {
+        "originalPrice": 8.50,
+        "newPrice": 6.00,
+        "discount": 2.50,
+        "percentDiscount": 29.41
+      },
+      "timing": {
+        "startTime": "2024-12-21 13:27:46",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:28:29"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 11.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 11
+      }
+    },
+    {
+      "productName": "DET GODE SOL RUGBRØD SCHULSTAD",
+      "ean": "5701205001568",
+      "price": {
+        "originalPrice": 25.50,
+        "newPrice": 13.00,
+        "discount": 12.50,
+        "percentDiscount": 49.02
+      },
+      "timing": {
+        "startTime": "2024-12-21 13:29:15",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:28:29"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 6.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 6
+      }
+    },
+    {
+      "productName": "KRYDDERBOLLER GAMLE M#LLE",
+      "ean": "5712874603960",
+      "price": {
+        "originalPrice": 8.50,
+        "newPrice": 6.00,
+        "discount": 2.50,
+        "percentDiscount": 29.41
+      },
+      "timing": {
+        "startTime": "2024-12-21 13:29:56",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:28:29"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "DET GODE GULEROD SCHULSTAD",
+      "ean": "5701205009731",
+      "price": {
+        "originalPrice": 14.95,
+        "newPrice": 10.00,
+        "discount": 4.95,
+        "percentDiscount": 33.11
+      },
+      "timing": {
+        "startTime": "2024-12-21 13:17:59",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:28:29"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 5.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 5
+      }
+    }
+  ],
+  "isFavorite": true
+}

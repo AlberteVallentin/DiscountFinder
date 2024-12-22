@@ -84,8 +84,17 @@ public class Store {
     }
 
     public boolean needsProductUpdate() {
-        if (!hasProductsInDb) return true;
-        if (lastFetched == null) return true;
-        return LocalDateTime.now().minusHours(24).isAfter(lastFetched);
+        // Hvis vi ikke har produkter i databasen, skal vi hente dem
+        if (!hasProductsInDb || getProducts().isEmpty()) {
+            return true;
+        }
+
+        // Hvis sidste fetch er mere end 24 timer siden, skal vi opdatere
+        if (lastFetched == null) {
+            return true;
+        }
+
+        LocalDateTime twentyFourHoursAgo = LocalDateTime.now().minusHours(24);
+        return lastFetched.isBefore(twentyFourHoursAgo);
     }
 }

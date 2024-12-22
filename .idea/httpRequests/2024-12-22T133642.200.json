@@ -1,0 +1,964 @@
+{
+  "id": 22,
+  "name": "Netto Køge Idrætspark",
+  "brand": {
+    "displayName": "Netto"
+  },
+  "address": {
+    "addressLine": "Stensbjergvej 11",
+    "longitude": 12.177886,
+    "latitude": 55.469159,
+    "postalCode": {
+      "postalCode": 4600,
+      "city": "Køge"
+    }
+  },
+  "products": [
+    {
+      "productName": "VEGANSK LASAGNE SPIR",
+      "ean": "5712877056039",
+      "price": {
+        "originalPrice": 27.00,
+        "newPrice": 14.00,
+        "discount": 13.00,
+        "percentDiscount": 48.15
+      },
+      "timing": {
+        "startTime": "2024-12-21 06:04:33",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "HK. GRIS/KALV 4-7% VELSMAG",
+      "ean": "5707196301618",
+      "price": {
+        "originalPrice": 39.95,
+        "newPrice": 26.00,
+        "discount": 13.95,
+        "percentDiscount": 34.92
+      },
+      "timing": {
+        "startTime": "2024-12-22 05:33:25",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "PASTASALAT KRYD. URT SALLING",
+      "ean": "5712876789686",
+      "price": {
+        "originalPrice": 11.95,
+        "newPrice": 9.00,
+        "discount": 2.95,
+        "percentDiscount": 24.69
+      },
+      "timing": {
+        "startTime": "2024-12-22 05:52:45",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 5.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 5
+      }
+    },
+    {
+      "productName": "JAVISST PÅGEN",
+      "ean": "7311070032161",
+      "price": {
+        "originalPrice": 23.95,
+        "newPrice": 12.00,
+        "discount": 11.95,
+        "percentDiscount": 49.90
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:00:49",
+        "endTime": "2024-12-24 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "HYTTEOST ØGO",
+      "ean": "5705425003500",
+      "price": {
+        "originalPrice": 14.95,
+        "newPrice": 9.00,
+        "discount": 5.95,
+        "percentDiscount": 39.80
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:17:00",
+        "endTime": "2024-12-27 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "SPICY BRIO. HOT DAILY DELI",
+      "ean": "5704383008527",
+      "price": {
+        "originalPrice": 25.00,
+        "newPrice": 15.00,
+        "discount": 10.00,
+        "percentDiscount": 40.00
+      },
+      "timing": {
+        "startTime": "2024-12-17 06:13:35",
+        "endTime": "2025-01-31 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "BYGOTTO LØGISMOSE",
+      "ean": "5713507057891",
+      "price": {
+        "originalPrice": 32.95,
+        "newPrice": 17.00,
+        "discount": 15.95,
+        "percentDiscount": 48.41
+      },
+      "timing": {
+        "startTime": "2024-12-22 05:50:14",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "PEPPERONI PIZZA CASA T",
+      "ean": "8410762872081",
+      "price": {
+        "originalPrice": 31.95,
+        "newPrice": 18.00,
+        "discount": 13.95,
+        "percentDiscount": 43.66
+      },
+      "timing": {
+        "startTime": "2024-12-22 05:50:05",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "KRYDDERBOLLER GAMLE M#LLE",
+      "ean": "5712874603960",
+      "price": {
+        "originalPrice": 8.50,
+        "newPrice": 6.00,
+        "discount": 2.50,
+        "percentDiscount": 29.41
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:01:05",
+        "endTime": "2024-12-24 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "APPELSIN/MANGO INNOCENT",
+      "ean": "5038862003797",
+      "price": {
+        "originalPrice": 36.95,
+        "newPrice": 19.00,
+        "discount": 17.95,
+        "percentDiscount": 48.58
+      },
+      "timing": {
+        "startTime": "2024-12-16 11:16:44",
+        "endTime": "2024-12-24 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "BURGERBOOST DANISH CROWN",
+      "ean": "5701050395607",
+      "price": {
+        "originalPrice": 39.95,
+        "newPrice": 27.00,
+        "discount": 12.95,
+        "percentDiscount": 32.42
+      },
+      "timing": {
+        "startTime": "2024-12-22 05:30:46",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "ROASTBEEF EGELYKKE",
+      "ean": "5712875801112",
+      "price": {
+        "originalPrice": 14.50,
+        "newPrice": 9.00,
+        "discount": 5.50,
+        "percentDiscount": 37.93
+      },
+      "timing": {
+        "startTime": "2024-12-20 09:31:12",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 6.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 6
+      }
+    },
+    {
+      "productName": "BACON LEVERPOSTEJ BORNHOLMERSLAGTEREN",
+      "ean": "5710607000970",
+      "price": {
+        "originalPrice": 16.95,
+        "newPrice": 9.00,
+        "discount": 7.95,
+        "percentDiscount": 46.90
+      },
+      "timing": {
+        "startTime": "2024-12-20 09:35:24",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 5.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 5
+      }
+    },
+    {
+      "productName": "HVEDESANDWICH GAMLE MØLLE",
+      "ean": "5701246044418",
+      "price": {
+        "originalPrice": 14.95,
+        "newPrice": 11.00,
+        "discount": 3.95,
+        "percentDiscount": 26.42
+      },
+      "timing": {
+        "startTime": "2024-12-21 06:45:52",
+        "endTime": "2024-12-24 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "ITALIAN SPICE SIGDAL",
+      "ean": "7071848025053",
+      "price": {
+        "originalPrice": 25.00,
+        "newPrice": 19.00,
+        "discount": 6.00,
+        "percentDiscount": 24.00
+      },
+      "timing": {
+        "startTime": "2024-12-19 11:15:42",
+        "endTime": "2025-02-13 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "PANINI M/SKINKE&OST NÆMT",
+      "ean": "5712875032714",
+      "price": {
+        "originalPrice": 19.95,
+        "newPrice": 10.00,
+        "discount": 9.95,
+        "percentDiscount": 49.87
+      },
+      "timing": {
+        "startTime": "2024-12-21 06:04:48",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 5.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 5
+      }
+    },
+    {
+      "productName": "GRØNLANGKÅL STEFF HOUL.",
+      "ean": "5701293655506",
+      "price": {
+        "originalPrice": 29.00,
+        "newPrice": 18.00,
+        "discount": 11.00,
+        "percentDiscount": 37.93
+      },
+      "timing": {
+        "startTime": "2024-12-18 08:03:34",
+        "endTime": "2024-12-31 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "MINI MAJS M/PIZ GOOD FOOD",
+      "ean": "5900125009429",
+      "price": {
+        "originalPrice": 10.00,
+        "newPrice": 7.00,
+        "discount": 3.00,
+        "percentDiscount": 30.00
+      },
+      "timing": {
+        "startTime": "2024-12-18 12:51:48",
+        "endTime": "2024-12-31 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "SKYR M/ HINDB#R N#MT",
+      "ean": "5712889820208",
+      "price": {
+        "originalPrice": 19.95,
+        "newPrice": 14.00,
+        "discount": 5.95,
+        "percentDiscount": 29.82
+      },
+      "timing": {
+        "startTime": "2024-12-22 05:56:41",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "GULERODSBOLLER GAMLE MØLLE",
+      "ean": "5712874603953",
+      "price": {
+        "originalPrice": 15.95,
+        "newPrice": 12.00,
+        "discount": 3.95,
+        "percentDiscount": 24.76
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:01:59",
+        "endTime": "2024-12-24 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "GREEK STYLE 12% NATURLI",
+      "ean": "5701977002312",
+      "price": {
+        "originalPrice": 19.95,
+        "newPrice": 10.00,
+        "discount": 9.95,
+        "percentDiscount": 49.87
+      },
+      "timing": {
+        "startTime": "2024-12-22 13:19:51",
+        "endTime": "2024-12-27 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 5.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 5
+      }
+    },
+    {
+      "productName": "ØKO PIKANT BUKO",
+      "ean": "5711953047596",
+      "price": {
+        "originalPrice": 12.00,
+        "newPrice": 9.00,
+        "discount": 3.00,
+        "percentDiscount": 25.00
+      },
+      "timing": {
+        "startTime": "2024-12-19 11:13:29",
+        "endTime": "2025-02-13 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "BURGERBOOST SMOKEY DANISH CROWN",
+      "ean": "5701050426394",
+      "price": {
+        "originalPrice": 39.95,
+        "newPrice": 24.00,
+        "discount": 15.95,
+        "percentDiscount": 39.92
+      },
+      "timing": {
+        "startTime": "2024-12-22 05:29:12",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "FLÆSKESTEG PREMIEUR",
+      "ean": "5707196285178",
+      "price": {
+        "originalPrice": 99.95,
+        "newPrice": 70.00,
+        "discount": 29.95,
+        "percentDiscount": 29.96
+      },
+      "timing": {
+        "startTime": "2024-12-21 05:44:52",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "ROASTBEEF SMAGEN AF AARHUS",
+      "ean": "5712876120120",
+      "price": {
+        "originalPrice": 17.95,
+        "newPrice": 10.00,
+        "discount": 7.95,
+        "percentDiscount": 44.29
+      },
+      "timing": {
+        "startTime": "2024-12-20 09:34:48",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "SKOVMAND SCHULSTAD",
+      "ean": "5701205005481",
+      "price": {
+        "originalPrice": 12.95,
+        "newPrice": 10.00,
+        "discount": 2.95,
+        "percentDiscount": 22.78
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:02:43",
+        "endTime": "2024-12-24 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "GRØDBOLLER KOHBERG",
+      "ean": "5701246005662",
+      "price": {
+        "originalPrice": 23.95,
+        "newPrice": 18.00,
+        "discount": 5.95,
+        "percentDiscount": 24.84
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:02:54",
+        "endTime": "2024-12-24 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "OLIVEN MANDLER LA CAMPAGNA",
+      "ean": "5712874943349",
+      "price": {
+        "originalPrice": 19.95,
+        "newPrice": 13.00,
+        "discount": 6.95,
+        "percentDiscount": 34.84
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:51:21",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "LINGON GROVA PÅGEN",
+      "ean": "5710405067922",
+      "price": {
+        "originalPrice": 23.95,
+        "newPrice": 12.00,
+        "discount": 11.95,
+        "percentDiscount": 49.90
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:04:08",
+        "endTime": "2024-12-24 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "BAGERENS BEDSTE KOHBERG",
+      "ean": "5701246016743",
+      "price": {
+        "originalPrice": 20.95,
+        "newPrice": 11.00,
+        "discount": 9.95,
+        "percentDiscount": 47.49
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:04:20",
+        "endTime": "2024-12-24 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "HERKULES KOHBERG",
+      "ean": "5710405068103",
+      "price": {
+        "originalPrice": 21.95,
+        "newPrice": 11.00,
+        "discount": 10.95,
+        "percentDiscount": 49.89
+      },
+      "timing": {
+        "startTime": "2024-12-21 06:49:00",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 10.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 10
+      }
+    },
+    {
+      "productName": "RØGET RULLEPØLSE EGELYKKE",
+      "ean": "5712876534347",
+      "price": {
+        "originalPrice": 15.75,
+        "newPrice": 12.00,
+        "discount": 3.75,
+        "percentDiscount": 23.81
+      },
+      "timing": {
+        "startTime": "2024-12-20 09:27:12",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "JUBILÆUMSSALAMI GØL",
+      "ean": "5707196324990",
+      "price": {
+        "originalPrice": 20.00,
+        "newPrice": 15.00,
+        "discount": 5.00,
+        "percentDiscount": 25.00
+      },
+      "timing": {
+        "startTime": "2024-12-16 11:48:40",
+        "endTime": "2024-12-31 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "GRØDBRØD PÅGEN",
+      "ean": "7311070014211",
+      "price": {
+        "originalPrice": 22.00,
+        "newPrice": 17.00,
+        "discount": 5.00,
+        "percentDiscount": 22.73
+      },
+      "timing": {
+        "startTime": "2024-12-21 06:48:01",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "TRIO HUMMUS LA CAMPAGNA",
+      "ean": "5712876159991",
+      "price": {
+        "originalPrice": 18.95,
+        "newPrice": 14.00,
+        "discount": 4.95,
+        "percentDiscount": 26.12
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:43:36",
+        "endTime": "2024-12-28 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "HYTTEOST 4% MAMMEN",
+      "ean": "5703985056424",
+      "price": {
+        "originalPrice": 9.95,
+        "newPrice": 7.00,
+        "discount": 2.95,
+        "percentDiscount": 29.65
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:20:08",
+        "endTime": "2024-12-27 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 5.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 5
+      }
+    },
+    {
+      "productName": "SKYR M/ JORDB#R N#MT",
+      "ean": "5712889820222",
+      "price": {
+        "originalPrice": 19.95,
+        "newPrice": 15.00,
+        "discount": 4.95,
+        "percentDiscount": 24.81
+      },
+      "timing": {
+        "startTime": "2024-12-22 05:56:46",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "KEFIR VANILJE ARLA CULTURA",
+      "ean": "5711953180569",
+      "price": {
+        "originalPrice": 19.95,
+        "newPrice": 11.00,
+        "discount": 8.95,
+        "percentDiscount": 44.86
+      },
+      "timing": {
+        "startTime": "2024-12-19 09:49:00",
+        "endTime": "2024-12-24 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "ITA.LIEN SALAMI GØL",
+      "ean": "5707196217612",
+      "price": {
+        "originalPrice": 29.00,
+        "newPrice": 15.00,
+        "discount": 14.00,
+        "percentDiscount": 48.28
+      },
+      "timing": {
+        "startTime": "2024-12-16 11:48:28",
+        "endTime": "2024-12-31 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "SERRANO SERRANO",
+      "ean": "8410060889217",
+      "price": {
+        "originalPrice": 10.00,
+        "newPrice": 7.00,
+        "discount": 3.00,
+        "percentDiscount": 30.00
+      },
+      "timing": {
+        "startTime": "2024-12-18 08:05:14",
+        "endTime": "2024-12-31 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "SKAFTKOTELETTER VELSMAG",
+      "ean": "5707196301595",
+      "price": {
+        "originalPrice": 59.95,
+        "newPrice": 37.00,
+        "discount": 22.95,
+        "percentDiscount": 38.28
+      },
+      "timing": {
+        "startTime": "2024-12-22 05:40:09",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "SKINKESALAT K-SALAT",
+      "ean": "5704000496515",
+      "price": {
+        "originalPrice": 19.95,
+        "newPrice": 8.00,
+        "discount": 11.95,
+        "percentDiscount": 59.90
+      },
+      "timing": {
+        "startTime": "2024-12-19 10:00:49",
+        "endTime": "2024-12-27 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 12.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 12
+      }
+    },
+    {
+      "productName": "NAKKEKOTELET #GO",
+      "ean": "5707196284362",
+      "price": {
+        "originalPrice": 39.95,
+        "newPrice": 29.00,
+        "discount": 10.95,
+        "percentDiscount": 27.41
+      },
+      "timing": {
+        "startTime": "2024-12-21 05:45:22",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "HAVSALT RONDELÉ",
+      "ean": "3228024090167",
+      "price": {
+        "originalPrice": 13.00,
+        "newPrice": 10.00,
+        "discount": 3.00,
+        "percentDiscount": 23.08
+      },
+      "timing": {
+        "startTime": "2024-12-18 08:04:57",
+        "endTime": "2024-12-31 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "H#RFR# RUGBR#D GAMLE M#LLE",
+      "ean": "5712875981937",
+      "price": {
+        "originalPrice": 9.75,
+        "newPrice": 7.00,
+        "discount": 2.75,
+        "percentDiscount": 28.21
+      },
+      "timing": {
+        "startTime": "2024-12-21 06:51:19",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:36:42"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 19.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 19
+      }
+    }
+  ],
+  "isFavorite": false
+}

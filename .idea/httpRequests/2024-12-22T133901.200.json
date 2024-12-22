@@ -1,0 +1,523 @@
+{
+  "id": 48,
+  "name": "Netto Jernbane Allé 36",
+  "brand": {
+    "displayName": "Netto"
+  },
+  "address": {
+    "addressLine": "Jernbane Allé 36, ST",
+    "longitude": 12.4913,
+    "latitude": 55.686648,
+    "postalCode": {
+      "postalCode": 2720,
+      "city": "Vanløse"
+    }
+  },
+  "products": [
+    {
+      "productName": "RULLEPØLSE HAMMEL",
+      "ean": "5705333099947",
+      "price": {
+        "originalPrice": 22.95,
+        "newPrice": 17.00,
+        "discount": 5.95,
+        "percentDiscount": 25.93
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:39:27",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "MARINERET SVINEFILET VELSMAG",
+      "ean": "5707196306897",
+      "price": {
+        "originalPrice": 44.95,
+        "newPrice": 35.00,
+        "discount": 9.95,
+        "percentDiscount": 22.14
+      },
+      "timing": {
+        "startTime": "2024-12-21 17:23:26",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "BØFFEL MOZZARELLA PREMIEUR",
+      "ean": "5712871019948",
+      "price": {
+        "originalPrice": 19.95,
+        "newPrice": 15.00,
+        "discount": 4.95,
+        "percentDiscount": 24.81
+      },
+      "timing": {
+        "startTime": "2024-12-21 10:09:10",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "HÖNÖ BOHUSKAKA PÅGEN",
+      "ean": "7311070014488",
+      "price": {
+        "originalPrice": 22.00,
+        "newPrice": 17.00,
+        "discount": 5.00,
+        "percentDiscount": 22.73
+      },
+      "timing": {
+        "startTime": "2024-12-21 08:29:14",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "DET GODE GULEROD SCHULSTAD",
+      "ean": "5701205009731",
+      "price": {
+        "originalPrice": 14.95,
+        "newPrice": 11.00,
+        "discount": 3.95,
+        "percentDiscount": 26.42
+      },
+      "timing": {
+        "startTime": "2024-12-21 07:21:47",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "FLÆSK I SKIVER VELSMAG",
+      "ean": "5707196280654",
+      "price": {
+        "originalPrice": 39.95,
+        "newPrice": 31.00,
+        "discount": 8.95,
+        "percentDiscount": 22.40
+      },
+      "timing": {
+        "startTime": "2024-12-21 17:21:26",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 5.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 5
+      }
+    },
+    {
+      "productName": "HOTDOG PØLSER LANGELÆNDER",
+      "ean": "5704000516183",
+      "price": {
+        "originalPrice": 29.00,
+        "newPrice": 23.00,
+        "discount": 6.00,
+        "percentDiscount": 20.69
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:33:14",
+        "endTime": "2024-12-28 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "BACON LEVERPOSTEJ BORNHOLMERSLAGTEREN",
+      "ean": "5710607000970",
+      "price": {
+        "originalPrice": 16.95,
+        "newPrice": 12.00,
+        "discount": 4.95,
+        "percentDiscount": 29.20
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:40:31",
+        "endTime": "2024-12-26 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "HAMBURGERRYG MINIMUM",
+      "ean": "5712877113480",
+      "price": {
+        "originalPrice": 15.95,
+        "newPrice": 6.00,
+        "discount": 9.95,
+        "percentDiscount": 62.38
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:38:11",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 5.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 5
+      }
+    },
+    {
+      "productName": "KRYDDERBOLLER FK GAMLE M#LLE",
+      "ean": "5712874603977",
+      "price": {
+        "originalPrice": 10.50,
+        "newPrice": 8.00,
+        "discount": 2.50,
+        "percentDiscount": 23.81
+      },
+      "timing": {
+        "startTime": "2024-12-21 07:58:30",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "GROVHAK. LEVERPOSTEJ EGELYKKE",
+      "ean": "5707196210323",
+      "price": {
+        "originalPrice": 14.50,
+        "newPrice": 11.00,
+        "discount": 3.50,
+        "percentDiscount": 24.14
+      },
+      "timing": {
+        "startTime": "2024-12-21 11:29:37",
+        "endTime": "2024-12-27 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "TULIP BACONTERN TULIP",
+      "ean": "5707196214567",
+      "price": {
+        "originalPrice": 49.00,
+        "newPrice": 28.00,
+        "discount": 21.00,
+        "percentDiscount": 42.86
+      },
+      "timing": {
+        "startTime": "2024-12-18 06:23:40",
+        "endTime": "2024-12-25 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "HAKKET GRIS 8-12% ØGO",
+      "ean": "5707196301755",
+      "price": {
+        "originalPrice": 51.95,
+        "newPrice": 33.00,
+        "discount": 18.95,
+        "percentDiscount": 36.48
+      },
+      "timing": {
+        "startTime": "2024-12-21 17:36:48",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "H#RFR# RUGBR#D GAMLE M#LLE",
+      "ean": "5712875981937",
+      "price": {
+        "originalPrice": 9.75,
+        "newPrice": 7.00,
+        "discount": 2.75,
+        "percentDiscount": 28.21
+      },
+      "timing": {
+        "startTime": "2024-12-21 07:47:30",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "RISENGRØD ØKO LØGISMOSE",
+      "ean": "5713507062772",
+      "price": {
+        "originalPrice": 25.00,
+        "newPrice": 19.00,
+        "discount": 6.00,
+        "percentDiscount": 24.00
+      },
+      "timing": {
+        "startTime": "2024-12-21 11:44:11",
+        "endTime": "2024-12-28 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 54.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 54
+      }
+    },
+    {
+      "productName": "PAPRIKA/CHILI BUKO",
+      "ean": "5711953035876",
+      "price": {
+        "originalPrice": 6.00,
+        "newPrice": 4.00,
+        "discount": 2.00,
+        "percentDiscount": 33.33
+      },
+      "timing": {
+        "startTime": "2024-12-20 17:16:58",
+        "endTime": "2025-01-25 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "DET GODE SOL RUGBRØD SCHULSTAD",
+      "ean": "5701205001568",
+      "price": {
+        "originalPrice": 25.50,
+        "newPrice": 13.00,
+        "discount": 12.50,
+        "percentDiscount": 49.02
+      },
+      "timing": {
+        "startTime": "2024-12-21 07:44:28",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "SLIDERS M SESAM PREMIEUR",
+      "ean": "5712876977274",
+      "price": {
+        "originalPrice": 30.00,
+        "newPrice": 18.00,
+        "discount": 12.00,
+        "percentDiscount": 40.00
+      },
+      "timing": {
+        "startTime": "2024-12-12 05:20:48",
+        "endTime": "2024-12-31 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 5.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 5
+      }
+    },
+    {
+      "productName": "BURRATA ZANETTI",
+      "ean": "80894162",
+      "price": {
+        "originalPrice": 24.75,
+        "newPrice": 15.00,
+        "discount": 9.75,
+        "percentDiscount": 39.39
+      },
+      "timing": {
+        "startTime": "2024-12-21 10:08:53",
+        "endTime": "2024-12-27 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "SOYA YOFU NATUREL",
+      "ean": "5411188110675",
+      "price": {
+        "originalPrice": 21.55,
+        "newPrice": 11.00,
+        "discount": 10.55,
+        "percentDiscount": 48.96
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:41:30",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "RULLEPØLSE DEN GRØNNE SLAGTER",
+      "ean": "5707196213379",
+      "price": {
+        "originalPrice": 16.95,
+        "newPrice": 6.00,
+        "discount": 10.95,
+        "percentDiscount": 64.60
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:30:54",
+        "endTime": "2024-12-26 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "SPICY BRIO. HOT DAILY DELI",
+      "ean": "5704383008527",
+      "price": {
+        "originalPrice": 25.00,
+        "newPrice": 8.00,
+        "discount": 17.00,
+        "percentDiscount": 68.00
+      },
+      "timing": {
+        "startTime": "2024-12-21 12:52:48",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 11.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 11
+      }
+    },
+    {
+      "productName": "KOTELETTER VELSMAG",
+      "ean": "5707196282061",
+      "price": {
+        "originalPrice": 47.50,
+        "newPrice": 29.00,
+        "discount": 18.50,
+        "percentDiscount": 38.95
+      },
+      "timing": {
+        "startTime": "2024-12-21 17:21:16",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "HERKULES KOHBERG",
+      "ean": "5710405068103",
+      "price": {
+        "originalPrice": 21.95,
+        "newPrice": 11.00,
+        "discount": 10.95,
+        "percentDiscount": 49.89
+      },
+      "timing": {
+        "startTime": "2024-12-21 07:23:31",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:37:23"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    }
+  ],
+  "isFavorite": true
+}

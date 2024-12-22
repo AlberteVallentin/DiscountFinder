@@ -116,7 +116,7 @@ Accept: application/json
 
 ###
 # 3. Verify store is now favorite
-GET {{url}}/stores/50
+GET {{url}}/stores/22
 Authorization: Bearer {{auth_token}}
 Accept: application/json
 
@@ -134,7 +134,7 @@ Accept: application/json
 
 ###
 # 6. Verify store is no longer favorite
-GET {{url}}/stores/51
+GET {{url}}/stores/49
 Authorization: Bearer {{auth_token}}
 Accept: application/json
 

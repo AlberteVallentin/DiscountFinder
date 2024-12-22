@@ -242,41 +242,22 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
             LOGGER.info("Updating products for store {} ({}) with Salling ID: {}",
                 id, store.getName(), store.getSallingStoreId());
 
-            // Map eksisterende produkter efter EAN for hurtig adgang
-            Map<String, Product> existingProductMap = store.getProducts().stream()
-                .collect(Collectors.toMap(Product::getEan, p -> p));
+            // Først fjern alle eksisterende produkter for denne butik
+            if (!store.getProducts().isEmpty()) {
+                // Brug en bulk delete operation
+                em.createQuery("DELETE FROM Product p WHERE p.store.id = :storeId")
+                    .setParameter("storeId", store.getId())
+                    .executeUpdate();
 
-            Set<String> newProductEans = products.stream()
-                .map(ProductDTO::getEan)
-                .collect(Collectors.toSet());
-
-            // Fjern produkter, der ikke længere findes i API-listen
-            List<Product> productsToRemove = store.getProducts().stream()
-                .filter(p -> !newProductEans.contains(p.getEan()))
-                .collect(Collectors.toList());
-
-            for (Product product : productsToRemove) {
-                product.clearCategories();
-                store.getProducts().remove(product);
-                em.remove(product);
+                store.getProducts().clear();
             }
 
-            // Tilføj eller opdater produkter fra API-data
+            // Tilføj de nye produkter
             for (ProductDTO dto : products) {
-                Product product = existingProductMap.get(dto.getEan());
-
-                if (product == null) {
-                    product = new Product(dto);
-                    product.setStore(store);
-                    store.getProducts().add(product);  // Tilføj produkt til store
-                    em.persist(product);
-                } else {
-                    product.updateFromDTO(dto);
-                }
-
-                // Opdater kategorier for produktet
-                updateProductCategories(product, dto, em);
-                em.flush();  // Flush for at sikre at ændringer bliver gemt
+                Product product = new Product(dto);
+                product.setStore(store);
+                store.getProducts().add(product);
+                em.persist(product);
             }
 
             store.setHasProductsInDb(true);

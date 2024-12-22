@@ -34,15 +34,11 @@ public class StoreController {
     public void read(Context ctx) throws ApiException {
         try {
             Long id = Long.parseLong(ctx.pathParam("id"));
+            LOGGER.info("Fetching store with ID: {}", id);
 
-            // Get user email if user is logged in
             UserDTO userDTO = ctx.attribute("user");
             String userEmail = userDTO != null ? userDTO.getEmail() : null;
 
-            // Debug log for bruger information
-            LOGGER.info("Request for store {} from user: {}", id, userEmail != null ? userEmail : "not logged in");
-
-            // Vælg den rigtige find metode baseret på om bruger er logget ind
             Store store = userEmail != null ?
                 storeDAO.findByIdWithFavorites(id) :
                 storeDAO.findById(id);
@@ -51,77 +47,40 @@ public class StoreController {
                 throw new ApiException(404, "Store not found with ID: " + id);
             }
 
-            // Debug log for favorit information
-            if (userEmail != null) {
-                LOGGER.info("Store {} has {} users who favorited it",
-                    id,
-                    store.getFavoredByUsers() != null ? store.getFavoredByUsers().size() : 0);
-                if (store.getFavoredByUsers() != null) {
-                    store.getFavoredByUsers().forEach(user ->
-                        LOGGER.info("Favored by user: {}", user.getEmail())
-                    );
-                }
-            }
+            // Tilføj debug logging her
+            LOGGER.info("Store {} update check - hasProductsInDb: {}, lastFetched: {}, needsUpdate: {}",
+                id,
+                store.hasProductsInDb(),
+                store.getLastFetched(),
+                store.needsProductUpdate());
 
             if (store.needsProductUpdate()) {
-                LOGGER.info("Fetching products for store {} ({})", store.getId(), store.getName());
+                LOGGER.info("Fetching fresh products from Salling API for store {} ({})",
+                    store.getId(), store.getSallingStoreId());
                 try {
                     var products = productFetcher.fetchProductsForStore(store.getSallingStoreId());
-
-                    // Debug log products before saving
-                    LOGGER.debug("Products before saving:");
-                    products.forEach(p -> LOGGER.debug("Product: {}, Categories: {}",
-                        p.getProductName(),
-                        p.getCategories().stream()
-                            .map(c -> c.getNameDa() + " (" + c.getNameEn() + ")")
-                            .collect(Collectors.joining(" > "))
-                    ));
-
                     storeDAO.updateStoreProducts(store.getId(), products);
 
                     // Refresh store data after product update
                     store = userEmail != null ?
                         storeDAO.findByIdWithFavorites(id) :
                         storeDAO.findById(id);
-
-                    // Debug log products after fetching from database
-                    LOGGER.debug("Products after database fetch:");
-                    store.getProducts().forEach(p -> LOGGER.debug("Product: {}, Categories: {}",
-                        p.getProductName(),
-                        p.getCategories().stream()
-                            .map(c -> c.getNameDa() + " (" + c.getNameEn() + ")")
-                            .collect(Collectors.joining(" > "))
-                    ));
-
                 } catch (Exception e) {
-                    LOGGER.error("Error fetching products for store {}: {}", id, e.getMessage());
-                    throw new ApiException(500, "Error fetching products: " + e.getMessage());
+                    LOGGER.error("Error updating products for store {}: {}", id, e.getMessage());
                 }
+            } else {
+                LOGGER.info("Using cached products for store {} (last update: {})",
+                    store.getId(), store.getLastFetched());
             }
 
             StoreDTO storeDTO = new StoreDTO(store, true, userEmail);
+            ctx.json(storeDTO);
 
-            // Debug log for DTO favorit status
-            LOGGER.info("StoreDTO created with isFavorite: {} for user: {}",
-                storeDTO.getIsFavorite(),
-                userEmail != null ? userEmail : "not logged in");
-
-            // Debug log final DTO
-            LOGGER.debug("Final StoreDTO products:");
-            storeDTO.getProducts().forEach(p -> LOGGER.debug("Product: {}, Categories: {}",
-                p.getProductName(),
-                p.getCategories().stream()
-                    .map(c -> c.getNameDa() + " (" + c.getNameEn() + ")")
-                    .collect(Collectors.joining(" > "))
-            ));
-
-            String jsonOutput = objectMapper.writeValueAsString(storeDTO);
-            ctx.contentType("application/json").result(jsonOutput);
-
-        } catch (NumberFormatException e) {
-            throw new ApiException(400, "Invalid store ID format");
+        } catch (ApiException e) {
+            throw e;
         } catch (Exception e) {
-            throw new ApiException(500, e.getMessage());
+            LOGGER.error("Error in store read endpoint: ", e);
+            throw new ApiException(500, "Internal server error");
         }
     }
 

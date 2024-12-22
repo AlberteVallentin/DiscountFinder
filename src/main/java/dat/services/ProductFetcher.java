@@ -165,59 +165,61 @@ public class ProductFetcher {
         Set<CategoryDTO> categories = new HashSet<>();
         JsonNode categoriesNode = productNode.get("categories");
 
-        if (categoriesNode != null) {
+        if (categoriesNode != null && !categoriesNode.isNull()) {
             try {
-                // Get the category paths directly from da and en fields
-                String pathDa = categoriesNode.get("da").asText();
-                String pathEn = categoriesNode.get("en").asText();
+                // First check if both language nodes exist
+                JsonNode daNode = categoriesNode.get("da");
+                JsonNode enNode = categoriesNode.get("en");
 
-                LOGGER.debug("Parsing category paths - DA: {}, EN: {}", pathDa, pathEn);
-
-                // Split on > to get hierarchy
-                String[] categoryPathsDa = pathDa.split(">");
-                String[] categoryPathsEn = pathEn.split(">");
-
-                if (categoryPathsDa.length != categoryPathsEn.length) {
-                    LOGGER.warn("Mismatched category path lengths: DA={}, EN={}", pathDa, pathEn);
+                if (daNode == null || enNode == null || daNode.isNull() || enNode.isNull()) {
+                    LOGGER.debug("Missing category translations for product");
                     return categories;
                 }
 
-                StringBuilder currentPathDa = new StringBuilder();
-                StringBuilder currentPathEn = new StringBuilder();
+                String pathDa = daNode.asText();
+                String pathEn = enNode.asText();
 
-                // Create a category for each level in the hierarchy
-                for (int i = 0; i < categoryPathsDa.length; i++) {
-                    String categoryNameDa = categoryPathsDa[i].trim();
-                    String categoryNameEn = categoryPathsEn[i].trim();
+                // Only proceed if we have valid paths
+                if (pathDa != null && !pathDa.isEmpty() && pathEn != null && !pathEn.isEmpty()) {
+                    LOGGER.debug("Parsing category paths - DA: {}, EN: {}", pathDa, pathEn);
 
-                    // Build the cumulative path
-                    if (currentPathDa.length() > 0) {
-                        currentPathDa.append(">");
-                        currentPathEn.append(">");
+                    String[] categoryPathsDa = pathDa.split(">");
+                    String[] categoryPathsEn = pathEn.split(">");
+
+                    if (categoryPathsDa.length != categoryPathsEn.length) {
+                        LOGGER.warn("Mismatched category path lengths: DA={}, EN={}", pathDa, pathEn);
+                        return categories;
                     }
-                    currentPathDa.append(categoryNameDa);
-                    currentPathEn.append(categoryNameEn);
 
-                    // Create a category for this level
-                    CategoryDTO categoryDTO = CategoryDTO.builder()
-                        .nameDa(categoryNameDa)
-                        .nameEn(categoryNameEn)
-                        .pathDa(currentPathDa.toString())
-                        .pathEn(currentPathEn.toString())
-                        .build();
+                    StringBuilder currentPathDa = new StringBuilder();
+                    StringBuilder currentPathEn = new StringBuilder();
 
-                    categories.add(categoryDTO);
-                    LOGGER.debug("Added category: {} ({}) with path: {}",
-                        categoryNameDa, categoryNameEn, currentPathDa.toString());
+                    for (int i = 0; i < categoryPathsDa.length; i++) {
+                        String categoryNameDa = categoryPathsDa[i].trim();
+                        String categoryNameEn = categoryPathsEn[i].trim();
+
+                        if (currentPathDa.length() > 0) {
+                            currentPathDa.append(">");
+                            currentPathEn.append(">");
+                        }
+                        currentPathDa.append(categoryNameDa);
+                        currentPathEn.append(categoryNameEn);
+
+                        CategoryDTO categoryDTO = CategoryDTO.builder()
+                            .nameDa(categoryNameDa)
+                            .nameEn(categoryNameEn)
+                            .pathDa(currentPathDa.toString())
+                            .pathEn(currentPathEn.toString())
+                            .build();
+
+                        categories.add(categoryDTO);
+                    }
                 }
             } catch (Exception e) {
-                LOGGER.error("Error parsing categories: {}", e.getMessage(), e);
+                LOGGER.warn("Error parsing categories: {}", e.getMessage());
             }
-        } else {
-            LOGGER.debug("No categories found for product");
         }
 
-        LOGGER.debug("Final categories set size: {}", categories.size());
         return categories;
     }
 
