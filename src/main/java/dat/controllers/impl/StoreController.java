@@ -7,6 +7,7 @@ import dat.dtos.StoreDTO;
 import dat.entities.Category;
 import dat.entities.Store;
 import dat.exceptions.ApiException;
+import dat.security.token.UserDTO;
 import dat.services.ProductFetcher;
 import io.javalin.http.Context;
 import jakarta.persistence.EntityManager;
@@ -34,9 +35,32 @@ public class StoreController {
         try {
             Long id = Long.parseLong(ctx.pathParam("id"));
 
-            Store store = storeDAO.findById(id);
+            // Get user email if user is logged in
+            UserDTO userDTO = ctx.attribute("user");
+            String userEmail = userDTO != null ? userDTO.getEmail() : null;
+
+            // Debug log for bruger information
+            LOGGER.info("Request for store {} from user: {}", id, userEmail != null ? userEmail : "not logged in");
+
+            // Vælg den rigtige find metode baseret på om bruger er logget ind
+            Store store = userEmail != null ?
+                storeDAO.findByIdWithFavorites(id) :
+                storeDAO.findById(id);
+
             if (store == null) {
                 throw new ApiException(404, "Store not found with ID: " + id);
+            }
+
+            // Debug log for favorit information
+            if (userEmail != null) {
+                LOGGER.info("Store {} has {} users who favorited it",
+                    id,
+                    store.getFavoredByUsers() != null ? store.getFavoredByUsers().size() : 0);
+                if (store.getFavoredByUsers() != null) {
+                    store.getFavoredByUsers().forEach(user ->
+                        LOGGER.info("Favored by user: {}", user.getEmail())
+                    );
+                }
             }
 
             if (store.needsProductUpdate()) {
@@ -56,7 +80,9 @@ public class StoreController {
                     storeDAO.updateStoreProducts(store.getId(), products);
 
                     // Refresh store data after product update
-                    store = storeDAO.findById(id);
+                    store = userEmail != null ?
+                        storeDAO.findByIdWithFavorites(id) :
+                        storeDAO.findById(id);
 
                     // Debug log products after fetching from database
                     LOGGER.debug("Products after database fetch:");
@@ -73,7 +99,12 @@ public class StoreController {
                 }
             }
 
-            StoreDTO storeDTO = new StoreDTO(store, true);
+            StoreDTO storeDTO = new StoreDTO(store, true, userEmail);
+
+            // Debug log for DTO favorit status
+            LOGGER.info("StoreDTO created with isFavorite: {} for user: {}",
+                storeDTO.getIsFavorite(),
+                userEmail != null ? userEmail : "not logged in");
 
             // Debug log final DTO
             LOGGER.debug("Final StoreDTO products:");

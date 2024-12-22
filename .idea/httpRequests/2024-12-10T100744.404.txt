@@ -1,1 +1,0 @@
-Endpoint GET /auth/logout not found
