@@ -1,0 +1,670 @@
+{
+  "id": 51,
+  "name": "Netto Taastrup St. Center",
+  "brand": {
+    "displayName": "Netto"
+  },
+  "address": {
+    "addressLine": "Selsmosevej 2",
+    "longitude": 12.3003648,
+    "latitude": 55.6526031,
+    "postalCode": {
+      "postalCode": 2630,
+      "city": "Taastrup"
+    }
+  },
+  "products": [
+    {
+      "productName": "KRYDDERBOLLER GAMLE M#LLE",
+      "ean": "5712874603960",
+      "price": {
+        "originalPrice": 8.50,
+        "newPrice": 6.00,
+        "discount": 2.50,
+        "percentDiscount": 29.41
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:17:57",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "A38 NATUREL ARLA CULTURA",
+      "ean": "5700426219097",
+      "price": {
+        "originalPrice": 20.95,
+        "newPrice": 11.00,
+        "discount": 9.95,
+        "percentDiscount": 47.49
+      },
+      "timing": {
+        "startTime": "2024-12-20 09:32:38",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "SALAMI SNACK GØL",
+      "ean": "5707196231205",
+      "price": {
+        "originalPrice": 18.00,
+        "newPrice": 14.00,
+        "discount": 4.00,
+        "percentDiscount": 22.22
+      },
+      "timing": {
+        "startTime": "2024-12-18 12:32:19",
+        "endTime": "2024-12-31 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 24.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 24
+      }
+    },
+    {
+      "productName": "JULEMEDISTER VELSMAG",
+      "ean": "5707196304053",
+      "price": {
+        "originalPrice": 34.95,
+        "newPrice": 19.00,
+        "discount": 15.95,
+        "percentDiscount": 45.64
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:14:03",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "HAKKEBØFFER VELSMAG",
+      "ean": "5712877141988",
+      "price": {
+        "originalPrice": 20.00,
+        "newPrice": 15.00,
+        "discount": 5.00,
+        "percentDiscount": 25.00
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:39:31",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "ØKO KÆRNEMÆLK LØGISMOSE",
+      "ean": "5710328002253",
+      "price": {
+        "originalPrice": 13.25,
+        "newPrice": 7.00,
+        "discount": 6.25,
+        "percentDiscount": 47.17
+      },
+      "timing": {
+        "startTime": "2024-12-20 09:36:25",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "STICKS CLASSIC GØL",
+      "ean": "5707196175974",
+      "price": {
+        "originalPrice": 18.00,
+        "newPrice": 14.00,
+        "discount": 4.00,
+        "percentDiscount": 22.22
+      },
+      "timing": {
+        "startTime": "2024-12-18 12:32:33",
+        "endTime": "2024-12-31 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 37.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 37
+      }
+    },
+    {
+      "productName": "ØKO MINIMÆLK LØGISMOSE",
+      "ean": "5710328002222",
+      "price": {
+        "originalPrice": 16.00,
+        "newPrice": 10.00,
+        "discount": 6.00,
+        "percentDiscount": 37.50
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:44:39",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 5.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 5
+      }
+    },
+    {
+      "productName": "SOYA YOFU NATUREL",
+      "ean": "5411188110675",
+      "price": {
+        "originalPrice": 21.55,
+        "newPrice": 13.00,
+        "discount": 8.55,
+        "percentDiscount": 39.68
+      },
+      "timing": {
+        "startTime": "2024-12-20 10:46:32",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "H#RFR# RUGBR#D GAMLE M#LLE",
+      "ean": "5712875981937",
+      "price": {
+        "originalPrice": 9.75,
+        "newPrice": 5.00,
+        "discount": 4.75,
+        "percentDiscount": 48.72
+      },
+      "timing": {
+        "startTime": "2024-12-21 08:21:30",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "CAFÉ SANDWICH KOHBERG",
+      "ean": "5701246028111",
+      "price": {
+        "originalPrice": 21.95,
+        "newPrice": 12.00,
+        "discount": 9.95,
+        "percentDiscount": 45.33
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:13:55",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "WRAP N' ROLL NATURLI",
+      "ean": "5701977700041",
+      "price": {
+        "originalPrice": 22.95,
+        "newPrice": 10.00,
+        "discount": 12.95,
+        "percentDiscount": 56.43
+      },
+      "timing": {
+        "startTime": "2024-12-22 08:05:09",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "GROVHAK. LEVERPOSTEJ BORNHOLMERSLAGTEREN",
+      "ean": "5710607000963",
+      "price": {
+        "originalPrice": 19.95,
+        "newPrice": 11.00,
+        "discount": 8.95,
+        "percentDiscount": 44.86
+      },
+      "timing": {
+        "startTime": "2024-12-20 10:08:32",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "STICKS SPICY GØL",
+      "ean": "5712871002698",
+      "price": {
+        "originalPrice": 18.00,
+        "newPrice": 14.00,
+        "discount": 4.00,
+        "percentDiscount": 22.22
+      },
+      "timing": {
+        "startTime": "2024-12-18 12:38:22",
+        "endTime": "2024-12-31 00:00:00",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 87.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 87
+      }
+    },
+    {
+      "productName": "HK. GRISEKØD 4-7% VELSMAG",
+      "ean": "5707196301632",
+      "price": {
+        "originalPrice": 39.95,
+        "newPrice": 24.00,
+        "discount": 15.95,
+        "percentDiscount": 39.92
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:22:18",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "ØKO SKYR M/ VANILJE LØGISMOSE",
+      "ean": "5713507022905",
+      "price": {
+        "originalPrice": 19.95,
+        "newPrice": 12.00,
+        "discount": 7.95,
+        "percentDiscount": 39.85
+      },
+      "timing": {
+        "startTime": "2024-12-20 09:20:15",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "DET GODE GULEROD SCHULSTAD",
+      "ean": "5701205009731",
+      "price": {
+        "originalPrice": 14.95,
+        "newPrice": 10.00,
+        "discount": 4.95,
+        "percentDiscount": 33.11
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:07:02",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 5.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 5
+      }
+    },
+    {
+      "productName": "HK. GRIS/KALV 4-7% VELSMAG",
+      "ean": "5707196301618",
+      "price": {
+        "originalPrice": 39.95,
+        "newPrice": 24.00,
+        "discount": 15.95,
+        "percentDiscount": 39.92
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:23:22",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 5.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 5
+      }
+    },
+    {
+      "productName": "BURGERBOOST DANISH CROWN",
+      "ean": "5701050395607",
+      "price": {
+        "originalPrice": 39.95,
+        "newPrice": 20.00,
+        "discount": 19.95,
+        "percentDiscount": 49.94
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:34:37",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "CHEESEBURGER ABBELEN",
+      "ean": "4132500002669",
+      "price": {
+        "originalPrice": 26.95,
+        "newPrice": 21.00,
+        "discount": 5.95,
+        "percentDiscount": 22.08
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:55:53",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "BOLLER I KARRY LØGISMOSE",
+      "ean": "5713507057860",
+      "price": {
+        "originalPrice": 41.95,
+        "newPrice": 24.00,
+        "discount": 17.95,
+        "percentDiscount": 42.79
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:41:31",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "FRANSK LEVERPOSTEJ BORNHOLMERSLAGTEREN",
+      "ean": "5710607001069",
+      "price": {
+        "originalPrice": 16.95,
+        "newPrice": 13.00,
+        "discount": 3.95,
+        "percentDiscount": 23.30
+      },
+      "timing": {
+        "startTime": "2024-12-20 10:05:25",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "KRYDDERBOLLER FK GAMLE M#LLE",
+      "ean": "5712874603977",
+      "price": {
+        "originalPrice": 10.50,
+        "newPrice": 7.00,
+        "discount": 3.50,
+        "percentDiscount": 33.33
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:28:17",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 6.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 6
+      }
+    },
+    {
+      "productName": "OKSEPØLSER M/BAC.OST LØGISMOSE",
+      "ean": "5712876193032",
+      "price": {
+        "originalPrice": 39.95,
+        "newPrice": 31.00,
+        "discount": 8.95,
+        "percentDiscount": 22.40
+      },
+      "timing": {
+        "startTime": "2024-12-20 10:26:16",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "TYKMÆLK KLØVER",
+      "ean": "5700426102818",
+      "price": {
+        "originalPrice": 16.75,
+        "newPrice": 9.00,
+        "discount": 7.75,
+        "percentDiscount": 46.27
+      },
+      "timing": {
+        "startTime": "2024-12-20 10:10:05",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 7.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 7
+      }
+    },
+    {
+      "productName": "RULLEPØLSE DEN GRØNNE SLAGTER",
+      "ean": "5707196213379",
+      "price": {
+        "originalPrice": 16.95,
+        "newPrice": 9.00,
+        "discount": 7.95,
+        "percentDiscount": 46.90
+      },
+      "timing": {
+        "startTime": "2024-12-20 10:03:53",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 11.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 11
+      }
+    },
+    {
+      "productName": "SOLSTYKKER PÅGEN",
+      "ean": "7311070031515",
+      "price": {
+        "originalPrice": 23.95,
+        "newPrice": 12.00,
+        "discount": 11.95,
+        "percentDiscount": 49.90
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:23:17",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 8.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 8
+      }
+    },
+    {
+      "productName": "ØKO SKUMMETMÆLK ARLA",
+      "ean": "5700426293929",
+      "price": {
+        "originalPrice": 13.25,
+        "newPrice": 10.00,
+        "discount": 3.25,
+        "percentDiscount": 24.53
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:51:57",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "BONDEBR#D GAMLE M#LLE",
+      "ean": "5712874821685",
+      "price": {
+        "originalPrice": 6.95,
+        "newPrice": 5.00,
+        "discount": 1.95,
+        "percentDiscount": 28.06
+      },
+      "timing": {
+        "startTime": "2024-12-21 08:45:06",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "ØKO SKUMMETMÆLK LØGISMOSE",
+      "ean": "5710328002864",
+      "price": {
+        "originalPrice": 16.00,
+        "newPrice": 8.00,
+        "discount": 8.00,
+        "percentDiscount": 50.00
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:39:38",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 19.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 19
+      }
+    },
+    {
+      "productName": "OKSEBRYST SMAGEN AF AARHUS",
+      "ean": "5712876120106",
+      "price": {
+        "originalPrice": 17.95,
+        "newPrice": 10.00,
+        "discount": 7.95,
+        "percentDiscount": 44.29
+      },
+      "timing": {
+        "startTime": "2024-12-20 10:09:17",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:38:25"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    }
+  ],
+  "isFavorite": false
+}

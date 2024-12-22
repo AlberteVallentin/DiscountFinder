@@ -1,162 +1,19 @@
-2024-12-20 14:15:21 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
-2024-12-20 14:15:21 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
-2024-12-20 14:15:21 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2024-12-20 14:15:22 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@cd1d761
-2024-12-20 14:15:22 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2024-12-20 14:15:22 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
-2024-12-20 14:15:22 [main] INFO  io.javalin.Javalin - Starting Javalin ...
-2024-12-20 14:15:22 [main] INFO  org.eclipse.jetty.server.Server - jetty-11.0.23; built: 2024-08-14T01:40:17.906Z; git: 6fcf5ccaebd7ca13a0cb96c96adca699a24080a0; jvm 17.0.10+7-LTS
-2024-12-20 14:15:22 [main] INFO  o.e.j.s.s.DefaultSessionIdManager - Session workerName=node0
-2024-12-20 14:15:22 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@6cbdd1c5{/api,null,AVAILABLE}
-2024-12-20 14:15:22 [main] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@6a51ae7c{HTTP/1.1, (http/1.1)}{0.0.0.0:7070}
-2024-12-20 14:15:22 [main] INFO  org.eclipse.jetty.server.Server - Started Server@2e3252{STARTING}[11.0.23,sto=0] @1194ms
-2024-12-20 14:15:22 [main] INFO  io.javalin.Javalin - Javalin started in 56ms \o/
-2024-12-20 14:15:22 [main] INFO  io.javalin.Javalin - Listening on http://localhost:7070/api
-2024-12-20 14:15:22 [main] INFO  io.javalin.Javalin - You are running Javalin 6.3.0 (released August 22, 2024. Your Javalin version is 119 days old. Consider checking for a newer version.).
-2024-12-20 14:15:31 [JettyServerThreadPool-32] INFO  d.s.controllers.SecurityController - User verified: UserDTO(name=null, email=user@user.dk, roleType=USER, stores=null, password=null)
-2024-12-20 14:15:51 [JettyServerThreadPool-28] INFO  d.s.controllers.SecurityController - User verified: UserDTO(name=null, email=user@user.dk, roleType=USER, stores=null, password=null)
-2024-12-20 14:15:51 [JettyServerThreadPool-28] INFO  d.controllers.impl.StoreController - Request for store 51 from user: user@user.dk
-2024-12-20 14:15:51 [JettyServerThreadPool-28] INFO  d.controllers.impl.StoreController - Store 51 has 0 users who favorited it
-2024-12-20 14:15:51 [JettyServerThreadPool-28] INFO  d.controllers.impl.StoreController - Fetching products for store 51 (Netto Taastrup St. Center)
-2024-12-20 14:15:51 [JettyServerThreadPool-28] ERROR d.controllers.impl.StoreController - Error fetching products for store 51: Invalid API key
-2024-12-20 14:15:51 [JettyServerThreadPool-28] ERROR dat.config.ApplicationConfig - An unhandled exception occurred
-dat.exceptions.ApiException: Error fetching products: Invalid API key
-	at dat.controllers.impl.StoreController.read(StoreController.java:124)
-	at io.javalin.router.Endpoint.handle(Endpoint.kt:52)
-	at io.javalin.router.ParsedEndpoint.handle(ParsedEndpoint.kt:15)
-	at io.javalin.http.servlet.DefaultTasks.HTTP$lambda$9$lambda$7$lambda$6(DefaultTasks.kt:52)
-	at io.javalin.http.servlet.JavalinServlet.handleTask(JavalinServlet.kt:99)
-	at io.javalin.http.servlet.JavalinServlet.handleSync(JavalinServlet.kt:64)
-	at io.javalin.http.servlet.JavalinServlet.handle(JavalinServlet.kt:50)
-	at io.javalin.http.servlet.JavalinServlet.service(JavalinServlet.kt:30)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:587)
-	at io.javalin.jetty.JavalinJettyServlet.service(JavalinJettyServlet.kt:52)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:587)
-	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:764)
-	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:529)
-	at org.eclipse.jetty.server.handler.ScopedHandler.nextHandle(ScopedHandler.java:221)
-	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:1580)
-	at org.eclipse.jetty.server.handler.ScopedHandler.nextHandle(ScopedHandler.java:221)
-	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1381)
-	at org.eclipse.jetty.server.handler.ScopedHandler.nextScope(ScopedHandler.java:176)
-	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:484)
-	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1553)
-	at org.eclipse.jetty.server.handler.ScopedHandler.nextScope(ScopedHandler.java:174)
-	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1303)
-	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:129)
-	at org.eclipse.jetty.server.handler.StatisticsHandler.handle(StatisticsHandler.java:173)
-	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:122)
-	at org.eclipse.jetty.server.Server.handle(Server.java:563)
-	at org.eclipse.jetty.server.HttpChannel$RequestDispatchable.dispatch(HttpChannel.java:1598)
-	at org.eclipse.jetty.server.HttpChannel.dispatch(HttpChannel.java:753)
-	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:501)
-	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:287)
-	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:314)
-	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:100)
-	at org.eclipse.jetty.io.SelectableChannelEndPoint$1.run(SelectableChannelEndPoint.java:53)
-	at org.eclipse.jetty.util.thread.strategy.AdaptiveExecutionStrategy.runTask(AdaptiveExecutionStrategy.java:421)
-	at org.eclipse.jetty.util.thread.strategy.AdaptiveExecutionStrategy.consumeTask(AdaptiveExecutionStrategy.java:390)
-	at org.eclipse.jetty.util.thread.strategy.AdaptiveExecutionStrategy.tryProduce(AdaptiveExecutionStrategy.java:277)
-	at org.eclipse.jetty.util.thread.strategy.AdaptiveExecutionStrategy.produce(AdaptiveExecutionStrategy.java:193)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:969)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1194)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1149)
-	at java.base/java.lang.Thread.run(Thread.java:840)
-2024-12-20 14:16:01 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
-2024-12-20 14:16:01 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
-2024-12-20 14:16:01 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2024-12-20 14:16:01 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7642df8f
-2024-12-20 14:16:01 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2024-12-20 14:16:01 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
-2024-12-20 14:16:02 [main] INFO  io.javalin.Javalin - Starting Javalin ...
-2024-12-20 14:16:02 [main] INFO  org.eclipse.jetty.server.Server - jetty-11.0.23; built: 2024-08-14T01:40:17.906Z; git: 6fcf5ccaebd7ca13a0cb96c96adca699a24080a0; jvm 17.0.10+7-LTS
-2024-12-20 14:16:02 [main] INFO  o.e.j.s.s.DefaultSessionIdManager - Session workerName=node0
-2024-12-20 14:16:02 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@6335f04a{/api,null,AVAILABLE}
-2024-12-20 14:16:02 [main] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@45571cfc{HTTP/1.1, (http/1.1)}{0.0.0.0:7070}
-2024-12-20 14:16:02 [main] INFO  org.eclipse.jetty.server.Server - Started Server@58186f9f{STARTING}[11.0.23,sto=0] @1159ms
-2024-12-20 14:16:02 [main] INFO  io.javalin.Javalin - Javalin started in 54ms \o/
-2024-12-20 14:16:02 [main] INFO  io.javalin.Javalin - Listening on http://localhost:7070/api
-2024-12-20 14:16:02 [main] INFO  io.javalin.Javalin - You are running Javalin 6.3.0 (released August 22, 2024. Your Javalin version is 119 days old. Consider checking for a newer version.).
-2024-12-20 14:16:59 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
-2024-12-20 14:16:59 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
-2024-12-20 14:16:59 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2024-12-20 14:16:59 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1199fe66
-2024-12-20 14:16:59 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2024-12-20 14:16:59 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
-2024-12-20 14:17:00 [main] INFO  io.javalin.Javalin - Starting Javalin ...
-2024-12-20 14:17:00 [main] INFO  org.eclipse.jetty.server.Server - jetty-11.0.23; built: 2024-08-14T01:40:17.906Z; git: 6fcf5ccaebd7ca13a0cb96c96adca699a24080a0; jvm 17.0.10+7-LTS
-2024-12-20 14:17:00 [main] INFO  o.e.j.s.s.DefaultSessionIdManager - Session workerName=node0
-2024-12-20 14:17:00 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@5aa6da2{/api,null,AVAILABLE}
-2024-12-20 14:17:00 [main] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@7548e1fb{HTTP/1.1, (http/1.1)}{0.0.0.0:7070}
-2024-12-20 14:17:00 [main] INFO  org.eclipse.jetty.server.Server - Started Server@3a5b7d7e{STARTING}[11.0.23,sto=0] @1299ms
-2024-12-20 14:17:00 [main] INFO  io.javalin.Javalin - Javalin started in 59ms \o/
-2024-12-20 14:17:00 [main] INFO  io.javalin.Javalin - Listening on http://localhost:7070/api
-2024-12-20 14:17:00 [main] INFO  io.javalin.Javalin - You are running Javalin 6.3.0 (released August 22, 2024. Your Javalin version is 119 days old. Consider checking for a newer version.).
-2024-12-20 14:17:08 [JettyServerThreadPool-32] INFO  d.controllers.impl.StoreController - Request for store 49 from user: not logged in
-2024-12-20 14:17:09 [JettyServerThreadPool-32] INFO  d.controllers.impl.StoreController - StoreDTO created with isFavorite: null for user: not logged in
-2024-12-20 14:17:12 [JettyServerThreadPool-28] INFO  d.s.controllers.SecurityController - User verified: UserDTO(name=null, email=user@user.dk, roleType=USER, stores=null, password=null)
-2024-12-20 14:17:12 [JettyServerThreadPool-28] INFO  d.controllers.impl.StoreController - Request for store 51 from user: user@user.dk
-2024-12-20 14:17:12 [JettyServerThreadPool-28] INFO  d.controllers.impl.StoreController - Store 51 has 0 users who favorited it
-2024-12-20 14:17:12 [JettyServerThreadPool-28] INFO  d.controllers.impl.StoreController - Fetching products for store 51 (Netto Taastrup St. Center)
-2024-12-20 14:17:13 [JettyServerThreadPool-28] ERROR dat.services.ProductFetcher - Error parsing categories: Cannot invoke "com.fasterxml.jackson.databind.JsonNode.asText()" because the return value of "com.fasterxml.jackson.databind.JsonNode.get(String)" is null
-java.lang.NullPointerException: Cannot invoke "com.fasterxml.jackson.databind.JsonNode.asText()" because the return value of "com.fasterxml.jackson.databind.JsonNode.get(String)" is null
-	at dat.services.ProductFetcher.parseCategories(ProductFetcher.java:171)
-	at dat.services.ProductFetcher.parseProduct(ProductFetcher.java:239)
-	at dat.services.ProductFetcher.fetchProductsForStore(ProductFetcher.java:65)
-	at dat.controllers.impl.StoreController.read(StoreController.java:69)
-	at io.javalin.router.Endpoint.handle(Endpoint.kt:52)
-	at io.javalin.router.ParsedEndpoint.handle(ParsedEndpoint.kt:15)
-	at io.javalin.http.servlet.DefaultTasks.HTTP$lambda$9$lambda$7$lambda$6(DefaultTasks.kt:52)
-	at io.javalin.http.servlet.JavalinServlet.handleTask(JavalinServlet.kt:99)
-	at io.javalin.http.servlet.JavalinServlet.handleSync(JavalinServlet.kt:64)
-	at io.javalin.http.servlet.JavalinServlet.handle(JavalinServlet.kt:50)
-	at io.javalin.http.servlet.JavalinServlet.service(JavalinServlet.kt:30)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:587)
-	at io.javalin.jetty.JavalinJettyServlet.service(JavalinJettyServlet.kt:52)
-	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:587)
-	at org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:764)
-	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:529)
-	at org.eclipse.jetty.server.handler.ScopedHandler.nextHandle(ScopedHandler.java:221)
-	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:1580)
-	at org.eclipse.jetty.server.handler.ScopedHandler.nextHandle(ScopedHandler.java:221)
-	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1381)
-	at org.eclipse.jetty.server.handler.ScopedHandler.nextScope(ScopedHandler.java:176)
-	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:484)
-	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1553)
-	at org.eclipse.jetty.server.handler.ScopedHandler.nextScope(ScopedHandler.java:174)
-	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1303)
-	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:129)
-	at org.eclipse.jetty.server.handler.StatisticsHandler.handle(StatisticsHandler.java:173)
-	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:122)
-	at org.eclipse.jetty.server.Server.handle(Server.java:563)
-	at org.eclipse.jetty.server.HttpChannel$RequestDispatchable.dispatch(HttpChannel.java:1598)
-	at org.eclipse.jetty.server.HttpChannel.dispatch(HttpChannel.java:753)
-	at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:501)
-	at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:287)
-	at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:314)
-	at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:100)
-	at org.eclipse.jetty.io.SelectableChannelEndPoint$1.run(SelectableChannelEndPoint.java:53)
-	at org.eclipse.jetty.util.thread.strategy.AdaptiveExecutionStrategy.runTask(AdaptiveExecutionStrategy.java:421)
-	at org.eclipse.jetty.util.thread.strategy.AdaptiveExecutionStrategy.consumeTask(AdaptiveExecutionStrategy.java:390)
-	at org.eclipse.jetty.util.thread.strategy.AdaptiveExecutionStrategy.tryProduce(AdaptiveExecutionStrategy.java:277)
-	at org.eclipse.jetty.util.thread.strategy.AdaptiveExecutionStrategy.produce(AdaptiveExecutionStrategy.java:193)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:969)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.doRunJob(QueuedThreadPool.java:1194)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool$Runner.run(QueuedThreadPool.java:1149)
-	at java.base/java.lang.Thread.run(Thread.java:840)
-2024-12-20 14:17:13 [JettyServerThreadPool-28] INFO  dat.services.ProductFetcher - Successfully fetched 100 products for store 83c0b980-fb7b-4cb0-a76d-0109f533b164
-2024-12-20 14:17:13 [JettyServerThreadPool-28] INFO  dat.daos.impl.StoreDAO - Updating products for store 51 (Netto Taastrup St. Center) with Salling ID: 83c0b980-fb7b-4cb0-a76d-0109f533b164
-2024-12-20 14:17:14 [JettyServerThreadPool-28] INFO  dat.daos.impl.StoreDAO - Successfully updated 100 products for store Netto Taastrup St. Center
-2024-12-20 14:17:14 [JettyServerThreadPool-28] INFO  d.controllers.impl.StoreController - StoreDTO created with isFavorite: false for user: user@user.dk
-2024-12-20 14:17:32 [JettyServerThreadPool-29] INFO  d.s.controllers.SecurityController - User verified: UserDTO(name=null, email=user@user.dk, roleType=USER, stores=null, password=null)
-2024-12-20 14:17:37 [JettyServerThreadPool-30] INFO  d.s.controllers.SecurityController - User verified: UserDTO(name=null, email=user@user.dk, roleType=USER, stores=null, password=null)
-2024-12-20 14:17:53 [JettyServerThreadPool-26] INFO  d.s.controllers.SecurityController - User verified: UserDTO(name=null, email=user@user.dk, roleType=USER, stores=null, password=null)
-2024-12-20 14:17:53 [JettyServerThreadPool-26] INFO  d.controllers.impl.StoreController - Request for store 51 from user: user@user.dk
-2024-12-20 14:17:53 [JettyServerThreadPool-26] INFO  d.controllers.impl.StoreController - Store 51 has 1 users who favorited it
-2024-12-20 14:17:53 [JettyServerThreadPool-26] INFO  d.controllers.impl.StoreController - Favored by user: user@user.dk
-2024-12-20 14:17:53 [JettyServerThreadPool-26] INFO  d.controllers.impl.StoreController - StoreDTO created with isFavorite: true for user: user@user.dk
-2024-12-20 14:18:00 [JettyServerThreadPool-29] INFO  d.s.controllers.SecurityController - User verified: UserDTO(name=null, email=user@user.dk, roleType=USER, stores=null, password=null)
-2024-12-20 14:18:04 [JettyServerThreadPool-30] INFO  d.s.controllers.SecurityController - User verified: UserDTO(name=null, email=user@user.dk, roleType=USER, stores=null, password=null)
-2024-12-20 14:18:04 [JettyServerThreadPool-30] INFO  d.controllers.impl.StoreController - Request for store 51 from user: user@user.dk
-2024-12-20 14:18:04 [JettyServerThreadPool-30] INFO  d.controllers.impl.StoreController - Store 51 has 0 users who favorited it
-2024-12-20 14:18:04 [JettyServerThreadPool-30] INFO  d.controllers.impl.StoreController - StoreDTO created with isFavorite: false for user: user@user.dk
+2024-12-22 13:58:27 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
+2024-12-22 13:58:27 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2024-12-22 13:58:27 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-12-22 13:58:28 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@436bc36
+2024-12-22 13:58:28 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-12-22 13:58:28 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2024-12-22 13:58:28 [main] INFO  io.javalin.Javalin - Starting Javalin ...
+2024-12-22 13:58:28 [main] INFO  org.eclipse.jetty.server.Server - jetty-11.0.23; built: 2024-08-14T01:40:17.906Z; git: 6fcf5ccaebd7ca13a0cb96c96adca699a24080a0; jvm 17.0.10+7-LTS
+2024-12-22 13:58:28 [main] INFO  o.e.j.s.s.DefaultSessionIdManager - Session workerName=node0
+2024-12-22 13:58:28 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@6cbdd1c5{/api,null,AVAILABLE}
+2024-12-22 13:58:28 [main] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@6a51ae7c{HTTP/1.1, (http/1.1)}{0.0.0.0:7070}
+2024-12-22 13:58:28 [main] INFO  org.eclipse.jetty.server.Server - Started Server@2e3252{STARTING}[11.0.23,sto=0] @1206ms
+2024-12-22 13:58:28 [main] INFO  io.javalin.Javalin - Javalin started in 57ms \o/
+2024-12-22 13:58:28 [main] INFO  io.javalin.Javalin - Listening on http://localhost:7070/api
+2024-12-22 13:58:28 [main] INFO  io.javalin.Javalin - You are running Javalin 6.3.0 (released August 22, 2024. Your Javalin version is 121 days old. Consider checking for a newer version.).
+2024-12-22 13:58:33 [JettyServerThreadPool-32] WARN  d.controllers.impl.StoreController - Auth failed but continuing as public request: Unauthorized. Could not verify token
+2024-12-22 13:58:33 [JettyServerThreadPool-32] INFO  d.controllers.impl.StoreController - Fetching store with ID: 22
+2024-12-22 13:58:34 [JettyServerThreadPool-32] INFO  d.controllers.impl.StoreController - Store 22 update check - hasProductsInDb: true, lastFetched: 2024-12-22T13:36:42.778822, needsUpdate: false
+2024-12-22 13:58:34 [JettyServerThreadPool-32] INFO  d.controllers.impl.StoreController - Using cached products for store 22 (last update: 2024-12-22T13:36:42.778822)

@@ -1,0 +1,691 @@
+{
+  "id": 50,
+  "name": "Netto Blistrup",
+  "brand": {
+    "displayName": "Netto"
+  },
+  "address": {
+    "addressLine": "Helsingevej 75a",
+    "longitude": 12.212827,
+    "latitude": 56.085814,
+    "postalCode": {
+      "postalCode": 3230,
+      "city": "Græsted"
+    }
+  },
+  "products": [
+    {
+      "productName": "FLÆSKESTEG VELSMAG",
+      "ean": "5707196312775",
+      "price": {
+        "originalPrice": 89.95,
+        "newPrice": 56.00,
+        "discount": 33.95,
+        "percentDiscount": 37.74
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:20:09",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "ISKAFFE KARAMEL PETER LARSEN",
+      "ean": "5724618720345",
+      "price": {
+        "originalPrice": 10.00,
+        "newPrice": 4.00,
+        "discount": 6.00,
+        "percentDiscount": 60.00
+      },
+      "timing": {
+        "startTime": "2024-12-17 13:26:22",
+        "endTime": "2025-02-15 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "BURGER BOOST SLIDERS DANISH CROWN",
+      "ean": "5707196333435",
+      "price": {
+        "originalPrice": 34.95,
+        "newPrice": 27.00,
+        "discount": 7.95,
+        "percentDiscount": 22.75
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:17:20",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "RULLEPØLSE DEN GRØNNE SLAGTER",
+      "ean": "5707196213379",
+      "price": {
+        "originalPrice": 16.95,
+        "newPrice": 9.00,
+        "discount": 7.95,
+        "percentDiscount": 46.90
+      },
+      "timing": {
+        "startTime": "2024-12-19 14:04:41",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "LINGON GROVA PÅGEN",
+      "ean": "5710405067922",
+      "price": {
+        "originalPrice": 23.95,
+        "newPrice": 12.00,
+        "discount": 11.95,
+        "percentDiscount": 49.90
+      },
+      "timing": {
+        "startTime": "2024-12-22 06:59:10",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 5.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 5
+      }
+    },
+    {
+      "productName": "HK. GRIS/KALV 4-7% VELSMAG",
+      "ean": "5707196301618",
+      "price": {
+        "originalPrice": 39.95,
+        "newPrice": 24.00,
+        "discount": 15.95,
+        "percentDiscount": 39.92
+      },
+      "timing": {
+        "startTime": "2024-12-22 12:13:24",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "SCHWARZWÄLDER SKINKE LA CAMPAGNA",
+      "ean": "5712875588693",
+      "price": {
+        "originalPrice": 14.95,
+        "newPrice": 10.00,
+        "discount": 4.95,
+        "percentDiscount": 33.11
+      },
+      "timing": {
+        "startTime": "2024-12-22 09:57:09",
+        "endTime": "2024-12-24 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "NAKKEKOTELETTER VELSMAG",
+      "ean": "5707196301571",
+      "price": {
+        "originalPrice": 45.95,
+        "newPrice": 36.00,
+        "discount": 9.95,
+        "percentDiscount": 21.65
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:20:31",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "JULEMEDISTER PREMIEUR",
+      "ean": "5707196303810",
+      "price": {
+        "originalPrice": 34.95,
+        "newPrice": 27.00,
+        "discount": 7.95,
+        "percentDiscount": 22.75
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:20:57",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "SMØRBAR SILVER NATURLI'",
+      "ean": "5701977002466",
+      "price": {
+        "originalPrice": 16.95,
+        "newPrice": 9.00,
+        "discount": 7.95,
+        "percentDiscount": 46.90
+      },
+      "timing": {
+        "startTime": "2024-12-06 11:12:55",
+        "endTime": "2024-12-31 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 116.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 116
+      }
+    },
+    {
+      "productName": "SOLSIKKERUGBRØD DET GODE",
+      "ean": "5701205001582",
+      "price": {
+        "originalPrice": 13.25,
+        "newPrice": 10.00,
+        "discount": 3.25,
+        "percentDiscount": 24.53
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:07:36",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "KØDBOLLER VELSMAG",
+      "ean": "5707735940490",
+      "price": {
+        "originalPrice": 32.95,
+        "newPrice": 20.00,
+        "discount": 12.95,
+        "percentDiscount": 39.30
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:21:05",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "PØLSEBRØD BAKERSFIELD",
+      "ean": "5712874555948",
+      "price": {
+        "originalPrice": 14.75,
+        "newPrice": 11.00,
+        "discount": 3.75,
+        "percentDiscount": 25.42
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:19:15",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "KARBONADER VELSMAG",
+      "ean": "5712877117600",
+      "price": {
+        "originalPrice": 20.00,
+        "newPrice": 15.00,
+        "discount": 5.00,
+        "percentDiscount": 25.00
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:20:19",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "JAVISST PÅGEN",
+      "ean": "7311070032161",
+      "price": {
+        "originalPrice": 23.95,
+        "newPrice": 12.00,
+        "discount": 11.95,
+        "percentDiscount": 49.90
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:02:55",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "HOTDOGPØLSER PØLSERIET",
+      "ean": "5900244037075",
+      "price": {
+        "originalPrice": 16.50,
+        "newPrice": 13.00,
+        "discount": 3.50,
+        "percentDiscount": 21.21
+      },
+      "timing": {
+        "startTime": "2024-12-22 09:54:49",
+        "endTime": "2024-12-24 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "BURGERBOOST DANISH CROWN",
+      "ean": "5701050395607",
+      "price": {
+        "originalPrice": 39.95,
+        "newPrice": 27.00,
+        "discount": 12.95,
+        "percentDiscount": 32.42
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:16:26",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "H#RFR# RUGBR#D GAMLE M#LLE",
+      "ean": "5712875981937",
+      "price": {
+        "originalPrice": 9.75,
+        "newPrice": 7.00,
+        "discount": 2.75,
+        "percentDiscount": 28.21
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:09:00",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 11.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 11
+      }
+    },
+    {
+      "productName": "MEZZELUNE M/SVAMPE PREMIEUR",
+      "ean": "5712875419423",
+      "price": {
+        "originalPrice": 21.95,
+        "newPrice": 17.00,
+        "discount": 4.95,
+        "percentDiscount": 22.55
+      },
+      "timing": {
+        "startTime": "2024-12-22 10:10:32",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "SVINEMØRBRAD VELSMAG",
+      "ean": "5707196304077",
+      "price": {
+        "originalPrice": 124.95,
+        "newPrice": 80.00,
+        "discount": 44.95,
+        "percentDiscount": 35.97
+      },
+      "timing": {
+        "startTime": "2024-12-20 08:28:56",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "GNOCCHI LA CAMPAGNA",
+      "ean": "5712873692125",
+      "price": {
+        "originalPrice": 14.50,
+        "newPrice": 9.00,
+        "discount": 5.50,
+        "percentDiscount": 37.93
+      },
+      "timing": {
+        "startTime": "2024-12-22 10:06:23",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "HVIDLØGSPATÉ STEFF H.",
+      "ean": "5707196195460",
+      "price": {
+        "originalPrice": 19.95,
+        "newPrice": 15.00,
+        "discount": 4.95,
+        "percentDiscount": 24.81
+      },
+      "timing": {
+        "startTime": "2024-12-22 09:54:15",
+        "endTime": "2024-12-24 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "FRANSK LEVERPOSTEJ STRYHNS",
+      "ean": "5704000502261",
+      "price": {
+        "originalPrice": 14.95,
+        "newPrice": 8.00,
+        "discount": 6.95,
+        "percentDiscount": 46.49
+      },
+      "timing": {
+        "startTime": "2024-12-22 10:07:32",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "ØKO YMER ARLA",
+      "ean": "5711953030352",
+      "price": {
+        "originalPrice": 21.95,
+        "newPrice": 17.00,
+        "discount": 4.95,
+        "percentDiscount": 22.55
+      },
+      "timing": {
+        "startTime": "2024-12-22 10:57:20",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "KROGMODNET BURGERBØF PREMIEUR",
+      "ean": "5701050407454",
+      "price": {
+        "originalPrice": 32.95,
+        "newPrice": 23.00,
+        "discount": 9.95,
+        "percentDiscount": 30.20
+      },
+      "timing": {
+        "startTime": "2024-12-22 07:15:50",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 4.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 4
+      }
+    },
+    {
+      "productName": "SOLSTYKKER PÅGEN",
+      "ean": "7311070031515",
+      "price": {
+        "originalPrice": 23.95,
+        "newPrice": 12.00,
+        "discount": 11.95,
+        "percentDiscount": 49.90
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:16:41",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 3.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 3
+      }
+    },
+    {
+      "productName": "KYL.BRYST CHILI D.G. SLAGTER",
+      "ean": "5707196179194",
+      "price": {
+        "originalPrice": 16.95,
+        "newPrice": 9.00,
+        "discount": 7.95,
+        "percentDiscount": 46.90
+      },
+      "timing": {
+        "startTime": "2024-12-22 10:03:11",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 14.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 14
+      }
+    },
+    {
+      "productName": "FRIKADELLEPØLSE EGELYKKE",
+      "ean": "5712876146373",
+      "price": {
+        "originalPrice": 13.95,
+        "newPrice": 7.00,
+        "discount": 6.95,
+        "percentDiscount": 49.82
+      },
+      "timing": {
+        "startTime": "2024-12-19 14:01:43",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "BØFFEL MOZZARELLA PREMIEUR",
+      "ean": "5712871019948",
+      "price": {
+        "originalPrice": 19.95,
+        "newPrice": 15.00,
+        "discount": 4.95,
+        "percentDiscount": 24.81
+      },
+      "timing": {
+        "startTime": "2024-12-19 14:13:48",
+        "endTime": "2024-12-23 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 1.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 1
+      }
+    },
+    {
+      "productName": "PANDEKAGER NÆMT",
+      "ean": "5712877094642",
+      "price": {
+        "originalPrice": 19.95,
+        "newPrice": 11.00,
+        "discount": 8.95,
+        "percentDiscount": 44.86
+      },
+      "timing": {
+        "startTime": "2024-12-22 10:07:55",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "BONDEBR#D GAMLE M#LLE",
+      "ean": "5712874821685",
+      "price": {
+        "originalPrice": 6.95,
+        "newPrice": 5.00,
+        "discount": 1.95,
+        "percentDiscount": 28.06
+      },
+      "timing": {
+        "startTime": "2024-12-20 07:22:36",
+        "endTime": "2024-12-22 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    },
+    {
+      "productName": "R#GET FILET EGELYKKE",
+      "ean": "5900244039987",
+      "price": {
+        "originalPrice": 12.95,
+        "newPrice": 10.00,
+        "discount": 2.95,
+        "percentDiscount": 22.78
+      },
+      "timing": {
+        "startTime": "2024-12-22 09:56:54",
+        "endTime": "2024-12-24 23:59:59",
+        "lastUpdated": "2024-12-22 13:53:00"
+      },
+      "categories": [],
+      "stock": {
+        "quantity": 2.0,
+        "stockUnit": "EACH",
+        "quantityAsInteger": 2
+      }
+    }
+  ],
+  "isFavorite": true
+}
