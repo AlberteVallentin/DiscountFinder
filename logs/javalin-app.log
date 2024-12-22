@@ -17,3 +17,167 @@
 2024-12-22 13:58:33 [JettyServerThreadPool-32] INFO  d.controllers.impl.StoreController - Fetching store with ID: 22
 2024-12-22 13:58:34 [JettyServerThreadPool-32] INFO  d.controllers.impl.StoreController - Store 22 update check - hasProductsInDb: true, lastFetched: 2024-12-22T13:36:42.778822, needsUpdate: false
 2024-12-22 13:58:34 [JettyServerThreadPool-32] INFO  d.controllers.impl.StoreController - Using cached products for store 22 (last update: 2024-12-22T13:36:42.778822)
+2024-12-22 21:00:57 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
+2024-12-22 21:00:57 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2024-12-22 21:00:57 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-12-22 21:00:57 [main] INFO  o.t.utility.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2024-12-22 21:00:58 [main] INFO  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.UnixSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2024-12-22 21:00:58 [main] INFO  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+2024-12-22 21:00:58 [main] INFO  o.testcontainers.DockerClientFactory - Docker host IP address is localhost
+2024-12-22 21:00:58 [main] INFO  o.testcontainers.DockerClientFactory - Connected to docker: 
+  Server Version: 25.0.3
+  API Version: 1.44
+  Operating System: Docker Desktop
+  Total Memory: 7840 MB
+2024-12-22 21:00:58 [main] INFO  tc.testcontainers/ryuk:0.4.0 - Creating container for image: testcontainers/ryuk:0.4.0
+2024-12-22 21:00:58 [main] INFO  o.t.utility.RegistryAuthLocator - Credential helper/store (docker-credential-desktop) does not have credentials for https://index.docker.io/v1/
+2024-12-22 21:00:58 [main] INFO  tc.testcontainers/ryuk:0.4.0 - Container testcontainers/ryuk:0.4.0 is starting: 30830a9ebf88c23dffa3472abc8228e6ec8b13382a83bb2be9a7066e4f8ae672
+2024-12-22 21:00:58 [main] INFO  tc.testcontainers/ryuk:0.4.0 - Container testcontainers/ryuk:0.4.0 started in PT0.567933S
+2024-12-22 21:00:58 [main] INFO  o.t.utility.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2024-12-22 21:00:58 [main] INFO  o.testcontainers.DockerClientFactory - Checking the system...
+2024-12-22 21:00:58 [main] INFO  o.testcontainers.DockerClientFactory - ✔︎ Docker server version should be at least 1.6.0
+2024-12-22 21:00:58 [main] INFO  tc.postgres:15.3-alpine3.18 - Creating container for image: postgres:15.3-alpine3.18
+2024-12-22 21:00:58 [main] INFO  tc.postgres:15.3-alpine3.18 - Container postgres:15.3-alpine3.18 is starting: 11e418df0ac2ae8a9378922045bc5e0cb28a60855a752dc30f30da17de80a256
+2024-12-22 21:00:59 [main] INFO  tc.postgres:15.3-alpine3.18 - Container postgres:15.3-alpine3.18 started in PT0.896785S
+2024-12-22 21:00:59 [main] INFO  tc.postgres:15.3-alpine3.18 - Container is started (JDBC URL: jdbc:postgresql://localhost:53436/test?loggerLevel=OFF)
+2024-12-22 21:00:59 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.testcontainers.jdbc.ConnectionWrapper@117d32e
+2024-12-22 21:00:59 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-12-22 21:01:00 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "address" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "product_categories" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "product_categories" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "products" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "products" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "products" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "products" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "stores" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "stores" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "user_favorite_stores" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "user_favorite_stores" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "users" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "address" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "brands" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "categories" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "postal_code_and_city" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "prices" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "product_categories" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "products" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "roles" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "stocks" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "stores" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "timings" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "user_favorite_stores" does not exist, skipping
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:01:00 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "users" does not exist, skipping
+2024-12-22 21:01:00 [main] INFO  dat.daos.impl.StoreDAO - Updating products for store 1 (Netto Østerbro) with Salling ID: 1234
+2024-12-22 21:01:00 [main] INFO  dat.daos.impl.StoreDAO - Successfully updated 1 products for store Netto Østerbro
+2024-12-22 21:01:00 [main] INFO  dat.daos.impl.StoreDAO - Updating products for store 1 (Netto Østerbro) with Salling ID: 1234
+2024-12-22 21:01:00 [main] INFO  dat.daos.impl.StoreDAO - Successfully updated 1 products for store Netto Østerbro
+2024-12-22 21:01:00 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2024-12-22 21:01:01 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2024-12-22 21:11:04 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.2.4.Final
+2024-12-22 21:11:04 [main] INFO  org.hibernate.cfg.Environment - HHH000406: Using bytecode reflection optimizer
+2024-12-22 21:11:04 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-12-22 21:11:04 [main] INFO  o.t.utility.ImageNameSubstitutor - Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+2024-12-22 21:11:04 [main] INFO  o.t.d.DockerClientProviderStrategy - Loaded org.testcontainers.dockerclient.UnixSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+2024-12-22 21:11:04 [main] INFO  o.t.d.DockerClientProviderStrategy - Found Docker environment with local Unix socket (unix:///var/run/docker.sock)
+2024-12-22 21:11:04 [main] INFO  o.testcontainers.DockerClientFactory - Docker host IP address is localhost
+2024-12-22 21:11:04 [main] INFO  o.testcontainers.DockerClientFactory - Connected to docker: 
+  Server Version: 25.0.3
+  API Version: 1.44
+  Operating System: Docker Desktop
+  Total Memory: 7840 MB
+2024-12-22 21:11:04 [main] INFO  tc.testcontainers/ryuk:0.4.0 - Creating container for image: testcontainers/ryuk:0.4.0
+2024-12-22 21:11:05 [main] INFO  o.t.utility.RegistryAuthLocator - Credential helper/store (docker-credential-desktop) does not have credentials for https://index.docker.io/v1/
+2024-12-22 21:11:05 [main] INFO  tc.testcontainers/ryuk:0.4.0 - Container testcontainers/ryuk:0.4.0 is starting: 9106f94dfe310731163084a6e4cf1f54c0c26c4c35b5d807d2b5a3125475528d
+2024-12-22 21:11:05 [main] INFO  tc.testcontainers/ryuk:0.4.0 - Container testcontainers/ryuk:0.4.0 started in PT0.373903S
+2024-12-22 21:11:05 [main] INFO  o.t.utility.RyukResourceReaper - Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+2024-12-22 21:11:05 [main] INFO  o.testcontainers.DockerClientFactory - Checking the system...
+2024-12-22 21:11:05 [main] INFO  o.testcontainers.DockerClientFactory - ✔︎ Docker server version should be at least 1.6.0
+2024-12-22 21:11:05 [main] INFO  tc.postgres:15.3-alpine3.18 - Creating container for image: postgres:15.3-alpine3.18
+2024-12-22 21:11:05 [main] INFO  tc.postgres:15.3-alpine3.18 - Container postgres:15.3-alpine3.18 is starting: edb5235f68ca3bae444f7dcf5714d8c47bd9bee87fbd86e03bc138d197f135a1
+2024-12-22 21:11:06 [main] INFO  tc.postgres:15.3-alpine3.18 - Container postgres:15.3-alpine3.18 started in PT0.733413S
+2024-12-22 21:11:06 [main] INFO  tc.postgres:15.3-alpine3.18 - Container is started (JDBC URL: jdbc:postgresql://localhost:56370/test?loggerLevel=OFF)
+2024-12-22 21:11:06 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.testcontainers.jdbc.ConnectionWrapper@31ddb930
+2024-12-22 21:11:06 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-12-22 21:11:06 [main] INFO  o.h.b.i.BytecodeProviderInitiator - HHH000021: Bytecode provider name : bytebuddy
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "address" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "product_categories" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "product_categories" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "products" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "products" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "products" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "products" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "stores" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "stores" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "user_favorite_stores" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "user_favorite_stores" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - relation "users" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "address" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "brands" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "categories" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "postal_code_and_city" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "prices" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "product_categories" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "products" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "roles" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "stocks" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "stores" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "timings" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "user_favorite_stores" does not exist, skipping
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - SQL Warning Code: 0, SQLState: 00000
+2024-12-22 21:11:06 [main] WARN  o.h.e.jdbc.spi.SqlExceptionHelper - table "users" does not exist, skipping
+2024-12-22 21:11:07 [main] INFO  dat.daos.impl.StoreDAO - Updating products for store 1 (Netto Østerbro) with Salling ID: 1234
+2024-12-22 21:11:07 [main] INFO  dat.daos.impl.StoreDAO - Successfully updated 1 products for store Netto Østerbro
+2024-12-22 21:11:07 [main] INFO  dat.daos.impl.StoreDAO - Updating products for store 1 (Netto Østerbro) with Salling ID: 1234
+2024-12-22 21:11:07 [main] INFO  dat.daos.impl.StoreDAO - Successfully updated 1 products for store Netto Østerbro
+2024-12-22 21:11:07 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2024-12-22 21:11:07 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

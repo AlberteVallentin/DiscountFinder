@@ -5,21 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50970898-f021-40ab-8b7d-ce8447e2a8a2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T121721.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T121744.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T121752.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T121816.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T121834.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T122927.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T122930.200.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/javalin-app.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dat/controllers/impl/StoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/controllers/impl/StoreController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/javalin-app.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/javalin-app.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dat/daos/impl/StoreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/daos/impl/StoreDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dat/entities/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/entities/Store.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dat/services/ProductFetcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/services/ProductFetcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/http/dev.http" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/http/dev.http" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,6 +80,7 @@
     "HTTP Request.dev | Test API health.executor": "Run",
     "HTTP Request.dev | Test protected admin endpoint.executor": "Run",
     "HTTP Request.dev | Test protected user endpoint.executor": "Run",
+    "JUnit.StoreDAOTest.testUpdateStoreProducts.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "com.codeium.enabled": "true",
@@ -108,7 +97,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.StoreDAOTest.testUpdateStoreProducts">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>
         <env name="SALLING_API_KEY" value="77fcfa33-0e12-4dc9-aac6-c5d7cc9be766" />
@@ -137,15 +126,33 @@
     <configuration name="dev | #20" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="#20" index="20" runType="Run single request">
       <method v="2" />
     </configuration>
+    <configuration name="StoreDAOTest.testUpdateStoreProducts" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="DiscountFinder" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dat.daos.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="dat.daos.impl" />
+      <option name="MAIN_CLASS_NAME" value="dat.daos.impl.StoreDAOTest" />
+      <option name="METHOD_NAME" value="testUpdateStoreProducts" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.Main" />
       <item itemvalue="HTTP Request.dev | #17" />
       <item itemvalue="HTTP Request.dev | #16" />
       <item itemvalue="HTTP Request.dev | #18" />
       <item itemvalue="HTTP Request.dev | #20" />
+      <item itemvalue="JUnit.StoreDAOTest.testUpdateStoreProducts" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.StoreDAOTest.testUpdateStoreProducts" />
         <item itemvalue="HTTP Request.dev | #17" />
         <item itemvalue="HTTP Request.dev | #18" />
         <item itemvalue="HTTP Request.dev | #20" />
