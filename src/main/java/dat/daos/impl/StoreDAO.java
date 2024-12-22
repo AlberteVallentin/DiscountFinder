@@ -242,22 +242,70 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
             LOGGER.info("Updating products for store {} ({}) with Salling ID: {}",
                 id, store.getName(), store.getSallingStoreId());
 
-            // Først fjern alle eksisterende produkter for denne butik
-            if (!store.getProducts().isEmpty()) {
-                // Brug en bulk delete operation
-                em.createQuery("DELETE FROM Product p WHERE p.store.id = :storeId")
-                    .setParameter("storeId", store.getId())
-                    .executeUpdate();
+            // Map eksisterende produkter efter EAN for hurtig opslag
+            Map<String, Product> existingProductMap = store.getProducts().stream()
+                .collect(Collectors.toMap(Product::getEan, p -> p));
 
-                store.getProducts().clear();
+            // Find EANs for nye produkter
+            Set<String> newProductEans = products.stream()
+                .map(ProductDTO::getEan)
+                .collect(Collectors.toSet());
+
+            // Fjern produkter der ikke længere findes i API-listen
+            List<Product> productsToRemove = store.getProducts().stream()
+                .filter(p -> !newProductEans.contains(p.getEan()))
+                .collect(Collectors.toList());
+
+            // Fjern gamle produkter
+            for (Product product : productsToRemove) {
+                product.clearCategories();  // Fjern kategori-relationer først
+                store.getProducts().remove(product);
+                em.remove(product);
             }
 
-            // Tilføj de nye produkter
+            // Tilføj eller opdater produkter
             for (ProductDTO dto : products) {
-                Product product = new Product(dto);
-                product.setStore(store);
-                store.getProducts().add(product);
-                em.persist(product);
+                Product product = existingProductMap.get(dto.getEan());
+
+                if (product == null) {
+                    // Opret nyt produkt
+                    product = new Product(dto);
+                    product.setStore(store);
+                    store.getProducts().add(product);
+                    em.persist(product);
+                } else {
+                    // Opdater eksisterende produkt
+                    product.updateFromDTO(dto);
+                }
+
+                // Håndter kategorier
+                if (dto.getCategories() != null && !dto.getCategories().isEmpty()) {
+                    Set<Category> categories = new HashSet<>();
+
+                    for (CategoryDTO catDTO : dto.getCategories()) {
+                        // Find eksisterende kategori eller opret ny
+                        Category category = em.createQuery(
+                                "SELECT c FROM Category c WHERE c.pathDa = :pathDa AND c.pathEn = :pathEn",
+                                Category.class)
+                            .setParameter("pathDa", catDTO.getPathDa())
+                            .setParameter("pathEn", catDTO.getPathEn())
+                            .getResultStream()
+                            .findFirst()
+                            .orElseGet(() -> {
+                                Category newCategory = new Category(catDTO);
+                                em.persist(newCategory);
+                                return newCategory;
+                            });
+
+                        categories.add(category);
+                    }
+
+                    // Opdater produktets kategorier
+                    product.clearCategories();
+                    categories.forEach(product::addCategory);
+                }
+
+                em.merge(product);
             }
 
             store.setHasProductsInDb(true);
@@ -277,15 +325,23 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
 
     private void updateProductCategories(Product product, ProductDTO dto, EntityManager em) {
         if (dto.getCategories() != null && !dto.getCategories().isEmpty()) {
+            // Bevar den eksisterende kategori samling hvis den findes
+            if (product.getCategories() == null) {
+                product.setCategories(new HashSet<>());
+            }
+
+            // Clear eksisterende kategorier
             product.clearCategories();
 
             for (CategoryDTO categoryDTO : dto.getCategories()) {
-                Category category = em.createQuery(
+                // Find først eksisterende kategori eller opret ny
+                TypedQuery<Category> query = em.createQuery(
                         "SELECT c FROM Category c WHERE c.pathDa = :pathDa AND c.pathEn = :pathEn",
                         Category.class)
                     .setParameter("pathDa", categoryDTO.getPathDa())
-                    .setParameter("pathEn", categoryDTO.getPathEn())
-                    .getResultStream()
+                    .setParameter("pathEn", categoryDTO.getPathEn());
+
+                Category category = query.getResultStream()
                     .findFirst()
                     .orElseGet(() -> {
                         Category newCategory = new Category(categoryDTO);
@@ -293,8 +349,13 @@ public class StoreDAO implements IDAO<StoreDTO, Long> {
                         return newCategory;
                     });
 
+                // Tilføj relationen begge veje
                 product.addCategory(category);
+                category.getProducts().add(product);
             }
+
+            // Merge produktet for at sikre ændringerne bliver gemt
+            em.merge(product);
         }
     }
     public Store findById(Long id) {
