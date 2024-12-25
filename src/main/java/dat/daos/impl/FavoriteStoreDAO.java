@@ -55,7 +55,8 @@ public class FavoriteStoreDAO {
     }
 
     public void removeFavoriteStore(String userEmail, Long storeId) throws ApiException {
-        try (EntityManager em = emf.createEntityManager()) {
+        EntityManager em = emf.createEntityManager();
+        try {
             em.getTransaction().begin();
 
             User user = em.createQuery("SELECT u FROM User u JOIN FETCH u.favoriteStores WHERE u.email = :email", User.class)
@@ -70,11 +71,19 @@ public class FavoriteStoreDAO {
             boolean removed = user.getFavoriteStores().removeIf(s -> s.getId().equals(storeId));
             if (removed) {
                 em.merge(user);
+                em.getTransaction().commit();
+            } else {
+                em.getTransaction().rollback();
+                throw new ApiException(404, "Store not found in favorites");
             }
 
-            em.getTransaction().commit();
         } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
             throw new ApiException(500, "Error removing favorite store: " + e.getMessage());
+        } finally {
+            em.close();
         }
     }
 

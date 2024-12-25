@@ -5,9 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50970898-f021-40ab-8b7d-ce8447e2a8a2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T122944.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T122947.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T123010.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T123029.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T123132.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T123139.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/2024-12-20T123150.200.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/javalin-app.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/javalin-app.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dat/daos/impl/StoreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/daos/impl/StoreDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dat/daos/impl/FavoriteStoreDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dat/daos/impl/FavoriteStoreDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/http/dev.http" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/http/dev.http" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +51,7 @@
   }
 }</component>
   <component name="HttpClientSelectedEnvironments">
-    <file url="file://$PROJECT_DIR$/src/main/resources/http/dev.http" environment="dev" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/http/dev.http" environment="prod" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -74,6 +83,7 @@
     "HTTP Request.dev | Get user's favorite stores (requires auth).executor": "Run",
     "HTTP Request.dev | Log out (reset token).executor": "Run",
     "HTTP Request.dev | Login user#1.executor": "Run",
+    "HTTP Request.dev | Login user#2.executor": "Run",
     "HTTP Request.dev | Login user.executor": "Run",
     "HTTP Request.dev | Register new user.executor": "Run",
     "HTTP Request.dev | Reset token.executor": "Run",
@@ -84,11 +94,11 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "com.codeium.enabled": "true",
-    "git-widget-placeholder": "api",
+    "git-widget-placeholder": "favorite",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.stylelint": "",
     "nodejs_package_manager_path": "npm",
-    "rest.client.default.execution.environment": "dev",
+    "rest.client.default.execution.environment": "prod",
     "settings.editor.selected.configurable": "fileTemplates"
   },
   "keyToStringList": {
@@ -97,7 +107,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.StoreDAOTest.testUpdateStoreProducts">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <envs>
         <env name="SALLING_API_KEY" value="77fcfa33-0e12-4dc9-aac6-c5d7cc9be766" />
@@ -114,16 +124,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="dev | #16" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="#16" index="16" runType="Run single request">
+    <configuration name="dev | Login user#2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="Login user#2" index="4" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="dev | #17" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="#17" index="17" runType="Run single request">
+    <configuration name="dev | #16" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="#16" index="16" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="dev | #18" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="#18" index="18" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="dev | #20" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="#20" index="20" runType="Run single request">
+    <configuration name="dev | #19" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/src/main/resources/http/dev.http" executionIdentifier="#19" index="19" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="StoreDAOTest.testUpdateStoreProducts" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
@@ -144,19 +154,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.Main" />
-      <item itemvalue="HTTP Request.dev | #17" />
+      <item itemvalue="HTTP Request.dev | #19" />
+      <item itemvalue="HTTP Request.dev | Login user#2" />
       <item itemvalue="HTTP Request.dev | #16" />
       <item itemvalue="HTTP Request.dev | #18" />
-      <item itemvalue="HTTP Request.dev | #20" />
       <item itemvalue="JUnit.StoreDAOTest.testUpdateStoreProducts" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.StoreDAOTest.testUpdateStoreProducts" />
-        <item itemvalue="HTTP Request.dev | #17" />
         <item itemvalue="HTTP Request.dev | #18" />
-        <item itemvalue="HTTP Request.dev | #20" />
+        <item itemvalue="HTTP Request.dev | #19" />
         <item itemvalue="HTTP Request.dev | #16" />
+        <item itemvalue="HTTP Request.dev | Login user#2" />
+        <item itemvalue="JUnit.StoreDAOTest.testUpdateStoreProducts" />
       </list>
     </recent_temporary>
   </component>
