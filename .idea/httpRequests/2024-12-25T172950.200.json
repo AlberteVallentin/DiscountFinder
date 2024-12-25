@@ -1,0 +1,19 @@
+[
+  {
+    "id": 51,
+    "name": "Netto Taastrup St. Center",
+    "brand": {
+      "displayName": "Netto"
+    },
+    "address": {
+      "addressLine": "Selsmosevej 2",
+      "longitude": 12.3003648,
+      "latitude": 55.6526031,
+      "postalCode": {
+        "postalCode": 2630,
+        "city": "Taastrup"
+      }
+    },
+    "isFavorite": true
+  }
+]
